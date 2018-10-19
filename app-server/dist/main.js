@@ -284,7 +284,7 @@ var HttpService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list\">\n    <h3>Our team: </h3>\n    <mat-nav-list>\n        <mat-list-item *ngFor=\"let player of team\">\n            <a matLine (click)=\"showLink(player.github)\">{{ player.name }}</a>\n        </mat-list-item>\n    </mat-nav-list>\n</div>"
+module.exports = "<div class=\"list\">\n    <h3>Our team</h3>\n    <mat-nav-list>\n        <mat-list-item *ngFor=\"let player of team\">\n            <a matLine (click)=\"showLink(player.github)\">{{ player.name }}</a>\n        </mat-list-item>\n    </mat-nav-list>\n</div>"
 
 /***/ }),
 
