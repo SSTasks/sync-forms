@@ -71,7 +71,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"container\">\n    <router-outlet class=\"router\"></router-outlet>\n    <div class=\"logo\">\n        <h1>\n            Welcome to {{ title }}!\n        </h1>\n        <img width=\"300\" alt=\"Angular Logo\"\n             src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n    </div>\n\n</div>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"container\">\n\n    <div class=\"logo\" >\n        <h2>\n            Welcome to {{ title }}!\n        </h2>\n        <img width=\"200\" alt=\"Angular Logo\"\n             src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n    </div>\n    <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
@@ -82,7 +82,7 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  padding: 0 15px;\n  margin: 0 auto;\n  max-width: 1200px; }\n\n.logo, .router {\n  margin: 30px 0 0 100px;\n  float: left; }\n"
+module.exports = ".container {\n  padding: 0 15px;\n  margin: 0 auto;\n  max-width: 1200px; }\n\n.logo {\n  text-align: center; }\n"
 
 /***/ }),
 
@@ -133,13 +133,18 @@ var AppComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./material */ "./src/app/material.ts");
-/* harmony import */ var _team_team_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./team/team.component */ "./src/app/team/team.component.ts");
-/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/http.service */ "./src/app/services/http.service.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material */ "./src/app/material.ts");
+/* harmony import */ var _team_team_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./team/team.component */ "./src/app/team/team.component.ts");
+/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/http.service */ "./src/app/services/http.service.ts");
+/* harmony import */ var _form_form_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./form/form.component */ "./src/app/form/form.component.ts");
+/* harmony import */ var _constructor_constructor_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./constructor/constructor.component */ "./src/app/constructor/constructor.component.ts");
+/* harmony import */ var _services_dropzones_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./services/dropzones.service */ "./src/app/services/dropzones.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -154,26 +159,194 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-                _team_team_component__WEBPACK_IMPORTED_MODULE_6__["TeamComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
+                _team_team_component__WEBPACK_IMPORTED_MODULE_8__["TeamComponent"],
+                _form_form_component__WEBPACK_IMPORTED_MODULE_10__["ConstructorComponent"],
+                _constructor_constructor_component__WEBPACK_IMPORTED_MODULE_11__["FormComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
-                _material__WEBPACK_IMPORTED_MODULE_5__["MaterialModule"]
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
+                _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"],
+                _material__WEBPACK_IMPORTED_MODULE_7__["MaterialModule"]
             ],
-            providers: [_services_http_service__WEBPACK_IMPORTED_MODULE_7__["HttpService"]],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
+            providers: [_services_http_service__WEBPACK_IMPORTED_MODULE_9__["HttpService"], _services_dropzones_service__WEBPACK_IMPORTED_MODULE_12__["DropzonesService"]],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/constructor/constructor.component.html":
+/*!********************************************************!*\
+  !*** ./src/app/constructor/constructor.component.html ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n<form class=\"example-form palette\" cdkDropList\n     id=\"paletteRef\"\n     [cdkDropListData]=\"paletteItems\"\n     [cdkDropListConnectedTo]=\"['canvasRef']\"\n     (cdkDropListDropped)=\"drop($event)\">\n\n\n    <div class=\"drag-item-container\" *ngFor=\"let elem of paletteItems; let i = index\"\n         cdkDrag\n         [cdkDragData]=\"elem\"\n         [cdkDropListData]=\"[elem]\"\n         cdkDropList\n         [cdkDropListConnectedTo]=\"['canvasRef']\">\n\n        <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width\">\n            <input matInput type=\"text\" placeholder=\"Text\" required>\n        </mat-form-field>\n\n        <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width\">\n            <input matInput type=\"number\" placeholder=\"Price\" required>\n        </mat-form-field>\n\n        <mat-form-field *ngIf=\"elem.type==='select'\">\n            <mat-select placeholder=\"Choose...\">\n                <mat-option *ngFor=\"let option of elem.options\" [value]=\"option\">\n                    {{option}}\n                </mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <section class=\"example-section\" *ngIf=\"elem.type==='checkbox'\">\n            <mat-checkbox *ngFor=\"let option of elem.options\" class=\"example-margin\">{{option}}</mat-checkbox>\n        </section>\n\n        <mat-radio-group *ngIf=\"elem.type==='radio'\">\n            <mat-radio-button value=\"{{i}}\" *ngFor=\"let option of elem.options; let i = index\">{{option}}</mat-radio-button>\n        </mat-radio-group>\n\n        <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width\">\n            <textarea matInput placeholder=\"Leave a comment\"></textarea>\n        </mat-form-field>\n\n        <div *ngIf=\"elem.type==='button'\" class=\"example-button-row\">\n            <button mat-raised-button *ngFor=\"let option of elem.options\" color=\"{{option}}\">{{option}}</button>\n        </div>\n    </div>\n\n</form>\n"
+
+/***/ }),
+
+/***/ "./src/app/constructor/constructor.component.scss":
+/*!********************************************************!*\
+  !*** ./src/app/constructor/constructor.component.scss ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "mat-card {\n  background: #add8e6;\n  margin: 6px;\n  min-width: 90px; }\n\n.palette {\n  width: 20%;\n  float: left;\n  padding: 5px;\n  border-radius: 5px;\n  float: left;\n  margin: 50px 2px;\n  box-shadow: 1px 1px 10px .1px black;\n  min-height: 400px;\n  background: lightblue; }\n\n.drag-item {\n  display: inline-flex;\n  padding: 20px;\n  background: lightcoral;\n  border-radius: 50%; }\n\n.drag-item-container {\n  padding: 5px; }\n\n.drag-item-container input {\n    float: left; }\n\n.drag-item-container input:hover {\n      cursor: move; }\n\n.drag-item-container mat-checkbox, .drag-item-container mat-radio-button, .drag-item-container button {\n    margin: 5px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/constructor/constructor.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/constructor/constructor.component.ts ***!
+  \******************************************************/
+/*! exports provided: FormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormComponent", function() { return FormComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_dropzones_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/dropzones.service */ "./src/app/services/dropzones.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var FormComponent = /** @class */ (function () {
+    function FormComponent(dropZones) {
+        this.dropZones = dropZones;
+        this.paletteItems = [
+            { type: 'text', label: 'elem 1', options: [] },
+            { type: 'number', label: 'elem 2', options: [] },
+            { type: 'textarea', label: 'elem 3', options: [] },
+            { type: 'select', label: 'elem 4', options: ['Option 1', 'Option 2', 'Option 3'] },
+            { type: 'checkbox', label: 'elem 5', options: ['Option 1', 'Option 2'] },
+            { type: 'radio', label: 'elem 6', options: ['Option 1', 'Option 2'] },
+            { type: 'button', label: 'elem 7', options: ['primary', 'warn'] }
+        ];
+    }
+    FormComponent.prototype.ngOnInit = function () {
+    };
+    FormComponent.prototype.drop = function (event) {
+        this.dropZones.moveInList(event);
+    };
+    FormComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-constructor',
+            template: __webpack_require__(/*! ./constructor.component.html */ "./src/app/constructor/constructor.component.html"),
+            styles: [__webpack_require__(/*! ./constructor.component.scss */ "./src/app/constructor/constructor.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_dropzones_service__WEBPACK_IMPORTED_MODULE_1__["DropzonesService"]])
+    ], FormComponent);
+    return FormComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/form/form.component.html":
+/*!******************************************!*\
+  !*** ./src/app/form/form.component.html ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n<div cdkDropList\n    id=\"canvasRef\"\n    class=\"canvas\"\n    #todoList=\"cdkDropList\"\n    [cdkDropListData]=\"canvasItems\"\n    (cdkDropListDropped)=\"drop($event)\">\n\n    <div *ngFor=\"let item of canvasItems; let i = index\" cdkDrag>\n        <mat-card>\n            <div> {{item.label}}</div>\n        </mat-card>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/form/form.component.scss":
+/*!******************************************!*\
+  !*** ./src/app/form/form.component.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".canvas {\n  width: 50%;\n  padding: 5px;\n  border-radius: 5px;\n  float: left;\n  margin: 50px 2px;\n  box-shadow: 1px 1px 10px .1px black;\n  min-height: 400px;\n  background: mediumaquamarine;\n  float: left; }\n\nmat-card {\n  background: lightcoral;\n  margin: 5px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/form/form.component.ts":
+/*!****************************************!*\
+  !*** ./src/app/form/form.component.ts ***!
+  \****************************************/
+/*! exports provided: ConstructorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConstructorComponent", function() { return ConstructorComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_dropzones_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/dropzones.service */ "./src/app/services/dropzones.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ConstructorComponent = /** @class */ (function () {
+    function ConstructorComponent(dropZones) {
+        this.dropZones = dropZones;
+        this.canvasItems = [];
+    }
+    // TODO: stronger checking could be done here. Confirm against actual container instances
+    ConstructorComponent.prototype.drop = function (event) {
+        console.log(event);
+        // if drop event is from an item that was already on canvas
+        if (event.container === event.previousContainer) {
+            // sort it based on where it was dropped
+            this.dropZones.moveInList(event);
+        }
+        else {
+            // else the event was from a dropped palette item so add it to the list
+            this.dropZones.addToList(event);
+        }
+    };
+    ConstructorComponent.prototype.ngOnInit = function () {
+        // this.dropZones.canvasRef = this.canvasDropZone;
+    };
+    ConstructorComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-form',
+            template: __webpack_require__(/*! ./form.component.html */ "./src/app/form/form.component.html"),
+            styles: [__webpack_require__(/*! ./form.component.scss */ "./src/app/form/form.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_dropzones_service__WEBPACK_IMPORTED_MODULE_1__["DropzonesService"]])
+    ], ConstructorComponent);
+    return ConstructorComponent;
 }());
 
 
@@ -191,7 +364,7 @@ var AppModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MaterialModule", function() { return MaterialModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_material_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material/list */ "./node_modules/@angular/material/esm5/list.es5.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -206,14 +379,95 @@ var MaterialModule = /** @class */ (function () {
     MaterialModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
-                _angular_material_list__WEBPACK_IMPORTED_MODULE_1__["MatListModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSidenavModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatRadioModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSelectModule"]
             ],
             exports: [
-                _angular_material_list__WEBPACK_IMPORTED_MODULE_1__["MatListModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSidenavModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatRadioModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSelectModule"]
             ],
         })
     ], MaterialModule);
     return MaterialModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/dropzones.service.ts":
+/*!***********************************************!*\
+  !*** ./src/app/services/dropzones.service.ts ***!
+  \***********************************************/
+/*! exports provided: DropzonesService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DropzonesService", function() { return DropzonesService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DropzonesService = /** @class */ (function () {
+    function DropzonesService() {
+    }
+    DropzonesService.prototype.moveInList = function (event) {
+        Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__["moveItemInArray"])(event.container.data, event.previousIndex, event.currentIndex);
+    };
+    DropzonesService.prototype.addToList = function (event) {
+        this.cloneToList(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    };
+    /**
+     * Clones item from one array to another. Modifying transferArrayItem from cdk utils found here
+     *
+     * https://github.com/angular/material2/blob/master/src/cdk/drag-drop/drag-utils.ts
+     *
+     * @param currentArray Array from which to transfer the item.
+     * @param targetArray Array into which is put the item.
+     * @param currentIndex Index of the item in its current array.
+     * @param targetIndex Index at which to insert the item.
+     */
+    DropzonesService.prototype.cloneToList = function (currentArray, targetArray, currentIndex, targetIndex) {
+        var to = this.clamp(targetIndex, targetArray.length);
+        if (currentArray.length) {
+            targetArray.splice(to, 0, currentArray[currentIndex]);
+        }
+    };
+    /** Clamps a number between zero and a maximum. */
+    DropzonesService.prototype.clamp = function (value, max) {
+        return Math.max(0, Math.min(max, value));
+    };
+    DropzonesService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [])
+    ], DropzonesService);
+    return DropzonesService;
 }());
 
 
@@ -284,7 +538,7 @@ var HttpService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list\">\n    <h3>Our team</h3>\n    <mat-nav-list>\n        <mat-list-item *ngFor=\"let player of team\">\n            <a matLine (click)=\"showLink(player.github)\">{{ player.name }}</a>\n        </mat-list-item>\n    </mat-nav-list>\n</div>"
+module.exports = "<div class=\"list\">\n    <h3>Our team</h3>\n    <mat-nav-list>\n        <mat-list-item *ngFor=\"let player of team\">\n            <a matLine (click)=\"showLink(player.github)\">{{ player.name }}</a>\n        </mat-list-item>\n    </mat-nav-list>\n</div>\n\n<app-constructor></app-constructor>\n<app-form></app-form>"
 
 /***/ }),
 
@@ -295,7 +549,7 @@ module.exports = "<div class=\"list\">\n    <h3>Our team</h3>\n    <mat-nav-list
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".list {\n  width: 20%;\n  padding: 5px;\n  border-radius: 5px;\n  float: left;\n  margin: 50px 2px;\n  box-shadow: 1px 1px 10px .1px black;\n  background-color: rgba(255, 255, 255, 0.4); }\n  .list h3 {\n    text-align: center;\n    font-size: 20px;\n    margin: 5px;\n    padding: 5px;\n    color: black; }\n  .list .mat-nav-list {\n    padding: 0;\n    border-radius: 5px;\n    background-color: white; }\n  .list .mat-nav-list .mat-list-item {\n      border-bottom: 1px solid black; }\n"
+module.exports = ".list {\n  width: 20%;\n  padding: 5px;\n  border-radius: 5px;\n  float: left;\n  margin: 50px 2px;\n  box-shadow: 1px 1px 10px .1px black;\n  background-color: rgba(255, 255, 255, 0.4); }\n  .list h3 {\n    text-align: center;\n    font-size: 20px;\n    margin: 5px;\n    padding: 5px;\n    color: black; }\n  .list .mat-nav-list {\n    padding: 0;\n    border-radius: 5px;\n    background-color: white; }\n  .list .mat-nav-list .mat-list-item {\n      border-bottom: 1px solid #dcdcdc; }\n"
 
 /***/ }),
 

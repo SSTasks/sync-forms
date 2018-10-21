@@ -1,0 +1,36 @@
+mat-card {
+  background: #add8e6;
+  margin: 6px;
+  min-width: 90px;
+}
+.palette {
+  width:20%;
+  float:left;
+  padding:5px;
+  border-radius: 5px;
+  float:left;
+  margin:50px 2px;
+  box-shadow: 1px 1px 10px .1px black;
+  min-height: 400px;
+  background: lightblue;
+
+}
+.drag-item {
+  display: inline-flex;
+  padding:20px;
+  background: lightcoral;
+  border-radius: 50%;
+}
+
+.drag-item-container{
+  padding:5px;
+
+  input{
+    float:left;
+
+    &:hover{cursor: move}
+  }
+
+  mat-checkbox, mat-radio-button, button {margin: 5px;}
+
+}

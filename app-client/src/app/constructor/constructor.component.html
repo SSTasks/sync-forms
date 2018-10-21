@@ -1,0 +1,49 @@
+
+<form class="example-form palette" cdkDropList
+     id="paletteRef"
+     [cdkDropListData]="paletteItems"
+     [cdkDropListConnectedTo]="['canvasRef']"
+     (cdkDropListDropped)="drop($event)">
+
+
+    <div class="drag-item-container" *ngFor="let elem of paletteItems; let i = index"
+         cdkDrag
+         [cdkDragData]="elem"
+         [cdkDropListData]="[elem]"
+         cdkDropList
+         [cdkDropListConnectedTo]="['canvasRef']">
+
+        <mat-form-field *ngIf="elem.type==='text'" class="example-full-width">
+            <input matInput type="text" placeholder="Text" required>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="elem.type==='number'" class="example-full-width">
+            <input matInput type="number" placeholder="Price" required>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="elem.type==='select'">
+            <mat-select placeholder="Choose...">
+                <mat-option *ngFor="let option of elem.options" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <section class="example-section" *ngIf="elem.type==='checkbox'">
+            <mat-checkbox *ngFor="let option of elem.options" class="example-margin">{{option}}</mat-checkbox>
+        </section>
+
+        <mat-radio-group *ngIf="elem.type==='radio'">
+            <mat-radio-button value="{{i}}" *ngFor="let option of elem.options; let i = index">{{option}}</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field *ngIf="elem.type==='textarea'" class="example-full-width">
+            <textarea matInput placeholder="Leave a comment"></textarea>
+        </mat-form-field>
+
+        <div *ngIf="elem.type==='button'" class="example-button-row">
+            <button mat-raised-button *ngFor="let option of elem.options" color="{{option}}">{{option}}</button>
+        </div>
+    </div>
+
+</form>
