@@ -201,7 +201,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<form class=\"example-form palette\" cdkDropList\n     id=\"paletteRef\"\n     [cdkDropListData]=\"paletteItems\"\n     [cdkDropListConnectedTo]=\"['canvasRef']\"\n     (cdkDropListDropped)=\"drop($event)\">\n\n\n    <div class=\"drag-item-container\" *ngFor=\"let elem of paletteItems; let i = index\"\n         cdkDrag\n         [cdkDragData]=\"elem\"\n         [cdkDropListData]=\"[elem]\"\n         cdkDropList\n         [cdkDropListConnectedTo]=\"['canvasRef']\">\n\n        <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width\">\n            <input matInput type=\"text\" placeholder=\"Text\" required>\n        </mat-form-field>\n\n        <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width\">\n            <input matInput type=\"number\" placeholder=\"Price\" required>\n        </mat-form-field>\n\n        <mat-form-field *ngIf=\"elem.type==='select'\">\n            <mat-select placeholder=\"Choose...\">\n                <mat-option *ngFor=\"let option of elem.options\" [value]=\"option\">\n                    {{option}}\n                </mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <section class=\"example-section\" *ngIf=\"elem.type==='checkbox'\">\n            <mat-checkbox *ngFor=\"let option of elem.options\" class=\"example-margin\">{{option}}</mat-checkbox>\n        </section>\n\n        <mat-radio-group *ngIf=\"elem.type==='radio'\">\n            <mat-radio-button value=\"{{i}}\" *ngFor=\"let option of elem.options; let i = index\">{{option}}</mat-radio-button>\n        </mat-radio-group>\n\n        <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width\">\n            <textarea matInput placeholder=\"Leave a comment\"></textarea>\n        </mat-form-field>\n\n        <div *ngIf=\"elem.type==='button'\" class=\"example-button-row\">\n            <button mat-raised-button *ngFor=\"let option of elem.options\" color=\"{{option}}\">{{option}}</button>\n        </div>\n    </div>\n\n</form>\n"
+module.exports = "\n<form class=\"example-form palette\" cdkDropList\n     id=\"paletteRef\"\n     [cdkDropListData]=\"paletteItems\"\n     [cdkDropListConnectedTo]=\"['canvasRef']\"\n     (cdkDropListDropped)=\"drop($event)\">\n\n\n    <div class=\"drag-item-container\" *ngFor=\"let elem of paletteItems; let i = index\"\n         cdkDrag\n         [cdkDragData]=\"elem\"\n         [cdkDropListData]=\"[elem]\"\n         cdkDropList\n         [cdkDropListConnectedTo]=\"['canvasRef']\">\n\n        <!--if element is input TEXT-->\n        <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width\">\n            <input matInput type=\"text\" placeholder=\"Text\" [disabled]=true required>\n        </mat-form-field>\n\n        <!--if element is SLIDER-->\n        <section *ngIf=\"elem.type==='slider'\" class=\"example-section\">\n            <mat-slider\n                    class=\"example-margin\"\n                    [disabled]=true\n                    [invert]=\"invert\"\n                    [max]=\"max\"\n                    [min]=\"min\"\n                    [step]=\"step\"\n                    [thumbLabel]=\"thumbLabel\"\n                    [tickInterval]=\"tickInterval\"\n                    [vertical]=\"vertical\">\n            </mat-slider>\n        </section>\n\n        <!--if element is TOGGLE-->\n        <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\">\n            <mat-slide-toggle\n                    class=\"example-margin\"\n                    [color]=\"color\"\n                    [checked]=\"checked\"\n                    [disabled]=true>\n                Slide me!\n            </mat-slide-toggle>\n        </section>\n\n        <!--if element is SELECT-->\n        <mat-form-field *ngIf=\"elem.type==='select'\">\n            <mat-select placeholder=\"Choose...\">\n                <mat-option *ngFor=\"let option of elem.options\" [value]=\"option\">\n                    {{option}}\n                </mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <!--if element is input CHECKBOX-->\n        <section class=\"example-section\" *ngIf=\"elem.type==='checkbox'\">\n            <mat-checkbox *ngFor=\"let option of elem.options\" class=\"example-margin\" [disabled]=true>{{option}}</mat-checkbox>\n        </section>\n\n        <!--if element is input RADIO-->\n        <mat-radio-group *ngIf=\"elem.type==='radio'\">\n            <mat-radio-button value=\"{{i}}\" *ngFor=\"let option of elem.options; let i = index\" [disabled]=true>{{option}}</mat-radio-button>\n        </mat-radio-group>\n\n        <!--if element is TEXTAREA-->\n        <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width\">\n            <textarea matInput placeholder=\"Leave a comment\" [disabled]=true></textarea>\n        </mat-form-field>\n\n        <!--if element is BUTTON-->\n        <div *ngIf=\"elem.type==='button'\" class=\"example-button-row\">\n            <button mat-raised-button *ngFor=\"let option of elem.options\" color=\"{{option}}\">{{option}}</button>\n        </div>\n    </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -212,7 +212,7 @@ module.exports = "\n<form class=\"example-form palette\" cdkDropList\n     id=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-card {\n  background: #add8e6;\n  margin: 6px;\n  min-width: 90px; }\n\n.palette {\n  width: 20%;\n  float: left;\n  padding: 5px;\n  border-radius: 5px;\n  float: left;\n  margin: 50px 2px;\n  box-shadow: 1px 1px 10px .1px black;\n  min-height: 400px;\n  background: lightblue; }\n\n.drag-item {\n  display: inline-flex;\n  padding: 20px;\n  background: lightcoral;\n  border-radius: 50%; }\n\n.drag-item-container {\n  padding: 5px; }\n\n.drag-item-container input {\n    float: left; }\n\n.drag-item-container input:hover {\n      cursor: move; }\n\n.drag-item-container mat-checkbox, .drag-item-container mat-radio-button, .drag-item-container button {\n    margin: 5px; }\n"
+module.exports = "mat-card {\n  background: #add8e6;\n  margin: 6px;\n  min-width: 90px; }\n\n.palette {\n  width: 20%;\n  float: left;\n  padding: 5px;\n  border-radius: 5px;\n  float: left;\n  margin: 50px 2px;\n  box-shadow: 1px 1px 10px .1px black;\n  min-height: 400px;\n  background: lightblue; }\n\n.drag-item {\n  display: inline-flex;\n  padding: 20px;\n  background: lightcoral;\n  border-radius: 50%; }\n\n.drag-item-container {\n  padding: 5px; }\n\n.drag-item-container:hover {\n    cursor: move; }\n\n.drag-item-container input, .drag-item-container mat-checkbox, .drag-item-container mat-radio-button, .drag-item-container button {\n    margin: 5px; }\n"
 
 /***/ }),
 
@@ -243,13 +243,14 @@ var FormComponent = /** @class */ (function () {
     function FormComponent(dropZones) {
         this.dropZones = dropZones;
         this.paletteItems = [
-            { type: 'text', label: 'elem 1', options: [] },
-            { type: 'number', label: 'elem 2', options: [] },
-            { type: 'textarea', label: 'elem 3', options: [] },
-            { type: 'select', label: 'elem 4', options: ['Option 1', 'Option 2', 'Option 3'] },
-            { type: 'checkbox', label: 'elem 5', options: ['Option 1', 'Option 2'] },
-            { type: 'radio', label: 'elem 6', options: ['Option 1', 'Option 2'] },
-            { type: 'button', label: 'elem 7', options: ['primary', 'warn'] }
+            { type: 'text', label: 'text', options: [] },
+            { type: 'slider', label: 'slider', options: [] },
+            { type: 'toggle', label: 'toggle', options: [] },
+            { type: 'textarea', label: 'textarea', options: [] },
+            { type: 'select', label: 'select', options: ['Option 1', 'Option 2', 'Option 3'] },
+            { type: 'checkbox', label: 'checkbox', options: ['Option 1', 'Option 2'] },
+            { type: 'radio', label: 'radio', options: ['Option 1', 'Option 2'] },
+            { type: 'button', label: 'button', options: ['primary', 'warn'] }
         ];
     }
     FormComponent.prototype.ngOnInit = function () {
@@ -279,7 +280,7 @@ var FormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div cdkDropList\n    id=\"canvasRef\"\n    class=\"canvas\"\n    #todoList=\"cdkDropList\"\n    [cdkDropListData]=\"canvasItems\"\n    (cdkDropListDropped)=\"drop($event)\">\n\n    <div *ngFor=\"let item of canvasItems; let i = index\" cdkDrag>\n        <mat-card>\n            <div> {{item.label}}</div>\n        </mat-card>\n    </div>\n</div>"
+module.exports = "\n<div cdkDropList\n    id=\"canvasRef\"\n    class=\"canvas\"\n    #todoList=\"cdkDropList\"\n    [cdkDropListData]=\"canvasItems\"\n    (cdkDropListDropped)=\"drop($event)\">\n\n    <div *ngFor=\"let elem of canvasItems; let i = index\" class=\"drag-item-container\" cdkDrag>\n\n        <!--if element is input TEXT-->\n        <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width\">\n            <input matInput type=\"text\" placeholder=\"Text\" required>\n        </mat-form-field>\n\n        <!--if element is SLIDER-->\n        <section *ngIf=\"elem.type==='slider'\" class=\"example-section\">\n            <mat-slider\n                    class=\"example-margin\"\n                    [disabled]=\"disabled\"\n                    [invert]=\"invert\"\n                    [max]=\"max\"\n                    [min]=\"min\"\n                    [step]=\"step\"\n                    [thumbLabel]=\"thumbLabel\"\n                    [tickInterval]=\"tickInterval\"\n                    [vertical]=\"vertical\">\n            </mat-slider>\n        </section>\n\n        <!--if element is TOGGLE-->\n        <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\">\n            <mat-slide-toggle\n                    class=\"example-margin\"\n                    [color]=\"color\"\n                    [checked]=\"checked\"\n                    [disabled]=\"disabled\">\n                Slide me!\n            </mat-slide-toggle>\n        </section>\n\n        <!--if element is SELECT-->\n        <mat-form-field *ngIf=\"elem.type==='select'\">\n            <mat-select placeholder=\"Choose...\">\n                <mat-option *ngFor=\"let option of elem.options\" [value]=\"option\">\n                    {{option}}\n                </mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <!--if element is input CHECKBOX-->\n        <section class=\"example-section\" *ngIf=\"elem.type==='checkbox'\">\n            <mat-checkbox *ngFor=\"let option of elem.options\" class=\"example-margin\">{{option}}</mat-checkbox>\n        </section>\n\n        <!--if element is input RADIO-->\n        <mat-radio-group *ngIf=\"elem.type==='radio'\">\n            <mat-radio-button value=\"{{i}}\" *ngFor=\"let option of elem.options; let i = index\">{{option}}</mat-radio-button>\n        </mat-radio-group>\n\n        <!--if element is TEXTAREA-->\n        <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width\">\n            <textarea matInput placeholder=\"Leave a comment\"></textarea>\n        </mat-form-field>\n\n        <!--if element is BUTTON-->\n        <div *ngIf=\"elem.type==='button'\" class=\"example-button-row\">\n            <button mat-raised-button *ngFor=\"let option of elem.options\" color=\"{{option}}\">{{option}}</button>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -290,7 +291,7 @@ module.exports = "\n<div cdkDropList\n    id=\"canvasRef\"\n    class=\"canvas\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".canvas {\n  width: 50%;\n  padding: 5px;\n  border-radius: 5px;\n  float: left;\n  margin: 50px 2px;\n  box-shadow: 1px 1px 10px .1px black;\n  min-height: 400px;\n  background: mediumaquamarine;\n  float: left; }\n\nmat-card {\n  background: lightcoral;\n  margin: 5px; }\n"
+module.exports = ".canvas {\n  width: 50%;\n  padding: 5px;\n  border-radius: 5px;\n  float: left;\n  margin: 50px 2px;\n  box-shadow: 1px 1px 10px .1px black;\n  min-height: 400px;\n  background: mediumaquamarine;\n  float: left;\n  position: relative; }\n\nmat-card {\n  display: inline-block;\n  background: lightcoral;\n  margin: 5px; }\n\n.drag-item-container {\n  padding: 5px; }\n\n.drag-item-container input {\n    float: left; }\n\n.drag-item-container input:hover {\n      cursor: move; }\n\n.drag-item-container mat-checkbox, .drag-item-container mat-radio-button, .drag-item-container button {\n    margin: 5px; }\n"
 
 /***/ }),
 
@@ -388,7 +389,9 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatInputModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatRadioModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCheckboxModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSelectModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSelectModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSliderModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSlideToggleModule"]
             ],
             exports: [
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatListModule"],
@@ -400,7 +403,9 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatInputModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatRadioModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCheckboxModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSelectModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSelectModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSliderModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSlideToggleModule"]
             ],
         })
     ], MaterialModule);

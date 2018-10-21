@@ -11,13 +11,14 @@ import {Item} from '../services/item.model';
 export class FormComponent implements OnInit {
 
     paletteItems: Item[] = [
-        {type: 'text', label: 'elem 1', options: []},
-        {type: 'number', label: 'elem 2', options: []},
-        {type: 'textarea', label: 'elem 3', options: []},
-        {type: 'select', label: 'elem 4', options: ['Option 1', 'Option 2', 'Option 3']},
-        {type: 'checkbox', label: 'elem 5', options: ['Option 1', 'Option 2']},
-        {type: 'radio', label: 'elem 6', options: ['Option 1', 'Option 2']},
-        {type: 'button', label: 'elem 7', options: ['primary', 'warn']}
+        {type: 'text', label: 'text', options: []},
+        {type: 'slider', label: 'slider', options: []},
+        {type: 'toggle', label: 'toggle', options: []},
+        {type: 'textarea', label: 'textarea', options: []},
+        {type: 'select', label: 'select', options: ['Option 1', 'Option 2', 'Option 3']},
+        {type: 'checkbox', label: 'checkbox', options: ['Option 1', 'Option 2']},
+        {type: 'radio', label: 'radio', options: ['Option 1', 'Option 2']},
+        {type: 'button', label: 'button', options: ['primary', 'warn']}
     ];
 
     constructor(

@@ -6,9 +6,66 @@
     [cdkDropListData]="canvasItems"
     (cdkDropListDropped)="drop($event)">
 
-    <div *ngFor="let item of canvasItems; let i = index" cdkDrag>
-        <mat-card>
-            <div> {{item.label}}</div>
-        </mat-card>
+    <div *ngFor="let elem of canvasItems; let i = index" class="drag-item-container" cdkDrag>
+
+        <!--if element is input TEXT-->
+        <mat-form-field *ngIf="elem.type==='text'" class="example-full-width">
+            <input matInput type="text" placeholder="Text" required>
+        </mat-form-field>
+
+        <!--if element is SLIDER-->
+        <section *ngIf="elem.type==='slider'" class="example-section">
+            <mat-slider
+                    class="example-margin"
+                    [disabled]="disabled"
+                    [invert]="invert"
+                    [max]="max"
+                    [min]="min"
+                    [step]="step"
+                    [thumbLabel]="thumbLabel"
+                    [tickInterval]="tickInterval"
+                    [vertical]="vertical">
+            </mat-slider>
+        </section>
+
+        <!--if element is TOGGLE-->
+        <section *ngIf="elem.type==='toggle'" class="example-section">
+            <mat-slide-toggle
+                    class="example-margin"
+                    [color]="color"
+                    [checked]="checked"
+                    [disabled]="disabled">
+                Slide me!
+            </mat-slide-toggle>
+        </section>
+
+        <!--if element is SELECT-->
+        <mat-form-field *ngIf="elem.type==='select'">
+            <mat-select placeholder="Choose...">
+                <mat-option *ngFor="let option of elem.options" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!--if element is input CHECKBOX-->
+        <section class="example-section" *ngIf="elem.type==='checkbox'">
+            <mat-checkbox *ngFor="let option of elem.options" class="example-margin">{{option}}</mat-checkbox>
+        </section>
+
+        <!--if element is input RADIO-->
+        <mat-radio-group *ngIf="elem.type==='radio'">
+            <mat-radio-button value="{{i}}" *ngFor="let option of elem.options; let i = index">{{option}}</mat-radio-button>
+        </mat-radio-group>
+
+        <!--if element is TEXTAREA-->
+        <mat-form-field *ngIf="elem.type==='textarea'" class="example-full-width">
+            <textarea matInput placeholder="Leave a comment"></textarea>
+        </mat-form-field>
+
+        <!--if element is BUTTON-->
+        <div *ngIf="elem.type==='button'" class="example-button-row">
+            <button mat-raised-button *ngFor="let option of elem.options" color="{{option}}">{{option}}</button>
+        </div>
     </div>
 </div>

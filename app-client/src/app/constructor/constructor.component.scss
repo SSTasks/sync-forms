@@ -24,13 +24,10 @@ mat-card {
 
 .drag-item-container{
   padding:5px;
+  &:hover{cursor: move}
 
-  input{
-    float:left;
-
-    &:hover{cursor: move}
+  input, mat-checkbox, mat-radio-button, button {
+    margin: 5px;
   }
-
-  mat-checkbox, mat-radio-button, button {margin: 5px;}
 
 }

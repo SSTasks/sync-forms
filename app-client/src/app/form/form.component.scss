@@ -8,9 +8,25 @@
   min-height: 400px;
   background: mediumaquamarine;
   float:left;
+  position: relative;
 }
 
 mat-card {
+  display: inline-block;
   background: lightcoral;
   margin: 5px;
+}
+
+
+.drag-item-container{
+  padding:5px;
+
+  input{
+    float:left;
+
+    &:hover{cursor: move}
+  }
+
+  mat-checkbox, mat-radio-button, button {margin: 5px;}
+
 }

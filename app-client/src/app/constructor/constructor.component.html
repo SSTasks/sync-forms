@@ -13,14 +13,38 @@
          cdkDropList
          [cdkDropListConnectedTo]="['canvasRef']">
 
+        <!--if element is input TEXT-->
         <mat-form-field *ngIf="elem.type==='text'" class="example-full-width">
-            <input matInput type="text" placeholder="Text" required>
+            <input matInput type="text" placeholder="Text" [disabled]=true required>
         </mat-form-field>
 
-        <mat-form-field *ngIf="elem.type==='number'" class="example-full-width">
-            <input matInput type="number" placeholder="Price" required>
-        </mat-form-field>
+        <!--if element is SLIDER-->
+        <section *ngIf="elem.type==='slider'" class="example-section">
+            <mat-slider
+                    class="example-margin"
+                    [disabled]=true
+                    [invert]="invert"
+                    [max]="max"
+                    [min]="min"
+                    [step]="step"
+                    [thumbLabel]="thumbLabel"
+                    [tickInterval]="tickInterval"
+                    [vertical]="vertical">
+            </mat-slider>
+        </section>
 
+        <!--if element is TOGGLE-->
+        <section *ngIf="elem.type==='toggle'" class="example-section">
+            <mat-slide-toggle
+                    class="example-margin"
+                    [color]="color"
+                    [checked]="checked"
+                    [disabled]=true>
+                Slide me!
+            </mat-slide-toggle>
+        </section>
+
+        <!--if element is SELECT-->
         <mat-form-field *ngIf="elem.type==='select'">
             <mat-select placeholder="Choose...">
                 <mat-option *ngFor="let option of elem.options" [value]="option">
@@ -29,18 +53,22 @@
             </mat-select>
         </mat-form-field>
 
+        <!--if element is input CHECKBOX-->
         <section class="example-section" *ngIf="elem.type==='checkbox'">
-            <mat-checkbox *ngFor="let option of elem.options" class="example-margin">{{option}}</mat-checkbox>
+            <mat-checkbox *ngFor="let option of elem.options" class="example-margin" [disabled]=true>{{option}}</mat-checkbox>
         </section>
 
+        <!--if element is input RADIO-->
         <mat-radio-group *ngIf="elem.type==='radio'">
-            <mat-radio-button value="{{i}}" *ngFor="let option of elem.options; let i = index">{{option}}</mat-radio-button>
+            <mat-radio-button value="{{i}}" *ngFor="let option of elem.options; let i = index" [disabled]=true>{{option}}</mat-radio-button>
         </mat-radio-group>
 
+        <!--if element is TEXTAREA-->
         <mat-form-field *ngIf="elem.type==='textarea'" class="example-full-width">
-            <textarea matInput placeholder="Leave a comment"></textarea>
+            <textarea matInput placeholder="Leave a comment" [disabled]=true></textarea>
         </mat-form-field>
 
+        <!--if element is BUTTON-->
         <div *ngIf="elem.type==='button'" class="example-button-row">
             <button mat-raised-button *ngFor="let option of elem.options" color="{{option}}">{{option}}</button>
         </div>
