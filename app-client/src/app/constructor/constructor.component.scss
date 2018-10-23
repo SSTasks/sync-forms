@@ -9,7 +9,7 @@ mat-card {
   padding:5px;
   border-radius: 5px;
   float:left;
-  margin:50px 2px;
+  margin:20px 2px;
   box-shadow: 1px 1px 10px .1px black;
   min-height: 400px;
   background: lightblue;
@@ -23,11 +23,11 @@ mat-card {
 }
 
 .drag-item-container{
-  padding:5px;
+  padding:2px;
   &:hover{cursor: move}
 
   input, mat-checkbox, mat-radio-button, button {
-    margin: 5px;
+    margin: 2px 5px;
   }
 
 }

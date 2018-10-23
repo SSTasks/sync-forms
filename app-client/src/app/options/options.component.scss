@@ -1,22 +1,22 @@
 .canvas {
-  width:39%;
+  width:15%;
   padding:5px;
   border-radius: 5px;
   float:left;
   margin:20px 2px;
   box-shadow: 1px 1px 10px .1px black;
   min-height: 432px;
-  background: mediumaquamarine;
+  background: #cd95b4;
   float:left;
   position: relative;
-}
 
-mat-card {
-  display: inline-block;
-  background: lightcoral;
-  margin: 5px;
+  h2{
+    text-align: center;
+    &:first-letter{
+      text-transform: uppercase;
+    }
+  }
 }
-
 
 .drag-item-container{
   padding:5px;

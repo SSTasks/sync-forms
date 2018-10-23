@@ -15,16 +15,17 @@
 
         <!--if element is SLIDER-->
         <section *ngIf="elem.type==='slider'" class="example-section">
-            <mat-slider
+            <mat-slider (change)="focus(elem)"
                     class="example-margin"
-                    [disabled]="disabled"
-                    [invert]="invert"
-                    [max]="max"
-                    [min]="min"
-                    [step]="step"
-                    [thumbLabel]="thumbLabel"
-                    [tickInterval]="tickInterval"
-                    [vertical]="vertical">
+                    [disabled]="elem.config.disabled"
+                    [invert]="elem.config.invert"
+                    [max]="elem.config.max"
+                    [min]="elem.config.min"
+                    [step]="elem.config.step"
+                    [thumbLabel]="elem.config.thumbLabel"
+                    [tickInterval]="elem.config.tickInterval"
+                    [(ngModel)]="elem.config.value"
+                    [vertical]="elem.config.vertical">
             </mat-slider>
         </section>
 

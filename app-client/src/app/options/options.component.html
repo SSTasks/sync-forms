@@ -1,0 +1,42 @@
+
+<div class="canvas">
+    <h2 class="example-h2">{{type}}</h2>
+
+    <section class="example-section">
+        <mat-form-field class="example-margin">
+            <input matInput type="number" placeholder="Value" [(ngModel)]="value" [disabled]="formActivation" (change)="change()">
+        </mat-form-field>
+        <mat-form-field class="example-margin">
+            <input matInput type="number" placeholder="Min value" [(ngModel)]="min" [disabled]="formActivation" (change)="change()">
+        </mat-form-field>
+        <mat-form-field class="example-margin">
+            <input matInput type="number" placeholder="Max value" [(ngModel)]="max" [disabled]="formActivation" (change)="change()">
+        </mat-form-field>
+        <mat-form-field class="example-margin">
+            <input matInput type="number" placeholder="Step size" [(ngModel)]="step" [disabled]="formActivation" (change)="change()">
+        </mat-form-field>
+    </section>
+
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="showTicks" [disabled]="formActivation" (change)="change()">Show ticks</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="autoTicks" *ngIf="showTicks" [disabled]="formActivation" (change)="change()">
+            Auto ticks
+        </mat-checkbox>
+        <mat-form-field class="example-margin" *ngIf="showTicks && !autoTicks">
+            <input matInput type="number" placeholder="Tick interval" [(ngModel)]="tickInterval" [disabled]="formActivation" (change)="change()">
+        </mat-form-field>
+    </section>
+
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="thumbLabel" [disabled]="formActivation" (change)="change()">Show thumb label</mat-checkbox>
+    </section>
+
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="vertical" [disabled]="formActivation" (change)="change()">Vertical</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="invert" [disabled]="formActivation" (change)="change()">Inverted</mat-checkbox>
+    </section>
+
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="disabled" [disabled]="formActivation" (change)="change()">Disabled</mat-checkbox>
+    </section>
+</div>
