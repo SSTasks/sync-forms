@@ -1,0 +1,47 @@
+<mat-card (click)="addElem(elements.text)">
+    <mat-form-field>
+        <mat-label>Input</mat-label>
+        <input matInput [disabled]="true">
+    </mat-form-field>
+</mat-card>
+
+<mat-card (click)="addElem(elements.select)">
+    <mat-form-field>
+        <mat-label>Select</mat-label>
+        <mat-select [disabled]="true">
+            <mat-option>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-card>
+
+<mat-card (click)="addElem(elements.textarea)">
+    <mat-form-field>
+        <mat-label>Textarea</mat-label>
+        <textarea rows="1" matInput [disabled]="true"></textarea>
+    </mat-form-field>
+</mat-card>
+
+<mat-card (click)="addElem(elements.slider)">
+    <mat-slider [disabled]="true"></mat-slider>
+</mat-card>
+
+<mat-card (click)="addElem(elements.radio)">
+    <mat-radio-group>
+        <mat-radio-button [disabled]="true" checked>Radio</mat-radio-button>
+    </mat-radio-group>
+</mat-card>
+
+<mat-card (click)="addElem(elements.toggle)">
+    <mat-slide-toggle [disabled]="true">Slide me!</mat-slide-toggle>
+</mat-card>
+
+<mat-card (click)="addElem(elements.checkbox)">
+    <mat-checkbox [disabled]="true">Checkbox</mat-checkbox>
+</mat-card>
+
+
+<mat-card (click)="addElem(elements.button)">
+    <button mat-raised-button [disabled]="true">Button</button>
+</mat-card>
+

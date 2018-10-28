@@ -1,24 +1,35 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
-import {HttpClient} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {catchError, tap, map} from 'rxjs/operators';
-import {Team} from './team';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpService {
 
+    user = new EventEmitter();
+
     constructor(private http: HttpClient) {}
 
-    // http get any pet
-    public getTeam(): Observable<Team[]> {
-        return this.http.get<Team[]>('/team')
-            .pipe(
-                tap(team => console.log(team)),
-                catchError(this.handleError('getTeam', []))
-            );
+    login(username: string, password: string) {
+        return this.http.post<any>(`/users/auth`, { username: username, password: password })
+            .pipe(map(user => {
+                this.user.emit(user);
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                return user;
+            }));
+    }
+
+    subscriber() {
+        return this.user;
+    }
+
+    logout() {
+        window.localStorage.clear();
+        this.user.emit({});
     }
 
     private handleError<T> (operation = 'operation', result?: T) {

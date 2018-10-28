@@ -1,0 +1,12 @@
+mat-card {
+   margin: 16px;
+   padding-bottom: 0;
+}
+ 
+ mat-card mat-card-title {
+    font-size: 20px;
+ }
+
+ ::ng-deep .mat-input-wrapper{
+   width:400px !important;
+ }

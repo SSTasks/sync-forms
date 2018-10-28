@@ -1,0 +1,231 @@
+<mat-sidenav-container class="sidenav-container" fxLayout="row">
+    <mat-sidenav fxFlex.sm="1 0 230px"
+                 fxFlex.md="1 1 25%"
+                 fxFlex.gt-md="1 1 20%"
+                 #drawer class="sidenav"
+                 fixedInViewport="true"
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="!(isHandset$ | async)">
+        <mat-toolbar fxLayout="row"
+                     fxLayoutAlign="center center">
+            <mat-slide-toggle fxHide.xs="true"
+                              labelPosition="before"
+                              #showEditPanel>
+                <span *ngIf="!showEditPanel.checked">Show edit panel</span>
+                <span *ngIf="showEditPanel.checked">Hide edit panel</span>
+            </mat-slide-toggle>
+        </mat-toolbar>
+        <mat-nav-list>
+            <app-nav-constructor *ngIf="!showEditPanel.checked"></app-nav-constructor>
+            <app-nav-list *ngIf="showEditPanel.checked"></app-nav-list>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlex.sm="1 1 70%"
+                         fxFlex.md="1 1 75%"
+                         fxFlex.gt-md="1 1 80%">
+        <mat-toolbar *ngIf="!showEditPanel.checked"
+                     fxLayout="row"
+                     fxLayoutAlign="space-between center"
+                     fxLayoutAlign.gt-xs="end center"
+                     color="primary">
+            <button type="button"
+                    aria-label="Toggle sidenav"
+                    mat-icon-button
+                    (click)="drawer.toggle()"
+                    *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <button fxFlex="1 1 260px"
+                    mat-raised-button>Start interview
+            </button>
+        </mat-toolbar>
+        <mat-toolbar *ngIf="showEditPanel.checked"
+                     fxLayout="row"
+                     fxLayoutAlign="space-between center"
+                     color="primary">
+            <button type="button"
+                    aria-label="Toggle sidenav"
+                    mat-icon-button
+                    (click)="drawer.toggle()"
+                    *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <button fxFlex.lt-md="0 1 150px"
+                    fxFlex.md="200px"
+                    fxFlex.gt-md="260px"
+                    mat-raised-button
+                    class="save-form-button">Save form
+            </button>
+            <div fxFlex.lt-md="0 1 310px"
+                 fxFlex.md="410px"
+                 fxFlex.gt-md="550px">
+                <button fxFlex.lt-md="0 1 150px"
+                        fxFlex.md="200px"
+                        fxFlex.gt-md="260px"
+                        mat-raised-button class="new-form-button">New form
+                </button>
+                <button fxFlex.lt-md="0 1 150px"
+                        fxFlex.md="200px"
+                        fxFlex.gt-md="260px"
+                        mat-raised-button class="remove-form-button">Remove form
+                </button>
+            </div>
+        </mat-toolbar>
+
+        <div class="form">
+            <h2 class="mat-h2">{{form.title}}</h2>
+            <form class="example-container" [formGroup]="options">
+                <!--container for row-->
+                <div class="row-container" *ngFor="let row of form.rows; let rowIndex = index">
+                    <!--row-->
+                    <div class="row">
+                        <!--container for cell-->
+                        <div class="cell-container" *ngFor="let cell of row.cells; let cellIndex = index">
+                            <!--cell-->
+                            <div class="cell">
+                                <div class="element" *ngFor="let elem of cell.elements; let elemIndex = index">
+                                    <!--<div  [innerHtml]="cell.element | type"></div>-->
+
+                                    <!--if element is input TEXT-->
+                                    <mat-form-field *ngIf="elem.type==='text'" class="example-full-width" click>
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <input matInput type="text"
+                                               [value]="elem.config.value"
+                                               [placeholder]="elem.config.placeholder"
+                                               [disabled]="elem.config.disabled">
+                                    </mat-form-field>
+
+                                    <!--if element is input NUMBER-->
+                                    <mat-form-field *ngIf="elem.type==='number'" class="example-full-width">
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <input matInput type="number"
+                                               [value]="elem.config.value"
+                                               [placeholder]="elem.config.placeholder"
+                                               [min]="elem.config.min"
+                                               [max]="elem.config.max"
+                                               [disabled]="elem.config.disabled">
+                                    </mat-form-field>
+
+                                    <!--if element is input EMAIL-->
+                                    <mat-form-field *ngIf="elem.type==='email'" class="example-full-width">
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <input matInput type="email"
+                                               [value]="elem.config.value"
+                                               [placeholder]="elem.config.placeholder"
+                                               [disabled]="elem.config.disabled">
+                                    </mat-form-field>
+
+                                    <!--if element is input PASSWORD-->
+                                    <mat-form-field *ngIf="elem.type==='password'" class="example-full-width">
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <input matInput type="password"
+                                               [value]="elem.config.value"
+                                               [placeholder]="elem.config.placeholder"
+                                               [disabled]="elem.config.disabled">
+                                    </mat-form-field>
+
+                                    <!--if element is SLIDER-->
+                                    <section *ngIf="elem.type==='slider'" class="example-section">
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <mat-slider
+                                                    class="example-margin"
+                                                    [value]="elem.config.value"
+                                                    [invert]="elem.config.invert"
+                                                    [max]="elem.config.max"
+                                                    [min]="elem.config.min"
+                                                    [step]="elem.config.step"
+                                                    [thumbLabel]="elem.config.thumbLabel"
+                                                    [vertical]="elem.config.vertical"
+                                                    [disabled]="elem.config.disabled">
+                                        </mat-slider>
+                                    </section>
+
+                                    <!--if element is TOGGLE-->
+                                    <section *ngIf="elem.type==='toggle'" class="example-section">
+
+                                        <mat-slide-toggle class="example-margin"
+                                                [color]="elem.config.color"
+                                                [checked]="elem.config.checked"
+                                                [disabled]="elem.config.disabled">
+                                            Slide me!
+                                        </mat-slide-toggle>
+                                    </section>
+
+                                    <!--if element is SELECT-->
+                                    <mat-form-field *ngIf="elem.type==='select'">
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <mat-select [disabled]="elem.config.disabled">
+                                            <mat-option *ngFor="let option of elem.config.options" value="{{option}}">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <!--if element is input CHECKBOX-->
+                                    <section class="example-section example-section-checkbox" *ngIf="elem.type==='checkbox'">
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <mat-checkbox *ngFor="let option of elem.config.options" class="example-margin example-margin-checkbox"
+                                                      [value]="option"
+                                                      [color]="elem.config.color"
+                                                      [disabled]="elem.config.disabled">{{option}}</mat-checkbox>
+                                    </section>
+
+                                    <!--if element is input RADIO-->
+                                    <mat-radio-group class="example-radio-group" *ngIf="elem.type==='radio'">
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <mat-radio-button class="example-radio-button" *ngFor="let option of elem.config.options"
+                                                          [value]="option"
+                                                          [color]="elem.config.color"
+                                                          [disabled]="elem.config.disabled">{{option}}</mat-radio-button>
+                                    </mat-radio-group>
+
+                                    <!--if element is TEXTAREA-->
+                                    <mat-form-field *ngIf="elem.type==='textarea'" class="example-full-width">
+                                        <mat-label>{{elem.label}}</mat-label>
+                                        <textarea matInput
+                                                  [value]="elem.config.value"
+                                                  [placeholder]="elem.config.placeholder"
+                                                  [disabled]="elem.config.disabled"></textarea>
+                                    </mat-form-field>
+
+                                    <!--if element is BUTTON-->
+                                    <div *ngIf="elem.type==='button'" class="example-button-row">
+                                        <button mat-raised-button
+                                                [color]="elem.config.color"
+                                                [disabled]="elem.config.disabled">{{elem.label}}</button>
+                                    </div>
+
+                                    <button mat-mini-fab color="primary" (click)="delElem(rowIndex, cellIndex)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </div>
+
+                                <button mat-mini-fab color="primary" *ngIf="!cell.elements.length" (click)="addElem(rowIndex, cellIndex)">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+
+                            <button mat-mini-fab color="primary" (click)="delCell(rowIndex, cellIndex)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </div>
+
+                        <button mat-mini-fab color="primary" (click)="addCell(rowIndex)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+
+                    <button mat-mini-fab color="primary" (click)="delRow(rowIndex)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+
+                <button mat-mini-fab color="primary" (click)="addRow()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </form>
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

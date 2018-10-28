@@ -1,0 +1,53 @@
+<mat-card class="form-card">
+  <div class="form-info">
+      <h1 class="form-title">SyncForms</h1>
+  </div>
+  <!-- <div 
+        class="alert alert-{{message.type}}"
+        *ngIf="message.text"
+    >
+    {{ message?.text }}
+    </div> -->
+  <form
+      [formGroup]='form'
+      (ngSubmit)='onSubmit()'
+      class="form"
+  >
+      <mat-form-field 
+          class="form-input-full"
+          appearance="outline"
+      >
+          <mat-label>Enter username</mat-label>
+          <input 
+              matInput 
+              placeholder="Username"
+              type="text"
+              formControlName='username'
+          >
+          <mat-error *ngIf="form.get('username').errors?.required">Username field must not be empty</mat-error>
+      </mat-form-field>
+      <mat-form-field 
+          class="form-input-full"
+          appearance="outline"
+      >
+          <mat-label>Enter password</mat-label>
+          <input 
+              matInput 
+              placeholder="Password"
+              [type]="passwordType"
+              formControlName='password'
+          >
+          <i [ngClass]="{'active': active}" class="material-icons form-show" (click)="togglePassword()">remove_red_eye</i>
+          <mat-error *ngIf="form.get('password').errors?.required">Password field must not be empty</mat-error>
+      </mat-form-field>
+      <div class="form-button">
+          <button 
+              mat-raised-button 
+              color="primary"
+              [disabled]='form.invalid'
+          >
+          Log in
+          </button>
+      </div>
+  </form>
+</mat-card>

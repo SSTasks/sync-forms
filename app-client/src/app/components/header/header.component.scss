@@ -1,0 +1,57 @@
+$logo: url(./../../../assets/img/symbol.svg);
+
+.header {
+    &-logo {
+        font-family: 'Russo One', sans-serif;
+        cursor: pointer;
+    }
+    &-spacer {
+        flex: 1 1 auto;
+    }
+    &-user {
+        text-transform: capitalize;
+        font-weight: 300;
+        font-size: 23px;
+    }
+}
+
+// .logo {
+//     background: $logo no-repeat top left;
+//     background-size: contain;
+//     width: 46px;
+//     height: 50px;
+//     margin-left: 25px;
+//     opacity: 0.5;
+//   }
+
+// .mat-toolbar {
+//     padding: 3px;
+//     border-bottom: 1px solid rgba(0,0,0,.1);
+// }
+
+// a {
+//     font-family: 'Chakra Petch', sans-serif;
+//     font-size: 20px;
+//     text-align: center;
+//     color: #000000;
+//     padding: 16px 26px;
+//     display: inline-block;
+//     text-decoration: none;
+//     margin-top:10px;
+// }
+
+// a:hover {
+//     background: rgba(197, 197, 197, 0.1);
+// }
+
+// a:active {
+//     box-shadow: 0px 0px rgba(71, 71, 71, 0.1);
+//     background: rgba(27, 27, 27, 0.1);
+// }
+
+// .links {
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     margin-right: 20px;
+// }

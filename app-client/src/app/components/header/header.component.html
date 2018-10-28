@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <div class="logo"></div>
+      <h1 class="header-logo" [routerLink]="['/']">{{Title}}</h1>
+      <span class="header-spacer"></span>
+      <ul class="header-list">
+          <button *ngIf="!user?.username" class="headear-list-item" mat-raised-button [routerLink]="[ '/login' ]">Log in</button>
+          <button class="headear-list-item" mat-raised-button [routerLink]="[ '/form' ]">Form</button>
+          <button *ngIf="user?.username" class="header-user" mat-button [matMenuTriggerFor]="menu">{{user.username}}</button>
+          <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onLogout()">Log out</button>
+          </mat-menu>
+          <!-- <a routerLink="/auth" routerLinkActive="active">Main</a>
+          <a *ngIf="isMaster" routerLink="/auth" routerLinkActive="active">Demonstration</a>
+          <a *ngIf="isMaster" routerLink="/auth" routerLinkActive="active">Constructor</a> -->
+      </ul>
+  </mat-toolbar-row>
+</mat-toolbar>

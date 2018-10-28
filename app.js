@@ -1,14 +1,22 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
-require("./app-server/models/db");
+var User = require('./app-server/schemas/userSchema');
+var config = require('./app-server/config');
+
+require("./app-server/schemas/db");
 
 var index = require('./app-server/routes/index');
-var users = require('./app-server/routes/users');
+var usersRouter = require('./app-server/routes/usersRouter');
+
+var authorizeUser = require('./app-server/middlewares/authorizeUser');
 
 var app = express();
 
@@ -20,13 +28,25 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(express.static(__dirname + '/app-server/dist/'));
+app.use(cookieParser());    
+app.use(express.static(__dirname + '/app-server/dist/')); // !
+app.use(session({
+    secret: config.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: (60 * 60) * 8 * 1000 // 8 hours
+    }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+passport.use(new LocalStrategy(authorizeUser));
 
 //app.use('/', index);
-app.use('/', users);
-
-
+//app.use('/', usersRouter);
+app.use('/users', usersRouter);
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname + '/app-server/dist/index.html'));

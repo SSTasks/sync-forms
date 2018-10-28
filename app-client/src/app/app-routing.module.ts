@@ -1,14 +1,19 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {TeamComponent} from './team/team.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+
+import {MainNavComponent} from './forms/main-nav/main-nav.component';
+
+
 
 const routes: Routes = [
-    {path: '', component: TeamComponent}
+    {path: 'form', component: MainNavComponent}
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    declarations: [],
+    imports: [CommonModule, RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+    providers: [],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
