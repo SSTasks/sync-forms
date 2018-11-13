@@ -1,0 +1,45 @@
+.mat-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
+  padding: 8px;
+  height: 60px;
+  font-size: 18px;
+  font-weight: normal;
+  box-shadow: 1px 1px 10px .1px #e6e6e6 !important;
+}
+ 
+.options{
+  margin: 16px;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: normal;
+  box-shadow: 1px 1px 10px .1px #e6e6e6 !important;
+  background: white;
+
+  h4{
+    font-size:18px;
+    font-weight:normal;
+  }
+  .mat-card {
+    margin: 5px 2px ;
+    padding: 10px 4px 0 10px;
+    font-size: 18px;
+    font-weight: normal;
+    box-shadow: none !important;
+    border:1px solid #e6e6e6;
+
+    ::ng-deep .mat-form-field-infix{
+      width:140px !important;
+    }
+  }
+
+  button{
+    padding:0;
+    width:25px;
+    height:25px;
+    fort-size:14px;
+    line-height: 14px;
+  }
+}

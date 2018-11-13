@@ -1,26 +1,46 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import '../polyfills';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {MaterialModule} from './material';
-import {TeamComponent} from './team/team.component';
-import {HttpService} from './services/http.service';
+import { BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './modules/material/material';
+
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AuthModule } from './modules/auth/auth.module';
+import { MainPageComponent } from './components/main-page/main-page.component';
+
+
+import { FormsPageModule } from './forms/forms-page.module';
+import { AdminModule } from './modules/admin/admin.module';
+
 
 @NgModule({
     declarations: [
         AppComponent,
-        TeamComponent
+        HeaderComponent,
+        MainPageComponent
     ],
     imports: [
+        AuthModule,
+        AdminModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        MaterialModule
+        MaterialModule,
+        BrowserAnimationsModule,
+        FormsPageModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
-    providers: [HttpService],
-    bootstrap: [AppComponent]
+    providers: [],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule {
 }

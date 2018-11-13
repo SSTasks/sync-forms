@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sync-forms": {
+    "syncforms": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -23,11 +23,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              "src/assets/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/assets/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -54,18 +55,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sync-forms:build"
+            "browserTarget": "syncforms:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sync-forms:build:production"
+              "browserTarget": "syncforms:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sync-forms:build"
+            "browserTarget": "syncforms:build"
           }
         },
         "test": {
@@ -76,7 +77,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/assets/styles/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -99,7 +101,7 @@
         }
       }
     },
-    "sync-forms-e2e": {
+    "syncforms-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -107,11 +109,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "sync-forms:serve"
+            "devServerTarget": "syncforms:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "sync-forms:serve:production"
+              "devServerTarget": "syncforms:serve:production"
             }
           }
         },
@@ -127,5 +129,5 @@
       }
     }
   },
-  "defaultProject": "sync-forms"
+  "defaultProject": "syncforms"
 }

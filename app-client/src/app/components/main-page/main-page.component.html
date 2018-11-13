@@ -1,0 +1,42 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav [mode]="mode.value">
+    <p><button mat-button (click)="sidenav.toggle()">FAQ</button></p>
+    <h3>Welcome to the app for interviewing candidates for the QA Tester post.</h3>
+    <p>Before you begin the interview, wait until the expert runs the test form.<br>
+    </p>
+      <ol>
+        <li>Choose an accessible form from the list of interviews.</li>
+        <li>Interact with form elements to identify problems</li>
+      </ol>
+    
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <p><button mat-button (click)="sidenav.toggle()">FAQ</button></p>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<div fxLayout="column" fxLayoutAlign="center center" >
+  <table mat-table [dataSource]="formsSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="interviewer">
+      <th mat-header-cell *matHeaderCellDef> Interviewer </th>
+      <td mat-cell *matCellDef="let element">{{element.interviewer}} </td>
+    </ng-container>
+    <ng-container matColumnDef="formName">
+      <th mat-header-cell *matHeaderCellDef> Form name </th>
+      <td mat-cell *matCellDef="let element">{{element.formName}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{'highlight': selectedRowIndex == row.interviewId}" 
+      (click)="highlight(row)">
+    </tr>
+  </table>
+  <div fxLayout="column" fxLayoutAlign="space-around center" >
+  <button mat-raised-button color="primary" (click)="startInterview()" [disabled]="selectedRowIndex === -1">
+    Join interview
+  </button>
+</div>
+</div>
+
+
+
+

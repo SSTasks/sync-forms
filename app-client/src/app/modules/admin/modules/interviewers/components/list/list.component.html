@@ -1,0 +1,27 @@
+<section *ngIf="dataSource">
+    <ng-content select="h2"></ng-content>
+    <mat-table [(dataSource)]="dataSource" matSort>
+        <ng-container matColumnDef="{{column.title}}" *ngFor="let column of columns">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                {{ column.value }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+                {{ item[column.title] }}
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="headers">
+        </mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: headers" (contextmenu)="editContextMenu($event)" (click)="select($event)">
+        </mat-row>
+    </mat-table>
+
+    <mat-toolbar class="list--tolbar">
+        <ng-content select=".paginator"></ng-content>
+        <list-controls (onAdd)="add()">
+            <ng-content></ng-content>
+        </list-controls>
+        <ng-content select=".showAll"></ng-content>
+    </mat-toolbar>
+</section>

@@ -1,0 +1,12 @@
+interviewers-list {
+    flex-grow: 1;
+}
+
+interviewers-list:first-of-type {
+    border-right: 10px solid rgba(#f5f5f5, .3);
+}
+
+h2 { 
+    margin-left: 20px;
+    height: 24px;
+}

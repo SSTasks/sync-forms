@@ -1,0 +1,51 @@
+$logo: url(./../../../assets/img/symbol.svg);
+
+.header {
+    &-logo {
+        font-family: 'Russo One', sans-serif;
+        cursor: pointer;
+    }
+    &-spacer {
+        flex: 1 1 auto;
+    }
+    &-user {
+        text-transform: capitalize;
+        font-weight: 300;
+        font-size: 23px;
+    }
+    &-button-spacer {
+        margin: 0 10px;
+    }
+    &-list {
+        display: flex;
+        align-items: center;
+    }
+}
+
+//header navigation styles start
+.mobile .mat-menu-item {
+    color:black;
+}
+
+.headernav {
+    & button {
+        color: white !important;
+    }
+}
+
+button.mat-menu-item {
+    width: auto;
+}
+
+mat-menu-content {
+    display: flex;
+    justify-content: center;
+}
+
+.logout {
+    text-align: center;
+}
+
+.disabled {
+    opacity: 0.3;
+}

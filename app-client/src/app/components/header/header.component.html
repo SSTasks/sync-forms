@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <div class="logo"></div>
+        <h1 class="header-logo" [routerLink]="['/main']">{{Title}}</h1>
+        <span class="header-spacer"></span>
+        <ul class="header-list headernav">
+            <button *ngIf="isInterviewer || isMaster" class="header-button-spacer disabled" mat-menu-item routerLinkActive disabled [routerLink]="[ '/interviews' ]" >Interviews</button>
+            <button *ngIf="isInterviewer || isMaster" class="header-button-spacer disabled" color="white" mat-menu-item routerLinkActive disabled [routerLink]="[ '/statistics' ]" >Statistics</button>
+            <button *ngIf="isInterviewer || isMaster" class="header-button-spacer" mat-menu-item [routerLink]="[ '/preview' ]" >Preview</button>
+            <button *ngIf="isMaster" class="header-button-spacer" color="white" mat-menu-item routerLinkActive [routerLink]="[ '/admin' ]">Admin</button>
+            <a *ngIf="!user?.fullname" class="header-button-spacer" mat-raised-button [routerLink]="[ '/login' ]">Log in</a>
+            <button *ngIf="user?.fullname" class="header-user header-button-spacer" mat-button [matMenuTriggerFor]="menu">{{user.fullname}}</button>
+                <mat-menu #menu="matMenu" xPosition="after">
+                    <a mat-menu-item (click)="onLogout()" class="logout">Log out</a>
+                </mat-menu>
+        </ul>
+    </mat-toolbar-row>
+</mat-toolbar>
