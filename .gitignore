@@ -1,8 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
+<<<<<<< HEAD
 /node_modules
 !node_modules/bcrypt
+=======
+!node_modules/bcrypt
+/node_modules
+>>>>>>> 3276c29986895334282855292bf3c984c7918086
 /app-client/node_modules
 
 # IDEs and editors

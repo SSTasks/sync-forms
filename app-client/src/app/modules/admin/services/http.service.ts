@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { User } from '../../../../../models/users.model';
-import { Group } from '../../../../../models/group.model';
+import { User } from '../../../models/users.model';
+import { Group } from '../../../models/group.model';
 import { BehaviorSubject, Observable } from 'rxjs'
 @Injectable({
     providedIn: 'root'
@@ -17,6 +17,10 @@ export class HttpAdminService {
         return this.http.get < User[] > (`/users/users`);
     };
 
+    getUser(name: string) {
+        return this.http.get < User > (`/users/${name}`);
+    };
+
     getGroups() {
         return this.http.get < Group[] > (`/users/groups`);
     };
@@ -29,18 +33,12 @@ export class HttpAdminService {
         return this.http.post(`/users/adduser`, user);
     }
 
-    removeUser(username) {
-        let request = {
-            username
-        };
-        return this.http.post('/users/removeuser', request);
+    deleteUser(id: string) {
+        return this.http.delete(`/users/removeuser/${id}`);
     }
 
-    removeGroup(name) {
-        let request = {
-            name
-        };
-        return this.http.post('/users/removegroup', request);
+    deleteGroup(id: string) {
+        return this.http.delete(`/users/removegroup/${id}`);
     }
 
     public selectedGroup: BehaviorSubject < any > ;

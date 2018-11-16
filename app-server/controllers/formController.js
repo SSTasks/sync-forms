@@ -20,7 +20,10 @@ exports.getAllForms = function(req, res, next) {
 // add new form
 module.exports.addForm = function(req, res) {
     formModel.create(req.body, function (err, doc) {
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.send({status:500, msg: "Current form wasn't save"});
+        }
         console.log(`Item ${doc.title} was created`);
 
         formModel.find({}, function(err, doc){

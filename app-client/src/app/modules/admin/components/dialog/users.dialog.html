@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>{{!data ? 'Add new user' : 'Delete user'}}</h2>
+<mat-dialog-content>
+    <form novalidate #userForm="ngForm">
+        <div *ngIf="!data">
+        <div *ngFor="let field of inputFields">
+            <mat-form-field>
+                <input matInput [placeholder]="field.value" [name]="field.title" ngModel #[field.title]="ngModel" minlength="2" required [type]="field?.type">
+            </mat-form-field>
+            <mat-error *ngIf="field.invalid">{{field}} Error.</mat-error>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-select placeholder="User group" required ngModel name="group">
+                    <mat-option value="" disabled selected></mat-option>
+                    <mat-option *ngFor="let group of groups" [value]="group.name">
+                        {{group.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-slide-toggle ngModel name="role" [checked]="checked">
+            Master
+        </mat-slide-toggle>
+        </div>
+
+        <div *ngIf="data">
+                <div *ngFor="let field of data">
+                    <p class="field_label">{{field.title}}:</p>
+                    <mat-form-field>          
+                        <input matInput [placeholder]="field.value"
+                                        [name]="field.value"
+                                        disabled>
+                    </mat-form-field>
+                </div>
+        </div>
+
+        <div *ngIf="data && edit">
+            <div *ngFor="let field of data">
+                <mat-form-field>
+                    <input matInput [placeholder]="field.value" [name]="field.title" ngModel #[field.title]="ngModel" minlength="2" required [type]="field?.type">
+                </mat-form-field>
+                <mat-error *ngIf="field.invalid">{{field}} Error.</mat-error>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-select placeholder="User group" required ngModel name="group">
+                        <mat-option value="" disabled selected></mat-option>
+                        <mat-option *ngFor="let group of groups" [value]="group.name">
+                            {{group.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <mat-slide-toggle ngModel name="role" [checked]="checked">
+                Master
+            </mat-slide-toggle>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close color="warn" *ngIf="!data"> Discard </button>
+    <button mat-raised-button [disabled]="userForm.invalid" [mat-dialog-close]="userForm.value" color="primary" *ngIf="!data"> Add </button>
+
+    <button mat-raised-button mat-dialog-close color="primary" *ngIf="data"> Cancel </button>
+    <button mat-raised-button [mat-dialog-close]="{shouldDelete: true}" color="warn" *ngIf="data"> Delete </button>
+
+    <button mat-raised-button mat-dialog-close color="warn" *ngIf="edit"> Discard </button>
+    <button mat-raised-button [disabled]="userForm.invalid" [mat-dialog-close]="userForm.value" color="primary" *ngIf="edit"> Add </button>
+</mat-dialog-actions>

@@ -20,7 +20,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public forms;
   private unsubUpdateTable;
   // displayedColumns = ['author', 'groups', 'title'];
-  displayedColumns = ['interviewer', 'formName'];
+  displayedColumns = ['interviewer', 'formName', 'creationTime'];
   formsSource: MatTableDataSource < object > ;
   selectedRowIndex = -1; 
   mode = new FormControl('over');
@@ -46,7 +46,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   updateTable() {
-    this.socketService.updateInterviewList()
+    return this.socketService.updateInterviewList()
         .subscribe(tableData => {
           this.forms = tableData;
           this.renderUsersList();
@@ -59,6 +59,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.socketService.connectToSockets();
+
     this.http.getAvailableInterviews()
       .subscribe(data => {
           this.forms = data;
@@ -70,7 +72,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
     if (this.unsubUpdateTable) {
       this.unsubUpdateTable.unsubscribe();
     }

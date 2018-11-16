@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
+
 @Component({
   selector: 'group-dialog',
   templateUrl: './group.dialog.html',
@@ -6,6 +8,7 @@ import { Component } from '@angular/core';
 })
 
 export class GroupDialogComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any){}
 
   fields: Object = [{
           title: 'name',

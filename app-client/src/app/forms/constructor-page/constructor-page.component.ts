@@ -10,12 +10,15 @@ import {map} from 'rxjs/operators';
 import {Form} from '../services/form';
 import {BroadcastService} from '../services/broadcast.service';
 import { HttpService } from '../services/http.service';
-import { HttpAdminService } from '../../modules/admin/modules/interviewers/services/http.service';
+import { HttpAdminService } from '../../modules/admin/services/http.service';
+import { MatDialog } from '@angular/material';
+import { ConfirmRemovingFormComponent } from '../../options/confirm-removing-form/confirm-removing-form.component';
+import { ScreenshotService } from '../services/screenshot.service';
 
 const emptyForm = {
     title: 'New form',
     author: 'Ya',
-    preview: 'https://ps.w.org/simple-registration-form/trunk/screenshot-1.png?rev=1790752',
+    preview: '',
     groups: ['Dnipro-142'],
     rows: [],
     description: ''
@@ -33,18 +36,22 @@ export class ConstructorPageComponent implements OnInit {
     public groups: String[];
     public form: Form; // new form
     private elemParams: any; // row and cell of new element
-
-    isHandset$: Observable<boolean> = this.breakpoint.observe(Breakpoints.Handset)
-        .pipe(
-            map(result => result.matches)
-        );
+    private formSavingProcess: boolean;
+   
+   isHandset$: Observable<boolean> = this.breakpoint.observe(Breakpoints.Handset)
+   .pipe(
+      map(result => result.matches)
+    );
 
     constructor(private breakpoint: BreakpointObserver,
                 private fb: FormBuilder,
                 private broadcast: BroadcastService,
                 private http: HttpService,
                 private router: Router,
-                private httpAdmin: HttpAdminService) {
+                private httpAdmin: HttpAdminService,
+                private dialog: MatDialog,
+                private screenshotService: ScreenshotService,
+                ) {
         // get template of element from constructor
         this.broadcast.subscriberSendElem()
             .subscribe(
@@ -57,6 +64,7 @@ export class ConstructorPageComponent implements OnInit {
             floatLabel: 'auto',
         });
     }
+
 
     ngOnInit() {
         let defaultForm = JSON.parse(JSON.stringify(emptyForm)), // getting template of empty form
@@ -73,6 +81,7 @@ export class ConstructorPageComponent implements OnInit {
         this.formBuild();
     }
 
+ 
     // form builder for name and group current form
     formBuild() {
         this.formInfo = this.fb.group({
@@ -91,28 +100,62 @@ export class ConstructorPageComponent implements OnInit {
     }
 
     saveForm() {
-        this.form.title = this.formInfo.value.title;
-        this.form.groups = this.formInfo.value.groups;
+      this.formSavingProcess = true;
+      let currentDate = new Date().valueOf();
+      let imgName = currentDate + '.png';
 
-        this.http.saveForm(this.form)
-            .subscribe(data => {
-                if (this.form._id) {
+      this.form.title = this.formInfo.value.title;
+      this.form.author = JSON.parse(window.localStorage.getItem('currentUser')).username;
+      this.form.groups = this.formInfo.value.groups;
+
+      if (this.form.preview === '') {
+          this.form.preview = imgName;
+      }
+
+      this.http.saveForm(this.form)
+          .subscribe(data => {
+              const isFormSaved = Array.isArray(data);
+
+              if (isFormSaved) {
+                 if (this.form._id) {
                     let forms = data.filter(form => form._id === this.form._id);
                     this.form = forms[0]; // show updated form
-                } else {
-                    this.form = data[data.length - 1]; // show created form
-                }
-            });
+                  } else {
+                     this.form = data[data.length - 1]; // show created form
+                  }
+                  this.screenshotService.saveScreenshot(this.form);
+
+              } else {
+                  this.screenshotService.showSaveMessage(this.form.title, isFormSaved);
+              }
+              this.formSavingProcess = false;
+          });
     }
 
-    delForm(id) {
-        this.http.delForm(id)
-            .subscribe(data => {
-                if (Array.isArray(data)) {
-                    this.showEditPanel();
-                }
-            });
-    }
+  
+    delForm(form) {
+      let confirmRemovingRef = this.dialog.open(ConfirmRemovingFormComponent);
+      confirmRemovingRef.afterClosed().subscribe(result => {
+         if (result) {
+            this.http.delForm(form._id)
+               .subscribe(data => {
+                  const isFormDeleted = Array.isArray(data);
+
+                  if (isFormDeleted) {
+                     this.showEditPanel();
+                     this.screenshotService.deleteScreenshot(form);
+
+                  } else {
+                     this.screenshotService.showDeleteMessage(this.form.title, isFormDeleted);
+                  }
+               });
+            }
+         });
+
+
+      }
+
+    
 
     addRow() {
         this.hideConfig();

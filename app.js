@@ -17,6 +17,8 @@ require("./app-server/schemas/db");
 
 var forms = require('./app-server/routes/forms');
 
+var screenshot = require('./app-server/routes/screenshot');
+
 var usersRouter = require('./app-server/routes/usersRouter');
 
 // var formsRouter = require('./app-server/routes/formsRouter');
@@ -27,13 +29,15 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
+var checkAuth = require('./app-server/middlewares/checkAuthorization');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'app-server/views'));
 app.set('view engine', 'pug'); 
 
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());    
 app.use(express.static(__dirname + '/app-server/dist/')); // !
@@ -54,12 +58,19 @@ passport.use(new LocalStrategy(authorizeUser));
 
 app.use('/users', usersRouter);
 app.use('/form', forms);
+app.use('/screenshot', screenshot);
 
 let activeInterviews = [];
 
 app.get('/interviews', (req, res) => {
     res.send(activeInterviews);
 });
+
+// unauthorized users don't have access to these routes
+app.use('/preview', checkAuth);
+app.use('/admin', checkAuth);
+app.use('/constructor', checkAuth);
+app.use('/interview-page', checkAuth);
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname + '/app-server/dist/index.html'));
@@ -76,14 +87,10 @@ io.on('connection', function(socket) {
 
     socket.on('joinInterview', function(interviewId) {
         socket.join(interviewId);
-        console.log('Connected to private interview');
-        // activeInterviews.push(interviewData);
-        // socket.broadcast.emit('updateInterviewList', activeInterviews);
     });
 
     socket.on('endInterview', function(interviewId) {
         activeInterviews = activeInterviews.filter(interview => interview.interviewId !== interviewId);
-        console.log('activeInterviews');
         socket.broadcast.emit('updateInterviewList', activeInterviews);
         socket.leave(interviewId);
     });

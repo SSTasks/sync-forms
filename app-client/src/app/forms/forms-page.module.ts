@@ -21,6 +21,10 @@ import {NavConfigComponent} from './constructor-page/nav-config/nav-config.compo
 import {InterviewPageComponent} from './interview-page/interview-page.component';
 import {PreviewPageComponent} from './preview-page/preview-page.component';
 import {ConstructorPageComponent} from './constructor-page/constructor-page.component';
+import { ScreenshotService } from './services/screenshot.service';
+import { ConfirmRemovingFormComponent } from '../options/confirm-removing-form/confirm-removing-form.component';
+import { FormScreenshotComponent } from './constructor-page/form-screenshot/form-screenshot.component';
+import { SnackbarComponent } from '../options/snackbar/snackbar.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +34,10 @@ import {ConstructorPageComponent} from './constructor-page/constructor-page.comp
         ElementTypePipe,
         InterviewPageComponent,
         PreviewPageComponent,
-        ConstructorPageComponent
+        ConstructorPageComponent,
+        ConfirmRemovingFormComponent,
+        FormScreenshotComponent,
+        SnackbarComponent,
     ],
     imports: [
         CommonModule,
@@ -42,8 +49,12 @@ import {ConstructorPageComponent} from './constructor-page/constructor-page.comp
     providers: [
         BroadcastService,
         HttpService, {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig},
-        SocketService
-    ]
+        SocketService,
+        ScreenshotService,
+        FormScreenshotComponent,
+        SnackbarComponent
+    ],
+    entryComponents: [ConfirmRemovingFormComponent],
 })
 export class FormsPageModule {
 }

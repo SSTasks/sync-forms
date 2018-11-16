@@ -42,6 +42,11 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     private unsubKeyboard;
     private unsubOnChange;
 
+    private currentUser;
+    private isSpectator = false;
+
+    private buttonInscription = 'Finish interview';
+
     private _url = '../assets/form.json';
     private _formData: any = null;
 
@@ -65,30 +70,37 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
 
     ngOnInit() {
         this.form = this.broadcast.selectedForm;
-        let user = JSON.parse(window.localStorage.getItem('currentUser'));
+        this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
 
         if (!this.form) {
             this.router.navigate(['/main']);
             return;
         }
 
-        if (!user) {
-            user = {
+        if (!this.currentUser) {
+            this.currentUser = {
                 role: 'candidate'
             };
         }
 
-        if ((user.role === 'master' || user.role === 'interviewer')
+        this.socketService.connectToSockets();
+
+        // decide whether we should create a new interview or connect to
+        // an existing one
+        if ((this.currentUser.role === 'master' || this.currentUser.role === 'interviewer')
             && !this.socketService.interviewId) {
             const interviewData = {
-                interviewer: user.fullname,
+                interviewer: this.currentUser.fullname,
                 interviewId: Math.round(Math.random() * 10000),
                 interviewForm: this.form,
-                formName: this.form.title
+                formName: this.form.title,
+                creationTime: this.addCreationTime()
             };
 
             this.socketService.initiateInterview(interviewData);
         } else {
+            this.isSpectator = true;
+            this.buttonInscription = 'Exit interview';
             this.socketService.joinInterview();
         }
 
@@ -110,7 +122,22 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     endInterview() {
-        this.router.navigate(['/preview']);
+        if (this.currentUser.role === 'candidate') {
+            this.router.navigate(['/main']);
+        } else {
+            this.router.navigate(['/preview']);
+        }
+    }
+
+    private addCreationTime() {
+        const timezoneOffset = (new Date()).getTimezoneOffset() * 60000;
+        const dateNow = (new Date(Date.now() - timezoneOffset)).toISOString();
+
+        const day = dateNow.slice(8, 10);
+        const month = dateNow.slice(5, 7);
+        const time = dateNow.slice(11, 16);
+
+        return `${day}.${month} ${time}`;
     }
 
     // primaly written to be able to change slider value
@@ -169,7 +196,7 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     //////////// event emitters  ////////////////////
 
     private clickEventEmitter() {
-        this.socketService.getClickEvent()
+        return this.socketService.getClickEvent()
           .subscribe((event: any) => {
             const targetElement = this.formElements[event.elementIndex];
             const mouseEvent = new MouseEvent('click', this.mouseEventOptions);
@@ -186,7 +213,7 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     
     private mouseMoveEmitter() {
-        this.socketService.getMouseMove()
+        return this.socketService.getMouseMove()
           .subscribe((event: any) => {
 
             if (event.eventType === 'mouseenter') {
@@ -205,7 +232,7 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     private focusEmitter() {
-        this.socketService.getFocusEvent()
+        return this.socketService.getFocusEvent()
           .subscribe((event: any) => {
             const elementToFocus = this.formElements[event.elementIndex].querySelector(event.targetElement);
         
@@ -218,7 +245,7 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     private keyboardEventEmitter() {
-        this.socketService.getKeyboardEvent()
+        return this.socketService.getKeyboardEvent()
           .subscribe((event: any) => {
             const targetElement = this.formElements[event.targetElementIndex];
             const changeEvent = new Event('change');
@@ -229,7 +256,7 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     private onChangeEventEmitter() {
-        this.socketService.getOnChangeEvent()
+        return this.socketService.getOnChangeEvent()
           .subscribe((event: any) => {
               const targetElement = this.formElements[event.targetElementIndex];
 
@@ -368,12 +395,10 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     ngOnDestroy() {
-        let user = JSON.parse(window.localStorage.getItem('currentUser'));
-        console.log(user);
-
-        if (!user || user.role === 'candidate') {
-            this.socketService.setInterviewId(null);
+        if (!this.currentUser) {
             return;
+        } else if (this.currentUser.role === 'candidate' || this.isSpectator) {
+            this.socketService.setInterviewId(null);
         } else {
             this.socketService.endInterview();
         }

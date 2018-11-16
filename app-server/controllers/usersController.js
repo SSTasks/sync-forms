@@ -2,6 +2,18 @@ const User = require('../schemas/userSchema');
 const Group = require('../schemas/groupSchema');
 const passport = require('passport');
 
+exports.loginUser = function(req, res) {
+    // let userToSend = Object.assign({}, req.user); // ?
+
+    // delete userToSend.password;
+    res.send(req.user);
+}
+
+exports.logoutUser = function(req, res) {
+    req.logout();
+    res.redirect('/');
+}
+
 exports.registerUser = function(req, res, next) {
     User.findOne({username: req.body.username})
     .then(user => {
@@ -28,25 +40,25 @@ exports.registerUser = function(req, res, next) {
     .catch(err => next(err));
 }
 
-exports.loginUser = function(req, res) {
-    // let userToSend = Object.assign({}, req.user); // ?
-
-    // delete userToSend.password;
-    res.send(req.user);
-}
-
-exports.logoutUser = function(req, res) {
-    req.logout();
-    res.redirect('/');
-}
-
-//admin panel
 exports.getUsers = function(req, res) {
     User.find((err, users) => {
         if (err) {
             throw err;
         }
         return res.json(users);
+    })
+};
+
+exports.getUser = function(req, res) {
+    console.log('getting user...');
+    console.log(req.params.name);
+    User.findOne({username: req.params.name})
+        .then( (err, user) => {
+            if (err) {
+                throw err;
+            }
+            console.log(user);
+            return res.json(user);
     })
 };
 
@@ -71,11 +83,11 @@ exports.addGroup = function(req, res) {
 };
 
 exports.removeUser = function(req, res) {
-    User.findOneAndDelete({username: req.body.username})
+    User.findByIdAndRemove({_id: req.params.id})
         .then( _ => `${req.body.username} was deleted`);
 }
 
 exports.removeGroup = function(req, res) {
-    Group.findOneAndDelete({name: req.body.name})
+    Group.findByIdAndRemove({_id: req.params.id})
         .then( _ => `${req.body.name} was deleted`);
 }

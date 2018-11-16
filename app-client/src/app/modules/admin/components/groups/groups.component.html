@@ -1,0 +1,31 @@
+<section fxLayout="row">
+  <interviewers-list [dataSource]="groupsSource"
+                     [columns]="groupsColumns" 
+                     [headers]="groupsColumnsHeaders"
+                     (onAdd)="addGroup()"
+                     (selectGroup)="selectGroup($event)"
+                     (contextMenu)="openContextMenu($event)">
+      <h2>
+          <i class="material-icons">
+              group
+          </i>
+          Group list
+      </h2>
+
+      <mat-paginator class="paginator groups__paginator" [pageSize]="10" [pageSizeOptions]="[5,10,25]" #groupsPaginator >
+      </mat-paginator>
+
+      Add
+      <i class="material-icons">
+              group_add
+      </i>
+  </interviewers-list>
+</section>
+
+<mat-menu #editMenu="matMenu" class="editMenu">
+  <button mat-menu-item (click)="edit($event)" disabled>Edit</button>
+  <button mat-menu-item (click)="remove($event)">Remove</button>
+</mat-menu>
+
+<div [matMenuTriggerFor]="editMenu" class="menuButton">
+</div>

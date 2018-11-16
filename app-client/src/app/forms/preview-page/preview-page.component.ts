@@ -9,6 +9,10 @@ import {BroadcastService} from '../services/broadcast.service';
 
 import {Router} from '@angular/router';
 import {HttpService} from '../services/http.service';
+import { MatDialog } from '@angular/material';
+import { ConfirmRemovingFormComponent } from '../../options/confirm-removing-form/confirm-removing-form.component';
+import { ScreenshotService } from '../services/screenshot.service';
+
 
 @Component({
     selector: 'app-preview-page',
@@ -28,7 +32,9 @@ export class PreviewPageComponent implements OnInit {
                 private fb: FormBuilder,
                 private http: HttpService,
                 private broadcast: BroadcastService,
-                private router: Router) {
+                private router: Router,
+                private dialog: MatDialog,
+                private screenshotService: ScreenshotService) {
 
         this.broadcast.subscriberSelectForm()
             .subscribe(
@@ -53,18 +59,25 @@ export class PreviewPageComponent implements OnInit {
     showEditPanel() {
         this.router.navigate(['/constructor']);
     }
+    
+    delForm(form) {
+      let confirmRemovingRef = this.dialog.open(ConfirmRemovingFormComponent);
+      confirmRemovingRef.afterClosed().subscribe(result => {
+         if (result) {
+            this.http.delForm(form._id)
+               .subscribe(data => {
+                  const isFormDeleted = Array.isArray(data);
 
-    delForm(id) {
-        this.http.delForm(id)
-            .subscribe(data => {
-                if (Array.isArray(data)) {
-                    this.broadcast.selectedForm = null;
-                    this.form = null;
-                }
-            });
-    }
+                  if (isFormDeleted) {
+                     this.broadcast.selectedForm = null;
+                     this.form = null;
+                     this.screenshotService.deleteScreenshot(form);
+
+                  } else {
+                     this.screenshotService.showDeleteMessage(this.form.title, isFormDeleted);
+                  }
+               });
+            }
+         });
+   }
 }
-
-
-
-

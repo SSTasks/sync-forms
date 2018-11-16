@@ -18,6 +18,7 @@ $thirdColor: #c9c9c9;
   position: sticky;
   top: 0;
   z-index: 10;
+  background-color: #fff
 }
 
 .mat-toolbar .mat-toolbar-single-row {
@@ -279,4 +280,13 @@ mat-card img {
 
 @mixin br($font: 3px, $color: $secondColor){
   border: $font solid $color;
+}
+
+.preview-bg {
+  background-color: #fff !important;
+}
+
+#screenshot {
+  position: relative;
+  left: -100%;
 }

@@ -8135,7 +8135,7 @@ module.exports = "<app-header [Title]=\"Title\"></app-header>\r\n<router-outlet>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".container {\n  padding: 0 15px;\n  margin: 0 auto;\n  max-width: 1200px; }\n\n.logo, .router {\n  margin: 30px 0 0 100px;\n  float: left; }\n"
 
 /***/ }),
 
@@ -8364,7 +8364,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"example-container\">\r\n  <mat-sidenav #sidenav [mode]=\"mode.value\">\r\n    <p><button mat-button (click)=\"sidenav.toggle()\">FAQ</button></p>\r\n    <h3>Welcome to the app for interviewing candidates for the QA Tester post.</h3>\r\n    <p>Before you begin the interview, wait until the expert runs the test form.<br>\r\n    </p>\r\n      <ol>\r\n        <li>Choose an accessible form from the list of interviews.</li>\r\n        <li>Interact with form elements to identify problems</li>\r\n      </ol>\r\n    \r\n  </mat-sidenav>\r\n  <mat-sidenav-content>\r\n    <p><button mat-button (click)=\"sidenav.toggle()\">FAQ</button></p>\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n<div fxLayout=\"column\" fxLayoutAlign=\"center center\" >\r\n  <table mat-table [dataSource]=\"formsSource\" class=\"mat-elevation-z8\">\r\n    <ng-container matColumnDef=\"interviewer\">\r\n      <th mat-header-cell *matHeaderCellDef> Interviewer </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.interviewer}} </td>\r\n    </ng-container>\r\n    <ng-container matColumnDef=\"formName\">\r\n      <th mat-header-cell *matHeaderCellDef> Form name </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.formName}}</td>\r\n    </ng-container>\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"\r\n      [ngClass]=\"{'highlight': selectedRowIndex == row.interviewId}\" \r\n      (click)=\"highlight(row)\">\r\n    </tr>\r\n  </table>\r\n  <div fxLayout=\"column\" fxLayoutAlign=\"space-around center\" >\r\n  <button mat-raised-button color=\"primary\" (click)=\"startInterview()\" [disabled]=\"selectedRowIndex === -1\">\r\n    Join interview\r\n  </button>\r\n</div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<mat-sidenav-container class=\"example-container\">\r\n  <mat-sidenav #sidenav [mode]=\"mode.value\">\r\n    <p><button mat-button (click)=\"sidenav.toggle()\">FAQ</button></p>\r\n    <h3>Welcome to the app for interviewing candidates for the QA Tester post.</h3>\r\n    <p>Before you begin the interview, wait until the expert runs the test form.<br>\r\n    </p>\r\n      <ol>\r\n        <li>Choose an accessible form from the list of interviews.</li>\r\n        <li>Interact with form elements to identify problems</li>\r\n      </ol>\r\n    \r\n  </mat-sidenav>\r\n  <mat-sidenav-content>\r\n    <p><button mat-button (click)=\"sidenav.toggle()\">FAQ</button></p>\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n<div fxLayout=\"column\" fxLayoutAlign=\"center center\" >\r\n  <table mat-table [dataSource]=\"formsSource\" class=\"mat-elevation-z8\">\r\n    <ng-container matColumnDef=\"interviewer\">\r\n      <th mat-header-cell *matHeaderCellDef> Interviewer </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.interviewer}} </td>\r\n    </ng-container>\r\n    <ng-container matColumnDef=\"formName\">\r\n      <th mat-header-cell *matHeaderCellDef> Form name </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.formName}}</td>\r\n    </ng-container>\r\n    <ng-container matColumnDef=\"creationTime\">\r\n      <th mat-header-cell *matHeaderCellDef> Created </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.creationTime}}</td>\r\n    </ng-container>\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"\r\n      [ngClass]=\"{'highlight': selectedRowIndex == row.interviewId}\" \r\n      (click)=\"highlight(row)\">\r\n    </tr>\r\n  </table>\r\n  <div fxLayout=\"column\" fxLayoutAlign=\"space-around center\" >\r\n  <button mat-raised-button color=\"primary\" (click)=\"startInterview()\" [disabled]=\"selectedRowIndex === -1\">\r\n    Join interview\r\n  </button>\r\n</div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -8419,7 +8419,7 @@ var MainPageComponent = /** @class */ (function () {
         this.broadcast = broadcast;
         this.router = router;
         // displayedColumns = ['author', 'groups', 'title'];
-        this.displayedColumns = ['interviewer', 'formName'];
+        this.displayedColumns = ['interviewer', 'formName', 'creationTime'];
         this.selectedRowIndex = -1;
         this.mode = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('over');
     }
@@ -8437,7 +8437,7 @@ var MainPageComponent = /** @class */ (function () {
     };
     MainPageComponent.prototype.updateTable = function () {
         var _this = this;
-        this.socketService.updateInterviewList()
+        return this.socketService.updateInterviewList()
             .subscribe(function (tableData) {
             _this.forms = tableData;
             _this.renderUsersList();
@@ -8449,6 +8449,7 @@ var MainPageComponent = /** @class */ (function () {
     };
     MainPageComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.socketService.connectToSockets();
         this.http.getAvailableInterviews()
             .subscribe(function (data) {
             _this.forms = data;
@@ -8547,7 +8548,7 @@ var ConfirmEqualValidatorDirective = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\" fxLayout=\"row\">\r\n    <mat-sidenav fxFlex.sm=\"1 0 230px\"\r\n                 fxFlex.md=\"1 1 25%\"\r\n                 fxFlex.gt-md=\"1 1 20%\"\r\n                 #drawer class=\"sidenav\"\r\n                 fixedInViewport=\"true\"\r\n                 [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n                 [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n                 [opened]=\"!(isHandset$ | async)\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"center center\">\r\n            <mat-slide-toggle (click)=\"showEditPanel()\"\r\n                              checked=\"true\"\r\n                              fxHide.xs=\"true\"\r\n                              labelPosition=\"before\">\r\n                <span>Hide edit panel</span>\r\n            </mat-slide-toggle>\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <app-nav-constructor *ngIf=\"!configPanel\"></app-nav-constructor>\r\n            <app-nav-config *ngIf=\"configPanel\"></app-nav-config>\r\n        </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content fxFlex.sm=\"1 1 70%\"\r\n                         fxFlex.md=\"1 1 75%\"\r\n                         fxFlex.gt-md=\"1 1 80%\">\r\n\r\n        <div class=\"form\">\r\n            <form class=\"form-info\" [formGroup]=\"formInfo\">\r\n                <div class=\"form-info-inputs\">\r\n                    <mat-form-field class=\"example-full-width\">\r\n                        <mat-label>Form title</mat-label>\r\n                        <input matInput type=\"text\" formControlName=\"title\" required>\r\n                        <mat-error>Min title length: 3</mat-error>\r\n                    </mat-form-field>\r\n\r\n                    <mat-form-field>\r\n                        <mat-label>Group name</mat-label>\r\n                        <mat-select formControlName=\"groups\" multiple required>\r\n                            <mat-option *ngFor=\"let group of groups\" [value]=\"group\">{{group}}</mat-option>\r\n                        </mat-select>\r\n                        <mat-error>Please choose group</mat-error>\r\n                    </mat-form-field>\r\n                </div>\r\n\r\n                <div class=\"form-info-buttons\">\r\n                    <button mat-raised-button [disabled]=\"!formInfo.valid\" (click)=\"saveForm()\" color=\"primary\">Save form</button>\r\n                    <button mat-raised-button [disabled]=\"!form._id\" (click)=\"delForm(form._id)\" color=\"warn\">Remove form</button>\r\n                </div>\r\n            </form>\r\n\r\n            <form class=\"example-container\">\r\n                <!--container for row-->\r\n                <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                    <!--row-->\r\n                    <div class=\"row\">\r\n\r\n                        <button mat-mini-fab color=\"primary\" (click)=\"addCell(rowIndex)\">\r\n                            <mat-icon>add</mat-icon>\r\n                        </button>\r\n\r\n                        <!--container for cell-->\r\n                        <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                            <!--cell-->\r\n                            <div class=\"cell\">\r\n                                <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                                    <!--<div  *ngIf=\"elem.type==='text'\" [innerHtml]=\"elem | type\"></div>-->\r\n\r\n                                    <!--if element is input TEXT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"text\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input NUMBER-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"number\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [min]=\"elem.config.min\"\r\n                                               [max]=\"elem.config.max\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input EMAIL-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"email\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input PASSWORD-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"password\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is SLIDER-->\r\n                                    <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-slider\r\n                                                class=\"example-margin\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\">\r\n                                        </mat-slider>\r\n                                    </section>\r\n\r\n                                    <!--if element is TOGGLE-->\r\n                                    <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n\r\n                                        <mat-slide-toggle class=\"example-margin\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [checked]=\"elem.config.checked\"\r\n                                                          [disabled]=\"elem.config.disabled\">\r\n                                            {{elem.config.label}}\r\n                                        </mat-slide-toggle>\r\n                                    </section>\r\n\r\n                                    <!--if element is SELECT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='select'\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-select [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\">\r\n                                            <mat-option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                                {{option}}\r\n                                            </mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input CHECKBOX-->\r\n                                    <section class=\"example-section example-section-checkbox\"\r\n                                             *ngIf=\"elem.type==='checkbox'\"\r\n                                             [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-checkbox *ngFor=\"let option of elem.config.options\"\r\n                                                      class=\"example-margin example-margin-checkbox\"\r\n                                                      [value]=\"option\"\r\n                                                      [color]=\"elem.config.color\"\r\n                                                      [disabled]=\"elem.config.disabled\"\r\n                                                      [required]=\"elem.config.required\">{{option}}\r\n                                        </mat-checkbox>\r\n                                    </section>\r\n\r\n                                    <!--if element is input RADIO-->\r\n                                    <mat-radio-group class=\"example-radio-group\" *ngIf=\"elem.type==='radio'\"\r\n                                                     [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\"\r\n                                                     (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-radio-button class=\"example-radio-button\"\r\n                                                          *ngFor=\"let option of elem.config.options\"\r\n                                                          [value]=\"option\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [disabled]=\"elem.config.disabled\"\r\n                                                          [required]=\"elem.config.required\">{{option}}\r\n                                        </mat-radio-button>\r\n                                    </mat-radio-group>\r\n\r\n                                    <!--if element is TEXTAREA-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <textarea matInput\r\n                                                  [value]=\"elem.config.value\"\r\n                                                  [placeholder]=\"elem.config.placeholder\"\r\n                                                  [disabled]=\"elem.config.disabled\"></textarea>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is BUTTON-->\r\n                                    <div *ngIf=\"elem.type==='button'\" class=\"example-button-row flex-grow\"\r\n                                         (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <button mat-raised-button\r\n                                                [color]=\"elem.config.color\"\r\n                                                [disabled]=\"elem.config.disabled\">{{elem.config.value}}\r\n                                        </button>\r\n                                    </div>\r\n\r\n                                    <button mat-mini-fab color=\"primary\" (click)=\"delElem(rowIndex, cellIndex)\">\r\n                                        <mat-icon>remove</mat-icon>\r\n                                    </button>\r\n                                </div>\r\n\r\n                                <button mat-mini-fab color=\"primary\" *ngIf=\"!cell.elements.length\"\r\n                                        (click)=\"addElem(rowIndex, cellIndex)\">\r\n                                    <mat-icon>add</mat-icon>\r\n                                </button>\r\n                            </div>\r\n\r\n                            <button mat-mini-fab color=\"primary\" (click)=\"delCell(rowIndex, cellIndex)\">\r\n                                <mat-icon>remove</mat-icon>\r\n                            </button>\r\n                        </div>\r\n\r\n                    </div>\r\n\r\n                    <button mat-mini-fab color=\"primary\" (click)=\"delRow(rowIndex)\">\r\n                        <mat-icon>remove</mat-icon>\r\n                    </button>\r\n                </div>\r\n\r\n                <button mat-mini-fab color=\"primary\" (click)=\"addRow()\">\r\n                    <mat-icon>add</mat-icon>\r\n                </button>\r\n            </form>\r\n\r\n            <!--block for snapshots-->\r\n            <div [hidden]=\"true\" class=\"form\" *ngIf=\"form\">\r\n                <form class=\"example-container\">\r\n                    <!--container for row-->\r\n                    <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                        <!--row-->\r\n                        <div class=\"row\">\r\n                            <!--container for cell-->\r\n                            <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                                <!--cell-->\r\n                                <div class=\"cell\">\r\n                                    <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                                        <!--if element is input TEXT-->\r\n                                        <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width flex-grow\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <input matInput type=\"text\"\r\n                                                   [value]=\"elem.config.value\"\r\n                                                   [placeholder]=\"elem.config.placeholder\"\r\n                                                   [disabled]=\"elem.config.disabled\"\r\n                                                   [required]=\"elem.config.required\">\r\n                                        </mat-form-field>\r\n\r\n                                        <!--if element is input NUMBER-->\r\n                                        <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width flex-grow\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <input matInput type=\"number\"\r\n                                                   [value]=\"elem.config.value\"\r\n                                                   [placeholder]=\"elem.config.placeholder\"\r\n                                                   [min]=\"elem.config.min\"\r\n                                                   [max]=\"elem.config.max\"\r\n                                                   [disabled]=\"elem.config.disabled\"\r\n                                                   [required]=\"elem.config.required\">\r\n                                        </mat-form-field>\r\n\r\n                                        <!--if element is input EMAIL-->\r\n                                        <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width flex-grow\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <input matInput type=\"email\"\r\n                                                   [value]=\"elem.config.value\"\r\n                                                   [placeholder]=\"elem.config.placeholder\"\r\n                                                   [disabled]=\"elem.config.disabled\"\r\n                                                   [required]=\"elem.config.required\">\r\n                                        </mat-form-field>\r\n\r\n                                        <!--if element is input PASSWORD-->\r\n                                        <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width flex-grow\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <input matInput type=\"password\"\r\n                                                   [value]=\"elem.config.value\"\r\n                                                   [placeholder]=\"elem.config.placeholder\"\r\n                                                   [disabled]=\"elem.config.disabled\"\r\n                                                   [required]=\"elem.config.required\">\r\n                                        </mat-form-field>\r\n\r\n                                        <!--if element is SLIDER-->\r\n                                        <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <mat-slider\r\n                                                    class=\"example-margin\"\r\n                                                    [value]=\"elem.config.value\"\r\n                                                    [invert]=\"elem.config.invert\"\r\n                                                    [max]=\"elem.config.max\"\r\n                                                    [min]=\"elem.config.min\"\r\n                                                    [step]=\"elem.config.step\"\r\n                                                    [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                    [vertical]=\"elem.config.vertical\"\r\n                                                    [disabled]=\"elem.config.disabled\">\r\n                                            </mat-slider>\r\n                                        </section>\r\n\r\n                                        <!--if element is TOGGLE-->\r\n                                        <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\" >\r\n\r\n                                            <mat-slide-toggle class=\"example-margin\"\r\n                                                              [color]=\"elem.config.color\"\r\n                                                              [checked]=\"elem.config.checked\"\r\n                                                              [disabled]=\"elem.config.disabled\">\r\n                                                {{elem.config.label}}\r\n                                            </mat-slide-toggle>\r\n                                        </section>\r\n\r\n                                        <!--if element is SELECT-->\r\n                                        <mat-form-field *ngIf=\"elem.type==='select'\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <mat-select [disabled]=\"elem.config.disabled\"\r\n                                                        [required]=\"elem.config.required\">\r\n                                                <mat-option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                                    {{option}}\r\n                                                </mat-option>\r\n                                            </mat-select>\r\n                                        </mat-form-field>\r\n\r\n                                        <!--if element is input CHECKBOX-->\r\n                                        <section class=\"example-section example-section-checkbox\"\r\n                                                 *ngIf=\"elem.type==='checkbox'\"\r\n                                                 [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <mat-checkbox *ngFor=\"let option of elem.config.options\" class=\"example-margin example-margin-checkbox\"\r\n                                                          [value]=\"option\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [disabled]=\"elem.config.disabled\"\r\n                                                          [required]=\"elem.config.required\">{{option}}</mat-checkbox>\r\n                                        </section>\r\n\r\n                                        <!--if element is input RADIO-->\r\n                                        <mat-radio-group class=\"example-radio-group\"\r\n                                                         *ngIf=\"elem.type==='radio'\"\r\n                                                         [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <mat-radio-button class=\"example-radio-button\" *ngFor=\"let option of elem.config.options\"\r\n                                                              [value]=\"option\"\r\n                                                              [color]=\"elem.config.color\"\r\n                                                              [disabled]=\"elem.config.disabled\"\r\n                                                              [required]=\"elem.config.required\">{{option}}</mat-radio-button>\r\n                                        </mat-radio-group>\r\n\r\n                                        <!--if element is TEXTAREA-->\r\n                                        <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width flex-grow\">\r\n                                            <mat-label>{{elem.config.label}}</mat-label>\r\n                                            <textarea matInput\r\n                                                      [value]=\"elem.config.value\"\r\n                                                      [placeholder]=\"elem.config.placeholder\"\r\n                                                      [disabled]=\"elem.config.disabled\"></textarea>\r\n                                        </mat-form-field>\r\n\r\n                                        <!--if element is BUTTON-->\r\n                                        <div *ngIf=\"elem.type==='button'\" class=\"example-button-row flex-grow\">\r\n                                            <button mat-raised-button\r\n                                                    [color]=\"elem.config.color\"\r\n                                                    [disabled]=\"elem.config.disabled\">{{elem.config.value}}</button>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n        </div>\r\n\r\n    </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\" fxLayout=\"row\">\r\n    <mat-sidenav fxFlex.sm=\"1 0 230px\"\r\n                 fxFlex.md=\"1 1 25%\"\r\n                 fxFlex.gt-md=\"1 1 20%\"\r\n                 #drawer class=\"sidenav\"\r\n                 fixedInViewport=\"true\"\r\n                 [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n                 [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n                 [opened]=\"!(isHandset$ | async)\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"center center\">\r\n            <mat-slide-toggle (click)=\"showEditPanel()\"\r\n                              checked=\"true\"\r\n                              fxHide.xs=\"true\"\r\n                              labelPosition=\"before\">\r\n                <span>Hide edit panel</span>\r\n            </mat-slide-toggle>\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <app-nav-constructor *ngIf=\"!configPanel\"></app-nav-constructor>\r\n            <app-nav-config *ngIf=\"configPanel\"></app-nav-config>\r\n        </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content fxFlex.sm=\"1 1 70%\"\r\n                         fxFlex.md=\"1 1 75%\"\r\n                         fxFlex.gt-md=\"1 1 80%\"\r\n                         class=\"preview-bg\">\r\n\r\n        <div class=\"form\">\r\n            <form class=\"form-info\" [formGroup]=\"formInfo\">\r\n                <div class=\"form-info-inputs\">\r\n                    <mat-form-field class=\"example-full-width\">\r\n                        <mat-label>Form title</mat-label>\r\n                        <input matInput type=\"text\" formControlName=\"title\" required>\r\n                        <mat-error>Min title length: 3</mat-error>\r\n                    </mat-form-field>\r\n\r\n                    <mat-form-field>\r\n                        <mat-label>Group name</mat-label>\r\n                        <mat-select formControlName=\"groups\" multiple required>\r\n                            <mat-option *ngFor=\"let group of groups\" [value]=\"group\">{{group}}</mat-option>\r\n                        </mat-select>\r\n                        <mat-error>Please choose group</mat-error>\r\n                    </mat-form-field>\r\n                </div>\r\n\r\n                <div class=\"form-info-buttons\">\r\n                    <mat-toolbar>\r\n                    <button mat-raised-button [disabled]=\"formSavingProcess || !formInfo.valid\" (click)=\"saveForm()\" color=\"primary\">Save form</button>\r\n                    <button mat-raised-button [disabled]=\"!form._id\" (click)=\"delForm(form)\" color=\"warn\">Remove form</button>\r\n                    </mat-toolbar>\r\n                </div>\r\n            </form>\r\n\r\n            <form class=\"example-container\">\r\n                <!--container for row-->\r\n                <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                    <!--row-->\r\n                    <div class=\"row\">\r\n\r\n                        <button mat-mini-fab color=\"primary\" (click)=\"addCell(rowIndex)\">\r\n                            <mat-icon>add</mat-icon>\r\n                        </button>\r\n\r\n                        <!--container for cell-->\r\n                        <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                            <!--cell-->\r\n                            <div class=\"cell\">\r\n                                <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                                    <!--<div  *ngIf=\"elem.type==='text'\" [innerHtml]=\"elem | type\"></div>-->\r\n\r\n                                    <!--if element is input TEXT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"text\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input NUMBER-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"number\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [min]=\"elem.config.min\"\r\n                                               [max]=\"elem.config.max\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input EMAIL-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"email\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input PASSWORD-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"password\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is SLIDER-->\r\n                                    <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-slider\r\n                                                class=\"example-margin\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\">\r\n                                        </mat-slider>\r\n                                    </section>\r\n\r\n                                    <!--if element is TOGGLE-->\r\n                                    <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n\r\n                                        <mat-slide-toggle class=\"example-margin\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [checked]=\"elem.config.checked\"\r\n                                                          [disabled]=\"elem.config.disabled\">\r\n                                            {{elem.config.label}}\r\n                                        </mat-slide-toggle>\r\n                                    </section>\r\n\r\n                                    <!--if element is SELECT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='select'\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-select [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\">\r\n                                            <mat-option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                                {{option}}\r\n                                            </mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input CHECKBOX-->\r\n                                    <section class=\"example-section example-section-checkbox\"\r\n                                             *ngIf=\"elem.type==='checkbox'\"\r\n                                             [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-checkbox *ngFor=\"let option of elem.config.options\"\r\n                                                      class=\"example-margin example-margin-checkbox\"\r\n                                                      [value]=\"option\"\r\n                                                      [color]=\"elem.config.color\"\r\n                                                      [disabled]=\"elem.config.disabled\"\r\n                                                      [required]=\"elem.config.required\">{{option}}\r\n                                        </mat-checkbox>\r\n                                    </section>\r\n\r\n                                    <!--if element is input RADIO-->\r\n                                    <mat-radio-group class=\"example-radio-group\" *ngIf=\"elem.type==='radio'\"\r\n                                                     [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\"\r\n                                                     (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-radio-button class=\"example-radio-button\"\r\n                                                          *ngFor=\"let option of elem.config.options\"\r\n                                                          [value]=\"option\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [disabled]=\"elem.config.disabled\"\r\n                                                          [required]=\"elem.config.required\">{{option}}\r\n                                        </mat-radio-button>\r\n                                    </mat-radio-group>\r\n\r\n                                    <!--if element is TEXTAREA-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <textarea matInput\r\n                                                  [value]=\"elem.config.value\"\r\n                                                  [placeholder]=\"elem.config.placeholder\"\r\n                                                  [disabled]=\"elem.config.disabled\"></textarea>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is BUTTON-->\r\n                                    <div *ngIf=\"elem.type==='button'\" class=\"example-button-row flex-grow\"\r\n                                         (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <button mat-raised-button\r\n                                                [color]=\"elem.config.color\"\r\n                                                [disabled]=\"elem.config.disabled\">{{elem.config.value}}\r\n                                        </button>\r\n                                    </div>\r\n\r\n                                    <button mat-mini-fab color=\"primary\" (click)=\"delElem(rowIndex, cellIndex)\">\r\n                                        <mat-icon>remove</mat-icon>\r\n                                    </button>\r\n                                </div>\r\n\r\n                                <button mat-mini-fab color=\"primary\" *ngIf=\"!cell.elements.length\"\r\n                                        (click)=\"addElem(rowIndex, cellIndex)\">\r\n                                    <mat-icon>add</mat-icon>\r\n                                </button>\r\n                            </div>\r\n\r\n                            <button mat-mini-fab color=\"primary\" (click)=\"delCell(rowIndex, cellIndex)\">\r\n                                <mat-icon>remove</mat-icon>\r\n                            </button>\r\n                        </div>\r\n\r\n                    </div>\r\n\r\n                    <button mat-mini-fab color=\"primary\" (click)=\"delRow(rowIndex)\">\r\n                        <mat-icon>remove</mat-icon>\r\n                    </button>\r\n                </div>\r\n\r\n                <button mat-mini-fab color=\"primary\" (click)=\"addRow()\">\r\n                    <mat-icon>add</mat-icon>\r\n                </button>\r\n               </form>\r\n            </div>\r\n        <app-form-screenshot [form]=\"form\"></app-form-screenshot>\r\n    </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
 
 /***/ }),
 
@@ -8558,7 +8559,7 @@ module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".sidenav {\n  width: 50%; }\n\n.sidenav-container {\n  height: 100%; }\n\n.sidenav {\n  background: inherit; }\n\n.mat-toolbar {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 10; }\n\n.mat-toolbar .mat-toolbar-single-row {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1; }\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n  padding-top: 0; }\n\n.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {\n  color: #fff !important;\n  font-size: 20px;\n  font-weight: normal; }\n\n.new-form-button, .save-form-button {\n  margin-right: 10px; }\n\nmat-sidenav-container {\n  text-align: center; }\n\nmat-sidenav {\n  min-width: 200px; }\n\nmat-card {\n  margin: 16px;\n  padding-bottom: 0; }\n\nmat-card mat-card-title {\n  font-size: 20px; }\n\nmat-card img {\n  max-width: 700px; }\n\n@media only screen and (min-width: 600px) {\n  mat-sidenav {\n    position: relative;\n    max-width: 25%; }\n  mat-sidenav-content {\n    margin-left: 0 !important; } }\n\n.full-height {\n  height: calc(100vh - 64px); }\n\n.flex-grow {\n  flex-grow: 1; }\n\n.flex-grow button {\n    width: 100%; }\n\n.form {\n  margin-top: 50px; }\n\n.form .form-info {\n    display: flex;\n    width: 90%;\n    margin: 10px auto;\n    align-items: center;\n    justify-content: center; }\n\n.form .form-info .form-info-inputs {\n      width: 45%;\n      text-align: left; }\n\n.form .form-info .form-info-inputs .mat-form-field {\n        margin-right: 10px;\n        font-size: 20px; }\n\n.form .form-info .form-info-buttons {\n      width: 55%;\n      text-align: right; }\n\n.form .form-info .form-info-buttons mat-toolbar {\n        justify-content: flex-end; }\n\n.form .form-info .form-info-buttons button {\n        margin-left: 10px; }\n\n.form .example-container {\n    margin: 10px auto;\n    width: 90%;\n    border: 1px solid #c9c9c9;\n    min-height: 50px;\n    padding: 5px;\n    border-radius: 5px; }\n\n.form .example-container .row-container {\n      display: flex;\n      align-items: center;\n      justify-content: center; }\n\n.form .example-container .row-container .row {\n        display: flex;\n        margin: 5px;\n        padding: 5px;\n        width: 100%;\n        min-height: 20px;\n        border-radius: 5px;\n        border: 1px solid #c9c9c9;\n        align-items: center; }\n\n.form .example-container .row-container .row .cell-container {\n          display: flex;\n          width: 100%;\n          margin-right: 5px;\n          align-items: center;\n          justify-content: center; }\n\n.form .example-container .row-container .row .cell-container .cell {\n            display: flex;\n            margin: 5px;\n            padding: 5px;\n            width: 100%;\n            min-height: 20px;\n            border-radius: 5px;\n            border: 1px solid #c9c9c9; }\n\n.form .example-container .row-container .row .cell-container .cell .element {\n              display: flex;\n              align-items: center; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field {\n                margin: 0 15px; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field ::ng-deep .mat-form-field-infix {\n                  width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slider {\n                width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slide-toggle {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-select {\n                width: 140px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-group {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-button {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical {\n                display: block !important;\n                text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .element .vertical .mat-checkbox {\n                  margin: 10px;\n                  display: block; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-section-checkbox {\n                display: flex;\n                align-content: center;\n                align-items: center;\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-margin-checkbox {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-button-row {\n                margin: 5px; }\n\n.form .example-container .row-container .mat-mini-fab {\n        width: 30px;\n        height: 30px; }\n\n.form .example-container .row-container .mat-mini-fab mat-icon {\n          width: 20px;\n          height: 30px;\n          font-size: 20px; }\n\n.form .example-container .mat-mini-fab {\n      width: 40px;\n      height: 40px;\n      padding: 3px; }\n\n.form .example-container .mat-mini-fab mat-icon {\n        margin-top: -8px;\n        padding: 0;\n        width: 30px;\n        height: 30px;\n        font-size: 30px; }\n\n/*my mixins*/\n"
+module.exports = ".sidenav {\n  width: 50%; }\n\n.sidenav-container {\n  height: 100%; }\n\n.sidenav {\n  background: inherit; }\n\n.mat-toolbar {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n  background-color: #fff; }\n\n.mat-toolbar .mat-toolbar-single-row {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1; }\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n  padding-top: 0; }\n\n.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {\n  color: #fff !important;\n  font-size: 20px;\n  font-weight: normal; }\n\n.new-form-button, .save-form-button {\n  margin-right: 10px; }\n\nmat-sidenav-container {\n  text-align: center; }\n\nmat-sidenav {\n  min-width: 200px; }\n\nmat-card {\n  margin: 16px;\n  padding-bottom: 0; }\n\nmat-card mat-card-title {\n  font-size: 20px; }\n\nmat-card img {\n  max-width: 700px; }\n\n@media only screen and (min-width: 600px) {\n  mat-sidenav {\n    position: relative;\n    max-width: 25%; }\n  mat-sidenav-content {\n    margin-left: 0 !important; } }\n\n.full-height {\n  height: calc(100vh - 64px); }\n\n.flex-grow {\n  flex-grow: 1; }\n\n.flex-grow button {\n    width: 100%; }\n\n.form {\n  margin-top: 50px; }\n\n.form .form-info {\n    display: flex;\n    width: 90%;\n    margin: 10px auto;\n    align-items: center;\n    justify-content: center; }\n\n.form .form-info .form-info-inputs {\n      width: 45%;\n      text-align: left; }\n\n.form .form-info .form-info-inputs .mat-form-field {\n        margin-right: 10px;\n        font-size: 20px; }\n\n.form .form-info .form-info-buttons {\n      width: 55%;\n      text-align: right; }\n\n.form .form-info .form-info-buttons mat-toolbar {\n        justify-content: flex-end; }\n\n.form .form-info .form-info-buttons button {\n        margin-left: 10px; }\n\n.form .example-container {\n    margin: 10px auto;\n    width: 90%;\n    border: 1px solid #c9c9c9;\n    min-height: 50px;\n    padding: 5px;\n    border-radius: 5px; }\n\n.form .example-container .row-container {\n      display: flex;\n      align-items: center;\n      justify-content: center; }\n\n.form .example-container .row-container .row {\n        display: flex;\n        margin: 5px;\n        padding: 5px;\n        width: 100%;\n        min-height: 20px;\n        border-radius: 5px;\n        border: 1px solid #c9c9c9;\n        align-items: center; }\n\n.form .example-container .row-container .row .cell-container {\n          display: flex;\n          width: 100%;\n          margin-right: 5px;\n          align-items: center;\n          justify-content: center; }\n\n.form .example-container .row-container .row .cell-container .cell {\n            display: flex;\n            margin: 5px;\n            padding: 5px;\n            width: 100%;\n            min-height: 20px;\n            border-radius: 5px;\n            border: 1px solid #c9c9c9; }\n\n.form .example-container .row-container .row .cell-container .cell .element {\n              display: flex;\n              align-items: center; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field {\n                margin: 0 15px; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field ::ng-deep .mat-form-field-infix {\n                  width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slider {\n                width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slide-toggle {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-select {\n                width: 140px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-group {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-button {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical {\n                display: block !important;\n                text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .element .vertical .mat-checkbox {\n                  margin: 10px;\n                  display: block; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-section-checkbox {\n                display: flex;\n                align-content: center;\n                align-items: center;\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-margin-checkbox {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-button-row {\n                margin: 5px; }\n\n.form .example-container .row-container .mat-mini-fab {\n        width: 30px;\n        height: 30px; }\n\n.form .example-container .row-container .mat-mini-fab mat-icon {\n          width: 20px;\n          height: 30px;\n          font-size: 20px; }\n\n.form .example-container .mat-mini-fab {\n      width: 40px;\n      height: 40px;\n      padding: 3px; }\n\n.form .example-container .mat-mini-fab mat-icon {\n        margin-top: -8px;\n        padding: 0;\n        width: 30px;\n        height: 30px;\n        font-size: 30px; }\n\n/*my mixins*/\n\n.preview-bg {\n  background-color: #fff !important; }\n\n#screenshot {\n  position: relative;\n  left: -100%; }\n"
 
 /***/ }),
 
@@ -8579,7 +8580,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _services_broadcast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
 /* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/http.service */ "./src/app/forms/services/http.service.ts");
-/* harmony import */ var _modules_admin_modules_interviewers_services_http_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../modules/admin/modules/interviewers/services/http.service */ "./src/app/modules/admin/modules/interviewers/services/http.service.ts");
+/* harmony import */ var _modules_admin_services_http_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../modules/admin/services/http.service */ "./src/app/modules/admin/services/http.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../options/confirm-removing-form/confirm-removing-form.component */ "./src/app/options/confirm-removing-form/confirm-removing-form.component.ts");
+/* harmony import */ var _services_screenshot_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/screenshot.service */ "./src/app/forms/services/screenshot.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8597,16 +8601,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var emptyForm = {
     title: 'New form',
     author: 'Ya',
-    preview: 'https://ps.w.org/simple-registration-form/trunk/screenshot-1.png?rev=1790752',
+    preview: '',
     groups: ['Dnipro-142'],
     rows: [],
     description: ''
 };
 var ConstructorPageComponent = /** @class */ (function () {
-    function ConstructorPageComponent(breakpoint, fb, broadcast, http, router, httpAdmin) {
+    function ConstructorPageComponent(breakpoint, fb, broadcast, http, router, httpAdmin, dialog, screenshotService) {
         var _this = this;
         this.breakpoint = breakpoint;
         this.fb = fb;
@@ -8614,6 +8621,8 @@ var ConstructorPageComponent = /** @class */ (function () {
         this.http = http;
         this.router = router;
         this.httpAdmin = httpAdmin;
+        this.dialog = dialog;
+        this.screenshotService = screenshotService;
         this.isHandset$ = this.breakpoint.observe(_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__["Breakpoints"].Handset)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (result) { return result.matches; }));
         // get template of element from constructor
@@ -8655,25 +8664,50 @@ var ConstructorPageComponent = /** @class */ (function () {
     };
     ConstructorPageComponent.prototype.saveForm = function () {
         var _this = this;
+        this.formSavingProcess = true;
+        var currentDate = new Date().valueOf();
+        var imgName = currentDate + '.png';
         this.form.title = this.formInfo.value.title;
+        this.form.author = JSON.parse(window.localStorage.getItem('currentUser')).username;
         this.form.groups = this.formInfo.value.groups;
+        if (this.form.preview === '') {
+            this.form.preview = imgName;
+        }
         this.http.saveForm(this.form)
             .subscribe(function (data) {
-            if (_this.form._id) {
-                var forms = data.filter(function (form) { return form._id === _this.form._id; });
-                _this.form = forms[0]; // show updated form
+            var isFormSaved = Array.isArray(data);
+            if (isFormSaved) {
+                if (_this.form._id) {
+                    var forms = data.filter(function (form) { return form._id === _this.form._id; });
+                    _this.form = forms[0]; // show updated form
+                }
+                else {
+                    _this.form = data[data.length - 1]; // show created form
+                }
+                _this.screenshotService.saveScreenshot(_this.form);
             }
             else {
-                _this.form = data[data.length - 1]; // show created form
+                _this.screenshotService.showSaveMessage(_this.form.title, isFormSaved);
             }
+            _this.formSavingProcess = false;
         });
     };
-    ConstructorPageComponent.prototype.delForm = function (id) {
+    ConstructorPageComponent.prototype.delForm = function (form) {
         var _this = this;
-        this.http.delForm(id)
-            .subscribe(function (data) {
-            if (Array.isArray(data)) {
-                _this.showEditPanel();
+        var confirmRemovingRef = this.dialog.open(_options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_9__["ConfirmRemovingFormComponent"]);
+        confirmRemovingRef.afterClosed().subscribe(function (result) {
+            if (result) {
+                _this.http.delForm(form._id)
+                    .subscribe(function (data) {
+                    var isFormDeleted = Array.isArray(data);
+                    if (isFormDeleted) {
+                        _this.showEditPanel();
+                        _this.screenshotService.deleteScreenshot(form);
+                    }
+                    else {
+                        _this.screenshotService.showDeleteMessage(_this.form.title, isFormDeleted);
+                    }
+                });
             }
         });
     };
@@ -8736,9 +8770,76 @@ var ConstructorPageComponent = /** @class */ (function () {
             _services_broadcast_service__WEBPACK_IMPORTED_MODULE_5__["BroadcastService"],
             _services_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            _modules_admin_modules_interviewers_services_http_service__WEBPACK_IMPORTED_MODULE_7__["HttpAdminService"]])
+            _modules_admin_services_http_service__WEBPACK_IMPORTED_MODULE_7__["HttpAdminService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatDialog"],
+            _services_screenshot_service__WEBPACK_IMPORTED_MODULE_10__["ScreenshotService"]])
     ], ConstructorPageComponent);
     return ConstructorPageComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/forms/constructor-page/form-screenshot/form-screenshot.component.html":
+/*!***************************************************************************************!*\
+  !*** ./src/app/forms/constructor-page/form-screenshot/form-screenshot.component.html ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = " <!--block for snapshots-->\r\n <div class=\"form\" *ngIf=\"form\" id=\"screenshot\" #screenshot>\r\n   <form class=\"example-container\">\r\n       <!--container for row-->\r\n       <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n           <!--row-->\r\n           <div class=\"row\">\r\n               <!--container for cell-->\r\n               <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                   <!--cell-->\r\n                   <div class=\"cell\">\r\n                       <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                           <!--if element is input TEXT-->\r\n                           <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width flex-grow\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <input matInput type=\"text\"\r\n                                      [value]=\"elem.config.value\"\r\n                                      [placeholder]=\"elem.config.placeholder\"\r\n                                      [disabled]=\"elem.config.disabled\"\r\n                                      [required]=\"elem.config.required\">\r\n                           </mat-form-field>\r\n\r\n                           <!--if element is input NUMBER-->\r\n                           <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width flex-grow\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <input matInput type=\"number\"\r\n                                      [value]=\"elem.config.value\"\r\n                                      [placeholder]=\"elem.config.placeholder\"\r\n                                      [min]=\"elem.config.min\"\r\n                                      [max]=\"elem.config.max\"\r\n                                      [disabled]=\"elem.config.disabled\"\r\n                                      [required]=\"elem.config.required\">\r\n                           </mat-form-field>\r\n\r\n                           <!--if element is input EMAIL-->\r\n                           <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width flex-grow\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <input matInput type=\"email\"\r\n                                      [value]=\"elem.config.value\"\r\n                                      [placeholder]=\"elem.config.placeholder\"\r\n                                      [disabled]=\"elem.config.disabled\"\r\n                                      [required]=\"elem.config.required\">\r\n                           </mat-form-field>\r\n\r\n                           <!--if element is input PASSWORD-->\r\n                           <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width flex-grow\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <input matInput type=\"password\"\r\n                                      [value]=\"elem.config.value\"\r\n                                      [placeholder]=\"elem.config.placeholder\"\r\n                                      [disabled]=\"elem.config.disabled\"\r\n                                      [required]=\"elem.config.required\">\r\n                           </mat-form-field>\r\n\r\n                           <!--if element is SLIDER-->\r\n                           <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <mat-slider\r\n                                       class=\"example-margin\"\r\n                                       [value]=\"elem.config.value\"\r\n                                       [invert]=\"elem.config.invert\"\r\n                                       [max]=\"elem.config.max\"\r\n                                       [min]=\"elem.config.min\"\r\n                                       [step]=\"elem.config.step\"\r\n                                       [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                       [vertical]=\"elem.config.vertical\"\r\n                                       [disabled]=\"elem.config.disabled\">\r\n                               </mat-slider>\r\n                           </section>\r\n\r\n                           <!--if element is TOGGLE-->\r\n                           <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\" >\r\n\r\n                               <mat-slide-toggle class=\"example-margin\"\r\n                                                 [color]=\"elem.config.color\"\r\n                                                 [checked]=\"elem.config.checked\"\r\n                                                 [disabled]=\"elem.config.disabled\">\r\n                                   {{elem.config.label}}\r\n                               </mat-slide-toggle>\r\n                           </section>\r\n\r\n                           <!--if element is SELECT-->\r\n                           <mat-form-field *ngIf=\"elem.type==='select'\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <mat-select [disabled]=\"elem.config.disabled\"\r\n                                           [required]=\"elem.config.required\">\r\n                                   <mat-option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                       {{option}}\r\n                                   </mat-option>\r\n                               </mat-select>\r\n                           </mat-form-field>\r\n\r\n                           <!--if element is input CHECKBOX-->\r\n                           <section class=\"example-section example-section-checkbox\"\r\n                                    *ngIf=\"elem.type==='checkbox'\"\r\n                                    [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <mat-checkbox *ngFor=\"let option of elem.config.options\" class=\"example-margin example-margin-checkbox\"\r\n                                             [value]=\"option\"\r\n                                             [color]=\"elem.config.color\"\r\n                                             [disabled]=\"elem.config.disabled\"\r\n                                             [required]=\"elem.config.required\">{{option}}</mat-checkbox>\r\n                           </section>\r\n\r\n                           <!--if element is input RADIO-->\r\n                           <mat-radio-group class=\"example-radio-group\"\r\n                                            *ngIf=\"elem.type==='radio'\"\r\n                                            [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <mat-radio-button class=\"example-radio-button\" *ngFor=\"let option of elem.config.options\"\r\n                                                 [value]=\"option\"\r\n                                                 [color]=\"elem.config.color\"\r\n                                                 [disabled]=\"elem.config.disabled\"\r\n                                                 [required]=\"elem.config.required\">{{option}}</mat-radio-button>\r\n                           </mat-radio-group>\r\n\r\n                           <!--if element is TEXTAREA-->\r\n                           <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width flex-grow\">\r\n                               <mat-label>{{elem.config.label}}</mat-label>\r\n                               <textarea matInput\r\n                                         [value]=\"elem.config.value\"\r\n                                         [placeholder]=\"elem.config.placeholder\"\r\n                                         [disabled]=\"elem.config.disabled\"></textarea>\r\n                           </mat-form-field>\r\n\r\n                           <!--if element is BUTTON-->\r\n                           <div *ngIf=\"elem.type==='button'\" class=\"example-button-row flex-grow\">\r\n                               <button mat-raised-button\r\n                                       [color]=\"elem.config.color\"\r\n                                       [disabled]=\"elem.config.disabled\">{{elem.config.value}}</button>\r\n                           </div>\r\n                       </div>\r\n                   </div>\r\n               </div>\r\n           </div>\r\n       </div>\r\n   </form>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/forms/constructor-page/form-screenshot/form-screenshot.component.ts":
+/*!*************************************************************************************!*\
+  !*** ./src/app/forms/constructor-page/form-screenshot/form-screenshot.component.ts ***!
+  \*************************************************************************************/
+/*! exports provided: FormScreenshotComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormScreenshotComponent", function() { return FormScreenshotComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_screenshot_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/screenshot.service */ "./src/app/forms/services/screenshot.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var FormScreenshotComponent = /** @class */ (function () {
+    function FormScreenshotComponent(screenshotService) {
+        this.screenshotService = screenshotService;
+    }
+    FormScreenshotComponent.prototype.ngOnInit = function () { };
+    FormScreenshotComponent.prototype.ngAfterViewInit = function () {
+        this.screenshotService.HTMLElement = this.screenshot.nativeElement;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], FormScreenshotComponent.prototype, "form", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('screenshot'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], FormScreenshotComponent.prototype, "screenshot", void 0);
+    FormScreenshotComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-form-screenshot',
+            template: __webpack_require__(/*! ./form-screenshot.component.html */ "./src/app/forms/constructor-page/form-screenshot/form-screenshot.component.html"),
+            styles: [__webpack_require__(/*! ../constructor-page.component.scss */ "./src/app/forms/constructor-page/constructor-page.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_screenshot_service__WEBPACK_IMPORTED_MODULE_1__["ScreenshotService"]])
+    ], FormScreenshotComponent);
+    return FormScreenshotComponent;
 }());
 
 
@@ -9080,6 +9181,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _interview_page_interview_page_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./interview-page/interview-page.component */ "./src/app/forms/interview-page/interview-page.component.ts");
 /* harmony import */ var _preview_page_preview_page_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./preview-page/preview-page.component */ "./src/app/forms/preview-page/preview-page.component.ts");
 /* harmony import */ var _constructor_page_constructor_page_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./constructor-page/constructor-page.component */ "./src/app/forms/constructor-page/constructor-page.component.ts");
+/* harmony import */ var _services_screenshot_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/screenshot.service */ "./src/app/forms/services/screenshot.service.ts");
+/* harmony import */ var _options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../options/confirm-removing-form/confirm-removing-form.component */ "./src/app/options/confirm-removing-form/confirm-removing-form.component.ts");
+/* harmony import */ var _constructor_page_form_screenshot_form_screenshot_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./constructor-page/form-screenshot/form-screenshot.component */ "./src/app/forms/constructor-page/form-screenshot/form-screenshot.component.ts");
+/* harmony import */ var _options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../options/snackbar/snackbar.component */ "./src/app/options/snackbar/snackbar.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9104,6 +9209,10 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+
 var FormsPageModule = /** @class */ (function () {
     function FormsPageModule() {
     }
@@ -9116,7 +9225,10 @@ var FormsPageModule = /** @class */ (function () {
                 _pipes_element_type_pipe__WEBPACK_IMPORTED_MODULE_7__["ElementTypePipe"],
                 _interview_page_interview_page_component__WEBPACK_IMPORTED_MODULE_14__["InterviewPageComponent"],
                 _preview_page_preview_page_component__WEBPACK_IMPORTED_MODULE_15__["PreviewPageComponent"],
-                _constructor_page_constructor_page_component__WEBPACK_IMPORTED_MODULE_16__["ConstructorPageComponent"]
+                _constructor_page_constructor_page_component__WEBPACK_IMPORTED_MODULE_16__["ConstructorPageComponent"],
+                _options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_18__["ConfirmRemovingFormComponent"],
+                _constructor_page_form_screenshot_form_screenshot_component__WEBPACK_IMPORTED_MODULE_19__["FormScreenshotComponent"],
+                _options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_20__["SnackbarComponent"],
             ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
@@ -9128,8 +9240,12 @@ var FormsPageModule = /** @class */ (function () {
             providers: [
                 _services_broadcast_service__WEBPACK_IMPORTED_MODULE_8__["BroadcastService"],
                 _services_http_service__WEBPACK_IMPORTED_MODULE_10__["HttpService"], { provide: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["HAMMER_GESTURE_CONFIG"], useClass: _angular_material__WEBPACK_IMPORTED_MODULE_5__["GestureConfig"] },
-                _services_socket_service_service__WEBPACK_IMPORTED_MODULE_9__["SocketService"]
-            ]
+                _services_socket_service_service__WEBPACK_IMPORTED_MODULE_9__["SocketService"],
+                _services_screenshot_service__WEBPACK_IMPORTED_MODULE_17__["ScreenshotService"],
+                _constructor_page_form_screenshot_form_screenshot_component__WEBPACK_IMPORTED_MODULE_19__["FormScreenshotComponent"],
+                _options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_20__["SnackbarComponent"]
+            ],
+            entryComponents: [_options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_18__["ConfirmRemovingFormComponent"]],
         })
     ], FormsPageModule);
     return FormsPageModule;
@@ -9146,7 +9262,7 @@ var FormsPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<mat-toolbar fxLayout=\"row\" *ngIf=\"form\" class=\"finishToolbar\">\r\n    <div>\r\n    <button (click)=\"endInterview()\" fxLayoutAlign=\"center\"\r\n            fxFlex.lt-md=\"0 1 150px\"\r\n            fxFlex.md=\"200px\"\r\n            fxFlex.gt-md=\"260px\"\r\n            mat-raised-button color=\"primary\" class=\"new-form-button\">Finish Interview\r\n    </button>\r\n    </div>\r\n</mat-toolbar>\r\n\r\n<div class=\"form\" *ngIf=\"form\">\r\n    <!--<h2 class=\"mat-h2\">{{form.title}}</h2>-->\r\n    <form class=\"example-container\" [formGroup]=\"options\">\r\n        <fieldset class=\"form\">\r\n            <legend>\r\n                <h2>{{form.title}}</h2>\r\n            </legend>\r\n            <!--container for row-->\r\n            <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                <!--row-->\r\n                <div class=\"row\">\r\n\r\n                    <!--container for cell-->\r\n                    <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                        <!--cell-->\r\n                        <div class=\"cell\">\r\n                            <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n                                <!--<div  [innerHtml]=\"cell.element | type\"></div>-->\r\n\r\n                                <!--if element is input TEXT-->\r\n                                <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"text\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input NUMBER-->\r\n                                <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"number\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [min]=\"elem.config.min\"\r\n                                            [max]=\"elem.config.max\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                            \r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input EMAIL-->\r\n                                <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"email\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input PASSWORD-->\r\n                                <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"password\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is SLIDER-->\r\n                                <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-slider\r\n                                                class=\"example-margin form-element\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\"\r\n                                    >\r\n                                    </mat-slider>\r\n                                </section>\r\n\r\n                                <!--if element is TOGGLE-->\r\n                                <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\" >\r\n\r\n                                    <mat-slide-toggle class=\"example-margin form-element\"\r\n                                            [color]=\"elem.config.color\"\r\n                                            [checked]=\"elem.config.checked\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                    >\r\n                                        {{elem.config.label}}\r\n                                    </mat-slide-toggle>\r\n                                </section>\r\n\r\n                                <!--if element is SELECT-->\r\n                                <mat-form-field *ngIf=\"elem.type==='select'\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <select matNativeControl  [disabled]=\"elem.config.disabled\"\r\n                                                [required]=\"elem.config.required\"\r\n                                                class=\"form-element\"\r\n                                    >\r\n                                        <option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                            {{option}}\r\n                                        </option>\r\n                                    </select>\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input CHECKBOX-->\r\n                                <section class=\"example-section example-section-checkbox\" *ngIf=\"elem.type==='checkbox'\" \r\n                                [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-checkbox *ngFor=\"let option of elem.config.options\" class=\"example-margin example-margin-checkbox form-element\"\r\n                                                    [value]=\"option\"\r\n                                                    [color]=\"elem.config.color\"\r\n                                                    [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\"\r\n                                    >\r\n                                        {{option}}\r\n                                    </mat-checkbox>\r\n                                </section>\r\n\r\n                                <!--if element is input RADIO-->\r\n                                <mat-radio-group class=\"example-radio-group\" *ngIf=\"elem.type==='radio'\"\r\n                                [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-radio-button class=\"example-radio-button form-element\" *ngFor=\"let option of elem.config.options\"\r\n                                                        [value]=\"option\"\r\n                                                        [color]=\"elem.config.color\"\r\n                                                        [disabled]=\"elem.config.disabled\"\r\n                                                        [required]=\"elem.config.required\">\r\n                                        {{option}}\r\n                                    </mat-radio-button>\r\n                                </mat-radio-group>\r\n\r\n                                <!--if element is TEXTAREA-->\r\n                                <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <textarea matInput\r\n                                                [value]=\"elem.config.value\"\r\n                                                [placeholder]=\"elem.config.placeholder\"\r\n                                                [disabled]=\"elem.config.disabled\"\r\n                                    ></textarea>\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is BUTTON-->\r\n                                <div *ngIf=\"elem.type==='button'\" class=\"example-button-row form-element flex-grow\" >\r\n                                    <button mat-raised-button\r\n                                            [color]=\"elem.config.color\"\r\n                                            [disabled]=\"elem.config.disabled\">{{elem.config.value}}</button>\r\n                                </div>\r\n                            </div>  \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div> \r\n        </fieldset>\r\n    </form>\r\n</div>\r\n\r\n"
+module.exports = "\r\n<mat-toolbar fxLayout=\"row\" *ngIf=\"form\" class=\"finishToolbar\">\r\n    <div>\r\n    <button (click)=\"endInterview()\" fxLayoutAlign=\"center\"\r\n            fxFlex.lt-md=\"0 1 150px\"\r\n            fxFlex.md=\"200px\"\r\n            fxFlex.gt-md=\"260px\"\r\n            mat-raised-button color=\"primary\" class=\"new-form-button\">{{buttonInscription}}\r\n    </button>\r\n    </div>\r\n</mat-toolbar>\r\n\r\n<div class=\"form\" *ngIf=\"form\">\r\n    <!--<h2 class=\"mat-h2\">{{form.title}}</h2>-->\r\n    <form class=\"example-container\" [formGroup]=\"options\">\r\n        <fieldset class=\"form\">\r\n            <legend>\r\n                <h2>{{form.title}}</h2>\r\n            </legend>\r\n            <!--container for row-->\r\n            <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                <!--row-->\r\n                <div class=\"row\">\r\n\r\n                    <!--container for cell-->\r\n                    <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                        <!--cell-->\r\n                        <div class=\"cell\">\r\n                            <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n                                <!--<div  [innerHtml]=\"cell.element | type\"></div>-->\r\n\r\n                                <!--if element is input TEXT-->\r\n                                <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"text\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input NUMBER-->\r\n                                <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"number\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [min]=\"elem.config.min\"\r\n                                            [max]=\"elem.config.max\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                            \r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input EMAIL-->\r\n                                <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"email\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input PASSWORD-->\r\n                                <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"password\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is SLIDER-->\r\n                                <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-slider\r\n                                                class=\"example-margin form-element\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\"\r\n                                    >\r\n                                    </mat-slider>\r\n                                </section>\r\n\r\n                                <!--if element is TOGGLE-->\r\n                                <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\" >\r\n\r\n                                    <mat-slide-toggle class=\"example-margin form-element\"\r\n                                            [color]=\"elem.config.color\"\r\n                                            [checked]=\"elem.config.checked\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                    >\r\n                                        {{elem.config.label}}\r\n                                    </mat-slide-toggle>\r\n                                </section>\r\n\r\n                                <!--if element is SELECT-->\r\n                                <mat-form-field *ngIf=\"elem.type==='select'\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <select matNativeControl  [disabled]=\"elem.config.disabled\"\r\n                                                [required]=\"elem.config.required\"\r\n                                                class=\"form-element\"\r\n                                    >\r\n                                        <option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                            {{option}}\r\n                                        </option>\r\n                                    </select>\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input CHECKBOX-->\r\n                                <section class=\"example-section example-section-checkbox\" *ngIf=\"elem.type==='checkbox'\" \r\n                                [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-checkbox *ngFor=\"let option of elem.config.options\" class=\"example-margin example-margin-checkbox form-element\"\r\n                                                    [value]=\"option\"\r\n                                                    [color]=\"elem.config.color\"\r\n                                                    [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\"\r\n                                    >\r\n                                        {{option}}\r\n                                    </mat-checkbox>\r\n                                </section>\r\n\r\n                                <!--if element is input RADIO-->\r\n                                <mat-radio-group class=\"example-radio-group\" *ngIf=\"elem.type==='radio'\"\r\n                                [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-radio-button class=\"example-radio-button form-element\" *ngFor=\"let option of elem.config.options\"\r\n                                                        [value]=\"option\"\r\n                                                        [color]=\"elem.config.color\"\r\n                                                        [disabled]=\"elem.config.disabled\"\r\n                                                        [required]=\"elem.config.required\">\r\n                                        {{option}}\r\n                                    </mat-radio-button>\r\n                                </mat-radio-group>\r\n\r\n                                <!--if element is TEXTAREA-->\r\n                                <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <textarea matInput\r\n                                                [value]=\"elem.config.value\"\r\n                                                [placeholder]=\"elem.config.placeholder\"\r\n                                                [disabled]=\"elem.config.disabled\"\r\n                                    ></textarea>\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is BUTTON-->\r\n                                <div *ngIf=\"elem.type==='button'\" class=\"example-button-row form-element flex-grow\" >\r\n                                    <button mat-raised-button\r\n                                            [color]=\"elem.config.color\"\r\n                                            [disabled]=\"elem.config.disabled\">{{elem.config.value}}</button>\r\n                                </div>\r\n                            </div>  \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div> \r\n        </fieldset>\r\n    </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -9212,6 +9328,8 @@ var InterviewPageComponent = /** @class */ (function () {
             which: 1,
         };
         this.elementConfigs = [];
+        this.isSpectator = false;
+        this.buttonInscription = 'Finish interview';
         this._url = '../assets/form.json';
         this._formData = null;
         this.isHandset$ = this.breakpoint.observe(_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["Breakpoints"].Handset)
@@ -9224,27 +9342,33 @@ var InterviewPageComponent = /** @class */ (function () {
     InterviewPageComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.form = this.broadcast.selectedForm;
-        var user = JSON.parse(window.localStorage.getItem('currentUser'));
+        this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
         if (!this.form) {
             this.router.navigate(['/main']);
             return;
         }
-        if (!user) {
-            user = {
+        if (!this.currentUser) {
+            this.currentUser = {
                 role: 'candidate'
             };
         }
-        if ((user.role === 'master' || user.role === 'interviewer')
+        this.socketService.connectToSockets();
+        // decide whether we should create a new interview or connect to
+        // an existing one
+        if ((this.currentUser.role === 'master' || this.currentUser.role === 'interviewer')
             && !this.socketService.interviewId) {
             var interviewData = {
-                interviewer: user.fullname,
+                interviewer: this.currentUser.fullname,
                 interviewId: Math.round(Math.random() * 10000),
                 interviewForm: this.form,
-                formName: this.form.title
+                formName: this.form.title,
+                creationTime: this.addCreationTime()
             };
             this.socketService.initiateInterview(interviewData);
         }
         else {
+            this.isSpectator = true;
+            this.buttonInscription = 'Exit interview';
             this.socketService.joinInterview();
         }
         window.onbeforeunload = function () { return _this.ngOnDestroy(); };
@@ -9264,7 +9388,20 @@ var InterviewPageComponent = /** @class */ (function () {
         }
     };
     InterviewPageComponent.prototype.endInterview = function () {
-        this.router.navigate(['/preview']);
+        if (this.currentUser.role === 'candidate') {
+            this.router.navigate(['/main']);
+        }
+        else {
+            this.router.navigate(['/preview']);
+        }
+    };
+    InterviewPageComponent.prototype.addCreationTime = function () {
+        var timezoneOffset = (new Date()).getTimezoneOffset() * 60000;
+        var dateNow = (new Date(Date.now() - timezoneOffset)).toISOString();
+        var day = dateNow.slice(8, 10);
+        var month = dateNow.slice(5, 7);
+        var time = dateNow.slice(11, 16);
+        return day + "." + month + " " + time;
     };
     // primaly written to be able to change slider value
     InterviewPageComponent.prototype.getElementConfigs = function () {
@@ -9312,7 +9449,7 @@ var InterviewPageComponent = /** @class */ (function () {
     //////////// event emitters  ////////////////////
     InterviewPageComponent.prototype.clickEventEmitter = function () {
         var _this = this;
-        this.socketService.getClickEvent()
+        return this.socketService.getClickEvent()
             .subscribe(function (event) {
             var targetElement = _this.formElements[event.elementIndex];
             var mouseEvent = new MouseEvent('click', _this.mouseEventOptions);
@@ -9327,7 +9464,7 @@ var InterviewPageComponent = /** @class */ (function () {
     };
     InterviewPageComponent.prototype.mouseMoveEmitter = function () {
         var _this = this;
-        this.socketService.getMouseMove()
+        return this.socketService.getMouseMove()
             .subscribe(function (event) {
             if (event.eventType === 'mouseenter') {
                 if (_this.lastHoveredTarget === event.targetElement) {
@@ -9344,7 +9481,7 @@ var InterviewPageComponent = /** @class */ (function () {
     };
     InterviewPageComponent.prototype.focusEmitter = function () {
         var _this = this;
-        this.socketService.getFocusEvent()
+        return this.socketService.getFocusEvent()
             .subscribe(function (event) {
             var elementToFocus = _this.formElements[event.elementIndex].querySelector(event.targetElement);
             if (elementToFocus) {
@@ -9357,7 +9494,7 @@ var InterviewPageComponent = /** @class */ (function () {
     };
     InterviewPageComponent.prototype.keyboardEventEmitter = function () {
         var _this = this;
-        this.socketService.getKeyboardEvent()
+        return this.socketService.getKeyboardEvent()
             .subscribe(function (event) {
             var targetElement = _this.formElements[event.targetElementIndex];
             var changeEvent = new Event('change');
@@ -9367,7 +9504,7 @@ var InterviewPageComponent = /** @class */ (function () {
     };
     InterviewPageComponent.prototype.onChangeEventEmitter = function () {
         var _this = this;
-        this.socketService.getOnChangeEvent()
+        return this.socketService.getOnChangeEvent()
             .subscribe(function (event) {
             var targetElement = _this.formElements[event.targetElementIndex];
             // angular material places target elements differently
@@ -9480,11 +9617,11 @@ var InterviewPageComponent = /** @class */ (function () {
         this.socketService.sendOnChangetEvent(eventInfo);
     };
     InterviewPageComponent.prototype.ngOnDestroy = function () {
-        var user = JSON.parse(window.localStorage.getItem('currentUser'));
-        console.log(user);
-        if (!user || user.role === 'candidate') {
-            this.socketService.setInterviewId(null);
+        if (!this.currentUser) {
             return;
+        }
+        else if (this.currentUser.role === 'candidate' || this.isSpectator) {
+            this.socketService.setInterviewId(null);
         }
         else {
             this.socketService.endInterview();
@@ -9607,7 +9744,7 @@ module.exports = "mat-card {\r\n   margin: 16px;\r\n   padding-bottom: 0;\r\n}\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"example-card\" *ngFor=\"let form of forms\" (click)=\"showForm(form)\">\r\n   <mat-card-header></mat-card-header>\r\n   <mat-card-title>{{form.title}}</mat-card-title>\r\n   <img mat-card-image src=\"https://ps.w.org/simple-registration-form/trunk/screenshot-1.png?rev=1790752\" alt=\"Photo of a Shiba Inu\">\r\n</mat-card>\r\n"
+module.exports = "<mat-card class=\"example-card\" *ngFor=\"let form of forms\" (click)=\"showForm(form)\">\r\n   <mat-card-header></mat-card-header>\r\n   <mat-card-title>{{form.title}}</mat-card-title>\r\n   <img mat-card-image [src]=\"'assets/img/' + form.preview\">\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -9678,7 +9815,7 @@ var NavListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\" fxLayout=\"row\">\r\n    <mat-sidenav fxFlex.sm=\"1 0 230px\"\r\n                 fxFlex.md=\"1 1 25%\"\r\n                 fxFlex.gt-md=\"1 1 20%\"\r\n                 #drawer class=\"sidenav\"\r\n                 fixedInViewport=\"true\"\r\n                 [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n                 [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n                 [opened]=\"!(isHandset$ | async)\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"center center\">\r\n            <mat-slide-toggle (click)=\"showEditPanel()\"\r\n                              fxHide.xs=\"true\"\r\n                              labelPosition=\"before\">\r\n                <span>Show edit panel</span>\r\n            </mat-slide-toggle>\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <app-nav-list></app-nav-list>\r\n        </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content fxFlex.sm=\"1 1 70%\"\r\n                         fxFlex.md=\"1 1 75%\"\r\n                         fxFlex.gt-md=\"1 1 80%\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"space-between center\"\r\n                     fxLayoutAlign.gt-xs=\"end center\"\r\n                     color=\"primary\">\r\n            <button type=\"button\"\r\n                    aria-label=\"Toggle sidenav\"\r\n                    mat-icon-button\r\n                    (click)=\"drawer.toggle()\"\r\n                    *ngIf=\"isHandset$ | async\"\r\n                    color=\"primary\">\r\n                <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n            </button>\r\n            <button fxFlex=\"1 1 260px\" mat-raised-button color=\"primary\" (click)=\"startInterview()\" [disabled]=\"!form\">\r\n                Start interview\r\n            </button>\r\n        </mat-toolbar>\r\n\r\n        <div class=\"form\" *ngIf=\"form\">\r\n            <div class=\"form-info-buttons\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"showEditPanel()\">Edit form</button>\r\n                <button mat-raised-button color=\"warn\" (click)=\"delForm(form._id)\">Remove form</button>\r\n            </div>\r\n            <form class=\"example-container\">\r\n                <fieldset class=\"form\">\r\n                    <legend>\r\n                        <h2>{{form.title}}</h2>\r\n                    </legend>\r\n                    <!--container for row-->\r\n                    <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                    <!--row-->\r\n                    <div class=\"row\">\r\n                        <!--container for cell-->\r\n                        <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                            <!--cell-->\r\n                            <div class=\"cell\">\r\n                                <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                                    <!--if element is input TEXT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"text\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input NUMBER-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"number\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [min]=\"elem.config.min\"\r\n                                               [max]=\"elem.config.max\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input EMAIL-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"email\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input PASSWORD-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"password\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is SLIDER-->\r\n                                    <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-slider\r\n                                                class=\"example-margin\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\">\r\n                                        </mat-slider>\r\n                                    </section>\r\n\r\n                                    <!--if element is TOGGLE-->\r\n                                    <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\" >\r\n\r\n                                        <mat-slide-toggle class=\"example-margin\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [checked]=\"elem.config.checked\"\r\n                                                          [disabled]=\"elem.config.disabled\">\r\n                                            {{elem.config.label}}\r\n                                        </mat-slide-toggle>\r\n                                    </section>\r\n\r\n                                    <!--if element is SELECT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='select'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-select [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\">\r\n                                            <mat-option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                                {{option}}\r\n                                            </mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input CHECKBOX-->\r\n                                    <section class=\"example-section example-section-checkbox\"\r\n                                             *ngIf=\"elem.type==='checkbox'\"\r\n                                             [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-checkbox *ngFor=\"let option of elem.config.options\" class=\"example-margin example-margin-checkbox\"\r\n                                                      [value]=\"option\"\r\n                                                      [color]=\"elem.config.color\"\r\n                                                      [disabled]=\"elem.config.disabled\"\r\n                                                      [required]=\"elem.config.required\">{{option}}</mat-checkbox>\r\n                                    </section>\r\n\r\n                                    <!--if element is input RADIO-->\r\n                                    <mat-radio-group class=\"example-radio-group\"\r\n                                                     *ngIf=\"elem.type==='radio'\"\r\n                                                     [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-radio-button class=\"example-radio-button\" *ngFor=\"let option of elem.config.options\"\r\n                                                          [value]=\"option\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [disabled]=\"elem.config.disabled\"\r\n                                                          [required]=\"elem.config.required\">{{option}}</mat-radio-button>\r\n                                    </mat-radio-group>\r\n\r\n                                    <!--if element is TEXTAREA-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <textarea matInput\r\n                                                  [value]=\"elem.config.value\"\r\n                                                  [placeholder]=\"elem.config.placeholder\"\r\n                                                  [disabled]=\"elem.config.disabled\"></textarea>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is BUTTON-->\r\n                                    <div *ngIf=\"elem.type==='button'\" class=\"example-button-row flex-grow\">\r\n                                        <button mat-raised-button\r\n                                                [color]=\"elem.config.color\"\r\n                                                [disabled]=\"elem.config.disabled\">{{elem.config.value}}</button>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                </fieldset>\r\n            </form>\r\n        </div>\r\n\r\n    </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\" fxLayout=\"row\">\r\n    <mat-sidenav fxFlex.sm=\"1 0 230px\"\r\n                 fxFlex.md=\"1 1 25%\"\r\n                 fxFlex.gt-md=\"1 1 20%\"\r\n                 #drawer class=\"sidenav\"\r\n                 fixedInViewport=\"true\"\r\n                 [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n                 [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n                 [opened]=\"!(isHandset$ | async)\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"center center\">\r\n            <mat-slide-toggle (click)=\"showEditPanel()\"\r\n                              fxHide.xs=\"true\"\r\n                              labelPosition=\"before\">\r\n                <span>Show edit panel</span>\r\n            </mat-slide-toggle>\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <app-nav-list></app-nav-list>\r\n        </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content fxFlex.sm=\"1 1 70%\"\r\n                         fxFlex.md=\"1 1 75%\"\r\n                         fxFlex.gt-md=\"1 1 80%\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"space-between center\"\r\n                     fxLayoutAlign.gt-xs=\"end center\"\r\n                     color=\"primary\">\r\n            <button type=\"button\"\r\n                    aria-label=\"Toggle sidenav\"\r\n                    mat-icon-button\r\n                    (click)=\"drawer.toggle()\"\r\n                    *ngIf=\"isHandset$ | async\"\r\n                    color=\"primary\">\r\n                <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n            </button>\r\n            <button fxFlex=\"1 1 260px\" mat-raised-button color=\"primary\" (click)=\"startInterview()\" [disabled]=\"!form\">\r\n                Start interview\r\n            </button>\r\n        </mat-toolbar>\r\n\r\n        <div class=\"form\" *ngIf=\"form\">\r\n            <div class=\"form-info-buttons\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"showEditPanel()\">Edit form</button>\r\n                <button mat-raised-button color=\"warn\" (click)=\"delForm(form)\">Remove form</button>\r\n            </div>\r\n            <form class=\"example-container\">\r\n                <fieldset class=\"form\">\r\n                    <legend>\r\n                        <h2>{{form.title}}</h2>\r\n                    </legend>\r\n                    <!--container for row-->\r\n                    <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                    <!--row-->\r\n                    <div class=\"row\">\r\n                        <!--container for cell-->\r\n                        <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                            <!--cell-->\r\n                            <div class=\"cell\">\r\n                                <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                                    <!--if element is input TEXT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"text\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input NUMBER-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"number\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [min]=\"elem.config.min\"\r\n                                               [max]=\"elem.config.max\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input EMAIL-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"email\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input PASSWORD-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"password\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is SLIDER-->\r\n                                    <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-slider\r\n                                                class=\"example-margin\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\">\r\n                                        </mat-slider>\r\n                                    </section>\r\n\r\n                                    <!--if element is TOGGLE-->\r\n                                    <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\" >\r\n\r\n                                        <mat-slide-toggle class=\"example-margin\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [checked]=\"elem.config.checked\"\r\n                                                          [disabled]=\"elem.config.disabled\">\r\n                                            {{elem.config.label}}\r\n                                        </mat-slide-toggle>\r\n                                    </section>\r\n\r\n                                    <!--if element is SELECT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='select'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-select [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\">\r\n                                            <mat-option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                                {{option}}\r\n                                            </mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input CHECKBOX-->\r\n                                    <section class=\"example-section example-section-checkbox\"\r\n                                             *ngIf=\"elem.type==='checkbox'\"\r\n                                             [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-checkbox *ngFor=\"let option of elem.config.options\" class=\"example-margin example-margin-checkbox\"\r\n                                                      [value]=\"option\"\r\n                                                      [color]=\"elem.config.color\"\r\n                                                      [disabled]=\"elem.config.disabled\"\r\n                                                      [required]=\"elem.config.required\">{{option}}</mat-checkbox>\r\n                                    </section>\r\n\r\n                                    <!--if element is input RADIO-->\r\n                                    <mat-radio-group class=\"example-radio-group\"\r\n                                                     *ngIf=\"elem.type==='radio'\"\r\n                                                     [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-radio-button class=\"example-radio-button\" *ngFor=\"let option of elem.config.options\"\r\n                                                          [value]=\"option\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [disabled]=\"elem.config.disabled\"\r\n                                                          [required]=\"elem.config.required\">{{option}}</mat-radio-button>\r\n                                    </mat-radio-group>\r\n\r\n                                    <!--if element is TEXTAREA-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <textarea matInput\r\n                                                  [value]=\"elem.config.value\"\r\n                                                  [placeholder]=\"elem.config.placeholder\"\r\n                                                  [disabled]=\"elem.config.disabled\"></textarea>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is BUTTON-->\r\n                                    <div *ngIf=\"elem.type==='button'\" class=\"example-button-row flex-grow\">\r\n                                        <button mat-raised-button\r\n                                                [color]=\"elem.config.color\"\r\n                                                [disabled]=\"elem.config.disabled\">{{elem.config.value}}</button>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                </fieldset>\r\n            </form>\r\n        </div>\r\n\r\n    </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
 
 /***/ }),
 
@@ -9710,6 +9847,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_broadcast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/http.service */ "./src/app/forms/services/http.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../options/confirm-removing-form/confirm-removing-form.component */ "./src/app/options/confirm-removing-form/confirm-removing-form.component.ts");
+/* harmony import */ var _services_screenshot_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/screenshot.service */ "./src/app/forms/services/screenshot.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9726,14 +9866,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var PreviewPageComponent = /** @class */ (function () {
-    function PreviewPageComponent(breakpoint, fb, http, broadcast, router) {
+    function PreviewPageComponent(breakpoint, fb, http, broadcast, router, dialog, screenshotService) {
         var _this = this;
         this.breakpoint = breakpoint;
         this.fb = fb;
         this.http = http;
         this.broadcast = broadcast;
         this.router = router;
+        this.dialog = dialog;
+        this.screenshotService = screenshotService;
         this.isHandset$ = this.breakpoint.observe(_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["Breakpoints"].Handset)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (result) { return result.matches; }));
         this.broadcast.subscriberSelectForm()
@@ -9754,13 +9899,23 @@ var PreviewPageComponent = /** @class */ (function () {
     PreviewPageComponent.prototype.showEditPanel = function () {
         this.router.navigate(['/constructor']);
     };
-    PreviewPageComponent.prototype.delForm = function (id) {
+    PreviewPageComponent.prototype.delForm = function (form) {
         var _this = this;
-        this.http.delForm(id)
-            .subscribe(function (data) {
-            if (Array.isArray(data)) {
-                _this.broadcast.selectedForm = null;
-                _this.form = null;
+        var confirmRemovingRef = this.dialog.open(_options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_8__["ConfirmRemovingFormComponent"]);
+        confirmRemovingRef.afterClosed().subscribe(function (result) {
+            if (result) {
+                _this.http.delForm(form._id)
+                    .subscribe(function (data) {
+                    var isFormDeleted = Array.isArray(data);
+                    if (isFormDeleted) {
+                        _this.broadcast.selectedForm = null;
+                        _this.form = null;
+                        _this.screenshotService.deleteScreenshot(form);
+                    }
+                    else {
+                        _this.screenshotService.showDeleteMessage(_this.form.title, isFormDeleted);
+                    }
+                });
             }
         });
     };
@@ -9774,7 +9929,9 @@ var PreviewPageComponent = /** @class */ (function () {
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"],
             _services_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"],
             _services_broadcast_service__WEBPACK_IMPORTED_MODULE_4__["BroadcastService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialog"],
+            _services_screenshot_service__WEBPACK_IMPORTED_MODULE_9__["ScreenshotService"]])
     ], PreviewPageComponent);
     return PreviewPageComponent;
 }());
@@ -9909,8 +10066,10 @@ var HttpService = /** @class */ (function () {
             console.log('add', form);
             return this.http.post('/form', form)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (forms) {
-                console.log(forms);
-                _this.forms = forms;
+                if (Array.isArray(forms)) {
+                    console.log(forms);
+                    _this.forms = forms;
+                }
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('addForm', [])));
         }
         else {
@@ -9947,6 +10106,13 @@ var HttpService = /** @class */ (function () {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(result);
         };
     };
+    HttpService.prototype.postScreenshotData = function (imgData) {
+        return this.http.post('/screenshot', imgData);
+    };
+    HttpService.prototype.deleteScreenshotData = function (imgName) {
+        console.log(imgName);
+        return this.http.delete("/screenshot/" + imgName);
+    };
     HttpService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -9954,6 +10120,97 @@ var HttpService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _broadcast_service__WEBPACK_IMPORTED_MODULE_4__["BroadcastService"]])
     ], HttpService);
     return HttpService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/forms/services/screenshot.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/forms/services/screenshot.service.ts ***!
+  \******************************************************/
+/*! exports provided: ScreenshotService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScreenshotService", function() { return ScreenshotService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! html2canvas */ "./node_modules/html2canvas/dist/npm/index.js");
+/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var src_app_options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/options/snackbar/snackbar.component */ "./src/app/options/snackbar/snackbar.component.ts");
+/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./http.service */ "./src/app/forms/services/http.service.ts");
+/* harmony import */ var _broadcast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ScreenshotService = /** @class */ (function () {
+    function ScreenshotService(http, snackbarComponent, broadcastService) {
+        this.http = http;
+        this.snackbarComponent = snackbarComponent;
+        this.broadcastService = broadcastService;
+        this.fileSaveResult = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    ScreenshotService.prototype.saveScreenshot = function (form) {
+        var _this = this;
+        html2canvas__WEBPACK_IMPORTED_MODULE_1___default()(this.HTMLElement, {
+            scale: 0.3
+        })
+            .then(function (canvas) {
+            var imgFile = canvas.toDataURL();
+            _this.http.postScreenshotData({ 'imgFile': imgFile, 'fileName': form.preview })
+                .subscribe(function (isFileSaved) {
+                _this.showSaveMessage(form.title, isFileSaved);
+            });
+        });
+    };
+    ScreenshotService.prototype.isScreenshotSaved = function (response) {
+        return this.fileSaveResult;
+    };
+    ScreenshotService.prototype.showSaveMessage = function (title, isAllSaved) {
+        if (isAllSaved) {
+            this.snackbarComponent.openSnackBar(title + " has been saved", 'success');
+        }
+        else {
+            this.snackbarComponent.openSnackBar(title + " has not been saved", 'fail');
+        }
+    };
+    ScreenshotService.prototype.deleteScreenshot = function (form) {
+        var _this = this;
+        this.http.deleteScreenshotData(form.preview)
+            .subscribe(function (isFileDeleted) {
+            _this.showDeleteMessage(form.title, isFileDeleted);
+        });
+    };
+    ScreenshotService.prototype.showDeleteMessage = function (title, isAllSaved) {
+        if (isAllSaved) {
+            this.snackbarComponent.openSnackBar(title + " has been removed", 'success');
+        }
+        else {
+            this.snackbarComponent.openSnackBar(title + " has not been removed", 'fail');
+        }
+    };
+    ScreenshotService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_http_service__WEBPACK_IMPORTED_MODULE_3__["HttpService"],
+            src_app_options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_2__["SnackbarComponent"],
+            _broadcast_service__WEBPACK_IMPORTED_MODULE_4__["BroadcastService"]])
+    ], ScreenshotService);
+    return ScreenshotService;
 }());
 
 
@@ -9991,8 +10248,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var SocketService = /** @class */ (function () {
     function SocketService() {
         this.url = '/';
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_3___default.a.connect(this.url);
     }
+    SocketService.prototype.connectToSockets = function () {
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_3___default.a.connect(this.url);
+    };
     SocketService.prototype.setInterviewId = function (id) {
         this.interviewId = id;
     };
@@ -10004,6 +10263,10 @@ var SocketService = /** @class */ (function () {
         this.socket.emit('joinInterview', this.interviewId);
     };
     SocketService.prototype.endInterview = function () {
+        // if we weren't connected, there is no need to unsub
+        if (!this.socket) {
+            return;
+        }
         this.socket.emit('endInterview', this.interviewId);
         this.interviewId = null;
     };
@@ -10120,7 +10383,7 @@ var SocketService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-drawer-container>\r\n\r\n    <mat-drawer mode=\"side\" opened>\r\n        <mat-toolbar>\r\n            <mat-icon color=\"primary\">settings</mat-icon>\r\n            {{title}}\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <a mat-list-item disabled>\r\n                Interviewers\r\n            </a>\r\n        </mat-nav-list>\r\n    </mat-drawer>\r\n\r\n    <mat-drawer-content>\r\n        <section>\r\n            <!-- <router-outlet></router-outlet>  -->\r\n            <app-interviewers></app-interviewers>\r\n        </section>\r\n    </mat-drawer-content>\r\n\r\n</mat-drawer-container>"
+module.exports = "<mat-drawer-container>\r\n    <mat-drawer mode=\"side\" opened>\r\n        <mat-toolbar>\r\n            <mat-icon color=\"primary\">settings</mat-icon>\r\n            {{title}}\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <a mat-list-item routerLink=\"interviewers\">\r\n                Interviewers\r\n            </a>\r\n        </mat-nav-list>\r\n        <mat-nav-list>\r\n            <a mat-list-item routerLink=\"groups\">\r\n                Groups\r\n            </a>\r\n        </mat-nav-list>\r\n    </mat-drawer>\r\n    <mat-drawer-content>\r\n        <section>\r\n            <router-outlet></router-outlet>\r\n        </section>\r\n    </mat-drawer-content>\r\n</mat-drawer-container>"
 
 /***/ }),
 
@@ -10146,23 +10409,33 @@ module.exports = "mat-drawer {\n  width: 250px; }\n\nmat-drawer-container {\n  h
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminComponent", function() { return AdminComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AdminComponent = /** @class */ (function () {
-    function AdminComponent() {
+    function AdminComponent(router) {
+        this.router = router;
         this.title = 'Admin panel';
     }
+    AdminComponent.prototype.ngOnInit = function () {
+        this.router.navigate(['admin/interviewers']);
+    };
     AdminComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-admin',
             template: __webpack_require__(/*! ./admin.component.html */ "./src/app/modules/admin/admin.component.html"),
             styles: [__webpack_require__(/*! ./admin.component.scss */ "./src/app/modules/admin/admin.component.scss")]
-        })
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], AdminComponent);
     return AdminComponent;
 }());
@@ -10187,9 +10460,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _material_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../material/material */ "./src/app/modules/material/material.ts");
 /* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/flex-layout */ "./node_modules/@angular/flex-layout/esm5/flex-layout.es5.js");
-/* harmony import */ var _modules_interviewers_interviewers_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/interviewers/interviewers.module */ "./src/app/modules/admin/modules/interviewers/interviewers.module.ts");
-/* harmony import */ var _admin_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./admin.component */ "./src/app/modules/admin/admin.component.ts");
-/* harmony import */ var _modules_interviewers_interviewers_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/interviewers/interviewers.component */ "./src/app/modules/admin/modules/interviewers/interviewers.component.ts");
+/* harmony import */ var _admin_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin.component */ "./src/app/modules/admin/admin.component.ts");
+/* harmony import */ var _components_interviewers_interviewers_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/interviewers/interviewers.component */ "./src/app/modules/admin/components/interviewers/interviewers.component.ts");
+/* harmony import */ var _components_groups_groups_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/groups/groups.component */ "./src/app/modules/admin/components/groups/groups.component.ts");
+/* harmony import */ var _components_list_list_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/list/list.component */ "./src/app/modules/admin/components/list/list.component.ts");
+/* harmony import */ var _components_listcontrols_listcontrols_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/listcontrols/listcontrols.component */ "./src/app/modules/admin/components/listcontrols/listcontrols.component.ts");
+/* harmony import */ var _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/dialog/users.dialog */ "./src/app/modules/admin/components/dialog/users.dialog.ts");
+/* harmony import */ var _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/dialog/group.dialog */ "./src/app/modules/admin/components/dialog/group.dialog.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10205,10 +10482,16 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+
 var adminRoutes = [
-    { path: 'admin', component: _admin_component__WEBPACK_IMPORTED_MODULE_7__["AdminComponent"], children: [
-            { path: 'interviewers', component: _modules_interviewers_interviewers_component__WEBPACK_IMPORTED_MODULE_8__["InterviewersComponent"] }
-        ] }
+    { path: 'admin', component: _admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"], children: [
+            { path: 'interviewers', component: _components_interviewers_interviewers_component__WEBPACK_IMPORTED_MODULE_7__["InterviewersComponent"] },
+            { path: 'groups', component: _components_groups_groups_component__WEBPACK_IMPORTED_MODULE_8__["GroupsComponent"] }
+        ]
+    }
 ];
 var AdminModule = /** @class */ (function () {
     function AdminModule() {
@@ -10220,14 +10503,23 @@ var AdminModule = /** @class */ (function () {
                 _material_material__WEBPACK_IMPORTED_MODULE_4__["MaterialModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(adminRoutes),
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _modules_interviewers_interviewers_module__WEBPACK_IMPORTED_MODULE_6__["InterviewersModule"],
                 _angular_flex_layout__WEBPACK_IMPORTED_MODULE_5__["FlexLayoutModule"]
             ],
             declarations: [
-                _admin_component__WEBPACK_IMPORTED_MODULE_7__["AdminComponent"]
+                _admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"],
+                _components_list_list_component__WEBPACK_IMPORTED_MODULE_9__["ListComponent"],
+                _components_listcontrols_listcontrols_component__WEBPACK_IMPORTED_MODULE_10__["ListControls"],
+                _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_11__["UsersDialogComponent"],
+                _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_12__["GroupDialogComponent"],
+                _components_groups_groups_component__WEBPACK_IMPORTED_MODULE_8__["GroupsComponent"],
+                _components_interviewers_interviewers_component__WEBPACK_IMPORTED_MODULE_7__["InterviewersComponent"]
             ],
             exports: [
-                _admin_component__WEBPACK_IMPORTED_MODULE_7__["AdminComponent"]
+                _admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"]
+            ],
+            entryComponents: [
+                _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_11__["UsersDialogComponent"],
+                _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_12__["GroupDialogComponent"]
             ]
         })
     ], AdminModule);
@@ -10238,32 +10530,32 @@ var AdminModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.html":
-/*!****************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.html ***!
-  \****************************************************************************************/
+/***/ "./src/app/modules/admin/components/dialog/group.dialog.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/modules/admin/components/dialog/group.dialog.html ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title> Add new group </h2>\r\n<mat-dialog-content>\r\n    <form novalidate #groupForm=\"ngForm\">\r\n        <div *ngFor=\"let field of fields\">\r\n            <mat-form-field>\r\n                <input matInput [placeholder]=\"field.title\" [name]=\"field.title\" ngModel #[field.title]=\"ngModel\" minlength=\"3\" maxlength=\"15\" required [matTooltip]=\"field.tooltip\">\r\n            </mat-form-field>\r\n        </div>\r\n    </form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n    <button mat-raised-button mat-dialog-close color=\"warn\"> Cancel </button>\r\n    <button mat-raised-button [disabled]=\"groupForm.invalid\" [mat-dialog-close]=\"groupForm.value\" color=\"primary\"> Add </button>\r\n</mat-dialog-actions>\r\n\r\n<!-- Group\r\n      Description -->\r\n\r\n<!-- <div *ngIf=\"groupName.errors?.required && groupName.touched\" class=\"error\">\r\n          Group title is required.\r\n        </div>\r\n        <div *ngIf=\"groupName.errors?.minlength && groupName.touched\" class=\"error\">\r\n         Minimum of 2 characters.\r\n      </div> -->"
+module.exports = "<h2 mat-dialog-title> {{!data ? 'Add new group' : 'Delete group'}} </h2>\r\n<mat-dialog-content>\r\n    <form novalidate #groupForm=\"ngForm\">\r\n        <div *ngIf=\"!data\">\r\n            <div *ngFor=\"let field of fields\">\r\n                <mat-form-field>\r\n                    <input matInput [placeholder]=\"field.title\"\r\n                                    [name]=\"field.title\"\r\n                                    ngModel #[field.title]=\"ngModel\"\r\n                                    minlength=\"3\"\r\n                                    maxlength=\"15\"\r\n                                    required\r\n                                    [matTooltip]=\"field.tooltip\">\r\n                </mat-form-field>\r\n            </div>\r\n        </div>\r\n\r\n        <div *ngIf=\"data\">\r\n            <div *ngFor=\"let field of data\">\r\n                <p class=\"field_label\">{{field.title}}:</p>\r\n                <mat-form-field>\r\n                    <input matInput [placeholder]=\"field.value\"\r\n                                    [name]=\"field.value\"\r\n                                    disabled>\r\n                </mat-form-field>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n    <button mat-raised-button mat-dialog-close color=\"warn\" *ngIf=\"!data\"> Cancel </button>\r\n    <button mat-raised-button [disabled]=\"groupForm.invalid\" [mat-dialog-close]=\"groupForm.value\" color=\"primary\" *ngIf=\"!data\"> Create </button>\r\n\r\n    <button mat-raised-button mat-dialog-close color=\"primary\" *ngIf=\"data\"> Cancel </button>\r\n    <button mat-raised-button [mat-dialog-close]=\"{shouldDelete: true}\" color=\"warn\" *ngIf=\"data\"> Delete </button>\r\n</mat-dialog-actions>\r\n\r\n<!-- Group\r\n      Description -->\r\n\r\n<!-- <div *ngIf=\"groupName.errors?.required && groupName.touched\" class=\"error\">\r\n          Group title is required.\r\n        </div>\r\n        <div *ngIf=\"groupName.errors?.minlength && groupName.touched\" class=\"error\">\r\n         Minimum of 2 characters.\r\n      </div> -->"
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.scss":
-/*!****************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.scss ***!
-  \****************************************************************************************/
+/***/ "./src/app/modules/admin/components/dialog/group.dialog.scss":
+/*!*******************************************************************!*\
+  !*** ./src/app/modules/admin/components/dialog/group.dialog.scss ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".error {\n  font-size: 13px;\n  color: #c7254e;\n  background: #f9f2f4;\n  border-radius: 3px;\n  padding: 15px;\n  margin: -26px 0 15px; }\n"
+module.exports = ".error {\n  font-size: 13px;\n  color: #c7254e;\n  background: #f9f2f4;\n  border-radius: 3px;\n  padding: 15px;\n  margin: -26px 0 15px; }\n\n.field_label {\n  margin: 0 !important; }\n"
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.ts ***!
-  \**************************************************************************************/
+/***/ "./src/app/modules/admin/components/dialog/group.dialog.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/modules/admin/components/dialog/group.dialog.ts ***!
+  \*****************************************************************/
 /*! exports provided: GroupDialogComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10271,15 +10563,24 @@ module.exports = ".error {\n  font-size: 13px;\n  color: #c7254e;\n  background:
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupDialogComponent", function() { return GroupDialogComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
 
 var GroupDialogComponent = /** @class */ (function () {
-    function GroupDialogComponent() {
+    function GroupDialogComponent(data) {
+        this.data = data;
         this.fields = [{
                 title: 'name',
                 value: 'Group name',
@@ -10295,9 +10596,11 @@ var GroupDialogComponent = /** @class */ (function () {
     GroupDialogComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'group-dialog',
-            template: __webpack_require__(/*! ./group.dialog.html */ "./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.html"),
-            styles: [__webpack_require__(/*! ./group.dialog.scss */ "./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.scss")]
-        })
+            template: __webpack_require__(/*! ./group.dialog.html */ "./src/app/modules/admin/components/dialog/group.dialog.html"),
+            styles: [__webpack_require__(/*! ./group.dialog.scss */ "./src/app/modules/admin/components/dialog/group.dialog.scss")]
+        }),
+        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [Object])
     ], GroupDialogComponent);
     return GroupDialogComponent;
 }());
@@ -10306,32 +10609,32 @@ var GroupDialogComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.html":
-/*!****************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.html ***!
-  \****************************************************************************************/
+/***/ "./src/app/modules/admin/components/dialog/users.dialog.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/modules/admin/components/dialog/users.dialog.html ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{title}}</h2>\r\n<mat-dialog-content>\r\n    <form novalidate #userForm=\"ngForm\">\r\n        <div *ngFor=\"let field of inputFields\">\r\n            <mat-form-field>\r\n                <input matInput [placeholder]=\"field.value\" [name]=\"field.title\" ngModel #[field.title]=\"ngModel\" minlength=\"2\" required [type]=\"field?.type\">\r\n            </mat-form-field>\r\n            <mat-error *ngIf=\"field.invalid\">{{field}} Error.</mat-error>\r\n        </div>\r\n        <div>\r\n            <mat-form-field>\r\n                <mat-select placeholder=\"User group\" required ngModel name=\"group\">\r\n                    <mat-option value=\"\" disabled selected></mat-option>\r\n                    <mat-option *ngFor=\"let group of groups\" [value]=\"group.name\">\r\n                        {{group.name}}\r\n                    </mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n        </div>\r\n\r\n        <mat-slide-toggle ngModel name=\"role\" [checked]=\"checked\">\r\n            Master\r\n        </mat-slide-toggle>\r\n\r\n    </form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n    <button mat-raised-button mat-dialog-close color=\"warn\"> Discard </button>\r\n    <button mat-raised-button [disabled]=\"userForm.invalid\" [mat-dialog-close]=\"userForm.value\" color=\"primary\"> Add </button>\r\n</mat-dialog-actions>"
+module.exports = "<h2 mat-dialog-title>{{!data ? 'Add new user' : 'Delete user'}}</h2>\r\n<mat-dialog-content>\r\n    <form novalidate #userForm=\"ngForm\">\r\n        <div *ngIf=\"!data\">\r\n        <div *ngFor=\"let field of inputFields\">\r\n            <mat-form-field>\r\n                <input matInput [placeholder]=\"field.value\" [name]=\"field.title\" ngModel #[field.title]=\"ngModel\" minlength=\"2\" required [type]=\"field?.type\">\r\n            </mat-form-field>\r\n            <mat-error *ngIf=\"field.invalid\">{{field}} Error.</mat-error>\r\n        </div>\r\n        <div>\r\n            <mat-form-field>\r\n                <mat-select placeholder=\"User group\" required ngModel name=\"group\">\r\n                    <mat-option value=\"\" disabled selected></mat-option>\r\n                    <mat-option *ngFor=\"let group of groups\" [value]=\"group.name\">\r\n                        {{group.name}}\r\n                    </mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n        </div>\r\n\r\n        <mat-slide-toggle ngModel name=\"role\" [checked]=\"checked\">\r\n            Master\r\n        </mat-slide-toggle>\r\n        </div>\r\n\r\n        <div *ngIf=\"data\">\r\n                <div *ngFor=\"let field of data\">\r\n                    <p class=\"field_label\">{{field.title}}:</p>\r\n                    <mat-form-field>          \r\n                        <input matInput [placeholder]=\"field.value\"\r\n                                        [name]=\"field.value\"\r\n                                        disabled>\r\n                    </mat-form-field>\r\n                </div>\r\n        </div>\r\n\r\n        <div *ngIf=\"data && edit\">\r\n            <div *ngFor=\"let field of data\">\r\n                <mat-form-field>\r\n                    <input matInput [placeholder]=\"field.value\" [name]=\"field.title\" ngModel #[field.title]=\"ngModel\" minlength=\"2\" required [type]=\"field?.type\">\r\n                </mat-form-field>\r\n                <mat-error *ngIf=\"field.invalid\">{{field}} Error.</mat-error>\r\n            </div>\r\n            <div>\r\n                <mat-form-field>\r\n                    <mat-select placeholder=\"User group\" required ngModel name=\"group\">\r\n                        <mat-option value=\"\" disabled selected></mat-option>\r\n                        <mat-option *ngFor=\"let group of groups\" [value]=\"group.name\">\r\n                            {{group.name}}\r\n                        </mat-option>\r\n                    </mat-select>\r\n                </mat-form-field>\r\n            </div>\r\n    \r\n            <mat-slide-toggle ngModel name=\"role\" [checked]=\"checked\">\r\n                Master\r\n            </mat-slide-toggle>\r\n        </div>\r\n    </form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n    <button mat-raised-button mat-dialog-close color=\"warn\" *ngIf=\"!data\"> Discard </button>\r\n    <button mat-raised-button [disabled]=\"userForm.invalid\" [mat-dialog-close]=\"userForm.value\" color=\"primary\" *ngIf=\"!data\"> Add </button>\r\n\r\n    <button mat-raised-button mat-dialog-close color=\"primary\" *ngIf=\"data\"> Cancel </button>\r\n    <button mat-raised-button [mat-dialog-close]=\"{shouldDelete: true}\" color=\"warn\" *ngIf=\"data\"> Delete </button>\r\n\r\n    <button mat-raised-button mat-dialog-close color=\"warn\" *ngIf=\"edit\"> Discard </button>\r\n    <button mat-raised-button [disabled]=\"userForm.invalid\" [mat-dialog-close]=\"userForm.value\" color=\"primary\" *ngIf=\"edit\"> Add </button>\r\n</mat-dialog-actions>"
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.scss":
-/*!****************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.scss ***!
-  \****************************************************************************************/
+/***/ "./src/app/modules/admin/components/dialog/users.dialog.scss":
+/*!*******************************************************************!*\
+  !*** ./src/app/modules/admin/components/dialog/users.dialog.scss ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".field_label {\n  margin: 0 !important; }\n"
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.ts ***!
-  \**************************************************************************************/
+/***/ "./src/app/modules/admin/components/dialog/users.dialog.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/modules/admin/components/dialog/users.dialog.ts ***!
+  \*****************************************************************/
 /*! exports provided: UsersDialogComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10339,7 +10642,8 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsersDialogComponent", function() { return UsersDialogComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/modules/interviewers/services/http.service.ts");
+/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/services/http.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10349,11 +10653,16 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
 
 
 var UsersDialogComponent = /** @class */ (function () {
-    function UsersDialogComponent(http) {
+    function UsersDialogComponent(http, data) {
         this.http = http;
+        this.data = data;
         this.title = 'Add new interviewer';
         this.inputFields = [{
                 title: 'fullname',
@@ -10388,10 +10697,11 @@ var UsersDialogComponent = /** @class */ (function () {
     UsersDialogComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'users-dialog',
-            template: __webpack_require__(/*! ./users.dialog.html */ "./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.html"),
-            styles: [__webpack_require__(/*! ./users.dialog.scss */ "./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.scss")]
+            template: __webpack_require__(/*! ./users.dialog.html */ "./src/app/modules/admin/components/dialog/users.dialog.html"),
+            styles: [__webpack_require__(/*! ./users.dialog.scss */ "./src/app/modules/admin/components/dialog/users.dialog.scss")]
         }),
-        __metadata("design:paramtypes", [_services_http_service__WEBPACK_IMPORTED_MODULE_1__["HttpAdminService"]])
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_services_http_service__WEBPACK_IMPORTED_MODULE_1__["HttpAdminService"], Object])
     ], UsersDialogComponent);
     return UsersDialogComponent;
 }());
@@ -10400,21 +10710,376 @@ var UsersDialogComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/list/list.component.html":
-/*!****************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/list/list.component.html ***!
-  \****************************************************************************************/
+/***/ "./src/app/modules/admin/components/groups/groups.component.html":
+/*!***********************************************************************!*\
+  !*** ./src/app/modules/admin/components/groups/groups.component.html ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"dataSource\">\r\n    <ng-content select=\"h2\"></ng-content>\r\n    <mat-table [(dataSource)]=\"dataSource\" matSort>\r\n        <ng-container matColumnDef=\"{{column.title}}\" *ngFor=\"let column of columns\">\r\n            <mat-header-cell *matHeaderCellDef mat-sort-header>\r\n                {{ column.value }}\r\n            </mat-header-cell>\r\n            <mat-cell *matCellDef=\"let item\">\r\n                {{ item[column.title] }}\r\n            </mat-cell>\r\n        </ng-container>\r\n\r\n        <mat-header-row *matHeaderRowDef=\"headers\">\r\n        </mat-header-row>\r\n\r\n        <mat-row *matRowDef=\"let row; columns: headers\" (contextmenu)=\"editContextMenu($event)\" (click)=\"select($event)\">\r\n        </mat-row>\r\n    </mat-table>\r\n\r\n    <mat-toolbar class=\"list--tolbar\">\r\n        <ng-content select=\".paginator\"></ng-content>\r\n        <list-controls (onAdd)=\"add()\">\r\n            <ng-content></ng-content>\r\n        </list-controls>\r\n        <ng-content select=\".showAll\"></ng-content>\r\n    </mat-toolbar>\r\n</section>\r\n"
+module.exports = "<section fxLayout=\"row\">\r\n  <interviewers-list [dataSource]=\"groupsSource\"\r\n                     [columns]=\"groupsColumns\" \r\n                     [headers]=\"groupsColumnsHeaders\"\r\n                     (onAdd)=\"addGroup()\"\r\n                     (selectGroup)=\"selectGroup($event)\"\r\n                     (contextMenu)=\"openContextMenu($event)\">\r\n      <h2>\r\n          <i class=\"material-icons\">\r\n              group\r\n          </i>\r\n          Group list\r\n      </h2>\r\n\r\n      <mat-paginator class=\"paginator groups__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #groupsPaginator >\r\n      </mat-paginator>\r\n\r\n      Add\r\n      <i class=\"material-icons\">\r\n              group_add\r\n      </i>\r\n  </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n  <button mat-menu-item (click)=\"edit($event)\" disabled>Edit</button>\r\n  <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>"
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/list/list.component.scss":
-/*!****************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/list/list.component.scss ***!
-  \****************************************************************************************/
+/***/ "./src/app/modules/admin/components/groups/groups.component.scss":
+/*!***********************************************************************!*\
+  !*** ./src/app/modules/admin/components/groups/groups.component.scss ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "interviewers-list {\n  flex-grow: 1; }\n\ninterviewers-list:first-of-type {\n  border-right: 10px solid rgba(245, 245, 245, 0.3); }\n\nh2 {\n  margin-left: 20px;\n  height: 24px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/groups/groups.component.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/modules/admin/components/groups/groups.component.ts ***!
+  \*********************************************************************/
+/*! exports provided: GroupsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupsComponent", function() { return GroupsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/services/http.service.ts");
+/* harmony import */ var _services_dialog_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/dialog.service */ "./src/app/modules/admin/services/dialog.service.ts");
+/* harmony import */ var _services_snackbar_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/snackbar.service */ "./src/app/modules/admin/services/snackbar.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var GroupsComponent = /** @class */ (function () {
+    function GroupsComponent(http, dialog, message) {
+        this.http = http;
+        this.dialog = dialog;
+        this.message = message;
+        this.groupsColumns = [{
+                title: "name",
+                value: "Title"
+            },
+            {
+                title: "description",
+                value: "Description"
+            }
+        ];
+    }
+    GroupsComponent.prototype.ngOnInit = function () {
+        this.getGroups();
+        this.groupsColumnsHeaders = this.groupsColumns.map(function (field) { return field.title; });
+    };
+    GroupsComponent.prototype.getGroups = function () {
+        var _this = this;
+        this.http.getGroups()
+            .subscribe(function (groups) {
+            _this.groupsData = groups;
+            _this.renderGroupsList();
+        });
+    };
+    GroupsComponent.prototype.initDataSource = function (data, paginator) {
+        var dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](data);
+        dataSource.paginator = paginator;
+        return dataSource;
+    };
+    GroupsComponent.prototype.renderGroupsList = function () {
+        this.groupsSource = this.initDataSource(this.groupsData, this.groupsPaginator);
+    };
+    GroupsComponent.prototype.addGroup = function () {
+        var _this = this;
+        this.dialog.addGroup()
+            .afterClosed()
+            .subscribe(function (data) {
+            if (data) {
+                if (_this.doExist(data.name, _this.groupsData)) {
+                    return _this.message.show(data.name + " already exists!");
+                }
+                _this.groupsData.push(data);
+                _this.renderGroupsList();
+                _this.http.addGroup(data)
+                    .subscribe(function (_) {
+                    _this.message.show(data.name + " was created!");
+                });
+            }
+        });
+    };
+    GroupsComponent.prototype.selectGroup = function (event) {
+        var name = event.target.parentNode.querySelector('.cdk-column-name').innerText ||
+            event.target.innerText;
+        this.http.setSelectedGroup(name);
+    };
+    GroupsComponent.prototype.openContextMenu = function (event) {
+        this.dialog.openContextMenu(event, this.trigger);
+    };
+    GroupsComponent.prototype.remove = function () {
+        var _this = this;
+        if (this.dialog.target) {
+            this.dialog.deleteGroup()
+                .afterClosed()
+                .subscribe(function (response) {
+                if (response.shouldDelete) {
+                    _this.removeGroup(_this.dialog.target);
+                    _this.dialog.target = null;
+                }
+            });
+        }
+    };
+    GroupsComponent.prototype.removeGroup = function (targetGroup) {
+        var _this = this;
+        this.groupsData = this.groupsData.filter(function (group) { return group._id != targetGroup._id; });
+        this.renderGroupsList();
+        this.message.show(targetGroup.name + ", was removed");
+        this.http.deleteGroup(targetGroup._id)
+            .subscribe(function (_) {
+            return _this.message.show(targetGroup.name + ", was removed");
+        });
+    };
+    GroupsComponent.prototype.doExist = function (name, array) {
+        return array.some(function (group) { return group.name === name; });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('groupsPaginator'),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
+    ], GroupsComponent.prototype, "groupsPaginator", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatMenuTrigger"]),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatMenuTrigger"])
+    ], GroupsComponent.prototype, "trigger", void 0);
+    GroupsComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-groups',
+            template: __webpack_require__(/*! ./groups.component.html */ "./src/app/modules/admin/components/groups/groups.component.html"),
+            styles: [__webpack_require__(/*! ./groups.component.scss */ "./src/app/modules/admin/components/groups/groups.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_http_service__WEBPACK_IMPORTED_MODULE_2__["HttpAdminService"],
+            _services_dialog_service__WEBPACK_IMPORTED_MODULE_3__["DialogService"],
+            _services_snackbar_service__WEBPACK_IMPORTED_MODULE_4__["SnackbarService"]])
+    ], GroupsComponent);
+    return GroupsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/interviewers/interviewers.component.html":
+/*!***********************************************************************************!*\
+  !*** ./src/app/modules/admin/components/interviewers/interviewers.component.html ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section fxLayout=\"row\">\r\n    <interviewers-list [dataSource]=\"usersSource\"\r\n                       [columns]=\"usersColumns\"\r\n                       [headers]=\"usersColumnsHeaders\"\r\n                       (onAdd)=\"addUser()\"\r\n                       (contextMenu)=\"openContextMenu($event)\">\r\n        <h2>\r\n            <i class=\"material-icons\">\r\n                    person\r\n            </i>\r\n            Interviewers list <span *ngIf=\"selectedGroup\">: {{selectedGroup}}</span>\r\n        </h2> \r\n        \r\n        <mat-paginator class=\"paginator users__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #usersPaginator>\r\n        </mat-paginator>\r\n\r\n        Add\r\n        <i class=\"material-icons\">\r\n                person_add\r\n        </i>\r\n\r\n        <button *ngIf=\"selectedGroup\" (click)=\"showAll()\" class=\"showAll\" mat-raised-button color=\"accent\">\r\n            Show all\r\n        </button>\r\n    </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n    <button mat-menu-item (click)=\"edit($event)\" disabled>Edit</button>\r\n    <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/interviewers/interviewers.component.scss":
+/*!***********************************************************************************!*\
+  !*** ./src/app/modules/admin/components/interviewers/interviewers.component.scss ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "interviewers-list {\n  flex-grow: 1; }\n\ninterviewers-list:first-of-type {\n  border-right: 10px solid rgba(245, 245, 245, 0.3); }\n\nh2 {\n  margin-left: 20px;\n  height: 24px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/interviewers/interviewers.component.ts":
+/*!*********************************************************************************!*\
+  !*** ./src/app/modules/admin/components/interviewers/interviewers.component.ts ***!
+  \*********************************************************************************/
+/*! exports provided: InterviewersComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InterviewersComponent", function() { return InterviewersComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/services/http.service.ts");
+/* harmony import */ var _services_dialog_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/dialog.service */ "./src/app/modules/admin/services/dialog.service.ts");
+/* harmony import */ var _services_snackbar_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/snackbar.service */ "./src/app/modules/admin/services/snackbar.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var InterviewersComponent = /** @class */ (function () {
+    function InterviewersComponent(http, dialog, message) {
+        this.http = http;
+        this.dialog = dialog;
+        this.message = message;
+        this.usersColumns = [{
+                title: "username",
+                value: "Username"
+            }, {
+                title: "fullname",
+                value: "Name"
+            },
+            {
+                title: "group",
+                value: "Group"
+            },
+            {
+                title: "role",
+                value: "Role"
+            }
+        ];
+    }
+    InterviewersComponent.prototype.ngOnInit = function () {
+        this.getUsers();
+        this.usersColumnsHeaders = this.usersColumns.map(function (field) { return field.title; });
+    };
+    InterviewersComponent.prototype.getUsers = function () {
+        var _this = this;
+        this.http.getUsers()
+            .subscribe(function (users) {
+            _this.usersData = users;
+            _this.renderUsersList();
+        });
+    };
+    InterviewersComponent.prototype.renderUsersList = function () {
+        var _this = this;
+        if (!this.selectedGroup) {
+            this.usersSource = this.initDataSource(this.usersData, this.usersPaginator);
+        }
+        else {
+            var selectedUsers = this.usersData.filter(function (user) { return user.group === _this.selectedGroup; });
+            this.usersSource = this.initDataSource(selectedUsers, this.usersPaginator);
+            this.http.setSelectedGroup(this.selectedGroup);
+        }
+    };
+    InterviewersComponent.prototype.initDataSource = function (data, paginator) {
+        var dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](data);
+        dataSource.paginator = paginator;
+        return dataSource;
+    };
+    InterviewersComponent.prototype.addUser = function () {
+        var _this = this;
+        this.dialog.addUser()
+            .afterClosed()
+            .subscribe(function (data) {
+            if (data) {
+                if (_this.doExist(data.username, _this.usersData)) {
+                    return _this.message.show("Unsuccessful. " + data.username + " already exists.");
+                }
+                var user = data;
+                user.role ? user.role = 'master' : user.role = 'interviewer';
+                _this.usersData.push(data);
+                _this.renderUsersList();
+                _this.http.addUser(data)
+                    .subscribe(function (_) {
+                    _this.message.show(data.username + " was added.");
+                });
+            }
+        });
+    };
+    InterviewersComponent.prototype.openContextMenu = function (event) {
+        this.dialog.openContextMenu(event, this.trigger);
+    };
+    InterviewersComponent.prototype.remove = function () {
+        var _this = this;
+        if (this.dialog.target) {
+            this.dialog.deleteUser()
+                .afterClosed()
+                .subscribe(function (response) {
+                if (response.shouldDelete) {
+                    _this.removeUser(_this.dialog.target);
+                    _this.dialog.target = null;
+                }
+            });
+        }
+    };
+    InterviewersComponent.prototype.removeUser = function (targetUser) {
+        var _this = this;
+        console.log('targetUser:', targetUser);
+        this.usersData = this.usersData.filter(function (user) { return user._id != targetUser._id; });
+        this.renderUsersList();
+        this.message.show(targetUser.username + ", was removed");
+        this.http.deleteUser(targetUser._id)
+            .subscribe(function (_) {
+            return _this.message.show(targetUser.username + ", was removed");
+        });
+    };
+    InterviewersComponent.prototype.selectGroup = function (event) {
+        this.selectedGroup = name;
+        this.renderUsersList();
+    };
+    InterviewersComponent.prototype.edit = function () {
+        this.message.show('in proccess');
+    };
+    InterviewersComponent.prototype.doExist = function (name, array) {
+        return array.some(function (user) { return user.username === name; });
+    };
+    InterviewersComponent.prototype.showAll = function () {
+        this.selectedGroup = '';
+        this.renderUsersList();
+        this.http.setSelectedGroup(false);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('usersPaginator'),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
+    ], InterviewersComponent.prototype, "usersPaginator", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('groupsPaginator'),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
+    ], InterviewersComponent.prototype, "groupsPaginator", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatMenuTrigger"]),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatMenuTrigger"])
+    ], InterviewersComponent.prototype, "trigger", void 0);
+    InterviewersComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-interviewers',
+            template: __webpack_require__(/*! ./interviewers.component.html */ "./src/app/modules/admin/components/interviewers/interviewers.component.html"),
+            styles: [__webpack_require__(/*! ./interviewers.component.scss */ "./src/app/modules/admin/components/interviewers/interviewers.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_http_service__WEBPACK_IMPORTED_MODULE_2__["HttpAdminService"],
+            _services_dialog_service__WEBPACK_IMPORTED_MODULE_3__["DialogService"],
+            _services_snackbar_service__WEBPACK_IMPORTED_MODULE_4__["SnackbarService"]])
+    ], InterviewersComponent);
+    return InterviewersComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/list/list.component.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/modules/admin/components/list/list.component.html ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section *ngIf=\"dataSource\">\r\n    <ng-content select=\"h2\"></ng-content>\r\n    <mat-table [(dataSource)]=\"dataSource\" matSort>\r\n        <ng-container matColumnDef=\"{{column.title}}\" *ngFor=\"let column of columns;\">\r\n            <!-- columns header -->\r\n            <mat-header-cell *matHeaderCellDef mat-sort-header>\r\n                {{ column.value }}\r\n            </mat-header-cell>\r\n            <mat-cell *matCellDef=\"let item\">\r\n                <!-- columns value -->\r\n                {{ item[column.title] }}\r\n            </mat-cell>\r\n        </ng-container>\r\n\r\n        <mat-header-row *matHeaderRowDef=\"headers\">\r\n        </mat-header-row>\r\n\r\n        <mat-row *matRowDef=\"let row; columns: headers; let item\" (contextmenu)=\"editContextMenu($event, item)\" (click)=\"select($event)\">\r\n        </mat-row>\r\n    </mat-table>\r\n\r\n    <mat-toolbar class=\"list--tolbar\">\r\n        <ng-content select=\".paginator\"></ng-content>\r\n        <list-controls (onAdd)=\"add()\">\r\n            <ng-content></ng-content>\r\n        </list-controls>\r\n        <ng-content select=\".showAll\"></ng-content>\r\n    </mat-toolbar>\r\n</section>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/list/list.component.scss":
+/*!*******************************************************************!*\
+  !*** ./src/app/modules/admin/components/list/list.component.scss ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10422,10 +11087,10 @@ module.exports = ".list--tolbar {\n  background-color: #fff; }\n"
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/list/list.component.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/list/list.component.ts ***!
-  \**************************************************************************************/
+/***/ "./src/app/modules/admin/components/list/list.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/modules/admin/components/list/list.component.ts ***!
+  \*****************************************************************/
 /*! exports provided: ListComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10433,7 +11098,7 @@ module.exports = ".list--tolbar {\n  background-color: #fff; }\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListComponent", function() { return ListComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/modules/interviewers/services/http.service.ts");
+/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/services/http.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10463,8 +11128,9 @@ var ListComponent = /** @class */ (function () {
     ListComponent.prototype.select = function (group) {
         this.selectGroup.emit(group);
     };
-    ListComponent.prototype.editContextMenu = function (event) {
-        this.contextMenu.emit(event);
+    ListComponent.prototype.editContextMenu = function (event, item) {
+        var eventObject = { event: event, item: item };
+        this.contextMenu.emit(eventObject);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -10493,8 +11159,8 @@ var ListComponent = /** @class */ (function () {
     ListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'interviewers-list',
-            template: __webpack_require__(/*! ./list.component.html */ "./src/app/modules/admin/modules/interviewers/components/list/list.component.html"),
-            styles: [__webpack_require__(/*! ./list.component.scss */ "./src/app/modules/admin/modules/interviewers/components/list/list.component.scss")]
+            template: __webpack_require__(/*! ./list.component.html */ "./src/app/modules/admin/components/list/list.component.html"),
+            styles: [__webpack_require__(/*! ./list.component.scss */ "./src/app/modules/admin/components/list/list.component.scss")]
         }),
         __metadata("design:paramtypes", [_services_http_service__WEBPACK_IMPORTED_MODULE_1__["HttpAdminService"]])
     ], ListComponent);
@@ -10505,10 +11171,10 @@ var ListComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.html":
-/*!********************************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.html ***!
-  \********************************************************************************************************/
+/***/ "./src/app/modules/admin/components/listcontrols/listcontrols.component.html":
+/*!***********************************************************************************!*\
+  !*** ./src/app/modules/admin/components/listcontrols/listcontrols.component.html ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10516,10 +11182,10 @@ module.exports = "<button mat-raised-button color=\"primary\" (click)=\"add()\">
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.scss":
-/*!********************************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.scss ***!
-  \********************************************************************************************************/
+/***/ "./src/app/modules/admin/components/listcontrols/listcontrols.component.scss":
+/*!***********************************************************************************!*\
+  !*** ./src/app/modules/admin/components/listcontrols/listcontrols.component.scss ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10527,10 +11193,10 @@ module.exports = "button {\n  margin-right: 16px; }\n"
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.ts":
-/*!******************************************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.ts ***!
-  \******************************************************************************************************/
+/***/ "./src/app/modules/admin/components/listcontrols/listcontrols.component.ts":
+/*!*********************************************************************************!*\
+  !*** ./src/app/modules/admin/components/listcontrols/listcontrols.component.ts ***!
+  \*********************************************************************************/
 /*! exports provided: ListControls */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10562,8 +11228,8 @@ var ListControls = /** @class */ (function () {
     ListControls = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'list-controls',
-            template: __webpack_require__(/*! ./listcontrols.component.html */ "./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.html"),
-            styles: [__webpack_require__(/*! ./listcontrols.component.scss */ "./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.scss")]
+            template: __webpack_require__(/*! ./listcontrols.component.html */ "./src/app/modules/admin/components/listcontrols/listcontrols.component.html"),
+            styles: [__webpack_require__(/*! ./listcontrols.component.scss */ "./src/app/modules/admin/components/listcontrols/listcontrols.component.scss")]
         })
     ], ListControls);
     return ListControls;
@@ -10573,378 +11239,10 @@ var ListControls = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/interviewers.component.html":
-/*!********************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/interviewers.component.html ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<section fxLayout=\"row\">\r\n    <interviewers-list [dataSource]=\"usersSource\"\r\n                       [columns]=\"usersColumns\"\r\n                       [headers]=\"usersColumnsHeaders\"\r\n                       (onAdd)=\"addUser()\"\r\n                       (contextMenu)=\"openContextMenu($event)\">\r\n        <h2>\r\n            <i class=\"material-icons\">\r\n                    person\r\n            </i>\r\n            Interviewers list <span *ngIf=\"selectedGroup\">: {{selectedGroup}}</span>\r\n        </h2> \r\n        \r\n        <mat-paginator class=\"paginator users__paginator\" [pageSize]=\"5\" [pageSizeOptions]=\"[5,10,25]\" #usersPaginator>\r\n        </mat-paginator>\r\n\r\n        Add\r\n        <i class=\"material-icons\">\r\n                person_add\r\n        </i>\r\n\r\n        <button *ngIf=\"selectedGroup\" (click)=\"showAll()\" class=\"showAll\" mat-raised-button color=\"accent\">\r\n            Show all\r\n        </button>\r\n    </interviewers-list>\r\n\r\n    <interviewers-list FlexGrow=\"1\"\r\n                       [dataSource]=\"groupsSource\"\r\n                       [columns]=\"groupsColumns\" \r\n                       [headers]=\"groupsColumnsHeaders\"\r\n                       (onAdd)=\"addGroup()\"\r\n                       (selectGroup)=\"selectGroup($event)\"\r\n                       (contextMenu)=\"openContextMenu($event)\">\r\n        <h2>\r\n            <i class=\"material-icons\">\r\n                group\r\n            </i>\r\n            Group list\r\n        </h2>\r\n\r\n\r\n        <mat-paginator class=\"paginator groups__paginator\" [pageSize]=\"5\" [pageSizeOptions]=\"[5,10,25]\" #groupsPaginator >\r\n        </mat-paginator>\r\n\r\n        Add\r\n        <i class=\"material-icons\">\r\n                group_add\r\n        </i>\r\n    </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n    <button mat-menu-item (click)=\"edit($event)\" disabled>Edit</button>\r\n    <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/modules/admin/modules/interviewers/interviewers.component.scss":
-/*!********************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/interviewers.component.scss ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "interviewers-list {\n  flex-grow: 1; }\n\ninterviewers-list:first-of-type {\n  border-right: 10px solid rgba(245, 245, 245, 0.3); }\n\nh2 {\n  margin-left: 20px;\n  height: 24px; }\n"
-
-/***/ }),
-
-/***/ "./src/app/modules/admin/modules/interviewers/interviewers.component.ts":
-/*!******************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/interviewers.component.ts ***!
-  \******************************************************************************/
-/*! exports provided: InterviewersComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InterviewersComponent", function() { return InterviewersComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/http.service */ "./src/app/modules/admin/modules/interviewers/services/http.service.ts");
-/* harmony import */ var _services_dialog_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/dialog.service */ "./src/app/modules/admin/modules/interviewers/services/dialog.service.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var InterviewersComponent = /** @class */ (function () {
-    function InterviewersComponent(http, dialog, snackBar) {
-        this.http = http;
-        this.dialog = dialog;
-        this.snackBar = snackBar;
-        this.usersColumns = [{
-                title: "username",
-                value: "Username"
-            }, {
-                title: "fullname",
-                value: "Name"
-            },
-            {
-                title: "group",
-                value: "Group"
-            },
-            {
-                title: "role",
-                value: "Role"
-            }
-        ];
-        this.groupsColumns = [{
-                title: "name",
-                value: "Title"
-            },
-            {
-                title: "description",
-                value: "description"
-            }
-        ];
-    }
-    InterviewersComponent.prototype.ngOnInit = function () {
-        this.getUsers();
-        this.getGroups();
-        this.usersColumnsHeaders = this.usersColumns.map(function (field) { return field.title; });
-        this.groupsColumnsHeaders = this.groupsColumns.map(function (field) { return field.title; });
-    };
-    InterviewersComponent.prototype.getUsers = function () {
-        var _this = this;
-        this.http.getUsers()
-            .subscribe(function (users) {
-            _this.usersData = users;
-            _this.renderUsersList();
-        });
-    };
-    InterviewersComponent.prototype.getGroups = function () {
-        var _this = this;
-        this.http.getGroups()
-            .subscribe(function (groups) {
-            _this.groupsData = groups;
-            _this.renderGroupsList();
-        });
-    };
-    InterviewersComponent.prototype.renderUsersList = function () {
-        var _this = this;
-        if (!this.selectedGroup) {
-            this.usersSource = this.initDataSource(this.usersData, this.usersPaginator);
-        }
-        else {
-            var selectedUsers = this.usersData.filter(function (user) { return user.group === _this.selectedGroup; });
-            this.usersSource = this.initDataSource(selectedUsers, this.usersPaginator);
-            this.http.setSelectedGroup(this.selectedGroup);
-        }
-    };
-    InterviewersComponent.prototype.renderGroupsList = function () {
-        this.groupsSource = this.initDataSource(this.groupsData, this.groupsPaginator);
-    };
-    InterviewersComponent.prototype.initDataSource = function (data, paginator) {
-        var dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](data);
-        dataSource.paginator = paginator;
-        return dataSource;
-    };
-    InterviewersComponent.prototype.addUser = function () {
-        var _this = this;
-        this.dialog.addUser()
-            .afterClosed()
-            .subscribe(function (data) {
-            if (data) {
-                if (_this.doExist(data.username, _this.usersData)) {
-                    return _this.showMessage("Unsuccessful. " + data.username + " already exists.");
-                }
-                var user = data;
-                user.role ? user.role = 'master' : user.role = 'interviewer';
-                _this.usersData.push(data);
-                _this.renderUsersList();
-                _this.http.addUser(data)
-                    .subscribe(function (_) {
-                    _this.showMessage(data.username + " was added.");
-                });
-            }
-        });
-    };
-    InterviewersComponent.prototype.addGroup = function () {
-        var _this = this;
-        this.dialog.addGroup()
-            .afterClosed()
-            .subscribe(function (data) {
-            if (data) {
-                if (_this.doExist(data.name, _this.groupsData, true)) {
-                    _this.showMessage(data.name + " already exists!");
-                }
-                _this.groupsData.push(data);
-                _this.renderGroupsList();
-                _this.http.addGroup(data)
-                    .subscribe(function (_) { return _this.renderGroupsList(); });
-            }
-        });
-    };
-    InterviewersComponent.prototype.removeUser = function (username) {
-        var _this = this;
-        this.usersData = this.usersData.filter(function (user) { return user.username != username; });
-        this.renderUsersList();
-        this.snackBar.open(username + ", was removed", '', {
-            duration: 1500
-        });
-        this.http.removeUser(username)
-            .subscribe(function (_) {
-            return _this.showMessage(username + ", was removed");
-        });
-    };
-    InterviewersComponent.prototype.removeGroup = function (query) {
-        var _this = this;
-        this.groupsData = this.groupsData.filter(function (group) { return group.name != query; });
-        this.renderGroupsList();
-        this.http.removeGroup(query)
-            .subscribe(function (_) {
-            return _this.showMessage(query + ", was removed");
-        });
-    };
-    InterviewersComponent.prototype.openContextMenu = function (event) {
-        event.preventDefault();
-        var triggerButton = document.querySelector('.menuButton');
-        triggerButton.setAttribute('style', this.getClickPositionStyle(event));
-        this.trigger.openMenu();
-        this.removeTarget = this.getClickedItemName(event.target);
-    };
-    InterviewersComponent.prototype.remove = function () {
-        if (this.removeTarget) {
-            if (!this.removeTarget.isGroup) {
-                this.removeUser(this.removeTarget.query);
-            }
-            else {
-                this.removeGroup(this.removeTarget.query);
-            }
-        }
-        this.removeTarget = null;
-    };
-    InterviewersComponent.prototype.selectGroup = function (event) {
-        var name = event.target.parentNode.querySelector('.cdk-column-name').innerText ||
-            event.target.innerText;
-        this.selectedGroup = name;
-        this.renderUsersList();
-    };
-    InterviewersComponent.prototype.edit = function () {
-        this.showMessage('in proccess');
-    };
-    InterviewersComponent.prototype.doExist = function (name, array, group) {
-        if (group === void 0) { group = false; }
-        if (!group) {
-            return array.some(function (user) { return user.username === name; });
-        }
-        else {
-            return array.some(function (group) { return group.name === name; });
-        }
-    };
-    InterviewersComponent.prototype.showAll = function () {
-        this.selectedGroup = '';
-        this.renderUsersList();
-        this.http.setSelectedGroup(false);
-    };
-    InterviewersComponent.prototype.getClickedItemName = function (node) {
-        if (node.classList.contains('cdk-column-username')) {
-            return {
-                query: node.innerText
-            };
-        }
-        else if (node.classList.contains('cdk-column-name')) {
-            return {
-                query: node.innerText,
-                isGroup: true
-            };
-        }
-        else if (node.parentNode.querySelector('.cdk-column-name')) {
-            return {
-                query: node.parentNode.querySelector('.cdk-column-name').innerText,
-                isGroup: true
-            };
-        }
-        else if (node.parentNode.querySelector('.cdk-column-username')) {
-            return {
-                query: node.parentNode.querySelector('.cdk-column-username').innerText
-            };
-        }
-        else {
-            return {
-                query: node.innerText
-            };
-        }
-    };
-    InterviewersComponent.prototype.getClickPositionStyle = function (event) {
-        return "position: fixed;\n         left: " + (event.pageX + 10) + "px;\n         top: " + (event.pageY + 10) + "px; \n         z-index: 1000";
-    };
-    InterviewersComponent.prototype.showMessage = function (message) {
-        this.snackBar.open(message, '', {
-            duration: 1500,
-        });
-    };
-    //deprecated: 
-    InterviewersComponent.prototype.formObject = function (object) {
-        var arr = [], regex = /^\_/;
-        for (var property in object) {
-            if (!property.match(regex)) {
-                arr.push({
-                    title: property,
-                    value: object[property]
-                });
-            }
-        }
-        return arr;
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('usersPaginator'),
-        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
-    ], InterviewersComponent.prototype, "usersPaginator", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('groupsPaginator'),
-        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
-    ], InterviewersComponent.prototype, "groupsPaginator", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatMenuTrigger"]),
-        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatMenuTrigger"])
-    ], InterviewersComponent.prototype, "trigger", void 0);
-    InterviewersComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-interviewers',
-            template: __webpack_require__(/*! ./interviewers.component.html */ "./src/app/modules/admin/modules/interviewers/interviewers.component.html"),
-            styles: [__webpack_require__(/*! ./interviewers.component.scss */ "./src/app/modules/admin/modules/interviewers/interviewers.component.scss")]
-        }),
-        __metadata("design:paramtypes", [_services_http_service__WEBPACK_IMPORTED_MODULE_2__["HttpAdminService"],
-            _services_dialog_service__WEBPACK_IMPORTED_MODULE_3__["DialogService"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"]])
-    ], InterviewersComponent);
-    return InterviewersComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/modules/admin/modules/interviewers/interviewers.module.ts":
-/*!***************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/interviewers.module.ts ***!
-  \***************************************************************************/
-/*! exports provided: InterviewersModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InterviewersModule", function() { return InterviewersModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/flex-layout */ "./node_modules/@angular/flex-layout/esm5/flex-layout.es5.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _modules_material_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../modules/material/material */ "./src/app/modules/material/material.ts");
-/* harmony import */ var _interviewers_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./interviewers.component */ "./src/app/modules/admin/modules/interviewers/interviewers.component.ts");
-/* harmony import */ var _components_list_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/list/list.component */ "./src/app/modules/admin/modules/interviewers/components/list/list.component.ts");
-/* harmony import */ var _components_listcontrols_listcontrols_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/listcontrols/listcontrols.component */ "./src/app/modules/admin/modules/interviewers/components/listcontrols/listcontrols.component.ts");
-/* harmony import */ var _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/dialog/users.dialog */ "./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.ts");
-/* harmony import */ var _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/dialog/group.dialog */ "./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-
-
-
-
-var InterviewersModule = /** @class */ (function () {
-    function InterviewersModule() {
-    }
-    InterviewersModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _modules_material_material__WEBPACK_IMPORTED_MODULE_4__["MaterialModule"],
-                _angular_flex_layout__WEBPACK_IMPORTED_MODULE_1__["FlexLayoutModule"]
-            ],
-            declarations: [
-                _interviewers_component__WEBPACK_IMPORTED_MODULE_5__["InterviewersComponent"],
-                _components_listcontrols_listcontrols_component__WEBPACK_IMPORTED_MODULE_7__["ListControls"],
-                _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_8__["UsersDialogComponent"],
-                _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_9__["GroupDialogComponent"],
-                _components_list_list_component__WEBPACK_IMPORTED_MODULE_6__["ListComponent"]
-            ],
-            exports: [
-                _interviewers_component__WEBPACK_IMPORTED_MODULE_5__["InterviewersComponent"]
-            ],
-            entryComponents: [
-                _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_8__["UsersDialogComponent"],
-                _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_9__["GroupDialogComponent"]
-            ]
-        })
-    ], InterviewersModule);
-    return InterviewersModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/modules/admin/modules/interviewers/services/dialog.service.ts":
-/*!*******************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/services/dialog.service.ts ***!
-  \*******************************************************************************/
+/***/ "./src/app/modules/admin/services/dialog.service.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/modules/admin/services/dialog.service.ts ***!
+  \**********************************************************/
 /*! exports provided: DialogService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10953,8 +11251,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DialogService", function() { return DialogService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dialog/group.dialog */ "./src/app/modules/admin/modules/interviewers/components/dialog/group.dialog.ts");
-/* harmony import */ var _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/dialog/users.dialog */ "./src/app/modules/admin/modules/interviewers/components/dialog/users.dialog.ts");
+/* harmony import */ var _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dialog/group.dialog */ "./src/app/modules/admin/components/dialog/group.dialog.ts");
+/* harmony import */ var _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/dialog/users.dialog */ "./src/app/modules/admin/components/dialog/users.dialog.ts");
+/* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/http.service */ "./src/app/modules/admin/services/http.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10968,9 +11267,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var DialogService = /** @class */ (function () {
-    function DialogService(dialog) {
+    function DialogService(dialog, http) {
         this.dialog = dialog;
+        this.http = http;
+        this.messages = {
+            addGroup: 'Add new group',
+            delGroup: 'Delete group'
+        };
     }
     DialogService.prototype.addGroup = function () {
         return this.dialog.open(_components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_2__["GroupDialogComponent"]);
@@ -10978,11 +11283,58 @@ var DialogService = /** @class */ (function () {
     DialogService.prototype.addUser = function () {
         return this.dialog.open(_components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_3__["UsersDialogComponent"]);
     };
+    DialogService.prototype.deleteGroup = function () {
+        return this.dialog.open(_components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_2__["GroupDialogComponent"], {
+            data: this.formArray(this.target)
+        });
+    };
+    DialogService.prototype.deleteUser = function () {
+        return this.dialog.open(_components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_3__["UsersDialogComponent"], {
+            data: this.formArray(this.target)
+        });
+    };
+    DialogService.prototype.getClickPositionStyle = function (event) {
+        return "position: fixed;\n              left: " + (event.pageX + 10) + "px;\n              top: " + (event.pageY + 10) + "px; \n              z-index: 1000";
+    };
+    DialogService.prototype.openContextMenu = function (event, trigger) {
+        var _this = this;
+        event.event.preventDefault();
+        var triggerButton = document.querySelector('.menuButton');
+        triggerButton.setAttribute('style', this.getClickPositionStyle(event.event));
+        this.target = event.item;
+        if (!this.target._id) {
+            console.log('_id not found');
+            console.log('username: ', this.target.username);
+            this.http.getUser(this.target.username)
+                .subscribe(function (user) {
+                _this.target = user;
+                console.log(_this.target);
+            });
+        }
+        trigger.openMenu(event);
+    };
+    DialogService.prototype.formArray = function (object) {
+        var arr = [], regex = /^\_/;
+        for (var property in object) {
+            if (!property.match(regex)) {
+                if (property.match('password')) {
+                    arr.push({ title: property, value: '********' });
+                }
+                else {
+                    arr.push({
+                        title: property,
+                        value: object[property]
+                    });
+                }
+            }
+        }
+        return arr;
+    };
     DialogService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"]])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"], _services_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpAdminService"]])
     ], DialogService);
     return DialogService;
 }());
@@ -10991,10 +11343,10 @@ var DialogService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/modules/admin/modules/interviewers/services/http.service.ts":
-/*!*****************************************************************************!*\
-  !*** ./src/app/modules/admin/modules/interviewers/services/http.service.ts ***!
-  \*****************************************************************************/
+/***/ "./src/app/modules/admin/services/http.service.ts":
+/*!********************************************************!*\
+  !*** ./src/app/modules/admin/services/http.service.ts ***!
+  \********************************************************/
 /*! exports provided: HttpAdminService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11025,6 +11377,10 @@ var HttpAdminService = /** @class */ (function () {
         return this.http.get("/users/users");
     };
     ;
+    HttpAdminService.prototype.getUser = function (name) {
+        return this.http.get("/users/" + name);
+    };
+    ;
     HttpAdminService.prototype.getGroups = function () {
         return this.http.get("/users/groups");
     };
@@ -11035,17 +11391,11 @@ var HttpAdminService = /** @class */ (function () {
     HttpAdminService.prototype.addUser = function (user) {
         return this.http.post("/users/adduser", user);
     };
-    HttpAdminService.prototype.removeUser = function (username) {
-        var request = {
-            username: username
-        };
-        return this.http.post('/users/removeuser', request);
+    HttpAdminService.prototype.deleteUser = function (id) {
+        return this.http.delete("/users/removeuser/" + id);
     };
-    HttpAdminService.prototype.removeGroup = function (name) {
-        var request = {
-            name: name
-        };
-        return this.http.post('/users/removegroup', request);
+    HttpAdminService.prototype.deleteGroup = function (id) {
+        return this.http.delete("/users/removegroup/" + id);
     };
     HttpAdminService.prototype.getSelectedGroup = function () {
         return this.selectedGroup.asObservable();
@@ -11060,6 +11410,51 @@ var HttpAdminService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], HttpAdminService);
     return HttpAdminService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/services/snackbar.service.ts":
+/*!************************************************************!*\
+  !*** ./src/app/modules/admin/services/snackbar.service.ts ***!
+  \************************************************************/
+/*! exports provided: SnackbarService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SnackbarService", function() { return SnackbarService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SnackbarService = /** @class */ (function () {
+    function SnackbarService(snackBar) {
+        this.snackBar = snackBar;
+    }
+    SnackbarService.prototype.show = function (message) {
+        this.snackBar.open(message, '', {
+            duration: 1500,
+        });
+    };
+    SnackbarService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"]])
+    ], SnackbarService);
+    return SnackbarService;
 }());
 
 
@@ -11578,6 +11973,147 @@ var MaterialModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/options/confirm-removing-form/confirm-removing-form.component.html":
+/*!************************************************************************************!*\
+  !*** ./src/app/options/confirm-removing-form/confirm-removing-form.component.html ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>Do you really want to delete this form?</h1>\r\n<mat-dialog-actions fxLayoutAlign=\"space-between center\">\r\n   <button mat-raised-button \r\n           [mat-dialog-close]=\"true\" \r\n           fxFlex=\"0 1 150px\" \r\n           color=\"primary\"\r\n           class=\"button_yes\">Yes</button>\r\n   <button mat-raised-button \r\n           [mat-dialog-close]=\"false\" \r\n           fxFlex=\"0 1 150px\"\r\n           color=\"warn\"\r\n           class=\"button_no\">No</button>\r\n</mat-dialog-actions>"
+
+/***/ }),
+
+/***/ "./src/app/options/confirm-removing-form/confirm-removing-form.component.scss":
+/*!************************************************************************************!*\
+  !*** ./src/app/options/confirm-removing-form/confirm-removing-form.component.scss ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "button {\n  font-size: 20px;\n  font-weight: normal; }\n"
+
+/***/ }),
+
+/***/ "./src/app/options/confirm-removing-form/confirm-removing-form.component.ts":
+/*!**********************************************************************************!*\
+  !*** ./src/app/options/confirm-removing-form/confirm-removing-form.component.ts ***!
+  \**********************************************************************************/
+/*! exports provided: ConfirmRemovingFormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfirmRemovingFormComponent", function() { return ConfirmRemovingFormComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ConfirmRemovingFormComponent = /** @class */ (function () {
+    function ConfirmRemovingFormComponent() {
+    }
+    ConfirmRemovingFormComponent.prototype.ngOnInit = function () {
+    };
+    ConfirmRemovingFormComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-confirm-removing-form',
+            template: __webpack_require__(/*! ./confirm-removing-form.component.html */ "./src/app/options/confirm-removing-form/confirm-removing-form.component.html"),
+            styles: [__webpack_require__(/*! ./confirm-removing-form.component.scss */ "./src/app/options/confirm-removing-form/confirm-removing-form.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ConfirmRemovingFormComponent);
+    return ConfirmRemovingFormComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/options/snackbar/snackbar.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/options/snackbar/snackbar.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  snackbar works!\r\n</p>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/options/snackbar/snackbar.component.scss":
+/*!**********************************************************!*\
+  !*** ./src/app/options/snackbar/snackbar.component.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/options/snackbar/snackbar.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/options/snackbar/snackbar.component.ts ***!
+  \********************************************************/
+/*! exports provided: SnackbarComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SnackbarComponent", function() { return SnackbarComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SnackbarComponent = /** @class */ (function () {
+    function SnackbarComponent(snackBar) {
+        this.snackBar = snackBar;
+    }
+    SnackbarComponent.prototype.ngOnInit = function () {
+    };
+    SnackbarComponent.prototype.openSnackBar = function (message, messageType, durationTime, action) {
+        if (durationTime === void 0) { durationTime = 3000; }
+        var messageCenter = 'snackbar-font-center';
+        var success = 'snackbar-success';
+        var fail = 'snackbar-fail';
+        var msgStyle = (messageType === 'success') ? success :
+            (messageType === 'fail') ? fail : '';
+        var config = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSnackBarConfig"]();
+        config.panelClass = [messageCenter, msgStyle];
+        config.duration = durationTime,
+            this.snackBar.open(message, action, config);
+    };
+    SnackbarComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-snackbar',
+            template: __webpack_require__(/*! ./snackbar.component.html */ "./src/app/options/snackbar/snackbar.component.html"),
+            styles: [__webpack_require__(/*! ./snackbar.component.scss */ "./src/app/options/snackbar/snackbar.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"]])
+    ], SnackbarComponent);
+    return SnackbarComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/environments/environment.ts":
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
@@ -11729,7 +12265,7 @@ window.global = window;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\syncforms\app-client\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! d:\Dp-142\add screenshot\syncforms\app-client\src\main.ts */"./src/main.ts");
 
 
 /***/ }),

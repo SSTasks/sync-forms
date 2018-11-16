@@ -9,15 +9,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './modules/material/material';
 
+import { HttpService } from './services/http.service';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { MainPageComponent } from './components/main-page/main-page.component';
 
-
+import { AlertService } from './services/alert.service';
 import { FormsPageModule } from './forms/forms-page.module';
-import { AdminModule } from './modules/admin/admin.module';
 
+import { AdminModule } from './modules/admin/admin.module';
 
 @NgModule({
     declarations: [

@@ -1,11 +1,13 @@
 <section *ngIf="dataSource">
     <ng-content select="h2"></ng-content>
     <mat-table [(dataSource)]="dataSource" matSort>
-        <ng-container matColumnDef="{{column.title}}" *ngFor="let column of columns">
+        <ng-container matColumnDef="{{column.title}}" *ngFor="let column of columns;">
+            <!-- columns header -->
             <mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ column.value }}
             </mat-header-cell>
             <mat-cell *matCellDef="let item">
+                <!-- columns value -->
                 {{ item[column.title] }}
             </mat-cell>
         </ng-container>
@@ -13,7 +15,7 @@
         <mat-header-row *matHeaderRowDef="headers">
         </mat-header-row>
 
-        <mat-row *matRowDef="let row; columns: headers" (contextmenu)="editContextMenu($event)" (click)="select($event)">
+        <mat-row *matRowDef="let row; columns: headers; let item" (contextmenu)="editContextMenu($event, item)" (click)="select($event)">
         </mat-row>
     </mat-table>
 

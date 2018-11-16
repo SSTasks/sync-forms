@@ -40,3 +40,30 @@ body {
 }
 /* Scroll bar end*/
 
+
+/* SnackBar */
+$snackbar-font-size: 16px !important;
+
+.snackbar-font-center  {
+   display: flex !important;
+   justify-content: center !important;
+   align-items: center !important;
+   color: #fff;
+}
+
+.snackbar-success {
+   background-color: #3F51B5;
+
+   simple-snack-bar span {
+      font-size: $snackbar-font-size;
+   }
+}
+
+.snackbar-fail {
+   background-color: #E91E63;
+
+   simple-snack-bar span {
+      font-size: $snackbar-font-size;
+   }
+}
+/* SnackBar end */

@@ -8,10 +8,14 @@ import io from 'socket.io-client';
 })
 export class SocketService {
   private url = '/';
-  private socket = io.connect(this.url);
+  private socket;
   public interviewId: Number;
 
   constructor() { }
+
+  public connectToSockets() {
+    this.socket = io.connect(this.url);
+  }
 
   public setInterviewId(id) {
     this.interviewId = id;
@@ -27,6 +31,11 @@ export class SocketService {
   }
 
   public endInterview() {
+    // if we weren't connected, there is no need to unsub
+    if (!this.socket) {
+      return;
+    }
+
     this.socket.emit('endInterview', this.interviewId);
     this.interviewId = null;
   }

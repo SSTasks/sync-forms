@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpAdminService } from '../../services/http.service';
 import { Group } from 'src/app/models/group.model';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'users-dialog',
@@ -9,9 +10,11 @@ import { Group } from 'src/app/models/group.model';
 })
 
 export class UsersDialogComponent implements OnInit {
+
     title = 'Add new interviewer';
 
-    constructor(private http: HttpAdminService) {}
+    constructor(private http: HttpAdminService,
+                @Inject(MAT_DIALOG_DATA) public data: any) {}
 
     inputFields: Object = [{
             title: 'fullname',

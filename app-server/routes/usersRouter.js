@@ -15,11 +15,12 @@ router.get('/', checkAuth, (req, res) => {
 });
 
 //admin panel routes
-router.get('/users', checkAuth, usersController.getUsers);
-router.get('/groups', checkAuth, usersController.getGroups);
-router.post('/adduser', checkAuth, usersController.registerUser);
-router.post('/addgroup', checkAuth, usersController.addGroup);
-router.post('/removeuser', checkAuth, usersController.removeUser);
-router.post('/removegroup', checkAuth, usersController.removeGroup);
+router.get('/users', usersController.getUsers);
+router.get('/users/:name', usersController.getUser);
+router.get('/groups', usersController.getGroups);
+router.post('/adduser', usersController.registerUser);
+router.post('/addgroup', usersController.addGroup);
+router.delete('/removeuser/:id', usersController.removeUser);
+router.delete('/removegroup/:id', usersController.removeGroup);
 
 module.exports = router;

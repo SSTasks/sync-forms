@@ -35,8 +35,10 @@ export class HttpService {
             return this.http.post<Form[]>('/form', form)
                 .pipe(
                     tap(forms => {
-                        console.log(forms);
-                        this.forms = forms;
+                        if (Array.isArray(forms)) {
+                            console.log(forms);
+                            this.forms = forms;
+                        } 
                     }),
                     catchError(this.handleError('addForm', []))
                 );
@@ -84,4 +86,14 @@ export class HttpService {
             return of(result as T);
         };
     }
+
+   postScreenshotData (imgData) {
+      return this.http.post('/screenshot', imgData);
+   }
+
+   deleteScreenshotData (imgName) {
+      console.log(imgName);
+      return this.http.delete(`/screenshot/${imgName}`);
+   }
+
 }

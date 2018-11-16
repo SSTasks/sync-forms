@@ -1,0 +1,120 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatMenuTrigger } from '@angular/material';
+
+import { HttpAdminService } from '../../services/http.service';
+import { DialogService } from '../../services/dialog.service';
+import { SnackbarService } from '../../services/snackbar.service';
+import { Group } from 'src/app/models/group.model';
+
+@Component({
+  selector: 'app-groups',
+  templateUrl: './groups.component.html',
+  styleUrls: ['./groups.component.scss']
+})
+
+export class GroupsComponent implements OnInit {
+
+  constructor(private http: HttpAdminService,
+              private dialog: DialogService,
+              private message: SnackbarService) {}
+
+  groupsSource: MatTableDataSource < object > ;
+  groupsColumnsHeaders: String[];
+  private groupsData: Group[];
+
+  @ViewChild('groupsPaginator') groupsPaginator: MatPaginator;
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
+  ngOnInit() {
+      this.getGroups();
+
+      this.groupsColumnsHeaders = this.groupsColumns.map(field => field.title);
+  }
+
+  private getGroups(): void {
+      this.http.getGroups()
+          .subscribe(groups => {
+              this.groupsData = groups;
+              this.renderGroupsList();
+          });
+  }
+
+  private initDataSource(data, paginator): MatTableDataSource < object > {
+      let dataSource = new MatTableDataSource(data);
+      dataSource.paginator = paginator;
+
+      return dataSource;
+  }
+
+  private renderGroupsList(): void {
+      this.groupsSource = this.initDataSource(this.groupsData, this.groupsPaginator);
+  }
+
+  addGroup(): void {
+      this.dialog.addGroup()
+          .afterClosed()
+          .subscribe(data => {
+              if (data) {
+                  if (this.doExist(data.name, this.groupsData)) {
+                      return this.message.show(`${data.name} already exists!`);
+                  }
+                  this.groupsData.push(data);
+                  this.renderGroupsList();
+
+                  this.http.addGroup(data)
+                      .subscribe(_ => {
+                          this.message.show(`${data.name} was created!`);
+                      });
+              }
+          });
+  }
+
+  selectGroup(event): void {
+      let name = event.target.parentNode.querySelector('.cdk-column-name').innerText ||
+          event.target.innerText;
+
+      this.http.setSelectedGroup(name);
+  }
+
+  openContextMenu(event): void {
+      this.dialog.openContextMenu(event, this.trigger)
+  }
+
+  remove(): void {
+      if (this.dialog.target) {
+          this.dialog.deleteGroup()
+            .afterClosed()
+            .subscribe( response => { if(response.shouldDelete){
+                this.removeGroup(this.dialog.target);
+                this.dialog.target = null;
+            }});
+      }
+  }
+
+  private removeGroup(targetGroup: Group): void {
+      this.groupsData = this.groupsData.filter(group => group._id != targetGroup._id);
+      this.renderGroupsList();
+      this.message.show(`${targetGroup.name}, was removed`);
+      this.http.deleteGroup(targetGroup._id)
+          .subscribe(_ =>
+              this.message.show(`${targetGroup.name}, was removed`)
+          );
+  }
+
+  private doExist(name: String, array: any): boolean {
+      return array.some(group => group.name === name);
+  }
+
+  groupsColumns: Array < {
+      title: string,
+      value: string
+  } >= [{
+          title: "name",
+          value: "Title"
+      },
+      {
+          title: "description",
+          value: "Description"
+      }
+  ];
+}
