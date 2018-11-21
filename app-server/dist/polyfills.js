@@ -8129,11 +8129,7 @@ window.global = window;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\Users\ozalitc\Documents\syncforms\fresh\syncforms\app-client\src\polyfills.ts */"./src/polyfills.ts");
-=======
-module.exports = __webpack_require__(/*! D:\WebUI\6.14\syncforms\app-client\src\polyfills.ts */"./src/polyfills.ts");
->>>>>>> 822700d001ad5637a641ab880463779dd34cd042
+module.exports = __webpack_require__(/*! D:\heroku\sync-forms\app-client\src\polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

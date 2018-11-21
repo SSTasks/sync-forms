@@ -11596,10 +11596,8 @@ var GroupsComponent = /** @class */ (function () {
     GroupsComponent.prototype.edit = function () {
         var _this = this;
         if (this.dialog.target) {
-            console.log(this.dialog.target);
             this.dialog.editGroup()
                 .afterClosed()
-<<<<<<< HEAD
                 .subscribe(function (changedGroup) {
                 if (changedGroup) {
                     _this.groupsData = _this.groupsData.map(function (group) {
@@ -11612,13 +11610,6 @@ var GroupsComponent = /** @class */ (function () {
                     _this.http.updateGroup(__assign({}, changedGroup, { previousName: _this.dialog.target.name }))
                         .subscribe(function (_) {
                         console.log(changedGroup, 'was updated');
-=======
-                .subscribe(function (group) {
-                if (group) {
-                    _this.http.updateGroup(__assign({}, group, { previousName: _this.dialog.target.name }))
-                        .subscribe(function (_) {
-                        console.log(group, 'was updated');
->>>>>>> 822700d001ad5637a641ab880463779dd34cd042
                         _this.dialog.target = null;
                     });
                 }
@@ -11833,13 +11824,13 @@ var InterviewersComponent = /** @class */ (function () {
                 if (changedUser) {
                     if (changedUser) {
                         _this.usersData = _this.usersData.map(function (user) {
+                            changedUser.role = changedUser.role ? 'master' : 'interviewer';
                             if (user.username === _this.dialog.target.username) {
                                 user = __assign({}, user, changedUser);
                             }
                             return user;
                         });
                         _this.renderUsersList();
-                        changedUser.role = changedUser.role ? 'master' : 'interviewer';
                         _this.http.updateUser(__assign({}, changedUser, { previousName: _this.dialog.target.username }))
                             .subscribe(function (_) {
                             console.log(changedUser, 'was updated');
@@ -13507,11 +13498,7 @@ window.global = window;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\Users\ozalitc\Documents\syncforms\fresh\syncforms\app-client\src\main.ts */"./src/main.ts");
-=======
-module.exports = __webpack_require__(/*! D:\WebUI\6.14\syncforms\app-client\src\main.ts */"./src/main.ts");
->>>>>>> 822700d001ad5637a641ab880463779dd34cd042
+module.exports = __webpack_require__(/*! D:\heroku\sync-forms\app-client\src\main.ts */"./src/main.ts");
 
 
 /***/ }),
