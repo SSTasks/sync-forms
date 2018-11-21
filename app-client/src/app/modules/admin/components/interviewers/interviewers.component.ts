@@ -88,16 +88,15 @@ export class InterviewersComponent implements OnInit {
         if (this.dialog.target) {
             this.dialog.deleteUser()
             .afterClosed()
-            .subscribe( response => { if(response.shouldDelete){
-                this.removeUser(this.dialog.target);
-                this.dialog.target = null;
-            }});
+                .subscribe( response => { if(response && response.shouldDelete){
+                    this.removeUser(this.dialog.target);
+                    this.dialog.target = null;
+                }});
         }
     }
 
     private removeUser(targetUser: User): void {
-        console.log('targetUser:', targetUser);
-        this.usersData = this.usersData.filter(user => user._id != targetUser._id);
+        this.usersData = this.usersData.filter(user => user.username != targetUser.username);
         this.renderUsersList();
         this.message.show(`${targetUser.username}, was removed`);
 
@@ -112,7 +111,33 @@ export class InterviewersComponent implements OnInit {
     }
 
     edit(): void {
-        this.message.show('in proccess');
+        if (this.dialog.target) {
+            console.log(this.dialog.target);
+            this.dialog.editUser()
+                .afterClosed()
+                .subscribe(changedUser => {
+                    if (changedUser) {
+                        if (changedUser) {
+                            this.usersData = this.usersData.map(user => {
+                                changedUser.role = changedUser.role ? 'master' : 'interviewer';
+                                if (user.username === this.dialog.target.username) {
+                                    user = { ...user, ...changedUser};
+                                }
+                                return user;
+                            });
+                            this.renderUsersList();
+
+                            this.http.updateUser({ ...changedUser,
+                                    previousName: this.dialog.target.username
+                                })
+                                .subscribe(_ => {
+                                    console.log(changedUser, 'was updated');
+                                    this.dialog.target = null;
+                                })
+                        };
+                    }
+                });
+        }
     }
 
     private doExist(name: String, array: any): boolean {

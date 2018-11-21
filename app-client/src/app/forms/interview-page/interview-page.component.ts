@@ -4,14 +4,15 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
-
 import { HttpClient } from '@angular/common/http';
 import {Form} from '../services/form';
 import {BroadcastService} from '../services/broadcast.service';
 import { SocketService } from '../services/socket-service.service';
 
-
 import {Router} from '@angular/router';
+
+import {MatSnackBar} from '@angular/material';
+
 // import { userInfo } from 'os';
 
 @Component({
@@ -41,6 +42,8 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
     private unsubFocus;
     private unsubKeyboard;
     private unsubOnChange;
+    private unsubConnectionMessage;
+    private unsubDisconnectTrigger;
 
     private currentUser;
     private isSpectator = false;
@@ -60,7 +63,8 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
                 private _http: HttpClient,
                 private router: Router,
                 private broadcast: BroadcastService,
-                private socketService: SocketService) {
+                private socketService: SocketService,
+                private snackBar: MatSnackBar) {
 
         this.options = fb.group({
             hideRequired: false,
@@ -79,6 +83,7 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
 
         if (!this.currentUser) {
             this.currentUser = {
+                fullname: 'Anonymous Candidate',
                 role: 'candidate'
             };
         }
@@ -101,7 +106,7 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
         } else {
             this.isSpectator = true;
             this.buttonInscription = 'Exit interview';
-            this.socketService.joinInterview();
+            this.socketService.joinInterview(this.currentUser);
         }
 
         window.onbeforeunload = () => this.ngOnDestroy();
@@ -118,6 +123,8 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
             this.unsubFocus = this.focusEmitter();
             this.unsubKeyboard = this.keyboardEventEmitter();
             this.unsubOnChange = this.onChangeEventEmitter();
+            this.unsubConnectionMessage = this.showConnectionMessage();
+            this.unsubDisconnectTrigger = this.disconnectInterview();
         }
     }
 
@@ -129,6 +136,13 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
         }
     }
 
+    private disconnectInterview() {
+        return this.socketService.finishInterview()
+          .subscribe((triggerFinish: boolean) => {
+            setTimeout( () => this.endInterview(), 2000);
+          });
+    }
+
     private addCreationTime() {
         const timezoneOffset = (new Date()).getTimezoneOffset() * 60000;
         const dateNow = (new Date(Date.now() - timezoneOffset)).toISOString();
@@ -138,6 +152,15 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
         const time = dateNow.slice(11, 16);
 
         return `${day}.${month} ${time}`;
+    }
+
+    private showConnectionMessage() {
+        return this.socketService.showMessage()
+          .subscribe((message: string) => {
+            this.snackBar.open(message, ' ', {
+                duration: 3000
+            });
+          });
     }
 
     // primaly written to be able to change slider value
@@ -398,9 +421,10 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
         if (!this.currentUser) {
             return;
         } else if (this.currentUser.role === 'candidate' || this.isSpectator) {
+            this.socketService.emitConnectionMessage(this.currentUser, 'disconnect');
             this.socketService.setInterviewId(null);
         } else {
-            this.socketService.endInterview();
+            this.socketService.endInterview(this.currentUser);
         }
 
         if (this.unsubClick) {
@@ -409,6 +433,8 @@ export class InterviewPageComponent implements OnInit, AfterViewInit, OnDestroy 
             this.unsubFocus.unsubscribe();
             this.unsubKeyboard.unsubscribe();
             this.unsubOnChange.unsubscribe();
+            this.unsubConnectionMessage.unsubscribe();
+            this.unsubDisconnectTrigger.unsubscribe();
         }
     }
 }

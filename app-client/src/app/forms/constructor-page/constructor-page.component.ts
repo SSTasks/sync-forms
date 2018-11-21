@@ -121,7 +121,8 @@ export class ConstructorPageComponent implements OnInit {
                     let forms = data.filter(form => form._id === this.form._id);
                     this.form = forms[0]; // show updated form
                   } else {
-                     this.form = data[data.length - 1]; // show created form
+                    let forms = data.filter(form => form.preview === this.form.preview);; // show created form
+                    this.form = forms[0];
                   }
                   this.screenshotService.saveScreenshot(this.form);
 

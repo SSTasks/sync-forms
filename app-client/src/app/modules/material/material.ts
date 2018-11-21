@@ -21,7 +21,8 @@ import {
     MatDialogModule,
     MatPaginatorModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
 } from '@angular/material';
 import {LayoutModule} from '@angular/cdk/layout';
 
@@ -58,7 +59,8 @@ import {LayoutModule} from '@angular/cdk/layout';
         MatDialogModule,
         MatPaginatorModule,
         MatTooltipModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatExpansionModule
     ],
     exports: [
         LayoutModule,
@@ -82,7 +84,8 @@ import {LayoutModule} from '@angular/cdk/layout';
         MatDialogModule,
         MatPaginatorModule,
         MatTooltipModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatExpansionModule
     ],
 })
 export class MaterialModule {}

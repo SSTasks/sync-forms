@@ -18,8 +18,9 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 
 import { AlertService } from './services/alert.service';
 import { FormsPageModule } from './forms/forms-page.module';
-
 import { AdminModule } from './modules/admin/admin.module';
+import { StatisticsModule } from './modules/statistics/statistics.module';
+import { NotfoundModule } from './modules/notfound/notfound.module';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,9 @@ import { AdminModule } from './modules/admin/admin.module';
         BrowserAnimationsModule,
         FormsPageModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        StatisticsModule,
+        NotfoundModule
     ],
     providers: [],
     bootstrap: [

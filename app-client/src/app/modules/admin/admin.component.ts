@@ -14,6 +14,8 @@ export class AdminComponent implements OnInit {
   public title: string = 'Admin panel';  
 
   ngOnInit(){
-    this.router.navigate(['admin/interviewers']);
+    if(this.router.routerState.snapshot.url === '/admin'){
+      this.router.navigate(['admin/interviewers']);
+    }
   }
 }

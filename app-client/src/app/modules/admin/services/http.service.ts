@@ -14,31 +14,43 @@ export class HttpAdminService {
     }
 
     getUsers() {
-        return this.http.get < User[] > (`/users/users`);
-    };
+        return this.http.get < User[] > (`/adm/users`);
+    }
 
     getUser(name: string) {
-        return this.http.get < User > (`/users/${name}`);
-    };
+        return this.http.get < User > (`/adm/user/${name}`);
+    }
 
     getGroups() {
-        return this.http.get < Group[] > (`/users/groups`);
-    };
+        return this.http.get < Group[] > (`/adm/groups`);
+    }
+
+    getGroup(name: string) {
+        return this.http.get < Group > (`/adm/group/${name}`);
+    }
 
     addGroup(group) {
-        return this.http.post(`/users/addgroup`, group);
+        return this.http.post(`/adm/groups`, group);
     }
 
     addUser(user) {
-        return this.http.post(`/users/adduser`, user);
+        return this.http.post(`/adm/users`, user);
     }
 
     deleteUser(id: string) {
-        return this.http.delete(`/users/removeuser/${id}`);
+        return this.http.delete(`/adm/user/${id}`);
     }
 
     deleteGroup(id: string) {
-        return this.http.delete(`/users/removegroup/${id}`);
+        return this.http.delete(`/adm/group/${id}`);
+    }
+
+    updateUser(user){
+        return this.http.put('/adm/user/', user);
+    }
+
+    updateGroup(group){
+        return this.http.put('/adm/group/', group);
     }
 
     public selectedGroup: BehaviorSubject < any > ;

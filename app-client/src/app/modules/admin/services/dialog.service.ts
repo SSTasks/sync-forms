@@ -11,76 +11,111 @@ import { HttpAdminService } from '../services/http.service';
 
 export class DialogService {
 
-  constructor(public dialog: MatDialog, public http: HttpAdminService) {}
+    constructor(public dialog: MatDialog, public http: HttpAdminService) {}
 
-  target: any;
+    target: any;
 
-  addGroup(): MatDialogRef < GroupDialogComponent > {
-      return this.dialog.open(GroupDialogComponent);
-  }
+    addGroup(): MatDialogRef < GroupDialogComponent > {
+        return this.dialog.open(GroupDialogComponent);
+    }
 
-  addUser(): MatDialogRef < UsersDialogComponent > {
-      return this.dialog.open(UsersDialogComponent);
-  }
+    addUser(): MatDialogRef < UsersDialogComponent > {
+        return this.dialog.open(UsersDialogComponent);
+    }
 
-  deleteGroup(): MatDialogRef < GroupDialogComponent > {
-      return this.dialog.open(GroupDialogComponent, {
-        data: this.formArray(this.target)
-      });
-  }
+    deleteGroup(): MatDialogRef < GroupDialogComponent > {
+        return this.dialog.open(GroupDialogComponent, {
+            data: this.formArray(this.target)
+        });
+    }
 
-  deleteUser(): MatDialogRef < UsersDialogComponent > {
-    return this.dialog.open(UsersDialogComponent, {
-      data: this.formArray(this.target)
-    });
-  }
+    deleteUser(): MatDialogRef < UsersDialogComponent > {
+        return this.dialog.open(UsersDialogComponent, {
+            data: this.formArray(this.target)
+        });
+    }
 
-  public getClickPositionStyle(event): string {
-      return `position: fixed;
-              left: ${event.pageX + 10}px;
-              top: ${event.pageY + 10}px; 
-              z-index: 1000`;
-  }
+    editGroup(): MatDialogRef < GroupDialogComponent > {
+        return this.dialog.open(GroupDialogComponent, {
+            data: {
+                object: this.formArray(this.target),
+                edit: true
+            }
+        });
+    }
 
-  openContextMenu(event, trigger): void {
-      event.event.preventDefault();
-      let triggerButton = document.querySelector('.menuButton');
-      triggerButton.setAttribute('style', this.getClickPositionStyle(event.event));
+    editUser(): MatDialogRef < UsersDialogComponent > {
+        return this.dialog.open(UsersDialogComponent, {
+            data: {
+                object: this.formArray(this.target),
+                edit: true
+            }
+        });
+    }
 
-      this.target = event.item;
-      if(!this.target._id){
-          console.log('_id not found');
-          console.log('username: ', this.target.username);
-          
-          this.http.getUser(this.target.username)
-            .subscribe( user => {
-                this.target = user;
-                console.log(this.target);
-            });
-      }
-      trigger.openMenu(event);
-  }
+    openContextMenu(event, trigger): void {
+        event.event.preventDefault();
+        let triggerButton = document.querySelector('.menuButton');
+        triggerButton.setAttribute('style', this.getClickPositionStyle(event.event));
 
-  formArray (object) {
-    let arr = [],
-        regex = /^\_/;
+        this.target = event.item;
 
-    for (let property in object) {
-        if (!property.match(regex)) {
-            if(property.match('password')){arr.push({title: property, value: '********'})}
-            else {
-                arr.push({
-                    title: property,
-                    value: object[property]
-                });
-            } 
+        if (!this.target._id) {
+            this.target = this.target.username ? this.getUser(this.target.username, trigger) :
+                                                 this.getGroup(this.target.name, trigger);
+        } else {
+            trigger.openMenu(event);
         }
     }
-    return arr;
+
+    getUser(username, trigger) {
+        this.http.getUser(username)
+            .subscribe(user => {
+                this.target = user;
+                trigger.openMenu(event);
+            });
+    }
+
+    getGroup(name, trigger) {
+        this.http.getGroup(name)
+            .subscribe(group => {
+                this.target = group;
+                trigger.openMenu(event);
+            });
+    }
+
+    formArray(object) {
+        let arr = [],
+            regex = /^\_/;
+
+        for (let property in object) {
+            if (!property.match(regex)) {
+                if (property.match('password')) {
+                    arr.push({
+                        title: property,
+                        value: ''
+                    })
+                } else {
+                    arr.push({
+                        title: property,
+                        value: object[property]
+                    });
+                }
+            }
+        }
+        return arr;
     }
 
     public messages = {
         addGroup: 'Add new group',
         delGroup: 'Delete group'
+    }
+
+
+    public getClickPositionStyle(event): string {
+        return `position: fixed;
+                left: ${event.pageX + 10}px;
+                top: ${event.pageY + 10}px; 
+                z-index: 1000`;
     }
 }

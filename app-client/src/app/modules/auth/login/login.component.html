@@ -2,11 +2,22 @@
     <div class="form-info">
         <h1 class="form-title">SyncForms</h1>
     </div>
+    <div class="form-toggle">
+        <mat-slide-toggle
+            class="form-toggle"
+            [checked]="checked"
+            (change)="onChange($event)"
+        >
+            <span *ngIf="checked == false">Log in as candidate</span>
+            <span *ngIf="checked == true">Log in as master or interviewer</span>
+        </mat-slide-toggle>
+    </div>
     <mat-error class="text-center" *ngIf="message">Wrong username or password</mat-error>
     <form
         [formGroup]='form'
         (ngSubmit)='onSubmit()'
         class="form"
+        *ngIf="checked == false"
     >
         <mat-form-field 
             class="form-input-full"
@@ -40,6 +51,35 @@
                 mat-raised-button 
                 color="primary"
                 [disabled]='form.invalid'
+            >
+            Log in
+            </button>
+        </div>
+    </form>
+    <form
+        [formGroup]='formCandidate'
+        (ngSubmit)='onSubmitCandidate()'
+        class="form" 
+        *ngIf="checked == true"
+    >
+        <mat-form-field 
+            class="form-input-full"
+            appearance="outline"
+        >
+            <mat-label>Enter username</mat-label>
+            <input 
+                matInput 
+                placeholder="Username"
+                type="text"
+                formControlName='username'
+            >
+            <mat-error *ngIf="formCandidate.get('username').errors?.required">Username field must not be empty</mat-error>
+        </mat-form-field>
+        <div class="form-button">
+            <button 
+                mat-raised-button 
+                color="primary"
+                [disabled]='formCandidate.invalid'
             >
             Log in
             </button>

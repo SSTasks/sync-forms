@@ -26,18 +26,45 @@ export class SocketService {
     this.socket.emit('initiateInterview', interviewData);
   }
 
-  public joinInterview() {
-    this.socket.emit('joinInterview', this.interviewId);
+  public joinInterview(userInfo) {
+    const connectionInfo = this.emitConnectionMessage(userInfo, 'connect');
+
+    this.socket.emit('joinInterview', connectionInfo);
   }
 
-  public endInterview() {
+  public endInterview(userInfo) {
     // if we weren't connected, there is no need to unsub
     if (!this.socket) {
       return;
     }
+    const eventInfo = this.emitConnectionMessage(userInfo, 'end interview');
 
-    this.socket.emit('endInterview', this.interviewId);
+    this.socket.emit('endInterview', eventInfo);
     this.interviewId = null;
+  }
+
+  public emitConnectionMessage(userInfo, eventType) {
+    const role = userInfo.role[0].toUpperCase() + userInfo.role.slice(1);
+    let messageText = `${role} ${userInfo.fullname}`;
+
+    const connectionInfo = {
+      interviewId: this.interviewId,
+      messageText
+    };
+
+    if (eventType === 'connect') {
+      connectionInfo.messageText += ' has joined the interview';
+      return connectionInfo;
+
+    } else if (eventType === 'end interview') {
+      connectionInfo.messageText += ' has finished the interview. Thank you for participating.';
+      return connectionInfo;
+
+    } else {
+      connectionInfo.messageText += ' has left the interview';
+
+      this.socket.emit('onLeave', connectionInfo);
+    }
   }
 
   public updateInterviewList() {
@@ -79,6 +106,20 @@ export class SocketService {
   public sendOnChangetEvent(eventInfo) {
     eventInfo.interviewId = this.interviewId;
     this.socket.emit('onChange', eventInfo);
+  }
+
+  public showMessage() {
+    const messageObservable = new Observable(observer => {
+      this.socket.on('showMessage', (message) => {
+        observer.next(message);
+      });
+
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+
+    return messageObservable; 
   }
 
   public getClickEvent() {
@@ -141,6 +182,20 @@ export class SocketService {
     const eventObservable = new Observable(observer => {
       this.socket.on('newOnChange', (eventData) => {
         observer.next(eventData);
+      });
+
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+
+    return eventObservable;
+  }
+
+  public finishInterview() {
+    const eventObservable = new Observable(observer => {
+      this.socket.on('finishInterview', (triggerFinish) => {
+        observer.next(triggerFinish);
       });
 
       return () => {

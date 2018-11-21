@@ -26,6 +26,11 @@ export class AuthService {
         return this.http.get<any>('/users/logout')
     }
 
+    loginCandidate(username: object) {
+        localStorage.setItem('currentUser', JSON.stringify(username));
+        this.user.emit(username);
+    }
+
     subscriber() {
         return this.user;
     }

@@ -8076,12 +8076,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _forms_interview_page_interview_page_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./forms/interview-page/interview-page.component */ "./src/app/forms/interview-page/interview-page.component.ts");
 /* harmony import */ var _modules_admin_admin_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/admin/admin.component */ "./src/app/modules/admin/admin.component.ts");
 /* harmony import */ var _components_main_page_main_page_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/main-page/main-page.component */ "./src/app/components/main-page/main-page.component.ts");
+/* harmony import */ var _modules_notfound_notfound_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/notfound/notfound.component */ "./src/app/modules/notfound/notfound.component.ts");
+/* harmony import */ var _modules_statistics_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/statistics/statistics/statistics.component */ "./src/app/modules/statistics/statistics/statistics.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -8097,7 +8101,8 @@ var routes = [
     { path: 'constructor', component: _forms_constructor_page_constructor_page_component__WEBPACK_IMPORTED_MODULE_4__["ConstructorPageComponent"] },
     { path: 'interview-page', component: _forms_interview_page_interview_page_component__WEBPACK_IMPORTED_MODULE_5__["InterviewPageComponent"] },
     { path: 'admin', component: _modules_admin_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"] },
-    { path: '**', redirectTo: '/main' }
+    { path: 'statistics', component: _modules_statistics_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_9__["StatisticsComponent"] },
+    { path: '**', component: _modules_notfound_notfound_component__WEBPACK_IMPORTED_MODULE_8__["NotfoundComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -8199,12 +8204,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_main_page_main_page_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/main-page/main-page.component */ "./src/app/components/main-page/main-page.component.ts");
 /* harmony import */ var _forms_forms_page_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./forms/forms-page.module */ "./src/app/forms/forms-page.module.ts");
 /* harmony import */ var _modules_admin_admin_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/admin/admin.module */ "./src/app/modules/admin/admin.module.ts");
+/* harmony import */ var _modules_statistics_statistics_module__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/statistics/statistics.module */ "./src/app/modules/statistics/statistics.module.ts");
+/* harmony import */ var _modules_notfound_notfound_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/notfound/notfound.module */ "./src/app/modules/notfound/notfound.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -8239,7 +8248,9 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"],
                 _forms_forms_page_module__WEBPACK_IMPORTED_MODULE_12__["FormsPageModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"],
+                _modules_statistics_statistics_module__WEBPACK_IMPORTED_MODULE_14__["StatisticsModule"],
+                _modules_notfound_notfound_module__WEBPACK_IMPORTED_MODULE_15__["NotfoundModule"]
             ],
             providers: [],
             bootstrap: [
@@ -8261,7 +8272,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <div class=\"logo\"></div>\r\n        <h1 class=\"header-logo\" [routerLink]=\"['/main']\">{{Title}}</h1>\r\n        <span class=\"header-spacer\"></span>\r\n        <ul class=\"header-list headernav\">\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer disabled\" mat-menu-item routerLinkActive disabled [routerLink]=\"[ '/interviews' ]\" >Interviews</button>\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer disabled\" color=\"white\" mat-menu-item routerLinkActive disabled [routerLink]=\"[ '/statistics' ]\" >Statistics</button>\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer\" mat-menu-item [routerLink]=\"[ '/preview' ]\" >Preview</button>\r\n            <button *ngIf=\"isMaster\" class=\"header-button-spacer\" color=\"white\" mat-menu-item routerLinkActive [routerLink]=\"[ '/admin' ]\">Admin</button>\r\n            <a *ngIf=\"!user?.fullname\" class=\"header-button-spacer\" mat-raised-button [routerLink]=\"[ '/login' ]\">Log in</a>\r\n            <button *ngIf=\"user?.fullname\" class=\"header-user header-button-spacer\" mat-button [matMenuTriggerFor]=\"menu\">{{user.fullname}}</button>\r\n                <mat-menu #menu=\"matMenu\" xPosition=\"after\">\r\n                    <a mat-menu-item (click)=\"onLogout()\" class=\"logout\">Log out</a>\r\n                </mat-menu>\r\n        </ul>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>"
+module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <div class=\"logo\"></div>\r\n        <h1 class=\"header-logo\" [routerLink]=\"['/main']\">{{Title}}</h1>\r\n        <span class=\"header-spacer\"></span>\r\n        <ul class=\"header-list headernav\">\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer disabled\" mat-menu-item routerLinkActive disabled [routerLink]=\"[ '/interviews' ]\" >Interviews</button>\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer\" mat-menu-item [routerLink]=\"[ '/preview' ]\" >Preview</button>\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer\" mat-menu-item routerLinkActive [routerLink]=\"[ '/statistics' ]\" >Statistics</button>\r\n            <button *ngIf=\"isMaster\" class=\"header-button-spacer\" color=\"white\" mat-menu-item routerLinkActive [routerLink]=\"[ '/admin' ]\">Admin</button>\r\n            <a *ngIf=\"!user?.fullname\" class=\"header-button-spacer\" mat-raised-button [routerLink]=\"[ '/login' ]\">Log in</a>\r\n            <button *ngIf=\"user?.fullname\" class=\"header-user header-button-spacer\" mat-button [matMenuTriggerFor]=\"menu\">{{user.fullname}}</button>\r\n                <mat-menu #menu=\"matMenu\" xPosition=\"after\">\r\n                    <a mat-menu-item (click)=\"onLogout()\" class=\"logout\">Log out</a>\r\n                </mat-menu>\r\n        </ul>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>"
 
 /***/ }),
 
@@ -8682,7 +8693,9 @@ var ConstructorPageComponent = /** @class */ (function () {
                     _this.form = forms[0]; // show updated form
                 }
                 else {
-                    _this.form = data[data.length - 1]; // show created form
+                    var forms = data.filter(function (form) { return form.preview === _this.form.preview; });
+                    ; // show created form
+                    _this.form = forms[0];
                 }
                 _this.screenshotService.saveScreenshot(_this.form);
             }
@@ -9295,6 +9308,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_broadcast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
 /* harmony import */ var _services_socket_service_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/socket-service.service */ "./src/app/forms/services/socket-service.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9312,15 +9326,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 // import { userInfo } from 'os';
 var InterviewPageComponent = /** @class */ (function () {
-    function InterviewPageComponent(breakpoint, fb, _http, router, broadcast, socketService) {
+    function InterviewPageComponent(breakpoint, fb, _http, router, broadcast, socketService, snackBar) {
         this.breakpoint = breakpoint;
         this.fb = fb;
         this._http = _http;
         this.router = router;
         this.broadcast = broadcast;
         this.socketService = socketService;
+        this.snackBar = snackBar;
         this.mouseEventOptions = {
             view: window,
             bubbles: true,
@@ -9349,6 +9365,7 @@ var InterviewPageComponent = /** @class */ (function () {
         }
         if (!this.currentUser) {
             this.currentUser = {
+                fullname: 'Anonymous Candidate',
                 role: 'candidate'
             };
         }
@@ -9369,7 +9386,7 @@ var InterviewPageComponent = /** @class */ (function () {
         else {
             this.isSpectator = true;
             this.buttonInscription = 'Exit interview';
-            this.socketService.joinInterview();
+            this.socketService.joinInterview(this.currentUser);
         }
         window.onbeforeunload = function () { return _this.ngOnDestroy(); };
     };
@@ -9385,6 +9402,8 @@ var InterviewPageComponent = /** @class */ (function () {
             this.unsubFocus = this.focusEmitter();
             this.unsubKeyboard = this.keyboardEventEmitter();
             this.unsubOnChange = this.onChangeEventEmitter();
+            this.unsubConnectionMessage = this.showConnectionMessage();
+            this.unsubDisconnectTrigger = this.disconnectInterview();
         }
     };
     InterviewPageComponent.prototype.endInterview = function () {
@@ -9395,6 +9414,13 @@ var InterviewPageComponent = /** @class */ (function () {
             this.router.navigate(['/preview']);
         }
     };
+    InterviewPageComponent.prototype.disconnectInterview = function () {
+        var _this = this;
+        return this.socketService.finishInterview()
+            .subscribe(function (triggerFinish) {
+            setTimeout(function () { return _this.endInterview(); }, 2000);
+        });
+    };
     InterviewPageComponent.prototype.addCreationTime = function () {
         var timezoneOffset = (new Date()).getTimezoneOffset() * 60000;
         var dateNow = (new Date(Date.now() - timezoneOffset)).toISOString();
@@ -9402,6 +9428,15 @@ var InterviewPageComponent = /** @class */ (function () {
         var month = dateNow.slice(5, 7);
         var time = dateNow.slice(11, 16);
         return day + "." + month + " " + time;
+    };
+    InterviewPageComponent.prototype.showConnectionMessage = function () {
+        var _this = this;
+        return this.socketService.showMessage()
+            .subscribe(function (message) {
+            _this.snackBar.open(message, ' ', {
+                duration: 3000
+            });
+        });
     };
     // primaly written to be able to change slider value
     InterviewPageComponent.prototype.getElementConfigs = function () {
@@ -9621,10 +9656,11 @@ var InterviewPageComponent = /** @class */ (function () {
             return;
         }
         else if (this.currentUser.role === 'candidate' || this.isSpectator) {
+            this.socketService.emitConnectionMessage(this.currentUser, 'disconnect');
             this.socketService.setInterviewId(null);
         }
         else {
-            this.socketService.endInterview();
+            this.socketService.endInterview(this.currentUser);
         }
         if (this.unsubClick) {
             this.unsubClick.unsubscribe();
@@ -9632,6 +9668,8 @@ var InterviewPageComponent = /** @class */ (function () {
             this.unsubFocus.unsubscribe();
             this.unsubKeyboard.unsubscribe();
             this.unsubOnChange.unsubscribe();
+            this.unsubConnectionMessage.unsubscribe();
+            this.unsubDisconnectTrigger.unsubscribe();
         }
     };
     InterviewPageComponent = __decorate([
@@ -9645,7 +9683,8 @@ var InterviewPageComponent = /** @class */ (function () {
             _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"],
             _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
             _services_broadcast_service__WEBPACK_IMPORTED_MODULE_5__["BroadcastService"],
-            _services_socket_service_service__WEBPACK_IMPORTED_MODULE_6__["SocketService"]])
+            _services_socket_service_service__WEBPACK_IMPORTED_MODULE_6__["SocketService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatSnackBar"]])
     ], InterviewPageComponent);
     return InterviewPageComponent;
 }());
@@ -10259,16 +10298,38 @@ var SocketService = /** @class */ (function () {
         this.interviewId = interviewData.interviewId;
         this.socket.emit('initiateInterview', interviewData);
     };
-    SocketService.prototype.joinInterview = function () {
-        this.socket.emit('joinInterview', this.interviewId);
+    SocketService.prototype.joinInterview = function (userInfo) {
+        var connectionInfo = this.emitConnectionMessage(userInfo, 'connect');
+        this.socket.emit('joinInterview', connectionInfo);
     };
-    SocketService.prototype.endInterview = function () {
+    SocketService.prototype.endInterview = function (userInfo) {
         // if we weren't connected, there is no need to unsub
         if (!this.socket) {
             return;
         }
-        this.socket.emit('endInterview', this.interviewId);
+        var eventInfo = this.emitConnectionMessage(userInfo, 'end interview');
+        this.socket.emit('endInterview', eventInfo);
         this.interviewId = null;
+    };
+    SocketService.prototype.emitConnectionMessage = function (userInfo, eventType) {
+        var role = userInfo.role[0].toUpperCase() + userInfo.role.slice(1);
+        var messageText = role + " " + userInfo.fullname;
+        var connectionInfo = {
+            interviewId: this.interviewId,
+            messageText: messageText
+        };
+        if (eventType === 'connect') {
+            connectionInfo.messageText += ' has joined the interview';
+            return connectionInfo;
+        }
+        else if (eventType === 'end interview') {
+            connectionInfo.messageText += ' has finished the interview. Thank you for participating.';
+            return connectionInfo;
+        }
+        else {
+            connectionInfo.messageText += ' has left the interview';
+            this.socket.emit('onLeave', connectionInfo);
+        }
     };
     SocketService.prototype.updateInterviewList = function () {
         var _this = this;
@@ -10302,6 +10363,18 @@ var SocketService = /** @class */ (function () {
     SocketService.prototype.sendOnChangetEvent = function (eventInfo) {
         eventInfo.interviewId = this.interviewId;
         this.socket.emit('onChange', eventInfo);
+    };
+    SocketService.prototype.showMessage = function () {
+        var _this = this;
+        var messageObservable = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
+            _this.socket.on('showMessage', function (message) {
+                observer.next(message);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return messageObservable;
     };
     SocketService.prototype.getClickEvent = function () {
         var _this = this;
@@ -10356,6 +10429,18 @@ var SocketService = /** @class */ (function () {
         var eventObservable = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
             _this.socket.on('newOnChange', function (eventData) {
                 observer.next(eventData);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return eventObservable;
+    };
+    SocketService.prototype.finishInterview = function () {
+        var _this = this;
+        var eventObservable = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
+            _this.socket.on('finishInterview', function (triggerFinish) {
+                observer.next(triggerFinish);
             });
             return function () {
                 _this.socket.disconnect();
@@ -10427,7 +10512,9 @@ var AdminComponent = /** @class */ (function () {
         this.title = 'Admin panel';
     }
     AdminComponent.prototype.ngOnInit = function () {
-        this.router.navigate(['admin/interviewers']);
+        if (this.router.routerState.snapshot.url === '/admin') {
+            this.router.navigate(['admin/interviewers']);
+        }
     };
     AdminComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -10467,12 +10554,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_listcontrols_listcontrols_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/listcontrols/listcontrols.component */ "./src/app/modules/admin/components/listcontrols/listcontrols.component.ts");
 /* harmony import */ var _components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/dialog/users.dialog */ "./src/app/modules/admin/components/dialog/users.dialog.ts");
 /* harmony import */ var _components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/dialog/group.dialog */ "./src/app/modules/admin/components/dialog/group.dialog.ts");
+/* harmony import */ var _components_dynamicform_dynamicform_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/dynamicform/dynamicform.module */ "./src/app/modules/admin/components/dynamicform/dynamicform.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -10503,7 +10592,9 @@ var AdminModule = /** @class */ (function () {
                 _material_material__WEBPACK_IMPORTED_MODULE_4__["MaterialModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(adminRoutes),
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _angular_flex_layout__WEBPACK_IMPORTED_MODULE_5__["FlexLayoutModule"]
+                _angular_flex_layout__WEBPACK_IMPORTED_MODULE_5__["FlexLayoutModule"],
+                _components_dynamicform_dynamicform_module__WEBPACK_IMPORTED_MODULE_13__["DynamicformModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]
             ],
             declarations: [
                 _admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"],
@@ -10537,7 +10628,7 @@ var AdminModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title> {{!data ? 'Add new group' : 'Delete group'}} </h2>\r\n<mat-dialog-content>\r\n    <form novalidate #groupForm=\"ngForm\">\r\n        <div *ngIf=\"!data\">\r\n            <div *ngFor=\"let field of fields\">\r\n                <mat-form-field>\r\n                    <input matInput [placeholder]=\"field.title\"\r\n                                    [name]=\"field.title\"\r\n                                    ngModel #[field.title]=\"ngModel\"\r\n                                    minlength=\"3\"\r\n                                    maxlength=\"15\"\r\n                                    required\r\n                                    [matTooltip]=\"field.tooltip\">\r\n                </mat-form-field>\r\n            </div>\r\n        </div>\r\n\r\n        <div *ngIf=\"data\">\r\n            <div *ngFor=\"let field of data\">\r\n                <p class=\"field_label\">{{field.title}}:</p>\r\n                <mat-form-field>\r\n                    <input matInput [placeholder]=\"field.value\"\r\n                                    [name]=\"field.value\"\r\n                                    disabled>\r\n                </mat-form-field>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n    <button mat-raised-button mat-dialog-close color=\"warn\" *ngIf=\"!data\"> Cancel </button>\r\n    <button mat-raised-button [disabled]=\"groupForm.invalid\" [mat-dialog-close]=\"groupForm.value\" color=\"primary\" *ngIf=\"!data\"> Create </button>\r\n\r\n    <button mat-raised-button mat-dialog-close color=\"primary\" *ngIf=\"data\"> Cancel </button>\r\n    <button mat-raised-button [mat-dialog-close]=\"{shouldDelete: true}\" color=\"warn\" *ngIf=\"data\"> Delete </button>\r\n</mat-dialog-actions>\r\n\r\n<!-- Group\r\n      Description -->\r\n\r\n<!-- <div *ngIf=\"groupName.errors?.required && groupName.touched\" class=\"error\">\r\n          Group title is required.\r\n        </div>\r\n        <div *ngIf=\"groupName.errors?.minlength && groupName.touched\" class=\"error\">\r\n         Minimum of 2 characters.\r\n      </div> -->"
+module.exports = "<h2 mat-dialog-title> {{getTitle()}} </h2>\r\n<mat-dialog-content>\r\n    <dynamic-form [fields]=\"groupConfig\" #form=\"dynamicForm\">\r\n    </dynamic-form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n   <button mat-raised-button mat-dialog-close color=\"warn\" *ngIf=\"!data\"> Cancel </button>\r\n   <button mat-raised-button mat-dialog-close color=\"primary\" *ngIf=\"data\"> Cancel </button>\r\n   <button mat-raised-button [disabled]=\"!form?.valid\" [mat-dialog-close]=\"form?.value\" color=\"primary\" *ngIf=\"!data\"> Create </button>\r\n   <button mat-raised-button [disabled]=\"!form?.valid\" [mat-dialog-close]=\"form?.value\" color=\"accent\" *ngIf=\"data?.edit\"> Save </button>\r\n   <button mat-raised-button [mat-dialog-close]=\"{shouldDelete: true}\" color=\"warn\" *ngIf=\"data && !data.edit\"> Delete </button>\r\n</mat-dialog-actions>"
 
 /***/ }),
 
@@ -10564,6 +10655,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupDialogComponent", function() { return GroupDialogComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _dynamicform_dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../dynamicform/dynamic-form-container/dynamic-form-container.component */ "./src/app/modules/admin/components/dynamicform/dynamic-form-container/dynamic-form-container.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10578,21 +10671,88 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 };
 
 
+
+
 var GroupDialogComponent = /** @class */ (function () {
     function GroupDialogComponent(data) {
         this.data = data;
-        this.fields = [{
-                title: 'name',
-                value: 'Group name',
-                tooltip: 'A-z, space, dash, length: 3-15 symbols'
+        this.groupConfig = [{
+                type: "input",
+                label: "Title",
+                inputType: "text",
+                name: "name",
+                validations: [{
+                        name: "required",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
+                        message: "Title required"
+                    },
+                    {
+                        name: "minlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(3),
+                        message: "Minimum length is 3 symbols"
+                    },
+                    {
+                        name: "maxlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(15),
+                        message: "Maximum length is 15 symbols"
+                    }
+                ]
             },
             {
-                title: 'description',
-                value: 'Description',
-                tooltip: 'A-z, length: 0-30 symbols'
+                type: "input",
+                label: "Description",
+                inputType: "description",
+                name: "description",
+                validations: [{
+                        name: "required",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
+                        message: "Description Required"
+                    },
+                    {
+                        name: "minlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(3),
+                        message: "Minimum length is 3 symbols"
+                    },
+                    {
+                        name: "maxlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(15),
+                        message: "Maximum length is 15 symbols"
+                    }
+                ]
             }
         ];
+        this.messages = {
+            new: 'Create new group',
+            edit: 'Edit grop',
+            del: 'Delete group',
+        };
     }
+    //remove setTimeout before production
+    GroupDialogComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        if (this.form) {
+            setTimeout(function () {
+                if (_this.data && !_this.data.edit) {
+                    _this.data.forEach(function (field) {
+                        _this.form.setValue(field.title, field.value);
+                        _this.form.setDisabled(field.title, true);
+                    });
+                }
+                else if (_this.data && _this.data.edit) {
+                    _this.data.object.forEach(function (field) {
+                        _this.form.setValue(field.title, field.value);
+                    });
+                }
+            });
+        }
+    };
+    GroupDialogComponent.prototype.getTitle = function () {
+        return !this.data ? this.messages.new : this.data.edit ? this.messages.edit : this.messages.del;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_dynamicform_dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_3__["DynamicFormComponent"]),
+        __metadata("design:type", _dynamicform_dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_3__["DynamicFormComponent"])
+    ], GroupDialogComponent.prototype, "form", void 0);
     GroupDialogComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'group-dialog',
@@ -10605,6 +10765,19 @@ var GroupDialogComponent = /** @class */ (function () {
     return GroupDialogComponent;
 }());
 
+// 19.11.2018 olez: instead of using ngAfterViewInit, add properties with getValue() and isDisabled()
+// you can use this code for adding field value and disabling it in case of removing object
+//
+// getValue(fieldTitle: string){
+//     (this.data && !this.data.edit) ? 
+//         this.data.filter( field => field.title === fieldTitle)[0].value : 
+//     (this.data && this.data.edit) ?
+//         this.data.object.filter( field => field.title === fieldTitle)[0].value :
+//         null;
+// }
+// isDisabled(){
+//     return this.data && !this.data.edit;
+// }
 
 
 /***/ }),
@@ -10616,7 +10789,7 @@ var GroupDialogComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{!data ? 'Add new user' : 'Delete user'}}</h2>\r\n<mat-dialog-content>\r\n    <form novalidate #userForm=\"ngForm\">\r\n        <div *ngIf=\"!data\">\r\n        <div *ngFor=\"let field of inputFields\">\r\n            <mat-form-field>\r\n                <input matInput [placeholder]=\"field.value\" [name]=\"field.title\" ngModel #[field.title]=\"ngModel\" minlength=\"2\" required [type]=\"field?.type\">\r\n            </mat-form-field>\r\n            <mat-error *ngIf=\"field.invalid\">{{field}} Error.</mat-error>\r\n        </div>\r\n        <div>\r\n            <mat-form-field>\r\n                <mat-select placeholder=\"User group\" required ngModel name=\"group\">\r\n                    <mat-option value=\"\" disabled selected></mat-option>\r\n                    <mat-option *ngFor=\"let group of groups\" [value]=\"group.name\">\r\n                        {{group.name}}\r\n                    </mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n        </div>\r\n\r\n        <mat-slide-toggle ngModel name=\"role\" [checked]=\"checked\">\r\n            Master\r\n        </mat-slide-toggle>\r\n        </div>\r\n\r\n        <div *ngIf=\"data\">\r\n                <div *ngFor=\"let field of data\">\r\n                    <p class=\"field_label\">{{field.title}}:</p>\r\n                    <mat-form-field>          \r\n                        <input matInput [placeholder]=\"field.value\"\r\n                                        [name]=\"field.value\"\r\n                                        disabled>\r\n                    </mat-form-field>\r\n                </div>\r\n        </div>\r\n\r\n        <div *ngIf=\"data && edit\">\r\n            <div *ngFor=\"let field of data\">\r\n                <mat-form-field>\r\n                    <input matInput [placeholder]=\"field.value\" [name]=\"field.title\" ngModel #[field.title]=\"ngModel\" minlength=\"2\" required [type]=\"field?.type\">\r\n                </mat-form-field>\r\n                <mat-error *ngIf=\"field.invalid\">{{field}} Error.</mat-error>\r\n            </div>\r\n            <div>\r\n                <mat-form-field>\r\n                    <mat-select placeholder=\"User group\" required ngModel name=\"group\">\r\n                        <mat-option value=\"\" disabled selected></mat-option>\r\n                        <mat-option *ngFor=\"let group of groups\" [value]=\"group.name\">\r\n                            {{group.name}}\r\n                        </mat-option>\r\n                    </mat-select>\r\n                </mat-form-field>\r\n            </div>\r\n    \r\n            <mat-slide-toggle ngModel name=\"role\" [checked]=\"checked\">\r\n                Master\r\n            </mat-slide-toggle>\r\n        </div>\r\n    </form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n    <button mat-raised-button mat-dialog-close color=\"warn\" *ngIf=\"!data\"> Discard </button>\r\n    <button mat-raised-button [disabled]=\"userForm.invalid\" [mat-dialog-close]=\"userForm.value\" color=\"primary\" *ngIf=\"!data\"> Add </button>\r\n\r\n    <button mat-raised-button mat-dialog-close color=\"primary\" *ngIf=\"data\"> Cancel </button>\r\n    <button mat-raised-button [mat-dialog-close]=\"{shouldDelete: true}\" color=\"warn\" *ngIf=\"data\"> Delete </button>\r\n\r\n    <button mat-raised-button mat-dialog-close color=\"warn\" *ngIf=\"edit\"> Discard </button>\r\n    <button mat-raised-button [disabled]=\"userForm.invalid\" [mat-dialog-close]=\"userForm.value\" color=\"primary\" *ngIf=\"edit\"> Add </button>\r\n</mat-dialog-actions>"
+module.exports = "<h2 mat-dialog-title> {{getTitle()}} </h2>\r\n<mat-dialog-content>\r\n    <dynamic-form [fields]=\"userConfig\" #form=\"dynamicForm\">\r\n    </dynamic-form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n   <button mat-raised-button mat-dialog-close color=\"warn\" *ngIf=\"!data\"> Cancel </button>\r\n   <button mat-raised-button mat-dialog-close color=\"primary\" *ngIf=\"data\"> Cancel </button>\r\n   <button mat-raised-button [disabled]=\"!form?.valid\" [mat-dialog-close]=\"form?.value\" color=\"primary\" *ngIf=\"!data\"> Create </button>\r\n   <button mat-raised-button [disabled]=\"!form?.valid\" [mat-dialog-close]=\"form?.value\" color=\"accent\" *ngIf=\"data?.edit\"> Save </button>\r\n   <button mat-raised-button [mat-dialog-close]=\"{shouldDelete: true}\" color=\"warn\" *ngIf=\"data && !data.edit\"> Delete </button>\r\n</mat-dialog-actions>"
 
 /***/ }),
 
@@ -10627,7 +10800,7 @@ module.exports = "<h2 mat-dialog-title>{{!data ? 'Add new user' : 'Delete user'}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".field_label {\n  margin: 0 !important; }\n"
+module.exports = ".field_label {\n  margin: 0 !important; }\n\n.mat-dialog-content {\n  overflow: visible; }\n"
 
 /***/ }),
 
@@ -10644,6 +10817,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/services/http.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _dynamicform_dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../dynamicform/dynamic-form-container/dynamic-form-container.component */ "./src/app/modules/admin/components/dynamicform/dynamic-form-container/dynamic-form-container.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10659,41 +10834,153 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 
 
 
+
+
 var UsersDialogComponent = /** @class */ (function () {
     function UsersDialogComponent(http, data) {
         this.http = http;
         this.data = data;
-        this.title = 'Add new interviewer';
-        this.inputFields = [{
-                title: 'fullname',
-                value: 'Name'
-            },
-            {
-                title: 'username',
-                value: 'Username'
-            },
-            {
-                title: 'password',
-                value: 'Password',
-                type: 'password'
-            }
-            // {
-            //   title: 'confirm',
-            //   value: 'Confirm Password',
-            //   type: 'password'
-            // }
-        ];
         this.checked = false;
+        this.messages = {
+            new: 'Create new user',
+            edit: 'Edit user',
+            del: 'Delete user',
+        };
+        this.userConfig = [{
+                type: "input",
+                label: "Name",
+                inputType: "text",
+                name: "fullname",
+                validations: [{
+                        name: "required",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required,
+                        message: "Name required"
+                    },
+                    {
+                        name: "minlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3),
+                        message: "Minimum length is 3 symbols"
+                    },
+                    {
+                        name: "maxlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(15),
+                        message: "Maximum length is 15 symbols"
+                    }
+                ]
+            },
+            {
+                type: "input",
+                label: "Username",
+                inputType: "text",
+                name: "username",
+                validations: [{
+                        name: "required",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required,
+                        message: "Username required"
+                    },
+                    {
+                        name: "minlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3),
+                        message: "Minimum length is 3 symbols"
+                    },
+                    {
+                        name: "maxlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(15),
+                        message: "Maximum length is 15 symbols"
+                    }
+                ]
+            },
+            {
+                type: "input",
+                label: "Password",
+                inputType: "password",
+                name: "password",
+                validations: [{
+                        name: "required",
+                        validator: this.isPassRequired(),
+                        message: "Password required"
+                    },
+                    {
+                        name: "minlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3),
+                        message: "Minimum length is 3 symbols"
+                    },
+                    {
+                        name: "maxlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(15),
+                        message: "Maximum length is 15 symbols"
+                    }
+                ]
+            },
+            {
+                type: "select",
+                label: "User group",
+                name: "group",
+                options: [],
+                validations: [{
+                        name: "required",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required,
+                        message: "Password required"
+                    },
+                    {
+                        name: "minlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3),
+                        message: "Minimum length is 3 symbols"
+                    },
+                    {
+                        name: "maxlength",
+                        validator: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(15),
+                        message: "Maximum length is 15 symbols"
+                    }
+                ]
+            },
+            {
+                type: "toggle",
+                label: "Master",
+                name: "role",
+                value: this.checked,
+                validations: []
+            }
+        ];
     }
-    UsersDialogComponent.prototype.getErrorMessage = function (field) {
-        return field.hasError('required') ? 'You must enter a value' :
-            field.hasError('email') ? 'Not a valid email' : '';
-    };
-    UsersDialogComponent.prototype.ngOnInit = function () {
+    UsersDialogComponent.prototype.ngOnInit = function () { };
+    //remove setTimeout before production
+    UsersDialogComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this.http.getGroups().
-            subscribe(function (groups) { return _this.groups = groups; });
+        if (this.form) {
+            setTimeout(function () {
+                _this.http.getGroups().subscribe(function (groups) {
+                    _this.form.fields.filter(function (field) {
+                        if (field.name === 'group') {
+                            var loadedGroups = groups.map(function (group) { return group.name; });
+                            field.options = loadedGroups;
+                        }
+                    });
+                });
+                if (_this.data && !_this.data.edit) {
+                    _this.data.forEach(function (field) {
+                        _this.form.setValue(field.title, field.value);
+                        _this.form.setDisabled(field.title, true);
+                    });
+                }
+                else if (_this.data && _this.data.edit) {
+                    _this.data.object.forEach(function (field) {
+                        _this.form.setValue(field.title, field.value);
+                    });
+                }
+            });
+        }
     };
+    UsersDialogComponent.prototype.getTitle = function () {
+        return !this.data ? this.messages.new : this.data.edit ? this.messages.edit : this.messages.del;
+    };
+    UsersDialogComponent.prototype.isPassRequired = function () {
+        return (this.data && this.data.edit) ? _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].nullValidator : _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_dynamicform_dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_4__["DynamicFormComponent"]),
+        __metadata("design:type", _dynamicform_dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_4__["DynamicFormComponent"])
+    ], UsersDialogComponent.prototype, "form", void 0);
     UsersDialogComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'users-dialog',
@@ -10710,6 +10997,467 @@ var UsersDialogComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/modules/admin/components/dynamicform/dynamic-field/dynamic-field.directive.ts":
+/*!***********************************************************************************************!*\
+  !*** ./src/app/modules/admin/components/dynamicform/dynamic-field/dynamic-field.directive.ts ***!
+  \***********************************************************************************************/
+/*! exports provided: DynamicFieldDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DynamicFieldDirective", function() { return DynamicFieldDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _form_controls_input_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../form-controls/input.component */ "./src/app/modules/admin/components/dynamicform/form-controls/input.component.ts");
+/* harmony import */ var _form_controls_select_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../form-controls/select.component */ "./src/app/modules/admin/components/dynamicform/form-controls/select.component.ts");
+/* harmony import */ var _form_controls_toggle_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../form-controls/toggle.component */ "./src/app/modules/admin/components/dynamicform/form-controls/toggle.component.ts");
+/* harmony import */ var _form_controls_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../form-controls/button.component */ "./src/app/modules/admin/components/dynamicform/form-controls/button.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var componentMapper = {
+    input: _form_controls_input_component__WEBPACK_IMPORTED_MODULE_2__["InputComponent"],
+    select: _form_controls_select_component__WEBPACK_IMPORTED_MODULE_3__["SelectComponent"],
+    toggle: _form_controls_toggle_component__WEBPACK_IMPORTED_MODULE_4__["ToggleComponent"],
+    button: _form_controls_button_component__WEBPACK_IMPORTED_MODULE_5__["ButtonComponent"]
+};
+var DynamicFieldDirective = /** @class */ (function () {
+    //ComponentFactoryResolver is used to resolve the component at run time
+    //ViewContainerRef to gain access to the view container of the element that will host the dynamically added component.
+    function DynamicFieldDirective(resolver, container) {
+        this.resolver = resolver;
+        this.container = container;
+    }
+    DynamicFieldDirective.prototype.ngOnInit = function () {
+        var factory = this.resolver.resolveComponentFactory(componentMapper[this.field.type]);
+        this.componentRef = this.container.createComponent(factory);
+        this.componentRef.instance.field = this.field;
+        this.componentRef.instance.group = this.group;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], DynamicFieldDirective.prototype, "field", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"])
+    ], DynamicFieldDirective.prototype, "group", void 0);
+    DynamicFieldDirective = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"])({
+            selector: '[dynamicField]'
+        }),
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ComponentFactoryResolver"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"]])
+    ], DynamicFieldDirective);
+    return DynamicFieldDirective;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/dynamicform/dynamic-form-container/dynamic-form-container.component.ts":
+/*!*****************************************************************************************************************!*\
+  !*** ./src/app/modules/admin/components/dynamicform/dynamic-form-container/dynamic-form-container.component.ts ***!
+  \*****************************************************************************************************************/
+/*! exports provided: DynamicFormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DynamicFormComponent", function() { return DynamicFormComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DynamicFormComponent = /** @class */ (function () {
+    function DynamicFormComponent(fb) {
+        this.fb = fb;
+        this.fields = [];
+        this.submit = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    Object.defineProperty(DynamicFormComponent.prototype, "controls", {
+        get: function () {
+            return this.fields.filter(function (_a) {
+                var type = _a.type;
+                return type !== 'button';
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DynamicFormComponent.prototype, "changes", {
+        get: function () {
+            return this.form.valueChanges;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DynamicFormComponent.prototype, "valid", {
+        get: function () {
+            return this.form.valid;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DynamicFormComponent.prototype, "value", {
+        get: function () {
+            return this.form.value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DynamicFormComponent.prototype.ngOnInit = function () {
+        this.form = this.createGroup();
+    };
+    DynamicFormComponent.prototype.ngOnChanges = function () {
+        var _this = this;
+        if (this.form) {
+            var controls_1 = Object.keys(this.form.controls);
+            var configControls_1 = this.controls.map(function (item) { return item.name; });
+            controls_1
+                .filter(function (control) { return !configControls_1.includes(control); })
+                .forEach(function (control) { return _this.form.removeControl(control); });
+            configControls_1
+                .filter(function (control) { return !controls_1.includes(control); })
+                .forEach(function (name) {
+                var config = _this.fields.find(function (control) { return control.name === name; });
+                _this.form.addControl(name, _this.createControl(config));
+            });
+        }
+    };
+    DynamicFormComponent.prototype.createGroup = function () {
+        var _this = this;
+        var group = this.fb.group({});
+        this.controls.forEach(function (control) { return group.addControl(control.name, _this.createControl(control)); });
+        return group;
+    };
+    DynamicFormComponent.prototype.createControl = function (config) {
+        var disabled = config.disabled, validations = config.validations, value = config.value;
+        return this.fb.control({
+            disabled: disabled,
+            value: value
+        }, this.bindValidations(validations || []));
+    };
+    DynamicFormComponent.prototype.handleSubmit = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.submit.emit(this.value);
+    };
+    DynamicFormComponent.prototype.setDisabled = function (name, disable) {
+        if (this.form.controls[name]) {
+            var method = disable ? 'disable' : 'enable';
+            this.form.controls[name][method]();
+            return;
+        }
+        this.fields = this.fields.map(function (item) {
+            if (item.name === name) {
+                item.disabled = disable;
+            }
+            return item;
+        });
+    };
+    DynamicFormComponent.prototype.setValue = function (name, value) {
+        this.form.controls[name].setValue(value, {
+            emitEvent: true
+        });
+    };
+    DynamicFormComponent.prototype.remove = function (name, value) {
+        this.form.controls[name].setValue(value, {
+            emitEvent: true
+        });
+    };
+    DynamicFormComponent.prototype.bindValidations = function (validations) {
+        if (validations.length > 0) {
+            var validList_1 = [];
+            validations.forEach(function (valid) {
+                validList_1.push(valid.validator);
+            });
+            return _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].compose(validList_1);
+        }
+        return null;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Array)
+    ], DynamicFormComponent.prototype, "fields", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
+    ], DynamicFormComponent.prototype, "submit", void 0);
+    DynamicFormComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'dynamic-form',
+            exportAs: 'dynamicForm',
+            template: "\n  <form \n    class=\"dynamic-form\"\n    [formGroup]=\"form\"\n    (submit)=\"onSubmit($event)\"\n    >\n    <ng-container *ngFor=\"let field of fields\"\n                  dynamicField\n                  [field]=\"field\"\n                  [group]=\"form\">\n    </ng-container>\n  </form>\n  ",
+            styles: ["\n      mat-form-field {\n        display: block;\n      }\n  "]
+        }),
+        __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])
+    ], DynamicFormComponent);
+    return DynamicFormComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/dynamicform/dynamicform.module.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/modules/admin/components/dynamicform/dynamicform.module.ts ***!
+  \****************************************************************************/
+/*! exports provided: DynamicformModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DynamicformModule", function() { return DynamicformModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _material_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../material/material */ "./src/app/modules/material/material.ts");
+/* harmony import */ var _form_controls_input_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./form-controls/input.component */ "./src/app/modules/admin/components/dynamicform/form-controls/input.component.ts");
+/* harmony import */ var _form_controls_select_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./form-controls/select.component */ "./src/app/modules/admin/components/dynamicform/form-controls/select.component.ts");
+/* harmony import */ var _form_controls_toggle_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./form-controls/toggle.component */ "./src/app/modules/admin/components/dynamicform/form-controls/toggle.component.ts");
+/* harmony import */ var _form_controls_button_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./form-controls/button.component */ "./src/app/modules/admin/components/dynamicform/form-controls/button.component.ts");
+/* harmony import */ var _dynamic_field_dynamic_field_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dynamic-field/dynamic-field.directive */ "./src/app/modules/admin/components/dynamicform/dynamic-field/dynamic-field.directive.ts");
+/* harmony import */ var _dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./dynamic-form-container/dynamic-form-container.component */ "./src/app/modules/admin/components/dynamicform/dynamic-form-container/dynamic-form-container.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+var DynamicformModule = /** @class */ (function () {
+    function DynamicformModule() {
+    }
+    DynamicformModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _material_material__WEBPACK_IMPORTED_MODULE_3__["MaterialModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"]
+            ],
+            declarations: [
+                _form_controls_input_component__WEBPACK_IMPORTED_MODULE_4__["InputComponent"],
+                _form_controls_select_component__WEBPACK_IMPORTED_MODULE_5__["SelectComponent"],
+                _form_controls_toggle_component__WEBPACK_IMPORTED_MODULE_6__["ToggleComponent"],
+                _form_controls_button_component__WEBPACK_IMPORTED_MODULE_7__["ButtonComponent"],
+                _dynamic_field_dynamic_field_directive__WEBPACK_IMPORTED_MODULE_8__["DynamicFieldDirective"],
+                _dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_9__["DynamicFormComponent"]
+            ],
+            exports: [
+                _dynamic_form_container_dynamic_form_container_component__WEBPACK_IMPORTED_MODULE_9__["DynamicFormComponent"]
+            ],
+            entryComponents: [
+                _form_controls_input_component__WEBPACK_IMPORTED_MODULE_4__["InputComponent"],
+                _form_controls_select_component__WEBPACK_IMPORTED_MODULE_5__["SelectComponent"],
+                _form_controls_toggle_component__WEBPACK_IMPORTED_MODULE_6__["ToggleComponent"],
+                _form_controls_button_component__WEBPACK_IMPORTED_MODULE_7__["ButtonComponent"]
+            ]
+        })
+    ], DynamicformModule);
+    return DynamicformModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/dynamicform/form-controls/button.component.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/app/modules/admin/components/dynamicform/form-controls/button.component.ts ***!
+  \****************************************************************************************/
+/*! exports provided: ButtonComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ButtonComponent", function() { return ButtonComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ButtonComponent = /** @class */ (function () {
+    function ButtonComponent() {
+    }
+    ButtonComponent.prototype.ngOnInit = function () {
+    };
+    ButtonComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-button',
+            template: "\n  <button [type]=\"field.name\" mat-raised-button [color]=\"field.color\" [formGroup]=\"group\">{{field.label}}</button>\n  ",
+            styles: ["\n  button {\n    margin: 8px 8px 0 0;\n  }"]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ButtonComponent);
+    return ButtonComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/dynamicform/form-controls/input.component.ts":
+/*!***************************************************************************************!*\
+  !*** ./src/app/modules/admin/components/dynamicform/form-controls/input.component.ts ***!
+  \***************************************************************************************/
+/*! exports provided: InputComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputComponent", function() { return InputComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var InputComponent = /** @class */ (function () {
+    function InputComponent() {
+    }
+    InputComponent.prototype.ngOnInit = function () { };
+    InputComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-input',
+            template: "\n  <mat-form-field [formGroup]=\"group\">\n    <input matInput [formControlName]=\"field.name\" [placeholder]=\"field.label\" [type]=\"field.inputType\">\n    <ng-container *ngFor=\"let validation of field.validations;\" ngProjectAs=\"mat-error\">\n      <mat-error *ngIf=\"group.get(field.name).hasError(validation.name)\">{{validation.message}}</mat-error>\n    </ng-container>\n  </mat-form-field>\n  ",
+            styles: ["\n    mat-form-field {\n      display: block;\n    }\n  "]
+        }),
+        __metadata("design:paramtypes", [])
+    ], InputComponent);
+    return InputComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/dynamicform/form-controls/select.component.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/app/modules/admin/components/dynamicform/form-controls/select.component.ts ***!
+  \****************************************************************************************/
+/*! exports provided: SelectComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectComponent", function() { return SelectComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SelectComponent = /** @class */ (function () {
+    function SelectComponent() {
+    }
+    SelectComponent.prototype.ngOnInit = function () {
+    };
+    SelectComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-select',
+            template: "\n  <mat-form-field [formGroup]=\"group\">\n    <mat-select [placeholder]=\"field.label\" [formControlName]=\"field.name\">\n      <mat-option *ngFor=\"let item of field.options\" [value]=\"item\">{{item}}</mat-option>\n    </mat-select>\n  </mat-form-field>\n  ",
+            styles: []
+        }),
+        __metadata("design:paramtypes", [])
+    ], SelectComponent);
+    return SelectComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/admin/components/dynamicform/form-controls/toggle.component.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/app/modules/admin/components/dynamicform/form-controls/toggle.component.ts ***!
+  \****************************************************************************************/
+/*! exports provided: ToggleComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToggleComponent", function() { return ToggleComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ToggleComponent = /** @class */ (function () {
+    function ToggleComponent() {
+    }
+    ToggleComponent.prototype.ngOnInit = function () {
+    };
+    ToggleComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-toggle',
+            template: "\n  <div [formGroup]=\"group\" >\n    <mat-slide-toggle [formControlName]=\"field.name\">{{field.label}}</mat-slide-toggle>\n  </div>\n  ",
+            styles: []
+        }),
+        __metadata("design:paramtypes", [])
+    ], ToggleComponent);
+    return ToggleComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/modules/admin/components/groups/groups.component.html":
 /*!***********************************************************************!*\
   !*** ./src/app/modules/admin/components/groups/groups.component.html ***!
@@ -10717,7 +11465,7 @@ var UsersDialogComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section fxLayout=\"row\">\r\n  <interviewers-list [dataSource]=\"groupsSource\"\r\n                     [columns]=\"groupsColumns\" \r\n                     [headers]=\"groupsColumnsHeaders\"\r\n                     (onAdd)=\"addGroup()\"\r\n                     (selectGroup)=\"selectGroup($event)\"\r\n                     (contextMenu)=\"openContextMenu($event)\">\r\n      <h2>\r\n          <i class=\"material-icons\">\r\n              group\r\n          </i>\r\n          Group list\r\n      </h2>\r\n\r\n      <mat-paginator class=\"paginator groups__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #groupsPaginator >\r\n      </mat-paginator>\r\n\r\n      Add\r\n      <i class=\"material-icons\">\r\n              group_add\r\n      </i>\r\n  </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n  <button mat-menu-item (click)=\"edit($event)\" disabled>Edit</button>\r\n  <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>"
+module.exports = "<section fxLayout=\"row\">\r\n  <interviewers-list [dataSource]=\"groupsSource\"\r\n                     [columns]=\"groupsColumns\" \r\n                     [headers]=\"groupsColumnsHeaders\"\r\n                     (onAdd)=\"addGroup()\"\r\n                     (selectGroup)=\"selectGroup($event)\"\r\n                     (contextMenu)=\"openContextMenu($event)\">\r\n      <h2>\r\n          <i class=\"material-icons\">\r\n              group\r\n          </i>\r\n          Group list\r\n      </h2>\r\n\r\n      <mat-paginator class=\"paginator groups__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #groupsPaginator >\r\n      </mat-paginator>\r\n\r\n      Add\r\n      <i class=\"material-icons\">\r\n              group_add\r\n      </i>\r\n  </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n  <button mat-menu-item (click)=\"edit($event)\">Edit</button>\r\n  <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>"
 
 /***/ }),
 
@@ -10747,6 +11495,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/services/http.service.ts");
 /* harmony import */ var _services_dialog_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/dialog.service */ "./src/app/modules/admin/services/dialog.service.ts");
 /* harmony import */ var _services_snackbar_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/snackbar.service */ "./src/app/modules/admin/services/snackbar.service.ts");
+var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10768,11 +11524,13 @@ var GroupsComponent = /** @class */ (function () {
         this.message = message;
         this.groupsColumns = [{
                 title: "name",
-                value: "Title"
+                value: "Title",
+                error: [{ minlength: "Length > 3" }, { symbol: "Symbol not allowed" }]
             },
             {
                 title: "description",
-                value: "Description"
+                value: "Description",
+                error: [{ minlength: "Length > 3" }, { symbol: "Symbol not allowed" }]
             }
         ];
     }
@@ -10828,16 +11586,49 @@ var GroupsComponent = /** @class */ (function () {
             this.dialog.deleteGroup()
                 .afterClosed()
                 .subscribe(function (response) {
-                if (response.shouldDelete) {
+                if (response && response.shouldDelete) {
                     _this.removeGroup(_this.dialog.target);
                     _this.dialog.target = null;
                 }
             });
         }
     };
+    GroupsComponent.prototype.edit = function () {
+        var _this = this;
+        if (this.dialog.target) {
+            console.log(this.dialog.target);
+            this.dialog.editGroup()
+                .afterClosed()
+<<<<<<< HEAD
+                .subscribe(function (changedGroup) {
+                if (changedGroup) {
+                    _this.groupsData = _this.groupsData.map(function (group) {
+                        if (group.name === _this.dialog.target.name) {
+                            group = __assign({}, group, changedGroup);
+                        }
+                        return group;
+                    });
+                    _this.renderGroupsList();
+                    _this.http.updateGroup(__assign({}, changedGroup, { previousName: _this.dialog.target.name }))
+                        .subscribe(function (_) {
+                        console.log(changedGroup, 'was updated');
+=======
+                .subscribe(function (group) {
+                if (group) {
+                    _this.http.updateGroup(__assign({}, group, { previousName: _this.dialog.target.name }))
+                        .subscribe(function (_) {
+                        console.log(group, 'was updated');
+>>>>>>> 822700d001ad5637a641ab880463779dd34cd042
+                        _this.dialog.target = null;
+                    });
+                }
+                ;
+            });
+        }
+    };
     GroupsComponent.prototype.removeGroup = function (targetGroup) {
         var _this = this;
-        this.groupsData = this.groupsData.filter(function (group) { return group._id != targetGroup._id; });
+        this.groupsData = this.groupsData.filter(function (group) { return group.name != targetGroup.name; });
         this.renderGroupsList();
         this.message.show(targetGroup.name + ", was removed");
         this.http.deleteGroup(targetGroup._id)
@@ -10880,7 +11671,7 @@ var GroupsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section fxLayout=\"row\">\r\n    <interviewers-list [dataSource]=\"usersSource\"\r\n                       [columns]=\"usersColumns\"\r\n                       [headers]=\"usersColumnsHeaders\"\r\n                       (onAdd)=\"addUser()\"\r\n                       (contextMenu)=\"openContextMenu($event)\">\r\n        <h2>\r\n            <i class=\"material-icons\">\r\n                    person\r\n            </i>\r\n            Interviewers list <span *ngIf=\"selectedGroup\">: {{selectedGroup}}</span>\r\n        </h2> \r\n        \r\n        <mat-paginator class=\"paginator users__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #usersPaginator>\r\n        </mat-paginator>\r\n\r\n        Add\r\n        <i class=\"material-icons\">\r\n                person_add\r\n        </i>\r\n\r\n        <button *ngIf=\"selectedGroup\" (click)=\"showAll()\" class=\"showAll\" mat-raised-button color=\"accent\">\r\n            Show all\r\n        </button>\r\n    </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n    <button mat-menu-item (click)=\"edit($event)\" disabled>Edit</button>\r\n    <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>\r\n"
+module.exports = "<section fxLayout=\"row\">\r\n    <interviewers-list [dataSource]=\"usersSource\"\r\n                       [columns]=\"usersColumns\"\r\n                       [headers]=\"usersColumnsHeaders\"\r\n                       (onAdd)=\"addUser()\"\r\n                       (contextMenu)=\"openContextMenu($event)\">\r\n        <h2>\r\n            <i class=\"material-icons\">\r\n                    person\r\n            </i>\r\n            Interviewers list <span *ngIf=\"selectedGroup\">: {{selectedGroup}}</span>\r\n        </h2> \r\n        \r\n        <mat-paginator class=\"paginator users__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #usersPaginator>\r\n        </mat-paginator>\r\n\r\n        Add\r\n        <i class=\"material-icons\">\r\n                person_add\r\n        </i>\r\n\r\n        <button *ngIf=\"selectedGroup\" (click)=\"showAll()\" class=\"showAll\" mat-raised-button color=\"accent\">\r\n            Show all\r\n        </button>\r\n    </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n    <button mat-menu-item (click)=\"edit($event)\">Edit</button>\r\n    <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>\r\n"
 
 /***/ }),
 
@@ -10910,6 +11701,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/http.service */ "./src/app/modules/admin/services/http.service.ts");
 /* harmony import */ var _services_dialog_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/dialog.service */ "./src/app/modules/admin/services/dialog.service.ts");
 /* harmony import */ var _services_snackbar_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/snackbar.service */ "./src/app/modules/admin/services/snackbar.service.ts");
+var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11003,7 +11802,7 @@ var InterviewersComponent = /** @class */ (function () {
             this.dialog.deleteUser()
                 .afterClosed()
                 .subscribe(function (response) {
-                if (response.shouldDelete) {
+                if (response && response.shouldDelete) {
                     _this.removeUser(_this.dialog.target);
                     _this.dialog.target = null;
                 }
@@ -11012,8 +11811,7 @@ var InterviewersComponent = /** @class */ (function () {
     };
     InterviewersComponent.prototype.removeUser = function (targetUser) {
         var _this = this;
-        console.log('targetUser:', targetUser);
-        this.usersData = this.usersData.filter(function (user) { return user._id != targetUser._id; });
+        this.usersData = this.usersData.filter(function (user) { return user.username != targetUser.username; });
         this.renderUsersList();
         this.message.show(targetUser.username + ", was removed");
         this.http.deleteUser(targetUser._id)
@@ -11026,7 +11824,32 @@ var InterviewersComponent = /** @class */ (function () {
         this.renderUsersList();
     };
     InterviewersComponent.prototype.edit = function () {
-        this.message.show('in proccess');
+        var _this = this;
+        if (this.dialog.target) {
+            console.log(this.dialog.target);
+            this.dialog.editUser()
+                .afterClosed()
+                .subscribe(function (changedUser) {
+                if (changedUser) {
+                    if (changedUser) {
+                        _this.usersData = _this.usersData.map(function (user) {
+                            if (user.username === _this.dialog.target.username) {
+                                user = __assign({}, user, changedUser);
+                            }
+                            return user;
+                        });
+                        _this.renderUsersList();
+                        changedUser.role = changedUser.role ? 'master' : 'interviewer';
+                        _this.http.updateUser(__assign({}, changedUser, { previousName: _this.dialog.target.username }))
+                            .subscribe(function (_) {
+                            console.log(changedUser, 'was updated');
+                            _this.dialog.target = null;
+                        });
+                    }
+                    ;
+                }
+            });
+        }
     };
     InterviewersComponent.prototype.doExist = function (name, array) {
         return array.some(function (user) { return user.username === name; });
@@ -11083,7 +11906,7 @@ module.exports = "<section *ngIf=\"dataSource\">\r\n    <ng-content select=\"h2\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".list--tolbar {\n  background-color: #fff; }\n"
+module.exports = ".list--tolbar {\n  background-color: #fff; }\n\n.title {\n  display: flex;\n  justify-content: flex-start;\n  vertical-align: middle;\n  align-items: center;\n  margin-left: 16px; }\n\n.title i {\n    opacity: 0.6;\n    margin-right: 8px; }\n\nmat-row:hover {\n  background-color: rgba(0, 0, 0, 0.03);\n  transition: background-color .3s ease; }\n"
 
 /***/ }),
 
@@ -11293,32 +12116,60 @@ var DialogService = /** @class */ (function () {
             data: this.formArray(this.target)
         });
     };
-    DialogService.prototype.getClickPositionStyle = function (event) {
-        return "position: fixed;\n              left: " + (event.pageX + 10) + "px;\n              top: " + (event.pageY + 10) + "px; \n              z-index: 1000";
+    DialogService.prototype.editGroup = function () {
+        return this.dialog.open(_components_dialog_group_dialog__WEBPACK_IMPORTED_MODULE_2__["GroupDialogComponent"], {
+            data: {
+                object: this.formArray(this.target),
+                edit: true
+            }
+        });
+    };
+    DialogService.prototype.editUser = function () {
+        return this.dialog.open(_components_dialog_users_dialog__WEBPACK_IMPORTED_MODULE_3__["UsersDialogComponent"], {
+            data: {
+                object: this.formArray(this.target),
+                edit: true
+            }
+        });
     };
     DialogService.prototype.openContextMenu = function (event, trigger) {
-        var _this = this;
         event.event.preventDefault();
         var triggerButton = document.querySelector('.menuButton');
         triggerButton.setAttribute('style', this.getClickPositionStyle(event.event));
         this.target = event.item;
         if (!this.target._id) {
-            console.log('_id not found');
-            console.log('username: ', this.target.username);
-            this.http.getUser(this.target.username)
-                .subscribe(function (user) {
-                _this.target = user;
-                console.log(_this.target);
-            });
+            this.target = this.target.username ? this.getUser(this.target.username, trigger) :
+                this.getGroup(this.target.name, trigger);
         }
-        trigger.openMenu(event);
+        else {
+            trigger.openMenu(event);
+        }
+    };
+    DialogService.prototype.getUser = function (username, trigger) {
+        var _this = this;
+        this.http.getUser(username)
+            .subscribe(function (user) {
+            _this.target = user;
+            trigger.openMenu(event);
+        });
+    };
+    DialogService.prototype.getGroup = function (name, trigger) {
+        var _this = this;
+        this.http.getGroup(name)
+            .subscribe(function (group) {
+            _this.target = group;
+            trigger.openMenu(event);
+        });
     };
     DialogService.prototype.formArray = function (object) {
         var arr = [], regex = /^\_/;
         for (var property in object) {
             if (!property.match(regex)) {
                 if (property.match('password')) {
-                    arr.push({ title: property, value: '********' });
+                    arr.push({
+                        title: property,
+                        value: ''
+                    });
                 }
                 else {
                     arr.push({
@@ -11329,6 +12180,9 @@ var DialogService = /** @class */ (function () {
             }
         }
         return arr;
+    };
+    DialogService.prototype.getClickPositionStyle = function (event) {
+        return "position: fixed;\n                left: " + (event.pageX + 10) + "px;\n                top: " + (event.pageY + 10) + "px; \n                z-index: 1000";
     };
     DialogService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -11374,28 +12228,34 @@ var HttpAdminService = /** @class */ (function () {
         this.selectedGroup = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](false);
     }
     HttpAdminService.prototype.getUsers = function () {
-        return this.http.get("/users/users");
+        return this.http.get("/adm/users");
     };
-    ;
     HttpAdminService.prototype.getUser = function (name) {
-        return this.http.get("/users/" + name);
+        return this.http.get("/adm/user/" + name);
     };
-    ;
     HttpAdminService.prototype.getGroups = function () {
-        return this.http.get("/users/groups");
+        return this.http.get("/adm/groups");
     };
-    ;
+    HttpAdminService.prototype.getGroup = function (name) {
+        return this.http.get("/adm/group/" + name);
+    };
     HttpAdminService.prototype.addGroup = function (group) {
-        return this.http.post("/users/addgroup", group);
+        return this.http.post("/adm/groups", group);
     };
     HttpAdminService.prototype.addUser = function (user) {
-        return this.http.post("/users/adduser", user);
+        return this.http.post("/adm/users", user);
     };
     HttpAdminService.prototype.deleteUser = function (id) {
-        return this.http.delete("/users/removeuser/" + id);
+        return this.http.delete("/adm/user/" + id);
     };
     HttpAdminService.prototype.deleteGroup = function (id) {
-        return this.http.delete("/users/removegroup/" + id);
+        return this.http.delete("/adm/group/" + id);
+    };
+    HttpAdminService.prototype.updateUser = function (user) {
+        return this.http.put('/adm/user/', user);
+    };
+    HttpAdminService.prototype.updateGroup = function (group) {
+        return this.http.put('/adm/group/', group);
     };
     HttpAdminService.prototype.getSelectedGroup = function () {
         return this.selectedGroup.asObservable();
@@ -11474,7 +12334,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login/login.component */ "./src/app/modules/auth/login/login.component.ts");
-/* harmony import */ var _auth_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth.component */ "./src/app/modules/auth/auth.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11484,11 +12343,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var routes = [
-    { path: '', component: _auth_component__WEBPACK_IMPORTED_MODULE_3__["AuthComponent"], children: [
-            { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"] }
-        ] }
+    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"] }
 ];
 var AuthRoutingModule = /** @class */ (function () {
     function AuthRoutingModule() {
@@ -11650,7 +12506,7 @@ var AuthModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"form-card\">\r\n    <div class=\"form-info\">\r\n        <h1 class=\"form-title\">SyncForms</h1>\r\n    </div>\r\n    <mat-error class=\"text-center\" *ngIf=\"message\">Wrong username or password</mat-error>\r\n    <form\r\n        [formGroup]='form'\r\n        (ngSubmit)='onSubmit()'\r\n        class=\"form\"\r\n    >\r\n        <mat-form-field \r\n            class=\"form-input-full\"\r\n            appearance=\"outline\"\r\n        >\r\n            <mat-label>Enter username</mat-label>\r\n            <input \r\n                matInput \r\n                placeholder=\"Username\"\r\n                type=\"text\"\r\n                formControlName='username'\r\n            >\r\n            <mat-error *ngIf=\"form.get('username').errors?.required\">Username field must not be empty</mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field \r\n            class=\"form-input-full\"\r\n            appearance=\"outline\"\r\n        >\r\n            <mat-label>Enter password</mat-label>\r\n            <input \r\n                matInput \r\n                placeholder=\"Password\"\r\n                [type]=\"passwordType\"\r\n                formControlName='password'\r\n            >\r\n            <i [ngClass]=\"{'active': active}\" class=\"material-icons form-show\" (click)=\"togglePassword()\">remove_red_eye</i>\r\n            <mat-error *ngIf=\"form.get('password').errors?.required\">Password field must not be empty</mat-error>\r\n        </mat-form-field>\r\n        <div class=\"form-button\">\r\n            <button \r\n                mat-raised-button \r\n                color=\"primary\"\r\n                [disabled]='form.invalid'\r\n            >\r\n            Log in\r\n            </button>\r\n        </div>\r\n    </form>\r\n</mat-card>"
+module.exports = "<mat-card class=\"form-card\">\r\n    <div class=\"form-info\">\r\n        <h1 class=\"form-title\">SyncForms</h1>\r\n    </div>\r\n    <div class=\"form-toggle\">\r\n        <mat-slide-toggle\r\n            class=\"form-toggle\"\r\n            [checked]=\"checked\"\r\n            (change)=\"onChange($event)\"\r\n        >\r\n            <span *ngIf=\"checked == false\">Log in as candidate</span>\r\n            <span *ngIf=\"checked == true\">Log in as master or interviewer</span>\r\n        </mat-slide-toggle>\r\n    </div>\r\n    <mat-error class=\"text-center\" *ngIf=\"message\">Wrong username or password</mat-error>\r\n    <form\r\n        [formGroup]='form'\r\n        (ngSubmit)='onSubmit()'\r\n        class=\"form\"\r\n        *ngIf=\"checked == false\"\r\n    >\r\n        <mat-form-field \r\n            class=\"form-input-full\"\r\n            appearance=\"outline\"\r\n        >\r\n            <mat-label>Enter username</mat-label>\r\n            <input \r\n                matInput \r\n                placeholder=\"Username\"\r\n                type=\"text\"\r\n                formControlName='username'\r\n            >\r\n            <mat-error *ngIf=\"form.get('username').errors?.required\">Username field must not be empty</mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field \r\n            class=\"form-input-full\"\r\n            appearance=\"outline\"\r\n        >\r\n            <mat-label>Enter password</mat-label>\r\n            <input \r\n                matInput \r\n                placeholder=\"Password\"\r\n                [type]=\"passwordType\"\r\n                formControlName='password'\r\n            >\r\n            <i [ngClass]=\"{'active': active}\" class=\"material-icons form-show\" (click)=\"togglePassword()\">remove_red_eye</i>\r\n            <mat-error *ngIf=\"form.get('password').errors?.required\">Password field must not be empty</mat-error>\r\n        </mat-form-field>\r\n        <div class=\"form-button\">\r\n            <button \r\n                mat-raised-button \r\n                color=\"primary\"\r\n                [disabled]='form.invalid'\r\n            >\r\n            Log in\r\n            </button>\r\n        </div>\r\n    </form>\r\n    <form\r\n        [formGroup]='formCandidate'\r\n        (ngSubmit)='onSubmitCandidate()'\r\n        class=\"form\" \r\n        *ngIf=\"checked == true\"\r\n    >\r\n        <mat-form-field \r\n            class=\"form-input-full\"\r\n            appearance=\"outline\"\r\n        >\r\n            <mat-label>Enter username</mat-label>\r\n            <input \r\n                matInput \r\n                placeholder=\"Username\"\r\n                type=\"text\"\r\n                formControlName='username'\r\n            >\r\n            <mat-error *ngIf=\"formCandidate.get('username').errors?.required\">Username field must not be empty</mat-error>\r\n        </mat-form-field>\r\n        <div class=\"form-button\">\r\n            <button \r\n                mat-raised-button \r\n                color=\"primary\"\r\n                [disabled]='formCandidate.invalid'\r\n            >\r\n            Log in\r\n            </button>\r\n        </div>\r\n    </form>\r\n</mat-card>"
 
 /***/ }),
 
@@ -11661,7 +12517,7 @@ module.exports = "<mat-card class=\"form-card\">\r\n    <div class=\"form-info\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".form {\n  margin-top: 30px; }\n  .form-title {\n    font-family: 'Russo One', sans-serif !important; }\n  .form-card {\n    max-width: 400px;\n    padding: 30px !important;\n    margin: 0 auto;\n    margin-top: 100px; }\n  .form-info {\n    text-align: center; }\n  .form-button {\n    text-align: center;\n    margin-top: 10px; }\n  .form-show {\n    position: absolute;\n    right: 0px;\n    bottom: 15px;\n    cursor: pointer;\n    color: #a2a7aa; }\n  .form-input-full {\n    width: 100%; }\n  .form-login, .form-registration {\n    font-family: 'Montserrat', sans-serif;\n    color: #2196f3;\n    margin-bottom: 10px; }\n  .text-center {\n  text-align: center; }\n  .active {\n  color: #000; }\n"
+module.exports = ".form {\n  margin-top: 30px; }\n  .form-title {\n    font-family: 'Russo One', sans-serif !important; }\n  .form-card {\n    max-width: 400px;\n    padding: 30px !important;\n    margin: 0 auto;\n    margin-top: 100px; }\n  .form-info {\n    text-align: center; }\n  .form-button {\n    text-align: center;\n    margin-top: 10px; }\n  .form-show {\n    position: absolute;\n    right: 0px;\n    bottom: 15px;\n    cursor: pointer;\n    color: #a2a7aa; }\n  .form-input-full {\n    width: 100%; }\n  .form-login, .form-registration {\n    font-family: 'Montserrat', sans-serif;\n    color: #2196f3;\n    margin-bottom: 10px; }\n  .text-center {\n  text-align: center; }\n  .active {\n  color: #000; }\n  .form-toggle {\n  text-align: center;\n  margin: 12px 0; }\n"
 
 /***/ }),
 
@@ -11695,6 +12551,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var LoginComponent = /** @class */ (function () {
+    // user: object;
     function LoginComponent(authService, router, alertService) {
         this.authService = authService;
         this.router = router;
@@ -11702,6 +12559,7 @@ var LoginComponent = /** @class */ (function () {
         this.passwordType = 'password';
         this.passwordShow = false;
         this.active = false;
+        this.checked = false;
     }
     LoginComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -11713,6 +12571,31 @@ var LoginComponent = /** @class */ (function () {
             _this.alertService.error(error);
             _this.form.reset();
         });
+    };
+    LoginComponent.prototype.onSubmitCandidate = function () {
+        var username = this.formCandidate.value.username;
+        var user = { fullname: username, role: 'candidate' };
+        this.authService.loginCandidate(user);
+        this.router.navigate(['/main']);
+    };
+    LoginComponent.prototype.onChange = function (event) {
+        this.checked = event.checked;
+        if (this.checked) {
+            this.formCandidate.get('username').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]);
+            this.formCandidate.get('username').updateValueAndValidity();
+            this.form.get('username').clearValidators();
+            this.form.get('username').updateValueAndValidity();
+            this.form.get('password').clearValidators();
+            this.form.get('password').updateValueAndValidity();
+        }
+        else {
+            this.form.get('username').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]);
+            this.form.get('username').updateValueAndValidity();
+            this.form.get('password').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]);
+            this.form.get('password').updateValueAndValidity();
+            this.formCandidate.get('username').clearValidators();
+            this.formCandidate.get('username').updateValueAndValidity();
+        }
     };
     LoginComponent.prototype.togglePassword = function () {
         if (this.passwordShow) {
@@ -11734,6 +12617,9 @@ var LoginComponent = /** @class */ (function () {
         this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
             'username': new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]),
             'password': new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])
+        });
+        this.formCandidate = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            'username': new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]()
         });
     };
     LoginComponent = __decorate([
@@ -11861,6 +12747,10 @@ var AuthService = /** @class */ (function () {
         this.user.emit({});
         return this.http.get('/users/logout');
     };
+    AuthService.prototype.loginCandidate = function (username) {
+        localStorage.setItem('currentUser', JSON.stringify(username));
+        this.user.emit(username);
+    };
     AuthService.prototype.subscriber = function () {
         return this.user;
     };
@@ -11938,7 +12828,8 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginatorModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTooltipModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBarModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBarModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"]
             ],
             exports: [
                 _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__["LayoutModule"],
@@ -11962,11 +12853,362 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginatorModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTooltipModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBarModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBarModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"]
             ],
         })
     ], MaterialModule);
     return MaterialModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/notfound/notfound.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/modules/notfound/notfound.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div>\r\n  <h1>\r\n  Oooops...\r\n  <br> \r\n  404\r\n</h1>\r\n</div>\r\n\r\n<div>\r\n    <h2>\r\n        Page not found.\r\n    </h2>\r\n</div>\r\n\r\n<div>\r\n  <button href=\"/main\" mat-raised-button color=\"primary\">Go to homepage</button>\r\n</div>\r\n\r\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/notfound/notfound.component.scss":
+/*!**********************************************************!*\
+  !*** ./src/app/modules/notfound/notfound.component.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/modules/notfound/notfound.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/modules/notfound/notfound.component.ts ***!
+  \********************************************************/
+/*! exports provided: NotfoundComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotfoundComponent", function() { return NotfoundComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var NotfoundComponent = /** @class */ (function () {
+    function NotfoundComponent(router) {
+        this.router = router;
+    }
+    NotfoundComponent.prototype.ngOnInit = function () {
+    };
+    NotfoundComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-notfound',
+            template: __webpack_require__(/*! ./notfound.component.html */ "./src/app/modules/notfound/notfound.component.html"),
+            styles: [__webpack_require__(/*! ./notfound.component.scss */ "./src/app/modules/notfound/notfound.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], NotfoundComponent);
+    return NotfoundComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/notfound/notfound.module.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/modules/notfound/notfound.module.ts ***!
+  \*****************************************************/
+/*! exports provided: NotfoundModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotfoundModule", function() { return NotfoundModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _notfound_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./notfound.component */ "./src/app/modules/notfound/notfound.component.ts");
+/* harmony import */ var _material_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../material/material */ "./src/app/modules/material/material.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+var NotfoundModule = /** @class */ (function () {
+    function NotfoundModule() {
+    }
+    NotfoundModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _material_material__WEBPACK_IMPORTED_MODULE_3__["MaterialModule"]
+            ],
+            declarations: [_notfound_component__WEBPACK_IMPORTED_MODULE_2__["NotfoundComponent"]],
+            exports: [
+                _notfound_component__WEBPACK_IMPORTED_MODULE_2__["NotfoundComponent"]
+            ]
+        })
+    ], NotfoundModule);
+    return NotfoundModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/services/statistics.service.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/modules/statistics/services/statistics.service.ts ***!
+  \*******************************************************************/
+/*! exports provided: StatisticsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatisticsService", function() { return StatisticsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var StatisticsService = /** @class */ (function () {
+    function StatisticsService() {
+    }
+    StatisticsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], StatisticsService);
+    return StatisticsService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics.module.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/modules/statistics/statistics.module.ts ***!
+  \*********************************************************/
+/*! exports provided: StatisticsModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatisticsModule", function() { return StatisticsModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _statistics_statistics_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./statistics/statistics.component */ "./src/app/modules/statistics/statistics/statistics.component.ts");
+/* harmony import */ var _services_statistics_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/statistics.service */ "./src/app/modules/statistics/services/statistics.service.ts");
+/* harmony import */ var _material_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../material/material */ "./src/app/modules/material/material.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+var StatisticsModule = /** @class */ (function () {
+    function StatisticsModule() {
+    }
+    StatisticsModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _material_material__WEBPACK_IMPORTED_MODULE_4__["MaterialModule"]
+            ],
+            providers: [
+                _services_statistics_service__WEBPACK_IMPORTED_MODULE_3__["StatisticsService"]
+            ],
+            declarations: [_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_2__["StatisticsComponent"]],
+            exports: [
+                _statistics_statistics_component__WEBPACK_IMPORTED_MODULE_2__["StatisticsComponent"]
+            ]
+        })
+    ], StatisticsModule);
+    return StatisticsModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/statistics.component.html":
+/*!*************************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/statistics.component.html ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section *ngIf=\"dataSource\">\r\n    <div class=\"title\">\r\n            <i class=\"material-icons\">\r\n                    info\r\n            </i>\r\n\r\n            <h2>{{title}}</h2>\r\n    </div>\r\n    <mat-table [dataSource]=\"interviewsSource\" matSort>\r\n        <ng-container matColumnDef=\"{{column.title}}\" *ngFor=\"let column of interviewColumns;\">\r\n            <!-- columns header -->\r\n            <mat-header-cell *matHeaderCellDef mat-sort-header>\r\n                    <!-- <i class=\"material-icons\" *ngIf=\"column?.icon\">\r\n                            {{ column.icon }}\r\n                    </i> -->\r\n                {{ column.value }}\r\n            </mat-header-cell>\r\n\r\n            <mat-cell *matCellDef=\"let item;\">\r\n   \r\n            <button mat-raised-button color=\"primary\" *ngIf=\"column?.icon && column.title==='info'\">\r\n                <i class=\"material-icons\">\r\n                        {{ column.icon }}\r\n                </i>\r\n            </button>\r\n                {{ item[column.title] }}\r\n            </mat-cell>\r\n        </ng-container>\r\n        \r\n        <mat-header-row *matHeaderRowDef=\"interviewsColumnsHeaders\">\r\n        </mat-header-row>\r\n                                 \r\n        <mat-row *matRowDef=\"let row; columns: interviewsColumnsHeaders; let item\">\r\n        </mat-row>\r\n    </mat-table>\r\n\r\n    <mat-toolbar class=\"list--tolbar\">\r\n        <mat-paginator class=\"paginator users__paginator\" \r\n                       [pageSize]=\"10\" \r\n                       [pageSizeOptions]=\"[5,10,25]\" \r\n                       #interviewsPaginator>\r\n        </mat-paginator>\r\n    </mat-toolbar>\r\n</section>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/statistics.component.scss":
+/*!*************************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/statistics.component.scss ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".list--tolbar {\n  background-color: #fff; }\n\n.title {\n  display: flex;\n  justify-content: flex-start;\n  vertical-align: middle;\n  align-items: center;\n  margin-left: 16px; }\n\n.title i {\n    opacity: 0.6;\n    margin-right: 8px; }\n\nmat-row:hover {\n  background-color: rgba(0, 0, 0, 0.03);\n  transition: background-color .3s ease; }\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/statistics.component.ts":
+/*!***********************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/statistics.component.ts ***!
+  \***********************************************************************/
+/*! exports provided: StatisticsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatisticsComponent", function() { return StatisticsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var StatisticsComponent = /** @class */ (function () {
+    function StatisticsComponent() {
+        this.title = "Interviews statistic";
+        this.panelOpenState = false;
+        this.dataSource = [{
+                id: 1,
+                startTime: '11:32',
+                endTime: '11:45',
+                candidate: 'Alexey',
+                interviewer: 'Happy Man',
+                formTitle: 'Registration Form',
+                logInOut: 'Expand to view',
+                actions: 'Expand',
+                comments: 'Expand'
+            },
+            {
+                id: 2,
+                startTime: '11:57',
+                endTime: '12:03',
+                candidate: 'Ehor',
+                interviewer: 'Валера',
+                formTitle: 'Registration Form',
+                logInOut: 'Expand to view',
+                actions: 'Expand',
+                comments: 'Expand'
+            },
+            {
+                id: 3,
+                startTime: '12:54',
+                endTime: '13:20',
+                candidate: 'Donald',
+                interviewer: 'epicmaster',
+                formTitle: 'Registration Form',
+                logInOut: 'Expand to view',
+                actions: 'Expand',
+                comments: 'Expand'
+            }
+        ];
+        this.interviewColumns = [{
+                title: 'id',
+                value: 'Interview id',
+            },
+            {
+                title: 'startTime',
+                value: 'Start Time',
+                icon: 'timer'
+            },
+            {
+                title: 'endTime',
+                value: 'End Time',
+                icon: 'timer_off'
+            },
+            {
+                title: 'candidate',
+                value: 'Candidate'
+            },
+            {
+                title: 'interviewer',
+                value: 'Interviewer'
+            },
+            {
+                title: 'formTitle',
+                value: 'Form title'
+            },
+            {
+                title: 'info',
+                value: 'Info',
+                icon: 'pageview'
+            }
+        ];
+    }
+    StatisticsComponent.prototype.ngOnInit = function () {
+        this.interviewsColumnsHeaders = this.interviewColumns.map(function (field) { return field.title; });
+        this.renderInterviewsList();
+    };
+    StatisticsComponent.prototype.ngAfterViewInit = function () {
+        this.interviewsSource.paginator = this.interviewsPaginator;
+    };
+    StatisticsComponent.prototype.renderInterviewsList = function () {
+        this.interviewsSource = this.initDataSource(this.dataSource, this.interviewsPaginator);
+    };
+    StatisticsComponent.prototype.initDataSource = function (data, paginator) {
+        var dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](data);
+        dataSource.paginator = paginator;
+        return dataSource;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('interviewsPaginator'),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
+    ], StatisticsComponent.prototype, "interviewsPaginator", void 0);
+    StatisticsComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-statistics',
+            template: __webpack_require__(/*! ./statistics.component.html */ "./src/app/modules/statistics/statistics/statistics.component.html"),
+            styles: [__webpack_require__(/*! ./statistics.component.scss */ "./src/app/modules/statistics/statistics/statistics.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], StatisticsComponent);
+    return StatisticsComponent;
 }());
 
 
@@ -12265,7 +13507,11 @@ window.global = window;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! d:\Dp-142\add screenshot\syncforms\app-client\src\main.ts */"./src/main.ts");
+<<<<<<< HEAD
+module.exports = __webpack_require__(/*! C:\Users\ozalitc\Documents\syncforms\fresh\syncforms\app-client\src\main.ts */"./src/main.ts");
+=======
+module.exports = __webpack_require__(/*! D:\WebUI\6.14\syncforms\app-client\src\main.ts */"./src/main.ts");
+>>>>>>> 822700d001ad5637a641ab880463779dd34cd042
 
 
 /***/ }),

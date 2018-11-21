@@ -20,6 +20,7 @@ var forms = require('./app-server/routes/forms');
 var screenshot = require('./app-server/routes/screenshot');
 
 var usersRouter = require('./app-server/routes/usersRouter');
+var adminRouter = require('./app-server/routes/adminRouter');
 
 // var formsRouter = require('./app-server/routes/formsRouter');
 
@@ -59,6 +60,7 @@ passport.use(new LocalStrategy(authorizeUser));
 app.use('/users', usersRouter);
 app.use('/form', forms);
 app.use('/screenshot', screenshot);
+app.use('/adm', adminRouter);
 
 let activeInterviews = [];
 
@@ -77,22 +79,23 @@ app.get('/*', (req, res) => {
 });
 
 io.on('connection', function(socket) {
-    console.log('user connected');
-
     socket.on('initiateInterview', function(interviewData) {
         socket.join(interviewData.interviewId);
         activeInterviews.push(interviewData);
         socket.broadcast.emit('updateInterviewList', activeInterviews);
     });
 
-    socket.on('joinInterview', function(interviewId) {
-        socket.join(interviewId);
+    socket.on('joinInterview', function(connectionInfo) {
+        socket.join(connectionInfo.interviewId);
+        socket.broadcast.emit('showMessage', connectionInfo.messageText);
     });
 
-    socket.on('endInterview', function(interviewId) {
-        activeInterviews = activeInterviews.filter(interview => interview.interviewId !== interviewId);
+    socket.on('endInterview', function(eventData) {
+        activeInterviews = activeInterviews.filter(interview => interview.interviewId !== eventData.interviewId);
+        socket.broadcast.to(eventData.interviewId).emit('showMessage', eventData.messageText);
+        socket.broadcast.to(eventData.interviewId).emit('finishInterview', true);
         socket.broadcast.emit('updateInterviewList', activeInterviews);
-        socket.leave(interviewId);
+        socket.leave(eventData.interviewId);
     });
 
     socket.on('click', function(eventData) {
@@ -113,6 +116,10 @@ io.on('connection', function(socket) {
 
     socket.on('onChange', function(eventData) {
         socket.broadcast.to(eventData.interviewId).emit('newOnChange', eventData);
+    });
+
+    socket.on('onLeave', function(eventData) {
+        socket.broadcast.to(eventData.interviewId).emit('showMessage', eventData.messageText);
     });
 });
 

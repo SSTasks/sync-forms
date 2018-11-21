@@ -6,7 +6,9 @@ import { PreviewPageComponent } from './forms/preview-page/preview-page.componen
 import { ConstructorPageComponent } from './forms/constructor-page/constructor-page.component';
 import { InterviewPageComponent } from './forms/interview-page/interview-page.component';
 import { AdminComponent } from './modules/admin/admin.component';
-import { MainPageComponent } from './components/main-page/main-page.component'
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { NotfoundComponent } from './modules/notfound/notfound.component';
+import { StatisticsComponent } from './modules/statistics/statistics/statistics.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/main', pathMatch: 'full'},
@@ -15,7 +17,8 @@ const routes: Routes = [
     {path: 'constructor', component: ConstructorPageComponent},
     {path: 'interview-page', component: InterviewPageComponent},
     {path: 'admin', component: AdminComponent},
-    {path: '**',  redirectTo: '/main'}
+    {path: 'statistics', component: StatisticsComponent},
+    {path: '**',  component: NotfoundComponent}
 ];
 
 @NgModule({

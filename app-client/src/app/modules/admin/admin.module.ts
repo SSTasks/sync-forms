@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { MaterialModule } from '../material/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -14,6 +14,7 @@ import { ListControls } from './components/listcontrols/listcontrols.component';
 import { UsersDialogComponent } from './components/dialog/users.dialog';
 import { GroupDialogComponent } from './components/dialog/group.dialog';
 
+import { DynamicformModule } from './components/dynamicform/dynamicform.module';
 
 const adminRoutes: Routes = [
   { path: 'admin', component: AdminComponent, children: [
@@ -28,7 +29,9 @@ const adminRoutes: Routes = [
     MaterialModule,
     RouterModule.forRoot(adminRoutes),
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    DynamicformModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AdminComponent,
