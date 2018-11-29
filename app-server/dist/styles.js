@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\heroku\sync-forms\app-client\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css");
-module.exports = __webpack_require__(/*! D:\heroku\sync-forms\app-client\src\assets\styles\styles.scss */"./src/assets/styles/styles.scss");
+__webpack_require__(/*! D:\Web\SoftServe\SyncForms2\heroku\sync-forms\app-client\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css");
+module.exports = __webpack_require__(/*! D:\Web\SoftServe\SyncForms2\heroku\sync-forms\app-client\src\assets\styles\styles.scss */"./src/assets/styles/styles.scss");
 
 
 /***/ })
