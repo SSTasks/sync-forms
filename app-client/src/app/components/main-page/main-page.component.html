@@ -1,20 +1,5 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav [mode]="mode.value">
-    <p><button mat-button (click)="sidenav.toggle()">FAQ</button></p>
-    <h3>Welcome to the app for interviewing candidates for the QA Tester post.</h3>
-    <p>Before you begin the interview, wait until the expert runs the test form.<br>
-    </p>
-      <ol>
-        <li>Choose an accessible form from the list of interviews.</li>
-        <li>Interact with form elements to identify problems</li>
-      </ol>
-    
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <p><button mat-button (click)="sidenav.toggle()">FAQ</button></p>
-  </mat-sidenav-content>
-</mat-sidenav-container>
-<div fxLayout="column" fxLayoutAlign="center center" >
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="forms?.length > 0">
+  <h1 class="main">Available interviews</h1>
   <table mat-table [dataSource]="formsSource" class="mat-elevation-z8">
     <ng-container matColumnDef="interviewer">
       <th mat-header-cell *matHeaderCellDef> Interviewer </th>
@@ -26,7 +11,7 @@
     </ng-container>
     <ng-container matColumnDef="creationTime">
       <th mat-header-cell *matHeaderCellDef> Created </th>
-      <td mat-cell *matCellDef="let element">{{element.creationTime}}</td>
+      <td mat-cell *matCellDef="let element">{{element.creationTime | date:'medium'}}</td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"
@@ -35,11 +20,57 @@
     </tr>
   </table>
   <div fxLayout="column" fxLayoutAlign="space-around center" >
-  <button mat-raised-button color="primary" (click)="startInterview()" [disabled]="selectedRowIndex === -1">
+  <button mat-raised-button color="primary" (click)="startInterview()" [disabled]="selectedRowIndex === -1" class="join--button">
     Join interview
   </button>
 </div>
 </div>
+
+<!-- 28.11 addition, olez: -->
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="!forms?.length > 0">
+    <h2 class="main no-avail">No available interviews at this moment. Please wait.</h2>
+</div>
+
+<section class="section--fullwidth intro">
+  <div class="img--block">
+      <docs-svg-viewer src="../assets/img/optimized.svg"
+                       scaleToContainer="true">
+      </docs-svg-viewer>
+  </div>
+
+    <div class="text--block">
+    <h2 class="main">Ultimate app for interviewing candidates for a QC position using interactive forms.</h2>
+    <div class="main text">
+        <p>To begin an interview, wait until an expert runs the interview session.
+        <p>How to use the app:</p>
+            <ul>
+              <li>Choose an accessible interview from the list of interviews.</li>
+              <li>Interact with form controls to identify problems. Have fun!</li>
+            </ul>
+          </div>
+    </div>
+</section>
+
+<section class="section--fullwidth features">
+
+      <div class="text--block">
+      <h2 class="main">The application main features are:</h2>
+      <div class="main text">
+          <ul>
+            <li>Create custom forms for interview and save them.</li>
+            <li>Ability to create an interview with chosen form.</li>
+            <li>Ability to mimic majority of events from one user to another.</li>
+            <li>Possibility of creation, editing, deleting user and groups. Assigning users to groups and choose user's permissions.</li>
+            <li>Possibility of viewing interview statistics: login/logout time, interview's actions and their performer, interview start and end time.</li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="img--block">
+    </div>
+    
+</section>
+
 
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatMenuTrigger, MatSnackBar } from '@angular/material';
 
 import { HttpAdminService } from '../../services/http.service';
@@ -21,7 +21,8 @@ export class InterviewersComponent implements OnInit {
     usersSource: MatTableDataSource < object > ;
     usersColumnsHeaders: String[];
     private usersData: User[];
-    private selectedGroup: string;
+    public groupName: string; 
+    @Input() selectedGroup: boolean;
 
     @ViewChild('usersPaginator') usersPaginator: MatPaginator;
     @ViewChild('groupsPaginator') groupsPaginator: MatPaginator;
@@ -29,7 +30,6 @@ export class InterviewersComponent implements OnInit {
 
     ngOnInit() {
         this.getUsers();
-
         this.usersColumnsHeaders = this.usersColumns.map(field => field.title);
     }
 
@@ -45,9 +45,12 @@ export class InterviewersComponent implements OnInit {
         if (!this.selectedGroup) {
             this.usersSource = this.initDataSource(this.usersData, this.usersPaginator);
         } else {
-            let selectedUsers = this.usersData.filter(user => user.group === this.selectedGroup);
-            this.usersSource = this.initDataSource(selectedUsers, this.usersPaginator);
-            this.http.setSelectedGroup(this.selectedGroup);
+            this.http.getSelectedGroup()
+                .subscribe( group => {
+                    this.groupName = group;
+                    let selectedUsers = this.usersData.filter(users => users.group === group)
+                    this.usersSource = this.initDataSource(selectedUsers, this.usersPaginator);
+                })
         }
     }
 
@@ -112,7 +115,6 @@ export class InterviewersComponent implements OnInit {
 
     edit(): void {
         if (this.dialog.target) {
-            console.log(this.dialog.target);
             this.dialog.editUser()
                 .afterClosed()
                 .subscribe(changedUser => {
@@ -131,7 +133,6 @@ export class InterviewersComponent implements OnInit {
                                     previousName: this.dialog.target.username
                                 })
                                 .subscribe(_ => {
-                                    console.log(changedUser, 'was updated');
                                     this.dialog.target = null;
                                 })
                         };
@@ -145,9 +146,8 @@ export class InterviewersComponent implements OnInit {
     }
 
     showAll(): void {
-        this.selectedGroup = '';
+        this.http.setSelectedGroup(null);
         this.renderUsersList();
-        this.http.setSelectedGroup(false);
     }
 
     usersColumns: Array < {

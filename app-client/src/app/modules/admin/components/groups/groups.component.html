@@ -29,3 +29,5 @@
 
 <div [matMenuTriggerFor]="editMenu" class="menuButton">
 </div>
+
+<app-interviewers *ngIf="isGroupSelected" [selectedGroup]="isGroupSelected"></app-interviewers>

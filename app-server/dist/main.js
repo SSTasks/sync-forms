@@ -8155,15 +8155,21 @@ module.exports = ".container {\n  padding: 0 15px;\n  margin: 0 auto;\n  max-wid
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _modules_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/auth/services/auth.service */ "./src/app/modules/auth/services/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(authService) {
+        this.authService = authService;
         this.Title = 'SyncForms';
     }
     AppComponent = __decorate([
@@ -8171,7 +8177,8 @@ var AppComponent = /** @class */ (function () {
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
-        })
+        }),
+        __metadata("design:paramtypes", [_modules_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -8200,18 +8207,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_material_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/material/material */ "./src/app/modules/material/material.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/header/header.component */ "./src/app/components/header/header.component.ts");
-/* harmony import */ var _modules_auth_auth_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/auth/auth.module */ "./src/app/modules/auth/auth.module.ts");
-/* harmony import */ var _components_main_page_main_page_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/main-page/main-page.component */ "./src/app/components/main-page/main-page.component.ts");
+/* harmony import */ var _components_main_page_main_page_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/main-page/main-page.component */ "./src/app/components/main-page/main-page.component.ts");
+/* harmony import */ var _modules_auth_auth_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/auth/auth.module */ "./src/app/modules/auth/auth.module.ts");
 /* harmony import */ var _forms_forms_page_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./forms/forms-page.module */ "./src/app/forms/forms-page.module.ts");
 /* harmony import */ var _modules_admin_admin_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/admin/admin.module */ "./src/app/modules/admin/admin.module.ts");
 /* harmony import */ var _modules_statistics_statistics_module__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/statistics/statistics.module */ "./src/app/modules/statistics/statistics.module.ts");
 /* harmony import */ var _modules_notfound_notfound_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/notfound/notfound.module */ "./src/app/modules/notfound/notfound.module.ts");
+/* harmony import */ var _app_components_main_page_svg_viewer_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../app/components/main-page/svg-viewer.component */ "./src/app/components/main-page/svg-viewer.component.ts");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store */ "./src/app/store.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -8236,10 +8247,11 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
                 _components_header_header_component__WEBPACK_IMPORTED_MODULE_9__["HeaderComponent"],
-                _components_main_page_main_page_component__WEBPACK_IMPORTED_MODULE_11__["MainPageComponent"]
+                _components_main_page_main_page_component__WEBPACK_IMPORTED_MODULE_10__["MainPageComponent"],
+                _app_components_main_page_svg_viewer_component__WEBPACK_IMPORTED_MODULE_16__["SvgViewer"]
             ],
             imports: [
-                _modules_auth_auth_module__WEBPACK_IMPORTED_MODULE_10__["AuthModule"],
+                _modules_auth_auth_module__WEBPACK_IMPORTED_MODULE_11__["AuthModule"],
                 _modules_admin_admin_module__WEBPACK_IMPORTED_MODULE_13__["AdminModule"],
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
@@ -8252,7 +8264,9 @@ var AppModule = /** @class */ (function () {
                 _modules_statistics_statistics_module__WEBPACK_IMPORTED_MODULE_14__["StatisticsModule"],
                 _modules_notfound_notfound_module__WEBPACK_IMPORTED_MODULE_15__["NotfoundModule"]
             ],
-            providers: [],
+            providers: [
+                _store__WEBPACK_IMPORTED_MODULE_17__["Store"]
+            ],
             bootstrap: [
                 _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]
             ]
@@ -8272,7 +8286,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <div class=\"logo\"></div>\r\n        <h1 class=\"header-logo\" [routerLink]=\"['/main']\">{{Title}}</h1>\r\n        <span class=\"header-spacer\"></span>\r\n        <ul class=\"header-list headernav\">\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer disabled\" mat-menu-item routerLinkActive disabled [routerLink]=\"[ '/interviews' ]\" >Interviews</button>\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer\" mat-menu-item [routerLink]=\"[ '/preview' ]\" >Preview</button>\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer\" mat-menu-item routerLinkActive [routerLink]=\"[ '/statistics' ]\" >Statistics</button>\r\n            <button *ngIf=\"isMaster\" class=\"header-button-spacer\" color=\"white\" mat-menu-item routerLinkActive [routerLink]=\"[ '/admin' ]\">Admin</button>\r\n            <a *ngIf=\"!user?.fullname\" class=\"header-button-spacer\" mat-raised-button [routerLink]=\"[ '/login' ]\">Log in</a>\r\n            <button *ngIf=\"user?.fullname\" class=\"header-user header-button-spacer\" mat-button [matMenuTriggerFor]=\"menu\">{{user.fullname}}</button>\r\n                <mat-menu #menu=\"matMenu\" xPosition=\"after\">\r\n                    <a mat-menu-item (click)=\"onLogout()\" class=\"logout\">Log out</a>\r\n                </mat-menu>\r\n        </ul>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>"
+module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <div class=\"logo\"></div>\r\n        <h1 class=\"header-logo\" [routerLink]=\"['/main']\">{{Title}}</h1>\r\n        <span class=\"header-spacer\"></span>\r\n        <ul class=\"header-list headernav\">\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer\" mat-menu-item routerLinkActive [routerLink]=\"[ '/main' ]\" >Interviews</button>\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer\" mat-menu-item [routerLink]=\"[ '/preview' ]\" >Preview</button>\r\n            <button *ngIf=\"isInterviewer || isMaster\" class=\"header-button-spacer\" mat-menu-item routerLinkActive [routerLink]=\"[ '/statistics' ]\" >Statistics</button>\r\n            <button *ngIf=\"isMaster\" class=\"header-button-spacer\" color=\"white\" mat-menu-item routerLinkActive [routerLink]=\"[ '/admin' ]\">Admin</button>\r\n            <a *ngIf=\"!user?.fullname\" class=\"header-button-spacer\" mat-raised-button [routerLink]=\"[ '/login' ]\">Log in</a>\r\n            <button *ngIf=\"user?.fullname\" class=\"header-user header-button-spacer\" mat-button [matMenuTriggerFor]=\"menu\">{{user.fullname}}</button>\r\n                <mat-menu #menu=\"matMenu\" xPosition=\"after\">\r\n                    <a mat-menu-item (click)=\"onLogout()\" class=\"logout\">Log out</a>\r\n                </mat-menu>\r\n        </ul>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>"
 
 /***/ }),
 
@@ -8375,7 +8389,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"example-container\">\r\n  <mat-sidenav #sidenav [mode]=\"mode.value\">\r\n    <p><button mat-button (click)=\"sidenav.toggle()\">FAQ</button></p>\r\n    <h3>Welcome to the app for interviewing candidates for the QA Tester post.</h3>\r\n    <p>Before you begin the interview, wait until the expert runs the test form.<br>\r\n    </p>\r\n      <ol>\r\n        <li>Choose an accessible form from the list of interviews.</li>\r\n        <li>Interact with form elements to identify problems</li>\r\n      </ol>\r\n    \r\n  </mat-sidenav>\r\n  <mat-sidenav-content>\r\n    <p><button mat-button (click)=\"sidenav.toggle()\">FAQ</button></p>\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n<div fxLayout=\"column\" fxLayoutAlign=\"center center\" >\r\n  <table mat-table [dataSource]=\"formsSource\" class=\"mat-elevation-z8\">\r\n    <ng-container matColumnDef=\"interviewer\">\r\n      <th mat-header-cell *matHeaderCellDef> Interviewer </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.interviewer}} </td>\r\n    </ng-container>\r\n    <ng-container matColumnDef=\"formName\">\r\n      <th mat-header-cell *matHeaderCellDef> Form name </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.formName}}</td>\r\n    </ng-container>\r\n    <ng-container matColumnDef=\"creationTime\">\r\n      <th mat-header-cell *matHeaderCellDef> Created </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.creationTime}}</td>\r\n    </ng-container>\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"\r\n      [ngClass]=\"{'highlight': selectedRowIndex == row.interviewId}\" \r\n      (click)=\"highlight(row)\">\r\n    </tr>\r\n  </table>\r\n  <div fxLayout=\"column\" fxLayoutAlign=\"space-around center\" >\r\n  <button mat-raised-button color=\"primary\" (click)=\"startInterview()\" [disabled]=\"selectedRowIndex === -1\">\r\n    Join interview\r\n  </button>\r\n</div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div fxLayout=\"column\" fxLayoutAlign=\"center center\" *ngIf=\"forms?.length > 0\">\r\n  <h1 class=\"main\">Available interviews</h1>\r\n  <table mat-table [dataSource]=\"formsSource\" class=\"mat-elevation-z8\">\r\n    <ng-container matColumnDef=\"interviewer\">\r\n      <th mat-header-cell *matHeaderCellDef> Interviewer </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.interviewer}} </td>\r\n    </ng-container>\r\n    <ng-container matColumnDef=\"formName\">\r\n      <th mat-header-cell *matHeaderCellDef> Form name </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.formName}}</td>\r\n    </ng-container>\r\n    <ng-container matColumnDef=\"creationTime\">\r\n      <th mat-header-cell *matHeaderCellDef> Created </th>\r\n      <td mat-cell *matCellDef=\"let element\">{{element.creationTime | date:'medium'}}</td>\r\n    </ng-container>\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"\r\n      [ngClass]=\"{'highlight': selectedRowIndex == row.interviewId}\" \r\n      (click)=\"highlight(row)\">\r\n    </tr>\r\n  </table>\r\n  <div fxLayout=\"column\" fxLayoutAlign=\"space-around center\" >\r\n  <button mat-raised-button color=\"primary\" (click)=\"startInterview()\" [disabled]=\"selectedRowIndex === -1\" class=\"join--button\">\r\n    Join interview\r\n  </button>\r\n</div>\r\n</div>\r\n\r\n<!-- 28.11 addition, olez: -->\r\n<div fxLayout=\"column\" fxLayoutAlign=\"center center\" *ngIf=\"!forms?.length > 0\">\r\n    <h2 class=\"main no-avail\">No available interviews at this moment. Please wait.</h2>\r\n</div>\r\n\r\n<section class=\"section--fullwidth intro\">\r\n  <div class=\"img--block\">\r\n      <docs-svg-viewer src=\"../assets/img/optimized.svg\"\r\n                       scaleToContainer=\"true\">\r\n      </docs-svg-viewer>\r\n  </div>\r\n\r\n    <div class=\"text--block\">\r\n    <h2 class=\"main\">Ultimate app for interviewing candidates for a QC position using interactive forms.</h2>\r\n    <div class=\"main text\">\r\n        <p>To begin an interview, wait until an expert runs the interview session.\r\n        <p>How to use the app:</p>\r\n            <ul>\r\n              <li>Choose an accessible interview from the list of interviews.</li>\r\n              <li>Interact with form controls to identify problems. Have fun!</li>\r\n            </ul>\r\n          </div>\r\n    </div>\r\n</section>\r\n\r\n<section class=\"section--fullwidth features\">\r\n\r\n      <div class=\"text--block\">\r\n      <h2 class=\"main\">The application main features are:</h2>\r\n      <div class=\"main text\">\r\n          <ul>\r\n            <li>Create custom forms for interview and save them.</li>\r\n            <li>Ability to create an interview with chosen form.</li>\r\n            <li>Ability to mimic majority of events from one user to another.</li>\r\n            <li>Possibility of creation, editing, deleting user and groups. Assigning users to groups and choose user's permissions.</li>\r\n            <li>Possibility of viewing interview statistics: login/logout time, interview's actions and their performer, interview start and end time.</li>\r\n          </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"img--block\">\r\n    </div>\r\n    \r\n</section>\r\n\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -8386,7 +8400,7 @@ module.exports = "<mat-sidenav-container class=\"example-container\">\r\n  <mat-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-radio-group {\n  display: inline-flex;\n  flex-direction: column; }\n\n.example-radio-button {\n  margin: 5px; }\n\n.example-radio-button:hover {\n  opacity: 0,5; }\n\n.example-selected-value {\n  margin: 15px 0; }\n\n.example-viewport {\n  height: 200px;\n  width: 60%;\n  margin-bottom: 20px; }\n\n.example-dt {\n  height: 30px;\n  font-weight: bold; }\n\n.example-dd {\n  height: 30px; }\n\n#scroll::-webkit-scrollbar-track {\n  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n  background-color: #F5F5F5; }\n\n#scroll::-webkit-scrollbar {\n  width: 6px;\n  background-color: #F5F5F5; }\n\n#scroll::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.3); }\n\n.example-container {\n  width: 15%;\n  height: 100%;\n  position: absolute;\n  background-color: rgba(0, 0, 0, 0.1); }\n\ntable {\n  width: 70%;\n  margin-bottom: 5%; }\n\n.highlight {\n  background: rgba(0, 0, 0, 0.1); }\n"
+module.exports = "@charset \"UTF-8\";\n.example-radio-group {\n  display: inline-flex;\n  flex-direction: column; }\n.example-radio-button {\n  margin: 5px; }\n.example-radio-button:hover {\n  opacity: 0,5; }\n.example-selected-value {\n  margin: 15px 0; }\n.example-viewport {\n  height: 200px;\n  width: 60%;\n  margin-bottom: 20px; }\n.example-dt {\n  height: 30px;\n  font-weight: bold; }\n.example-dd {\n  height: 30px; }\n#scroll::-webkit-scrollbar-track {\n  background-color: #F5F5F5; }\n#scroll::-webkit-scrollbar {\n  width: 6px;\n  background-color: #F5F5F5; }\n#scroll::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.3); }\n.example-container {\n  width: 15%;\n  height: 100%;\n  position: absolute;\n  background-color: rgba(0, 0, 0, 0.1); }\ntable {\n  width: 80%; }\n.highlight {\n  background: rgba(0, 0, 0, 0.1); }\n.mat-elevation-z8 {\n  box-shadow: none; }\n.join--button {\n  margin-top: 16px; }\n.main {\n  box-sizing: border-box; }\n.main .text {\n    font-size: 16px;\n    font-weight: 400 !important; }\nh1.main {\n  font-weight: 300;\n  font-size: 30px;\n  color: rgba(0, 0, 0, 0.54); }\nh2.main {\n  font-size: 20px;\n  font-weight: 400; }\nh2.main.no-avail {\n    color: rgba(0, 0, 0, 0.54); }\n.intro {\n  width: 80%;\n  margin: auto;\n  margin-top: 50px;\n  display: flex;\n  justify-content: center;\n  padding: 24px;\n  box-sizing: border-box; }\n.features {\n  width: 80%;\n  margin: auto;\n  margin-top: 50px;\n  display: flex;\n  justify-content: center;\n  padding: 24px;\n  box-sizing: border-box; }\n.text--block {\n  flex-basis: 1; }\n.img--block {\n  margin-right: 50px; }\n.logo--title {\n  font-family: 'Russo One', sans-serif;\n  margin-bottom: 8px; }\n.section--fullwidth {\n  box-sizing: border-box;\n  width: 100vw; }\n.section--fullwidth.intro {\n    color: rgba(0, 0, 0, 0.54);\n    background-color: #fafafa; }\n.section--fullwidth.features {\n    background-color: #3f51b5;\n    color: white;\n    margin-top: 0; }\nul {\n  list-style-type: none; }\nul li {\n  box-sizing: border-box;\n  margin: 8px; }\nli:before {\n  content: '⚡️'; }\n"
 
 /***/ }),
 
@@ -8464,8 +8478,8 @@ var MainPageComponent = /** @class */ (function () {
         this.http.getAvailableInterviews()
             .subscribe(function (data) {
             _this.forms = data;
+            console.log(_this.forms);
             _this.renderUsersList();
-            console.log(_this.formsSource);
         });
         this.unsubUpdateTable = this.updateTable();
     };
@@ -8490,6 +8504,91 @@ var MainPageComponent = /** @class */ (function () {
 }());
 
 // https://medium.com/codingthesmartway-com-blog/angular-material-part-4-data-table-23874582f23a
+
+
+/***/ }),
+
+/***/ "./src/app/components/main-page/svg-viewer.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/components/main-page/svg-viewer.component.ts ***!
+  \**************************************************************/
+/*! exports provided: SvgViewer, SvgViewerModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SvgViewer", function() { return SvgViewer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SvgViewerModule", function() { return SvgViewerModule; });
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SvgViewer = /** @class */ (function () {
+    function SvgViewer(elementRef, http) {
+        this.elementRef = elementRef;
+        this.http = http;
+    }
+    SvgViewer.prototype.ngOnInit = function () {
+        this.fetchAndInlineSvgContent(this.src);
+    };
+    SvgViewer.prototype.inlineSvgContent = function (template) {
+        this.elementRef.nativeElement.innerHTML = template;
+        if (this.scaleToContainer) {
+            var svg = this.elementRef.nativeElement.querySelector('svg');
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '100%');
+            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        }
+    };
+    SvgViewer.prototype.fetchAndInlineSvgContent = function (path) {
+        var _this = this;
+        var svgAbsPath = getAbsolutePathFromSrc(path);
+        this.http.get(svgAbsPath, { responseType: 'text' }).subscribe(function (svgResponse) {
+            _this.inlineSvgContent(svgResponse);
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        __metadata("design:type", String)
+    ], SvgViewer.prototype, "src", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], SvgViewer.prototype, "scaleToContainer", void 0);
+    SvgViewer = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'docs-svg-viewer',
+            template: '<div class="docs-svg-viewer" aria-hidden="true"></div>',
+        }),
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"], _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]])
+    ], SvgViewer);
+    return SvgViewer;
+}());
+
+function getAbsolutePathFromSrc(src) {
+    return src.slice(src.indexOf('assets/') - 1);
+}
+var SvgViewerModule = /** @class */ (function () {
+    function SvgViewerModule() {
+    }
+    SvgViewerModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            exports: [SvgViewer],
+            declarations: [SvgViewer],
+        })
+    ], SvgViewerModule);
+    return SvgViewerModule;
+}());
+
 
 
 /***/ }),
@@ -8559,7 +8658,7 @@ var ConfirmEqualValidatorDirective = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\" fxLayout=\"row\">\r\n    <mat-sidenav fxFlex.sm=\"1 0 230px\"\r\n                 fxFlex.md=\"1 1 25%\"\r\n                 fxFlex.gt-md=\"1 1 20%\"\r\n                 #drawer class=\"sidenav\"\r\n                 fixedInViewport=\"true\"\r\n                 [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n                 [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n                 [opened]=\"!(isHandset$ | async)\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"center center\">\r\n            <mat-slide-toggle (click)=\"showEditPanel()\"\r\n                              checked=\"true\"\r\n                              fxHide.xs=\"true\"\r\n                              labelPosition=\"before\">\r\n                <span>Hide edit panel</span>\r\n            </mat-slide-toggle>\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <app-nav-constructor *ngIf=\"!configPanel\"></app-nav-constructor>\r\n            <app-nav-config *ngIf=\"configPanel\"></app-nav-config>\r\n        </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content fxFlex.sm=\"1 1 70%\"\r\n                         fxFlex.md=\"1 1 75%\"\r\n                         fxFlex.gt-md=\"1 1 80%\"\r\n                         class=\"preview-bg\">\r\n\r\n        <div class=\"form\">\r\n            <form class=\"form-info\" [formGroup]=\"formInfo\">\r\n                <div class=\"form-info-inputs\">\r\n                    <mat-form-field class=\"example-full-width\">\r\n                        <mat-label>Form title</mat-label>\r\n                        <input matInput type=\"text\" formControlName=\"title\" required>\r\n                        <mat-error>Min title length: 3</mat-error>\r\n                    </mat-form-field>\r\n\r\n                    <mat-form-field>\r\n                        <mat-label>Group name</mat-label>\r\n                        <mat-select formControlName=\"groups\" multiple required>\r\n                            <mat-option *ngFor=\"let group of groups\" [value]=\"group\">{{group}}</mat-option>\r\n                        </mat-select>\r\n                        <mat-error>Please choose group</mat-error>\r\n                    </mat-form-field>\r\n                </div>\r\n\r\n                <div class=\"form-info-buttons\">\r\n                    <mat-toolbar>\r\n                    <button mat-raised-button [disabled]=\"formSavingProcess || !formInfo.valid\" (click)=\"saveForm()\" color=\"primary\">Save form</button>\r\n                    <button mat-raised-button [disabled]=\"!form._id\" (click)=\"delForm(form)\" color=\"warn\">Remove form</button>\r\n                    </mat-toolbar>\r\n                </div>\r\n            </form>\r\n\r\n            <form class=\"example-container\">\r\n                <!--container for row-->\r\n                <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                    <!--row-->\r\n                    <div class=\"row\">\r\n\r\n                        <button mat-mini-fab color=\"primary\" (click)=\"addCell(rowIndex)\">\r\n                            <mat-icon>add</mat-icon>\r\n                        </button>\r\n\r\n                        <!--container for cell-->\r\n                        <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                            <!--cell-->\r\n                            <div class=\"cell\">\r\n                                <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                                    <!--<div  *ngIf=\"elem.type==='text'\" [innerHtml]=\"elem | type\"></div>-->\r\n\r\n                                    <!--if element is input TEXT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"text\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input NUMBER-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"number\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [min]=\"elem.config.min\"\r\n                                               [max]=\"elem.config.max\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input EMAIL-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"email\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input PASSWORD-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"password\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is SLIDER-->\r\n                                    <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-slider\r\n                                                class=\"example-margin\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\">\r\n                                        </mat-slider>\r\n                                    </section>\r\n\r\n                                    <!--if element is TOGGLE-->\r\n                                    <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n\r\n                                        <mat-slide-toggle class=\"example-margin\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [checked]=\"elem.config.checked\"\r\n                                                          [disabled]=\"elem.config.disabled\">\r\n                                            {{elem.config.label}}\r\n                                        </mat-slide-toggle>\r\n                                    </section>\r\n\r\n                                    <!--if element is SELECT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='select'\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-select [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\">\r\n                                            <mat-option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                                {{option}}\r\n                                            </mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input CHECKBOX-->\r\n                                    <section class=\"example-section example-section-checkbox\"\r\n                                             *ngIf=\"elem.type==='checkbox'\"\r\n                                             [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\"\r\n                                             (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-checkbox *ngFor=\"let option of elem.config.options\"\r\n                                                      class=\"example-margin example-margin-checkbox\"\r\n                                                      [value]=\"option\"\r\n                                                      [color]=\"elem.config.color\"\r\n                                                      [disabled]=\"elem.config.disabled\"\r\n                                                      [required]=\"elem.config.required\">{{option}}\r\n                                        </mat-checkbox>\r\n                                    </section>\r\n\r\n                                    <!--if element is input RADIO-->\r\n                                    <mat-radio-group class=\"example-radio-group\" *ngIf=\"elem.type==='radio'\"\r\n                                                     [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\"\r\n                                                     (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-radio-button class=\"example-radio-button\"\r\n                                                          *ngFor=\"let option of elem.config.options\"\r\n                                                          [value]=\"option\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [disabled]=\"elem.config.disabled\"\r\n                                                          [required]=\"elem.config.required\">{{option}}\r\n                                        </mat-radio-button>\r\n                                    </mat-radio-group>\r\n\r\n                                    <!--if element is TEXTAREA-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width flex-grow\"\r\n                                                    (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <textarea matInput\r\n                                                  [value]=\"elem.config.value\"\r\n                                                  [placeholder]=\"elem.config.placeholder\"\r\n                                                  [disabled]=\"elem.config.disabled\"></textarea>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is BUTTON-->\r\n                                    <div *ngIf=\"elem.type==='button'\" class=\"example-button-row flex-grow\"\r\n                                         (click)=\"addConfig(elem, rowIndex, cellIndex)\">\r\n                                        <button mat-raised-button\r\n                                                [color]=\"elem.config.color\"\r\n                                                [disabled]=\"elem.config.disabled\">{{elem.config.value}}\r\n                                        </button>\r\n                                    </div>\r\n\r\n                                    <button mat-mini-fab color=\"primary\" (click)=\"delElem(rowIndex, cellIndex)\">\r\n                                        <mat-icon>remove</mat-icon>\r\n                                    </button>\r\n                                </div>\r\n\r\n                                <button mat-mini-fab color=\"primary\" *ngIf=\"!cell.elements.length\"\r\n                                        (click)=\"addElem(rowIndex, cellIndex)\">\r\n                                    <mat-icon>add</mat-icon>\r\n                                </button>\r\n                            </div>\r\n\r\n                            <button mat-mini-fab color=\"primary\" (click)=\"delCell(rowIndex, cellIndex)\">\r\n                                <mat-icon>remove</mat-icon>\r\n                            </button>\r\n                        </div>\r\n\r\n                    </div>\r\n\r\n                    <button mat-mini-fab color=\"primary\" (click)=\"delRow(rowIndex)\">\r\n                        <mat-icon>remove</mat-icon>\r\n                    </button>\r\n                </div>\r\n\r\n                <button mat-mini-fab color=\"primary\" (click)=\"addRow()\">\r\n                    <mat-icon>add</mat-icon>\r\n                </button>\r\n               </form>\r\n            </div>\r\n        <app-form-screenshot [form]=\"form\"></app-form-screenshot>\r\n    </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\" fxLayout=\"row\">\r\n    <mat-sidenav fxFlex.sm=\"1 0 230px\"\r\n                 fxFlex.md=\"1 1 25%\"\r\n                 fxFlex.gt-md=\"1 1 20%\"\r\n                 #drawer class=\"sidenav\"\r\n                 fixedInViewport=\"true\"\r\n                 [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n                 [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n                 [opened]=\"!(isHandset$ | async)\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"center center\">\r\n            <mat-slide-toggle (click)=\"showEditPanel()\"\r\n                              checked=\"true\"\r\n                              fxHide.xs=\"true\"\r\n                              labelPosition=\"before\">\r\n                <span>Hide edit panel</span>\r\n            </mat-slide-toggle>\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <app-nav-constructor *ngIf=\"!configPanel\"></app-nav-constructor>\r\n            <app-nav-config *ngIf=\"configPanel\"></app-nav-config>\r\n        </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content fxFlex.sm=\"1 1 70%\"\r\n                         fxFlex.md=\"1 1 75%\"\r\n                         fxFlex.gt-md=\"1 1 80%\"\r\n                         class=\"preview-bg\">\r\n\r\n        <div class=\"form\">\r\n            <form class=\"form-info\" [formGroup]=\"formInfo\">\r\n                <div class=\"form-info-inputs\">\r\n                    <mat-form-field class=\"example-full-width\">\r\n                        <mat-label>Form title</mat-label>\r\n                        <input matInput type=\"text\" formControlName=\"title\" required>\r\n                        <mat-error>Min title length: 3</mat-error>\r\n                    </mat-form-field>\r\n\r\n                    <mat-form-field>\r\n                        <mat-label>Group name</mat-label>\r\n                        <mat-select formControlName=\"groups\" multiple required>\r\n                            <mat-option *ngFor=\"let group of groups\" [value]=\"group\">{{group}}</mat-option>\r\n                        </mat-select>\r\n                        <mat-error>Please choose group</mat-error>\r\n                    </mat-form-field>\r\n                </div>\r\n\r\n                <div class=\"form-info-buttons\">\r\n                    <mat-toolbar>\r\n                    <button mat-raised-button [disabled]=\"disableSaveFormButton || !formInfo.valid\" (click)=\"saveForm()\" color=\"primary\">Save form</button>\r\n                    <button mat-raised-button [disabled]=\"!form._id\" (click)=\"delForm(form)\" color=\"warn\">Remove form</button>\r\n                    </mat-toolbar>\r\n                </div>\r\n            </form>\r\n\r\n            <form class=\"example-container\">\r\n                <!--container for row-->\r\n                <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                    <!--row-->\r\n                    <div class=\"row\">\r\n\r\n                        <button mat-mini-fab color=\"primary\" (click)=\"addCell(rowIndex)\">\r\n                            <mat-icon>add</mat-icon>\r\n                        </button>\r\n\r\n                        <!--container for cell-->\r\n                        <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                            <!--cell-->\r\n                            <div class=\"cell\">\r\n                                <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n                                    <!--<div  *ngIf=\"elem.type==='text'\" [innerHtml]=\"elem | type\"></div>-->\r\n\r\n                                    <!--component with elements-->\r\n                                    <app-element class=\"flex-grow\" [elem]=\"elem\" (click)=\"addConfig(elem, rowIndex, cellIndex)\"></app-element>\r\n\r\n                                    <button mat-mini-fab color=\"primary\" (click)=\"delElem(rowIndex, cellIndex)\">\r\n                                        <mat-icon>remove</mat-icon>\r\n                                    </button>\r\n                                </div>\r\n\r\n                                <button mat-mini-fab color=\"primary\" *ngIf=\"!cell.elements.length\"\r\n                                        (click)=\"addElem(rowIndex, cellIndex)\">\r\n                                    <mat-icon>add</mat-icon>\r\n                                </button>\r\n                            </div>\r\n\r\n                            <button mat-mini-fab color=\"primary\" (click)=\"delCell(rowIndex, cellIndex)\">\r\n                                <mat-icon>remove</mat-icon>\r\n                            </button>\r\n                        </div>\r\n\r\n                    </div>\r\n\r\n                    <button mat-mini-fab color=\"primary\" (click)=\"delRow(rowIndex)\">\r\n                        <mat-icon>remove</mat-icon>\r\n                    </button>\r\n                </div>\r\n\r\n                <button mat-mini-fab color=\"primary\" (click)=\"addRow()\">\r\n                    <mat-icon>add</mat-icon>\r\n                </button>\r\n               </form>\r\n            </div>\r\n        <app-form-screenshot [form]=\"form\"></app-form-screenshot>\r\n    </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
 
 /***/ }),
 
@@ -8570,7 +8669,7 @@ module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".sidenav {\n  width: 50%; }\n\n.sidenav-container {\n  height: 100%; }\n\n.sidenav {\n  background: inherit; }\n\n.mat-toolbar {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n  background-color: #fff; }\n\n.mat-toolbar .mat-toolbar-single-row {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1; }\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n  padding-top: 0; }\n\n.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {\n  color: #fff !important;\n  font-size: 20px;\n  font-weight: normal; }\n\n.new-form-button, .save-form-button {\n  margin-right: 10px; }\n\nmat-sidenav-container {\n  text-align: center; }\n\nmat-sidenav {\n  min-width: 200px; }\n\nmat-card {\n  margin: 16px;\n  padding-bottom: 0; }\n\nmat-card mat-card-title {\n  font-size: 20px; }\n\nmat-card img {\n  max-width: 700px; }\n\n@media only screen and (min-width: 600px) {\n  mat-sidenav {\n    position: relative;\n    max-width: 25%; }\n  mat-sidenav-content {\n    margin-left: 0 !important; } }\n\n.full-height {\n  height: calc(100vh - 64px); }\n\n.flex-grow {\n  flex-grow: 1; }\n\n.flex-grow button {\n    width: 100%; }\n\n.form {\n  margin-top: 50px; }\n\n.form .form-info {\n    display: flex;\n    width: 90%;\n    margin: 10px auto;\n    align-items: center;\n    justify-content: center; }\n\n.form .form-info .form-info-inputs {\n      width: 45%;\n      text-align: left; }\n\n.form .form-info .form-info-inputs .mat-form-field {\n        margin-right: 10px;\n        font-size: 20px; }\n\n.form .form-info .form-info-buttons {\n      width: 55%;\n      text-align: right; }\n\n.form .form-info .form-info-buttons mat-toolbar {\n        justify-content: flex-end; }\n\n.form .form-info .form-info-buttons button {\n        margin-left: 10px; }\n\n.form .example-container {\n    margin: 10px auto;\n    width: 90%;\n    border: 1px solid #c9c9c9;\n    min-height: 50px;\n    padding: 5px;\n    border-radius: 5px; }\n\n.form .example-container .row-container {\n      display: flex;\n      align-items: center;\n      justify-content: center; }\n\n.form .example-container .row-container .row {\n        display: flex;\n        margin: 5px;\n        padding: 5px;\n        width: 100%;\n        min-height: 20px;\n        border-radius: 5px;\n        border: 1px solid #c9c9c9;\n        align-items: center; }\n\n.form .example-container .row-container .row .cell-container {\n          display: flex;\n          width: 100%;\n          margin-right: 5px;\n          align-items: center;\n          justify-content: center; }\n\n.form .example-container .row-container .row .cell-container .cell {\n            display: flex;\n            margin: 5px;\n            padding: 5px;\n            width: 100%;\n            min-height: 20px;\n            border-radius: 5px;\n            border: 1px solid #c9c9c9; }\n\n.form .example-container .row-container .row .cell-container .cell .element {\n              display: flex;\n              align-items: center; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field {\n                margin: 0 15px; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field ::ng-deep .mat-form-field-infix {\n                  width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slider {\n                width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slide-toggle {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-select {\n                width: 140px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-group {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-button {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical {\n                display: block !important;\n                text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .element .vertical .mat-checkbox {\n                  margin: 10px;\n                  display: block; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-section-checkbox {\n                display: flex;\n                align-content: center;\n                align-items: center;\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-margin-checkbox {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-button-row {\n                margin: 5px; }\n\n.form .example-container .row-container .mat-mini-fab {\n        width: 30px;\n        height: 30px; }\n\n.form .example-container .row-container .mat-mini-fab mat-icon {\n          width: 20px;\n          height: 30px;\n          font-size: 20px; }\n\n.form .example-container .mat-mini-fab {\n      width: 40px;\n      height: 40px;\n      padding: 3px; }\n\n.form .example-container .mat-mini-fab mat-icon {\n        margin-top: -8px;\n        padding: 0;\n        width: 30px;\n        height: 30px;\n        font-size: 30px; }\n\n/*my mixins*/\n\n.preview-bg {\n  background-color: #fff !important; }\n\n#screenshot {\n  position: relative;\n  left: -100%; }\n"
+module.exports = ".sidenav {\n  width: 50%; }\n\n.sidenav-container {\n  height: 100%; }\n\n.sidenav {\n  background: inherit; }\n\n.mat-toolbar {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n  background-color: #fff; }\n\n.mat-toolbar .mat-toolbar-single-row {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1; }\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n  padding-top: 0; }\n\n.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {\n  color: #fff !important;\n  font-size: 20px;\n  font-weight: normal; }\n\n.new-form-button, .save-form-button {\n  margin-right: 10px; }\n\nmat-sidenav-container {\n  text-align: center; }\n\nmat-sidenav {\n  min-width: 200px; }\n\nmat-card {\n  margin: 16px;\n  padding-bottom: 0; }\n\nmat-card mat-card-title {\n  font-size: 20px; }\n\nmat-card img {\n  max-width: 700px; }\n\n@media only screen and (min-width: 600px) {\n  mat-sidenav {\n    position: relative;\n    max-width: 25%; }\n  mat-sidenav-content {\n    margin-left: 0 !important; } }\n\n.full-height {\n  height: calc(100vh - 64px); }\n\n.flex-grow {\n  display: flex;\n  flex-grow: 1; }\n\n.flex-grow button {\n    width: 100%; }\n\n.form {\n  margin-top: 50px; }\n\n.form .form-info {\n    display: flex;\n    width: 90%;\n    margin: 10px auto;\n    align-items: center;\n    justify-content: center; }\n\n.form .form-info .form-info-inputs {\n      width: 45%;\n      text-align: left; }\n\n.form .form-info .form-info-inputs .mat-form-field {\n        margin-right: 10px;\n        font-size: 20px; }\n\n.form .form-info .form-info-buttons {\n      width: 55%;\n      text-align: right; }\n\n.form .form-info .form-info-buttons mat-toolbar {\n        justify-content: flex-end; }\n\n.form .form-info .form-info-buttons button {\n        margin-left: 10px; }\n\n.form .example-container {\n    margin: 10px auto;\n    width: 90%;\n    border: 1px solid #c9c9c9;\n    min-height: 50px;\n    padding: 5px;\n    border-radius: 5px; }\n\n.form .example-container .row-container {\n      display: flex;\n      align-items: center;\n      justify-content: center; }\n\n.form .example-container .row-container .row {\n        display: flex;\n        margin: 5px;\n        padding: 5px;\n        width: 100%;\n        min-height: 20px;\n        border-radius: 5px;\n        border: 1px solid #c9c9c9;\n        align-items: center; }\n\n.form .example-container .row-container .row .cell-container {\n          display: flex;\n          width: 100%;\n          margin-right: 5px;\n          align-items: center;\n          justify-content: center; }\n\n.form .example-container .row-container .row .cell-container .cell {\n            display: flex;\n            margin: 5px;\n            padding: 5px;\n            width: 100%;\n            min-height: 20px;\n            border-radius: 5px;\n            border: 1px solid #c9c9c9; }\n\n.form .example-container .row-container .row .cell-container .cell .element {\n              display: flex;\n              align-items: center; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field {\n                margin: 0 15px; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field ::ng-deep .mat-form-field-infix {\n                  width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slider {\n                width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slide-toggle {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-select {\n                width: 140px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-group {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-button {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical {\n                display: block !important;\n                text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .element .vertical .mat-checkbox {\n                  margin: 10px;\n                  display: block; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-section-checkbox {\n                display: flex;\n                align-content: center;\n                align-items: center;\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-margin-checkbox {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-button-row {\n                margin: 5px; }\n\n.form .example-container .row-container .mat-mini-fab {\n        width: 30px;\n        height: 30px; }\n\n.form .example-container .row-container .mat-mini-fab mat-icon {\n          width: 20px;\n          height: 30px;\n          font-size: 20px; }\n\n.form .example-container .mat-mini-fab {\n      width: 40px;\n      height: 40px;\n      padding: 3px; }\n\n.form .example-container .mat-mini-fab mat-icon {\n        margin-top: -8px;\n        padding: 0;\n        width: 30px;\n        height: 30px;\n        font-size: 30px; }\n\n/*my mixins*/\n\n.preview-bg {\n  background-color: #fff !important; }\n\n#screenshot {\n  position: relative;\n  left: -100%; }\n"
 
 /***/ }),
 
@@ -8618,7 +8717,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var emptyForm = {
     title: 'New form',
     author: 'Ya',
-    preview: '',
+    preview: 'https://ps.w.org/simple-registration-form/trunk/screenshot-1.png?rev=1790752',
     groups: ['Dnipro-142'],
     rows: [],
     description: ''
@@ -8639,6 +8738,7 @@ var ConstructorPageComponent = /** @class */ (function () {
         // get template of element from constructor
         this.broadcast.subscriberSendElem()
             .subscribe(function (elem) {
+            console.log('got element');
             _this.pushElem(elem);
         });
         this.options = fb.group({
@@ -8675,15 +8775,17 @@ var ConstructorPageComponent = /** @class */ (function () {
     };
     ConstructorPageComponent.prototype.saveForm = function () {
         var _this = this;
-        this.formSavingProcess = true;
-        var currentDate = new Date().valueOf();
+        this.disableSaveFormButton = true;
+        if (this.form.preview !== '') {
+            var hideMessage = true;
+            this.screenshotService.deleteScreenshot(this.form, hideMessage);
+        }
+        var currentDate = Date.now();
         var imgName = currentDate + '.png';
         this.form.title = this.formInfo.value.title;
         this.form.author = JSON.parse(window.localStorage.getItem('currentUser')).username;
         this.form.groups = this.formInfo.value.groups;
-        if (this.form.preview === '') {
-            this.form.preview = imgName;
-        }
+        this.form.preview = imgName;
         this.http.saveForm(this.form)
             .subscribe(function (data) {
             var isFormSaved = Array.isArray(data);
@@ -8693,16 +8795,14 @@ var ConstructorPageComponent = /** @class */ (function () {
                     _this.form = forms[0]; // show updated form
                 }
                 else {
-                    var forms = data.filter(function (form) { return form.preview === _this.form.preview; });
-                    ; // show created form
-                    _this.form = forms[0];
+                    _this.form = data[data.length - 1]; // show created form
                 }
                 _this.screenshotService.saveScreenshot(_this.form);
             }
             else {
                 _this.screenshotService.showSaveMessage(_this.form.title, isFormSaved);
             }
-            _this.formSavingProcess = false;
+            _this.disableSaveFormButton = false;
         });
     };
     ConstructorPageComponent.prototype.delForm = function (form) {
@@ -8744,17 +8844,22 @@ var ConstructorPageComponent = /** @class */ (function () {
         var _this = this;
         this.hideConfig();
         this.elemParams = { row: rowIndex, cell: cellIndex }; // saves row and cell for new element
+        console.log(this.elemParams);
         setTimeout(function () {
             _this.broadcast.activationConstructor();
         }, 100);
     };
     ConstructorPageComponent.prototype.pushElem = function (elem) {
-        console.log(this.elemParams);
-        var copyElem = JSON.parse(JSON.stringify(elem));
-        var elements = this.form.rows[this.elemParams.row].cells[this.elemParams.cell].elements;
-        this.hideConfig();
-        if (!elements.length) {
-            elements.push(copyElem);
+        // debugger;
+        console.log(123);
+        if (this.elemParams) {
+            console.log(456);
+            var copyElem = JSON.parse(JSON.stringify(elem));
+            var elements = this.form.rows[this.elemParams.row].cells[this.elemParams.cell].elements;
+            this.hideConfig();
+            if (!elements.length) {
+                elements.push(copyElem);
+            }
         }
     };
     ConstructorPageComponent.prototype.delElem = function (rowIndex, cellIndex) {
@@ -9137,6 +9242,7 @@ var NavConstructorComponent = /** @class */ (function () {
         if (this.stateConstructor) {
             this.stateConstructor = false;
             constructorActivation(this.stateConstructor);
+            console.log('initiate element');
             this.broadcast.sendElem(elem);
         }
     };
@@ -9167,6 +9273,339 @@ function constructorActivation(state) {
 
 /***/ }),
 
+/***/ "./src/app/forms/element/element.component.html":
+/*!******************************************************!*\
+  !*** ./src/app/forms/element/element.component.html ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!--if element is input TEXT-->\r\n<mat-form-field *ngIf=\"elem.type==='text'\"\r\n      class=\"example-full-width flex-grow\"\r\n      [ngClass]=\"elem.type==='text' ? 'form-element': 'none'\"\r\n>\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <input matInput type=\"text\"\r\n         [value]=\"elem.config.value\"\r\n         [placeholder]=\"elem.config.placeholder\"\r\n         [disabled]=\"elem.config.disabled\"\r\n         [required]=\"elem.config.required\">\r\n</mat-form-field>\r\n\r\n<!--if element is input NUMBER-->\r\n<mat-form-field *ngIf=\"elem.type==='number'\"\r\n      class=\"example-full-width flex-grow\"\r\n      [ngClass]=\"elem.type==='number' ? 'form-element': 'none'\"\r\n>\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <input matInput type=\"number\"\r\n         [value]=\"elem.config.value\"\r\n         [placeholder]=\"elem.config.placeholder\"\r\n         [min]=\"elem.config.min\"\r\n         [max]=\"elem.config.max\"\r\n         [disabled]=\"elem.config.disabled\"\r\n         [required]=\"elem.config.required\">\r\n</mat-form-field>\r\n\r\n<!--if element is input EMAIL-->\r\n<mat-form-field *ngIf=\"elem.type==='email'\"\r\n      class=\"example-full-width flex-grow\"\r\n      [ngClass]=\"elem.type==='email' ? 'form-element': 'none'\"\r\n>\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <input matInput type=\"email\"\r\n         [value]=\"elem.config.value\"\r\n         [placeholder]=\"elem.config.placeholder\"\r\n         [disabled]=\"elem.config.disabled\"\r\n         [required]=\"elem.config.required\">\r\n</mat-form-field>\r\n\r\n<!--if element is input PASSWORD-->\r\n<mat-form-field *ngIf=\"elem.type==='password'\"\r\n      class=\"example-full-width flex-grow\"\r\n      [ngClass]=\"elem.type==='password' ? 'form-element': 'none'\"\r\n>\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <input matInput type=\"password\"\r\n         [value]=\"elem.config.value\"\r\n         [placeholder]=\"elem.config.placeholder\"\r\n         [disabled]=\"elem.config.disabled\"\r\n         [required]=\"elem.config.required\">\r\n</mat-form-field>\r\n\r\n<!--if element is SLIDER-->\r\n<section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\">\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <mat-slider\r\n          class=\"example-margin\"\r\n          [ngClass]=\"{'form-element': elem.type==='slider'}\"\r\n          (change)=\"catchOnChange($event)\"\r\n          [value]=\"sliderValue\"\r\n          [invert]=\"elem.config.invert\"\r\n          [max]=\"elem.config.max\"\r\n          [min]=\"elem.config.min\"\r\n          [step]=\"elem.config.step\"\r\n          [thumbLabel]=\"elem.config.thumbLabel\"\r\n          [vertical]=\"elem.config.vertical\"\r\n          [disabled]=\"elem.config.disabled\">\r\n  </mat-slider>\r\n</section>\r\n\r\n<!--if element is TOGGLE-->\r\n<section *ngIf=\"elem.type==='toggle'\" class=\"example-section\">\r\n\r\n  <mat-slide-toggle class=\"example-margin\"\r\n                    [ngClass]=\"elem.type==='toggle' ? 'form-element': 'none'\"\r\n                    [color]=\"elem.config.color\"\r\n                    [checked]=\"elem.config.checked\"\r\n                    [disabled]=\"elem.config.disabled\">\r\n    {{elem.config.label}}\r\n  </mat-slide-toggle>\r\n</section>\r\n\r\n<!--if element is SELECT-->\r\n<mat-form-field *ngIf=\"elem.type==='select'\">\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <select matNativeControl [disabled]=\"elem.config.disabled\"\r\n              [required]=\"elem.config.required\"\r\n              [ngClass]=\"elem.type==='select' ? 'form-element': ''\"\r\n  >\r\n    <option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n      {{option}}\r\n    </option>\r\n  </select>\r\n</mat-form-field>\r\n\r\n<!--if element is input CHECKBOX-->\r\n<section class=\"example-section example-section-checkbox\"\r\n         *ngIf=\"elem.type==='checkbox'\"\r\n         [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <mat-checkbox *ngFor=\"let option of elem.config.options\"\r\n                class=\"example-margin example-margin-checkbox\"\r\n                [ngClass]=\"elem.type==='checkbox' ? 'form-element': 'none'\"\r\n                [value]=\"option\"\r\n                [color]=\"elem.config.color\"\r\n                [disabled]=\"elem.config.disabled\"\r\n                [required]=\"elem.config.required\"\r\n  >\r\n    {{option}}\r\n  </mat-checkbox>\r\n</section>\r\n\r\n<!--if element is input RADIO-->\r\n<mat-radio-group class=\"example-radio-group\" *ngIf=\"elem.type==='radio'\"\r\n                 [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <mat-radio-button class=\"example-radio-button\"\r\n                    [ngClass]=\"elem.type==='radio' ? 'form-element': 'none'\"\r\n                    *ngFor=\"let option of elem.config.options\"\r\n                    [value]=\"option\"\r\n                    [color]=\"elem.config.color\"\r\n                    [disabled]=\"elem.config.disabled\"\r\n                    [required]=\"elem.config.required\">{{option}}\r\n  </mat-radio-button>\r\n</mat-radio-group>\r\n\r\n<!--if element is TEXTAREA-->\r\n<mat-form-field *ngIf=\"elem.type==='textarea'\"\r\n                class=\"example-full-width flex-grow\"\r\n                [ngClass]=\"elem.type==='textarea' ? 'form-element': 'none'\"\r\n>\r\n  <mat-label>{{elem.config.label}}</mat-label>\r\n  <textarea matInput\r\n            [value]=\"elem.config.value\"\r\n            [placeholder]=\"elem.config.placeholder\"\r\n            [disabled]=\"elem.config.disabled\"></textarea>\r\n</mat-form-field>\r\n\r\n<!--if element is BUTTON-->\r\n<div *ngIf=\"elem.type==='button'\"\r\n      class=\"example-button-row flex-grow\"\r\n      [ngClass]=\"elem.type==='button' ? 'form-element': 'none'\"\r\n>\r\n  <button mat-raised-button\r\n          [color]=\"elem.config.color\"\r\n          [disabled]=\"elem.config.disabled\">{{elem.config.value}}\r\n  </button>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/forms/element/element.component.scss":
+/*!******************************************************!*\
+  !*** ./src/app/forms/element/element.component.scss ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".flex-grow {\n  flex-grow: 1; }\n  .flex-grow button {\n    width: 100%; }\n  .hovered {\n  outline: 4px solid deeppink; }\n  mat-form-field {\n  margin: 0 15px; }\n  mat-form-field ::ng-deep .mat-form-field-infix {\n    width: 100%; }\n  .mat-slider {\n  width: 100%; }\n  .mat-slide-toggle {\n  margin: 0 10px; }\n  select {\n  width: 140px; }\n  .example-radio-group {\n  margin: 0 10px; }\n  .example-radio-button {\n  margin-left: 10px; }\n  .vertical {\n  display: block !important;\n  text-align: left; }\n  .vertical .mat-radio-button, .vertical .mat-checkbox {\n    margin: 10px;\n    display: block; }\n  .example-section-checkbox {\n  display: flex;\n  align-content: center;\n  align-items: center;\n  margin: 0 10px; }\n  .example-margin-checkbox {\n  margin-left: 10px; }\n  .example-button-row {\n  margin: 5px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/forms/element/element.component.ts":
+/*!****************************************************!*\
+  !*** ./src/app/forms/element/element.component.ts ***!
+  \****************************************************/
+/*! exports provided: ElementComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementComponent", function() { return ElementComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_socket_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/socket-service.service */ "./src/app/forms/services/socket-service.service.ts");
+/* harmony import */ var _services_statistic_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/statistic.service */ "./src/app/forms/services/statistic.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ElementComponent = /** @class */ (function () {
+    function ElementComponent(socketService, statistic, router) {
+        this.socketService = socketService;
+        this.statistic = statistic;
+        this.router = router;
+        this.signalExtraElements = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.sliderValue = 0;
+        this.mouseEventOptions = {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            which: 1,
+        };
+    }
+    ElementComponent.prototype.ngOnInit = function () {
+        if (typeof (this.elem) !== 'string' && this.elem.type !== 'select') {
+            if (this.elem.type === 'slider') {
+                this.sliderValue = this.elem.config.value;
+            }
+            if (this.elementNumber && this.elem.config.options) {
+                this.signalExtraElements.emit(this.elem.config.options.length - 1);
+            }
+        }
+    };
+    ElementComponent.prototype.ngAfterViewInit = function () {
+        if (this.router.url !== '/interview-page') {
+            return;
+        }
+        this.addListeners();
+        this.unsubClick = this.clickEventEmitter();
+        this.unsubMouseMove = this.mouseMoveEmitter();
+        this.unsubFocus = this.focusEmitter();
+        this.unsubKeyboard = this.keyboardEventEmitter();
+        this.unsubOnChange = this.onChangeEventEmitter();
+    };
+    ElementComponent.prototype.addListeners = function () {
+        this.formElement = document.querySelector('.form-element');
+        if (this.formElement) {
+            this.formElement.classList.remove('form-element');
+            this.formElement.addEventListener('click', this.catchClick.bind(this));
+            this.formElement.addEventListener('mouseenter', this.catchMouseMove.bind(this));
+            this.formElement.addEventListener('mouseleave', this.catchMouseMove.bind(this));
+            this.formElement.addEventListener('focus', this.catchFocus.bind(this));
+            this.formElement.addEventListener('keypress', this.catchTextInput.bind(this));
+            this.formElement.addEventListener('keyup', this.catchSpecialKeys.bind(this));
+            this.formElement.addEventListener('change', this.catchOnChange.bind(this));
+        }
+    };
+    //////////// event emitters  ////////////////////
+    ElementComponent.prototype.clickEventEmitter = function () {
+        var _this = this;
+        return this.socketService.getClickEvent()
+            .subscribe(function (event) {
+            if (event.elementNumber !== _this.elementNumber) {
+                return;
+            }
+            var targetElement = _this.formElement.querySelector(event.targetElement);
+            var mouseEvent = new MouseEvent('click', _this.mouseEventOptions);
+            if (targetElement) {
+                targetElement.dispatchEvent(mouseEvent);
+            }
+        });
+    };
+    ElementComponent.prototype.mouseMoveEmitter = function () {
+        var _this = this;
+        return this.socketService.getMouseMove()
+            .subscribe(function (event) {
+            if (event.elementNumber !== _this.elementNumber) {
+                return;
+            }
+            if (event.eventType === 'mouseenter') {
+                _this.formElement.classList.add('hovered');
+            }
+            else {
+                _this.formElement.classList.remove('hovered');
+            }
+        });
+    };
+    ElementComponent.prototype.focusEmitter = function () {
+        var _this = this;
+        return this.socketService.getFocusEvent()
+            .subscribe(function (event) {
+            if (event.elementNumber !== _this.elementNumber) {
+                return;
+            }
+            var elementToFocus = _this.formElement.querySelector(event.targetElement);
+            if (elementToFocus) {
+                elementToFocus.focus();
+            }
+            else {
+                _this.formElement.focus();
+            }
+        });
+    };
+    ElementComponent.prototype.keyboardEventEmitter = function () {
+        var _this = this;
+        return this.socketService.getKeyboardEvent()
+            .subscribe(function (event) {
+            if (event.elementNumber !== _this.elementNumber) {
+                return;
+            }
+            var changeEvent = new Event('change');
+            _this.formElement.querySelector(event.elementType).value = event.newValue;
+            _this.formElement.querySelector(event.elementType).dispatchEvent(changeEvent);
+        });
+    };
+    ElementComponent.prototype.onChangeEventEmitter = function () {
+        var _this = this;
+        return this.socketService.getOnChangeEvent()
+            .subscribe(function (event) {
+            if (event.elementNumber !== _this.elementNumber) {
+                return;
+            }
+            if (!event.targetElement) {
+                _this.sliderValue = event.newValue;
+                return;
+            }
+            // 'angular material' places target elements differently
+            if (event.targetElement === 'select') {
+                _this.formElement.value = event.newValue;
+            }
+            else {
+                _this.formElement.querySelector(event.targetElement).value = event.newValue;
+            }
+        });
+    };
+    //////////// event catchers  ////////////////////
+    ElementComponent.prototype.catchClick = function (event) {
+        var shouldBeSent = true;
+        var eventInfo = {
+            elementNumber: this.elementNumber,
+            targetElement: event.target.tagName.toLowerCase()
+        };
+        // if event initiated programatically don't react to it
+        if (!event.isTrusted) {
+            shouldBeSent = false;
+        }
+        if (event.target.tagName === 'SELECT' || event.target.tagName === 'MAT-SLIDER') {
+            shouldBeSent = false;
+        }
+        if (shouldBeSent && !this.interviewFinished) {
+            this.socketService.sendClick(eventInfo);
+            this.statistic.logClick(event);
+        }
+    };
+    ElementComponent.prototype.catchMouseMove = function (event) {
+        var eventInfo = {
+            elementNumber: this.elementNumber,
+            eventType: event.type
+        };
+        this.socketService.sendMouseMovement(eventInfo);
+    };
+    ElementComponent.prototype.catchFocus = function (event) {
+        var eventInfo = {
+            elementNumber: this.elementNumber,
+            targetElement: event.target.tagName.toLowerCase()
+        };
+        this.socketService.sendFocusEvent(eventInfo);
+    };
+    ElementComponent.prototype.catchTextInput = function (event) {
+        var newValue = event.target.value + event.key;
+        // prevents typing 'Enter' into the input
+        // catchOnChange already cares about datepickers
+        if (event.key === 'Enter' || event.target.type === 'date') {
+            return;
+        }
+        if (event.target.type === 'number'
+            && (isNaN(newValue) || event.key === '.' || event.key === ' ')) {
+            return;
+        }
+        this.keyboardEventHandler(event, newValue);
+    };
+    ElementComponent.prototype.catchSpecialKeys = function (event) {
+        if (!event.key) {
+            return;
+        }
+        if (event.key === 'Backspace'
+            || event.key === 'Delete'
+            || event.ctrlKey
+            || event.key.slice(0, 5) === 'Arrow') {
+            var newValue = event.target.value;
+            this.keyboardEventHandler(event, newValue);
+            // process focus caused by 'Tab' key
+        }
+        else if (event.key === 'Tab') {
+            this.catchFocus(event);
+        }
+    };
+    ElementComponent.prototype.keyboardEventHandler = function (event, newValue) {
+        if (event.target.tagName === 'MAT-SLIDER'
+            || event.target.tagName === 'SELECT') {
+            return;
+        }
+        if (this.switchEventHandler(event)) {
+            return;
+        }
+        var eventInfo = {
+            newValue: newValue,
+            elementNumber: this.elementNumber,
+            elementType: event.target.tagName.toLowerCase()
+        };
+        this.socketService.sendKeysEvent(eventInfo);
+    };
+    ElementComponent.prototype.switchEventHandler = function (event) {
+        var isSwitchEvent = false;
+        var switchEventInfo = {
+            elementNumber: this.elementNumber,
+            targetElement: event.target.tagName.toLowerCase()
+        };
+        // if these elements were interacted by keyboard
+        if (event.key.slice(0, 5) === 'Arrow' && event.target.type === 'radio') {
+            isSwitchEvent = true;
+            this.socketService.sendClick(switchEventInfo);
+        }
+        if ((event.target.type === 'checkbox' || event.target.type === 'radio')
+            && event.key === ' ') {
+            isSwitchEvent = true;
+            this.socketService.sendClick(switchEventInfo);
+        }
+        return isSwitchEvent;
+    };
+    ElementComponent.prototype.catchOnChange = function (event) {
+        if (!this.elementNumber) {
+            return;
+        }
+        var eventInfo = {
+            elementNumber: this.elementNumber,
+            targetElement: null,
+            newValue: null
+        };
+        if (event.source) {
+            eventInfo.newValue = event.value; // get new value of slider
+        }
+        else {
+            eventInfo.targetElement = event.target.tagName.toLowerCase();
+            eventInfo.newValue = event.target.value;
+        }
+        if (!this.interviewFinished) {
+            this.socketService.sendOnChangeEvent(eventInfo);
+            this.statistic.logValueChange(event);
+        }
+    };
+    ElementComponent.prototype.ngOnDestroy = function () {
+        if (this.unsubClick) {
+            this.unsubClick.unsubscribe();
+            this.unsubMouseMove.unsubscribe();
+            this.unsubFocus.unsubscribe();
+            this.unsubKeyboard.unsubscribe();
+            this.unsubOnChange.unsubscribe();
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ElementComponent.prototype, "elem", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], ElementComponent.prototype, "elementNumber", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], ElementComponent.prototype, "interviewFinished", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], ElementComponent.prototype, "signalExtraElements", void 0);
+    ElementComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-element',
+            template: __webpack_require__(/*! ./element.component.html */ "./src/app/forms/element/element.component.html"),
+            styles: [__webpack_require__(/*! ./element.component.scss */ "./src/app/forms/element/element.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_socket_service_service__WEBPACK_IMPORTED_MODULE_2__["SocketService"],
+            _services_statistic_service__WEBPACK_IMPORTED_MODULE_3__["StatisticService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], ElementComponent);
+    return ElementComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/forms/forms-page.module.ts":
 /*!********************************************!*\
   !*** ./src/app/forms/forms-page.module.ts ***!
@@ -9184,9 +9623,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _modules_material_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modules/material/material */ "./src/app/modules/material/material.ts");
-/* harmony import */ var _pipes_element_type_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pipes/element-type.pipe */ "./src/app/forms/pipes/element-type.pipe.ts");
-/* harmony import */ var _services_broadcast_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
-/* harmony import */ var _services_socket_service_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/socket-service.service */ "./src/app/forms/services/socket-service.service.ts");
+/* harmony import */ var _services_broadcast_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
+/* harmony import */ var _services_socket_service_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/socket-service.service */ "./src/app/forms/services/socket-service.service.ts");
+/* harmony import */ var _services_statistic_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/statistic.service */ "./src/app/forms/services/statistic.service.ts");
 /* harmony import */ var _services_http_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./services/http.service */ "./src/app/forms/services/http.service.ts");
 /* harmony import */ var _constructor_page_nav_constructor_nav_constructor_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./constructor-page/nav-constructor/nav-constructor.component */ "./src/app/forms/constructor-page/nav-constructor/nav-constructor.component.ts");
 /* harmony import */ var _preview_page_nav_list_nav_list_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./preview-page/nav-list/nav-list.component */ "./src/app/forms/preview-page/nav-list/nav-list.component.ts");
@@ -9198,6 +9637,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../options/confirm-removing-form/confirm-removing-form.component */ "./src/app/options/confirm-removing-form/confirm-removing-form.component.ts");
 /* harmony import */ var _constructor_page_form_screenshot_form_screenshot_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./constructor-page/form-screenshot/form-screenshot.component */ "./src/app/forms/constructor-page/form-screenshot/form-screenshot.component.ts");
 /* harmony import */ var _options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../options/snackbar/snackbar.component */ "./src/app/options/snackbar/snackbar.component.ts");
+/* harmony import */ var _element_element_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./element/element.component */ "./src/app/forms/element/element.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9226,6 +9666,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var FormsPageModule = /** @class */ (function () {
     function FormsPageModule() {
     }
@@ -9235,13 +9676,13 @@ var FormsPageModule = /** @class */ (function () {
                 _constructor_page_nav_constructor_nav_constructor_component__WEBPACK_IMPORTED_MODULE_11__["NavConstructorComponent"],
                 _preview_page_nav_list_nav_list_component__WEBPACK_IMPORTED_MODULE_12__["NavListComponent"],
                 _constructor_page_nav_config_nav_config_component__WEBPACK_IMPORTED_MODULE_13__["NavConfigComponent"],
-                _pipes_element_type_pipe__WEBPACK_IMPORTED_MODULE_7__["ElementTypePipe"],
                 _interview_page_interview_page_component__WEBPACK_IMPORTED_MODULE_14__["InterviewPageComponent"],
                 _preview_page_preview_page_component__WEBPACK_IMPORTED_MODULE_15__["PreviewPageComponent"],
                 _constructor_page_constructor_page_component__WEBPACK_IMPORTED_MODULE_16__["ConstructorPageComponent"],
                 _options_confirm_removing_form_confirm_removing_form_component__WEBPACK_IMPORTED_MODULE_18__["ConfirmRemovingFormComponent"],
                 _constructor_page_form_screenshot_form_screenshot_component__WEBPACK_IMPORTED_MODULE_19__["FormScreenshotComponent"],
                 _options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_20__["SnackbarComponent"],
+                _element_element_component__WEBPACK_IMPORTED_MODULE_21__["ElementComponent"]
             ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
@@ -9251,9 +9692,10 @@ var FormsPageModule = /** @class */ (function () {
                 _modules_material_material__WEBPACK_IMPORTED_MODULE_6__["MaterialModule"]
             ],
             providers: [
-                _services_broadcast_service__WEBPACK_IMPORTED_MODULE_8__["BroadcastService"],
+                _services_broadcast_service__WEBPACK_IMPORTED_MODULE_7__["BroadcastService"],
                 _services_http_service__WEBPACK_IMPORTED_MODULE_10__["HttpService"], { provide: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["HAMMER_GESTURE_CONFIG"], useClass: _angular_material__WEBPACK_IMPORTED_MODULE_5__["GestureConfig"] },
-                _services_socket_service_service__WEBPACK_IMPORTED_MODULE_9__["SocketService"],
+                _services_socket_service_service__WEBPACK_IMPORTED_MODULE_8__["SocketService"],
+                _services_statistic_service__WEBPACK_IMPORTED_MODULE_9__["StatisticService"],
                 _services_screenshot_service__WEBPACK_IMPORTED_MODULE_17__["ScreenshotService"],
                 _constructor_page_form_screenshot_form_screenshot_component__WEBPACK_IMPORTED_MODULE_19__["FormScreenshotComponent"],
                 _options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_20__["SnackbarComponent"]
@@ -9275,7 +9717,7 @@ var FormsPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<mat-toolbar fxLayout=\"row\" *ngIf=\"form\" class=\"finishToolbar\">\r\n    <div>\r\n    <button (click)=\"endInterview()\" fxLayoutAlign=\"center\"\r\n            fxFlex.lt-md=\"0 1 150px\"\r\n            fxFlex.md=\"200px\"\r\n            fxFlex.gt-md=\"260px\"\r\n            mat-raised-button color=\"primary\" class=\"new-form-button\">{{buttonInscription}}\r\n    </button>\r\n    </div>\r\n</mat-toolbar>\r\n\r\n<div class=\"form\" *ngIf=\"form\">\r\n    <!--<h2 class=\"mat-h2\">{{form.title}}</h2>-->\r\n    <form class=\"example-container\" [formGroup]=\"options\">\r\n        <fieldset class=\"form\">\r\n            <legend>\r\n                <h2>{{form.title}}</h2>\r\n            </legend>\r\n            <!--container for row-->\r\n            <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                <!--row-->\r\n                <div class=\"row\">\r\n\r\n                    <!--container for cell-->\r\n                    <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                        <!--cell-->\r\n                        <div class=\"cell\">\r\n                            <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n                                <!--<div  [innerHtml]=\"cell.element | type\"></div>-->\r\n\r\n                                <!--if element is input TEXT-->\r\n                                <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"text\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input NUMBER-->\r\n                                <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"number\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [min]=\"elem.config.min\"\r\n                                            [max]=\"elem.config.max\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                            \r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input EMAIL-->\r\n                                <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"email\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input PASSWORD-->\r\n                                <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <input matInput type=\"password\"\r\n                                            [value]=\"elem.config.value\"\r\n                                            [placeholder]=\"elem.config.placeholder\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                            [required]=\"elem.config.required\"\r\n                                    >\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is SLIDER-->\r\n                                <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-slider\r\n                                                class=\"example-margin form-element\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\"\r\n                                    >\r\n                                    </mat-slider>\r\n                                </section>\r\n\r\n                                <!--if element is TOGGLE-->\r\n                                <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\" >\r\n\r\n                                    <mat-slide-toggle class=\"example-margin form-element\"\r\n                                            [color]=\"elem.config.color\"\r\n                                            [checked]=\"elem.config.checked\"\r\n                                            [disabled]=\"elem.config.disabled\"\r\n                                    >\r\n                                        {{elem.config.label}}\r\n                                    </mat-slide-toggle>\r\n                                </section>\r\n\r\n                                <!--if element is SELECT-->\r\n                                <mat-form-field *ngIf=\"elem.type==='select'\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <select matNativeControl  [disabled]=\"elem.config.disabled\"\r\n                                                [required]=\"elem.config.required\"\r\n                                                class=\"form-element\"\r\n                                    >\r\n                                        <option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                            {{option}}\r\n                                        </option>\r\n                                    </select>\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is input CHECKBOX-->\r\n                                <section class=\"example-section example-section-checkbox\" *ngIf=\"elem.type==='checkbox'\" \r\n                                [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-checkbox *ngFor=\"let option of elem.config.options\" class=\"example-margin example-margin-checkbox form-element\"\r\n                                                    [value]=\"option\"\r\n                                                    [color]=\"elem.config.color\"\r\n                                                    [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\"\r\n                                    >\r\n                                        {{option}}\r\n                                    </mat-checkbox>\r\n                                </section>\r\n\r\n                                <!--if element is input RADIO-->\r\n                                <mat-radio-group class=\"example-radio-group\" *ngIf=\"elem.type==='radio'\"\r\n                                [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <mat-radio-button class=\"example-radio-button form-element\" *ngFor=\"let option of elem.config.options\"\r\n                                                        [value]=\"option\"\r\n                                                        [color]=\"elem.config.color\"\r\n                                                        [disabled]=\"elem.config.disabled\"\r\n                                                        [required]=\"elem.config.required\">\r\n                                        {{option}}\r\n                                    </mat-radio-button>\r\n                                </mat-radio-group>\r\n\r\n                                <!--if element is TEXTAREA-->\r\n                                <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width form-element flex-grow\" >\r\n                                    <mat-label>{{elem.config.label}}</mat-label>\r\n                                    <textarea matInput\r\n                                                [value]=\"elem.config.value\"\r\n                                                [placeholder]=\"elem.config.placeholder\"\r\n                                                [disabled]=\"elem.config.disabled\"\r\n                                    ></textarea>\r\n                                </mat-form-field>\r\n\r\n                                <!--if element is BUTTON-->\r\n                                <div *ngIf=\"elem.type==='button'\" class=\"example-button-row form-element flex-grow\" >\r\n                                    <button mat-raised-button\r\n                                            [color]=\"elem.config.color\"\r\n                                            [disabled]=\"elem.config.disabled\">{{elem.config.value}}</button>\r\n                                </div>\r\n                            </div>  \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div> \r\n        </fieldset>\r\n    </form>\r\n</div>\r\n\r\n"
+module.exports = "\r\n<mat-toolbar fxLayout=\"row\" *ngIf=\"form\" class=\"finishToolbar\">\r\n    <div>\r\n    <button (click)=\"leaveInterview()\" fxLayoutAlign=\"center\"\r\n            fxFlex.lt-md=\"0 1 150px\"\r\n            fxFlex.md=\"200px\"\r\n            fxFlex.gt-md=\"260px\"\r\n            mat-raised-button color=\"primary\" class=\"new-form-button\">{{buttonInscription}}\r\n    </button>\r\n    </div>\r\n</mat-toolbar>\r\n\r\n<div class=\"form\" *ngIf=\"form\">\r\n    <!--<h2 class=\"mat-h2\">{{form.title}}</h2>-->\r\n    <form class=\"example-container\" [formGroup]=\"options\">\r\n        <fieldset class=\"form\">\r\n            <legend>\r\n                <h2>{{form.title}}</h2>\r\n            </legend>\r\n            <!--container for row-->\r\n            <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                <!--row-->\r\n                <div class=\"row\">\r\n\r\n                    <!--container for cell-->\r\n                    <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                        <!--cell-->\r\n                        <div class=\"cell\">\r\n                            <div class=\"element flex-grow\"\r\n                                *ngFor=\"let elem of cell.elements; let elemIndex = index;\"\r\n                            >\r\n                                <!--<div  [innerHtml]=\"cell.element | type\"></div>-->\r\n\r\n                                <!--component with elements-->\r\n                                <app-element class=\"flex-grow\"\r\n                                            #formElement\r\n                                            [elementNumber]=\"formElement.elementNumber ? formElement.elementNumber : setElementNumber()\"\r\n                                            [elem]=\"elem\"\r\n                                            [interviewFinished]=\"interviewFinished\"\r\n                                            (signalExtraElements)=\"addExtraElements($event)\"\r\n                                >\r\n                                </app-element>\r\n                            </div>  \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div> \r\n        </fieldset>\r\n    </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -9286,7 +9728,7 @@ module.exports = "\r\n<mat-toolbar fxLayout=\"row\" *ngIf=\"form\" class=\"finis
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".hovered {\n  outline: 4px solid deeppink; }\n\n.sidenav {\n  width: 50%; }\n\n.sidenav-container {\n  height: 100%; }\n\n.sidenav {\n  background: inherit; }\n\n.mat-toolbar {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n  background-color: #fff; }\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n  padding-top: 0; }\n\n.mat-toolbar .mat-toolbar-single-row {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1; }\n\n.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {\n  color: #fff !important;\n  font-size: 20px;\n  font-weight: normal; }\n\n.new-form-button, .save-form-button {\n  margin-right: 10px; }\n\n.flex-grow {\n  flex-grow: 1; }\n\n.flex-grow button {\n    width: 100%; }\n\n.form .example-container {\n  margin: 10px auto;\n  width: 70%;\n  min-height: 50px;\n  padding: 5px; }\n\n.form .example-container fieldset {\n    margin: 0;\n    border: 1px solid #c9c9c9;\n    border-radius: 5px; }\n\n.form .example-container fieldset legend {\n      padding: 10px;\n      color: #464646; }\n\n.form .example-container fieldset legend h2 {\n        margin: 5px 0; }\n\n.form .example-container .row-container {\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n\n.form .example-container .row-container .row {\n      display: flex;\n      margin: 5px;\n      width: 100%;\n      min-height: 20px;\n      align-items: center; }\n\n.form .example-container .row-container .row .cell-container {\n        display: flex;\n        width: 100%;\n        margin-right: 5px;\n        align-items: center;\n        justify-content: center; }\n\n.form .example-container .row-container .row .cell-container .cell {\n          display: flex;\n          margin: 5px;\n          width: 100%;\n          min-height: 20px; }\n\n.form .example-container .row-container .row .cell-container .cell .element {\n            display: flex;\n            align-items: center; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field {\n              margin: 0 15px; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field ::ng-deep .mat-form-field-infix {\n                width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slider {\n              width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slide-toggle {\n              margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-select {\n              width: 140px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-group {\n              margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-button {\n              margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical {\n              display: block !important;\n              text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .element .vertical .mat-checkbox {\n                margin: 10px;\n                display: block; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-section-checkbox {\n              display: flex;\n              align-content: center;\n              align-items: center;\n              margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-margin-checkbox {\n              margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-button-row {\n              margin: 5px; }\n\n.form .example-container .row-container .row .cell-container .cell .vertical {\n            display: block !important;\n            text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .vertical .mat-checkbox {\n              margin: 10px;\n              display: block; }\n\n.finishToolbar {\n  justify-content: flex-end; }\n\nselect {\n  width: 180px !important; }\n"
+module.exports = ".sidenav {\n  width: 50%; }\n\n.sidenav-container {\n  height: 100%; }\n\n.sidenav {\n  background: inherit; }\n\n.mat-toolbar {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n  background-color: #fff; }\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n  padding-top: 0; }\n\n.mat-toolbar .mat-toolbar-single-row {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1; }\n\n.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {\n  color: #fff !important;\n  font-size: 20px;\n  font-weight: normal; }\n\n.new-form-button, .save-form-button {\n  margin-right: 10px; }\n\n.flex-grow {\n  display: flex;\n  flex-grow: 1; }\n\n.flex-grow button {\n    width: 100%; }\n\n.form .example-container {\n  margin: 10px auto;\n  width: 70%;\n  min-height: 50px;\n  padding: 5px; }\n\n.form .example-container fieldset {\n    margin: 0;\n    border: 1px solid #c9c9c9;\n    border-radius: 5px; }\n\n.form .example-container fieldset legend {\n      padding: 10px;\n      color: #464646; }\n\n.form .example-container fieldset legend h2 {\n        margin: 5px 0; }\n\n.form .example-container .row-container {\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n\n.form .example-container .row-container .row {\n      display: flex;\n      margin: 5px;\n      width: 100%;\n      min-height: 20px;\n      align-items: center; }\n\n.form .example-container .row-container .row .cell-container {\n        display: flex;\n        width: 100%;\n        margin-right: 5px;\n        align-items: center;\n        justify-content: center; }\n\n.form .example-container .row-container .row .cell-container .cell {\n          display: flex;\n          margin: 5px;\n          width: 100%;\n          min-height: 20px; }\n\n.form .example-container .row-container .row .cell-container .cell .element {\n            display: flex;\n            align-items: center; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field {\n              margin: 0 15px; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field ::ng-deep .mat-form-field-infix {\n                width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slider {\n              width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slide-toggle {\n              margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-select {\n              width: 140px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-group {\n              margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-button {\n              margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical {\n              display: block !important;\n              text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .element .vertical .mat-checkbox {\n                margin: 10px;\n                display: block; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-section-checkbox {\n              display: flex;\n              align-content: center;\n              align-items: center;\n              margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-margin-checkbox {\n              margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-button-row {\n              margin: 5px; }\n\n.form .example-container .row-container .row .cell-container .cell .vertical {\n            display: block !important;\n            text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .vertical .mat-checkbox {\n              margin: 10px;\n              display: block; }\n\n.finishToolbar {\n  justify-content: flex-end; }\n\nselect {\n  width: 180px !important; }\n"
 
 /***/ }),
 
@@ -9304,11 +9746,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm5/layout.es5.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _services_broadcast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
-/* harmony import */ var _services_socket_service_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/socket-service.service */ "./src/app/forms/services/socket-service.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _services_broadcast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
+/* harmony import */ var _services_socket_service_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/socket-service.service */ "./src/app/forms/services/socket-service.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9326,26 +9767,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-// import { userInfo } from 'os';
 var InterviewPageComponent = /** @class */ (function () {
-    function InterviewPageComponent(breakpoint, fb, _http, router, broadcast, socketService, snackBar) {
+    function InterviewPageComponent(breakpoint, fb, router, broadcast, socketService, snackBar) {
         this.breakpoint = breakpoint;
         this.fb = fb;
-        this._http = _http;
         this.router = router;
         this.broadcast = broadcast;
         this.socketService = socketService;
         this.snackBar = snackBar;
-        this.mouseEventOptions = {
-            view: window,
-            bubbles: true,
-            cancelable: true,
-            which: 1,
-        };
-        this.elementConfigs = [];
-        this.isSpectator = false;
+        this.isInitiator = true;
+        this.interviewFinished = false;
         this.buttonInscription = 'Finish interview';
+        this.elementCount = 1;
         this._url = '../assets/form.json';
         this._formData = null;
         this.isHandset$ = this.breakpoint.observe(_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["Breakpoints"].Handset)
@@ -9359,15 +9792,9 @@ var InterviewPageComponent = /** @class */ (function () {
         var _this = this;
         this.form = this.broadcast.selectedForm;
         this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
-        if (!this.form) {
+        if (!this.form || !this.currentUser) {
             this.router.navigate(['/main']);
             return;
-        }
-        if (!this.currentUser) {
-            this.currentUser = {
-                fullname: 'Anonymous Candidate',
-                role: 'candidate'
-            };
         }
         this.socketService.connectToSockets();
         // decide whether we should create a new interview or connect to
@@ -9376,15 +9803,15 @@ var InterviewPageComponent = /** @class */ (function () {
             && !this.socketService.interviewId) {
             var interviewData = {
                 interviewer: this.currentUser.fullname,
-                interviewId: Math.round(Math.random() * 10000),
+                role: this.currentUser.role,
+                interviewId: Math.round(Math.random() * 100000),
                 interviewForm: this.form,
-                formName: this.form.title,
-                creationTime: this.addCreationTime()
+                formName: this.form.title
             };
             this.socketService.initiateInterview(interviewData);
         }
         else {
-            this.isSpectator = true;
+            this.isInitiator = false;
             this.buttonInscription = 'Exit interview';
             this.socketService.joinInterview(this.currentUser);
         }
@@ -9395,18 +9822,12 @@ var InterviewPageComponent = /** @class */ (function () {
             this.router.navigate(['/main']);
         }
         else {
-            this.addListeners();
-            this.getElementConfigs();
-            this.unsubClick = this.clickEventEmitter();
-            this.unsubMouseMove = this.mouseMoveEmitter();
-            this.unsubFocus = this.focusEmitter();
-            this.unsubKeyboard = this.keyboardEventEmitter();
-            this.unsubOnChange = this.onChangeEventEmitter();
             this.unsubConnectionMessage = this.showConnectionMessage();
             this.unsubDisconnectTrigger = this.disconnectInterview();
         }
     };
-    InterviewPageComponent.prototype.endInterview = function () {
+    // if initiated by user
+    InterviewPageComponent.prototype.leaveInterview = function () {
         if (this.currentUser.role === 'candidate') {
             this.router.navigate(['/main']);
         }
@@ -9414,20 +9835,14 @@ var InterviewPageComponent = /** @class */ (function () {
             this.router.navigate(['/preview']);
         }
     };
+    // if initiated by interviewer's disconnect
     InterviewPageComponent.prototype.disconnectInterview = function () {
         var _this = this;
-        return this.socketService.finishInterview()
+        return this.socketService.finishNotificator()
             .subscribe(function (triggerFinish) {
-            setTimeout(function () { return _this.endInterview(); }, 2000);
+            _this.interviewFinished = true;
+            setTimeout(function () { return _this.leaveInterview(); }, 2000);
         });
-    };
-    InterviewPageComponent.prototype.addCreationTime = function () {
-        var timezoneOffset = (new Date()).getTimezoneOffset() * 60000;
-        var dateNow = (new Date(Date.now() - timezoneOffset)).toISOString();
-        var day = dateNow.slice(8, 10);
-        var month = dateNow.slice(5, 7);
-        var time = dateNow.slice(11, 16);
-        return day + "." + month + " " + time;
     };
     InterviewPageComponent.prototype.showConnectionMessage = function () {
         var _this = this;
@@ -9438,236 +9853,34 @@ var InterviewPageComponent = /** @class */ (function () {
             });
         });
     };
-    // primaly written to be able to change slider value
-    InterviewPageComponent.prototype.getElementConfigs = function () {
-        var form = this.form;
-        for (var i = 0; i < form.rows.length; i++) {
-            for (var j = 0; j < form.rows[i].cells.length; j++) {
-                for (var k = 0; k < form.rows[i].cells[j].elements.length; k++) {
-                    var elem = form.rows[i].cells[j].elements[k];
-                    this.elementConfigs.push(elem.config);
-                }
-            }
-        }
+    // make an array with certain amount of fake 'elements'
+    // and add them to the form template
+    // so that 'for' loop can take them into account
+    // and add event listeners to the extra elements
+    // without rendering fake ones
+    InterviewPageComponent.prototype.addExtraElements = function (amount) {
+        var fakeElements = Array.from('e'.repeat(amount));
+        var extraElements = [{ elements: fakeElements }];
+        this.form.rows.push({ cells: extraElements });
     };
-    InterviewPageComponent.prototype.addListeners = function () {
-        var _this = this;
-        this.formElements = document.querySelectorAll('.form-element');
-        this.formElements.forEach(function (element, index) {
-            element.addEventListener('click', _this.clickEventInjector(index));
-            element.addEventListener('mouseenter', _this.mouseMoveEventInjector(index));
-            element.addEventListener('mouseleave', _this.mouseMoveEventInjector(index));
-            element.addEventListener('focus', _this.focusEventInjector(index));
-            element.addEventListener('keypress', _this.keyEventInjector(index));
-            element.addEventListener('keyup', _this.keyUpEventInjector(index));
-            element.addEventListener('change', _this.onChangeEventInjector(index));
-        });
-    };
-    InterviewPageComponent.prototype.clickEventInjector = function (index) {
-        return this.catchClick.bind(this, index);
-    };
-    InterviewPageComponent.prototype.mouseMoveEventInjector = function (index) {
-        return this.catchMouseMove.bind(this, index);
-    };
-    InterviewPageComponent.prototype.focusEventInjector = function (index) {
-        return this.catchFocus.bind(this, index);
-    };
-    InterviewPageComponent.prototype.keyEventInjector = function (index) {
-        return this.catchTextInput.bind(this, index);
-    };
-    InterviewPageComponent.prototype.keyUpEventInjector = function (index) {
-        return this.catchSpecialKeys.bind(this, index);
-    };
-    InterviewPageComponent.prototype.onChangeEventInjector = function (index) {
-        return this.catchOnChange.bind(this, index);
-    };
-    //////////// event emitters  ////////////////////
-    InterviewPageComponent.prototype.clickEventEmitter = function () {
-        var _this = this;
-        return this.socketService.getClickEvent()
-            .subscribe(function (event) {
-            var targetElement = _this.formElements[event.elementIndex];
-            var mouseEvent = new MouseEvent('click', _this.mouseEventOptions);
-            if (event.sliderValue) {
-                if (targetElement && targetElement.tagName === 'MAT-SLIDER') {
-                    _this.elementConfigs[event.elementIndex].value = event.sliderValue;
-                }
-                return;
-            }
-            targetElement.querySelector(event.targetElement).dispatchEvent(mouseEvent);
-        });
-    };
-    InterviewPageComponent.prototype.mouseMoveEmitter = function () {
-        var _this = this;
-        return this.socketService.getMouseMove()
-            .subscribe(function (event) {
-            if (event.eventType === 'mouseenter') {
-                if (_this.lastHoveredTarget === event.targetElement) {
-                    return;
-                }
-                _this.lastHoveredTarget = event.targetElement;
-                _this.formElements[event.targetElement].classList.add('hovered');
-            }
-            else {
-                _this.lastHoveredTarget = -1;
-                _this.formElements[event.targetElement].classList.remove('hovered');
-            }
-        });
-    };
-    InterviewPageComponent.prototype.focusEmitter = function () {
-        var _this = this;
-        return this.socketService.getFocusEvent()
-            .subscribe(function (event) {
-            var elementToFocus = _this.formElements[event.elementIndex].querySelector(event.targetElement);
-            if (elementToFocus) {
-                elementToFocus.focus();
-            }
-            else {
-                _this.formElements[event.elementIndex].focus();
-            }
-        });
-    };
-    InterviewPageComponent.prototype.keyboardEventEmitter = function () {
-        var _this = this;
-        return this.socketService.getKeyboardEvent()
-            .subscribe(function (event) {
-            var targetElement = _this.formElements[event.targetElementIndex];
-            var changeEvent = new Event('change');
-            targetElement.querySelector(event.elementType).value = event.newValue;
-            targetElement.querySelector(event.elementType).dispatchEvent(changeEvent);
-        });
-    };
-    InterviewPageComponent.prototype.onChangeEventEmitter = function () {
-        var _this = this;
-        return this.socketService.getOnChangeEvent()
-            .subscribe(function (event) {
-            var targetElement = _this.formElements[event.targetElementIndex];
-            // angular material places target elements differently
-            if (event.targetElement === 'select') {
-                targetElement.value = event.newValue;
-            }
-            else {
-                targetElement.querySelector(event.targetElement).value = event.newValue;
-            }
-        });
-    };
-    //////////// event catchers  ////////////////////
-    InterviewPageComponent.prototype.catchClick = function (elementIndex, event) {
-        var shouldBeSent = true;
-        var eventInfo = {
-            elementIndex: elementIndex,
-            targetElement: event.target.tagName.toLowerCase(),
-            sliderValue: null
-        };
-        // if event initiated programatically don't react to it
-        if (!event.isTrusted) {
-            shouldBeSent = false;
-        }
-        if (event.target.tagName === 'SELECT') {
-            shouldBeSent = false;
-        }
-        if (event.target.tagName === 'MAT-SLIDER') {
-            eventInfo.sliderValue = event.target.getAttribute('aria-valuenow');
-        }
-        if (shouldBeSent) {
-            this.socketService.sendClick(eventInfo);
-        }
-    };
-    InterviewPageComponent.prototype.catchMouseMove = function (elementIndex, event) {
-        var eventInfo = {
-            targetElement: elementIndex,
-            eventType: event.type
-        };
-        this.socketService.sendMouseMovement(eventInfo);
-    };
-    InterviewPageComponent.prototype.catchFocus = function (elementIndex, event) {
-        var eventInfo = {
-            elementIndex: elementIndex,
-            targetElement: event.target.tagName.toLowerCase()
-        };
-        this.socketService.sendFocusEvent(eventInfo);
-    };
-    InterviewPageComponent.prototype.catchTextInput = function (elementIndex, event) {
-        var newValue = event.target.value + event.key;
-        // prevents typing 'Enter' into the input
-        // catchOnChange already cares about datepickers
-        if (event.key === 'Enter' || event.target.type === 'date') {
-            return;
-        }
-        if (event.target.type === 'number'
-            && (isNaN(newValue) || event.key === '.' || event.key === ' ')) {
-            return;
-        }
-        this.keyboardEventHandler(event, newValue, elementIndex);
-    };
-    InterviewPageComponent.prototype.catchSpecialKeys = function (elementIndex, event) {
-        console.log(event);
-        if (!event.key) {
-            return;
-        }
-        else if (event.key === 'Backspace'
-            || event.key === 'Delete'
-            || event.ctrlKey
-            || event.key.slice(0, 5) === 'Arrow') {
-            var newValue = event.target.value;
-            this.keyboardEventHandler(event, newValue, elementIndex);
-            // process focus caused by 'Tab' key
-        }
-        else if (event.key === 'Tab') {
-            this.catchFocus(elementIndex, event);
-        }
-    };
-    InterviewPageComponent.prototype.keyboardEventHandler = function (event, newValue, elementIndex) {
-        var switchEventInfo = {
-            elementIndex: elementIndex,
-            targetElement: event.target.tagName.toLowerCase()
-        };
-        // if these elements were interacted by keyboard
-        if (event.key.slice(0, 5) === 'Arrow' && event.target.type === 'radio') {
-            this.socketService.sendClick(switchEventInfo);
-            return;
-        }
-        if ((event.target.type === 'checkbox' || event.target.type === 'radio')
-            && event.key === ' ') {
-            this.socketService.sendClick(switchEventInfo);
-            return;
-        }
-        if (event.target.tagName === 'MAT-SLIDER'
-            || event.target.tagName === 'SELECT') {
-            return;
-        }
-        var eventInfo = {
-            targetElementIndex: elementIndex,
-            newValue: newValue,
-            elementType: event.target.tagName.toLowerCase()
-        };
-        this.socketService.sendKeysEvent(eventInfo);
-    };
-    InterviewPageComponent.prototype.catchOnChange = function (elementIndex, event) {
-        var eventInfo = {
-            targetElementIndex: elementIndex,
-            targetElement: event.target.tagName.toLowerCase(),
-            newValue: event.target.value
-        };
-        this.socketService.sendOnChangetEvent(eventInfo);
+    InterviewPageComponent.prototype.setElementNumber = function () {
+        return this.elementCount++;
     };
     InterviewPageComponent.prototype.ngOnDestroy = function () {
         if (!this.currentUser) {
             return;
         }
-        else if (this.currentUser.role === 'candidate' || this.isSpectator) {
-            this.socketService.emitConnectionMessage(this.currentUser, 'disconnect');
-            this.socketService.setInterviewId(null);
+        else if (this.interviewFinished) {
+            this.socketService.detachInterviewData();
+        }
+        else if (this.currentUser.role === 'candidate' || !this.isInitiator) {
+            this.socketService.exitInterview(this.currentUser);
         }
         else {
             this.socketService.endInterview(this.currentUser);
         }
-        if (this.unsubClick) {
-            this.unsubClick.unsubscribe();
-            this.unsubMouseMove.unsubscribe();
-            this.unsubFocus.unsubscribe();
-            this.unsubKeyboard.unsubscribe();
-            this.unsubOnChange.unsubscribe();
+        this.broadcast.selectForm('');
+        if (this.unsubConnectionMessage) {
             this.unsubConnectionMessage.unsubscribe();
             this.unsubDisconnectTrigger.unsubscribe();
         }
@@ -9680,87 +9893,14 @@ var InterviewPageComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["BreakpointObserver"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
-            _services_broadcast_service__WEBPACK_IMPORTED_MODULE_5__["BroadcastService"],
-            _services_socket_service_service__WEBPACK_IMPORTED_MODULE_6__["SocketService"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatSnackBar"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
+            _services_broadcast_service__WEBPACK_IMPORTED_MODULE_4__["BroadcastService"],
+            _services_socket_service_service__WEBPACK_IMPORTED_MODULE_5__["SocketService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatSnackBar"]])
     ], InterviewPageComponent);
     return InterviewPageComponent;
 }());
 
-
-
-/***/ }),
-
-/***/ "./src/app/forms/pipes/element-type.pipe.ts":
-/*!**************************************************!*\
-  !*** ./src/app/forms/pipes/element-type.pipe.ts ***!
-  \**************************************************/
-/*! exports provided: ElementTypePipe */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementTypePipe", function() { return ElementTypePipe; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var ElementTypePipe = /** @class */ (function () {
-    function ElementTypePipe(sanitizer) {
-        this.sanitizer = sanitizer;
-        this.templates = [
-            {
-                type: 'text',
-                view: '<mat-form-field class="t">\n' +
-                    '        <mat-label>Input</mat-label>\n' +
-                    '        <input matInput [disabled]="true">\n' +
-                    '    </mat-form-field>'
-            }
-        ];
-    }
-    ElementTypePipe.prototype.transform = function (elem, args) {
-        // this.templates.forEach( template => {
-        //
-        //     if (template.type === elem.type) {
-        //         let view = template.view;
-        //         console.log(view);
-        //         return view;
-        //     }
-        // });
-        var template;
-        if (elem.type === 'text') {
-            template = '<mat-form-field class="t">\n' +
-                '        <mat-label>Input</mat-label>\n' +
-                '        <input matInput [disabled]="true">\n' +
-                '    </mat-form-field>';
-        }
-        return this.sanitizer.bypassSecurityTrustHtml(template);
-    };
-    ElementTypePipe = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({
-            name: 'type'
-        }),
-        __metadata("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])
-    ], ElementTypePipe);
-    return ElementTypePipe;
-}());
-
-var Templates = /** @class */ (function () {
-    function Templates() {
-    }
-    return Templates;
-}());
 
 
 /***/ }),
@@ -9854,7 +9994,7 @@ var NavListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\" fxLayout=\"row\">\r\n    <mat-sidenav fxFlex.sm=\"1 0 230px\"\r\n                 fxFlex.md=\"1 1 25%\"\r\n                 fxFlex.gt-md=\"1 1 20%\"\r\n                 #drawer class=\"sidenav\"\r\n                 fixedInViewport=\"true\"\r\n                 [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n                 [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n                 [opened]=\"!(isHandset$ | async)\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"center center\">\r\n            <mat-slide-toggle (click)=\"showEditPanel()\"\r\n                              fxHide.xs=\"true\"\r\n                              labelPosition=\"before\">\r\n                <span>Show edit panel</span>\r\n            </mat-slide-toggle>\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <app-nav-list></app-nav-list>\r\n        </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content fxFlex.sm=\"1 1 70%\"\r\n                         fxFlex.md=\"1 1 75%\"\r\n                         fxFlex.gt-md=\"1 1 80%\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"space-between center\"\r\n                     fxLayoutAlign.gt-xs=\"end center\"\r\n                     color=\"primary\">\r\n            <button type=\"button\"\r\n                    aria-label=\"Toggle sidenav\"\r\n                    mat-icon-button\r\n                    (click)=\"drawer.toggle()\"\r\n                    *ngIf=\"isHandset$ | async\"\r\n                    color=\"primary\">\r\n                <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n            </button>\r\n            <button fxFlex=\"1 1 260px\" mat-raised-button color=\"primary\" (click)=\"startInterview()\" [disabled]=\"!form\">\r\n                Start interview\r\n            </button>\r\n        </mat-toolbar>\r\n\r\n        <div class=\"form\" *ngIf=\"form\">\r\n            <div class=\"form-info-buttons\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"showEditPanel()\">Edit form</button>\r\n                <button mat-raised-button color=\"warn\" (click)=\"delForm(form)\">Remove form</button>\r\n            </div>\r\n            <form class=\"example-container\">\r\n                <fieldset class=\"form\">\r\n                    <legend>\r\n                        <h2>{{form.title}}</h2>\r\n                    </legend>\r\n                    <!--container for row-->\r\n                    <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                    <!--row-->\r\n                    <div class=\"row\">\r\n                        <!--container for cell-->\r\n                        <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                            <!--cell-->\r\n                            <div class=\"cell\">\r\n                                <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                                    <!--if element is input TEXT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='text'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"text\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input NUMBER-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='number'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"number\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [min]=\"elem.config.min\"\r\n                                               [max]=\"elem.config.max\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input EMAIL-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='email'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"email\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input PASSWORD-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='password'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <input matInput type=\"password\"\r\n                                               [value]=\"elem.config.value\"\r\n                                               [placeholder]=\"elem.config.placeholder\"\r\n                                               [disabled]=\"elem.config.disabled\"\r\n                                               [required]=\"elem.config.required\">\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is SLIDER-->\r\n                                    <section *ngIf=\"elem.type==='slider'\" class=\"example-section flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-slider\r\n                                                class=\"example-margin\"\r\n                                                [value]=\"elem.config.value\"\r\n                                                [invert]=\"elem.config.invert\"\r\n                                                [max]=\"elem.config.max\"\r\n                                                [min]=\"elem.config.min\"\r\n                                                [step]=\"elem.config.step\"\r\n                                                [thumbLabel]=\"elem.config.thumbLabel\"\r\n                                                [vertical]=\"elem.config.vertical\"\r\n                                                [disabled]=\"elem.config.disabled\">\r\n                                        </mat-slider>\r\n                                    </section>\r\n\r\n                                    <!--if element is TOGGLE-->\r\n                                    <section *ngIf=\"elem.type==='toggle'\" class=\"example-section\" >\r\n\r\n                                        <mat-slide-toggle class=\"example-margin\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [checked]=\"elem.config.checked\"\r\n                                                          [disabled]=\"elem.config.disabled\">\r\n                                            {{elem.config.label}}\r\n                                        </mat-slide-toggle>\r\n                                    </section>\r\n\r\n                                    <!--if element is SELECT-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='select'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-select [disabled]=\"elem.config.disabled\"\r\n                                                    [required]=\"elem.config.required\">\r\n                                            <mat-option *ngFor=\"let option of elem.config.options\" value=\"{{option}}\">\r\n                                                {{option}}\r\n                                            </mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is input CHECKBOX-->\r\n                                    <section class=\"example-section example-section-checkbox\"\r\n                                             *ngIf=\"elem.type==='checkbox'\"\r\n                                             [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-checkbox *ngFor=\"let option of elem.config.options\" class=\"example-margin example-margin-checkbox\"\r\n                                                      [value]=\"option\"\r\n                                                      [color]=\"elem.config.color\"\r\n                                                      [disabled]=\"elem.config.disabled\"\r\n                                                      [required]=\"elem.config.required\">{{option}}</mat-checkbox>\r\n                                    </section>\r\n\r\n                                    <!--if element is input RADIO-->\r\n                                    <mat-radio-group class=\"example-radio-group\"\r\n                                                     *ngIf=\"elem.type==='radio'\"\r\n                                                     [ngClass]=\"elem.config.vertical ? 'vertical' : 'horizontal'\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <mat-radio-button class=\"example-radio-button\" *ngFor=\"let option of elem.config.options\"\r\n                                                          [value]=\"option\"\r\n                                                          [color]=\"elem.config.color\"\r\n                                                          [disabled]=\"elem.config.disabled\"\r\n                                                          [required]=\"elem.config.required\">{{option}}</mat-radio-button>\r\n                                    </mat-radio-group>\r\n\r\n                                    <!--if element is TEXTAREA-->\r\n                                    <mat-form-field *ngIf=\"elem.type==='textarea'\" class=\"example-full-width flex-grow\">\r\n                                        <mat-label>{{elem.config.label}}</mat-label>\r\n                                        <textarea matInput\r\n                                                  [value]=\"elem.config.value\"\r\n                                                  [placeholder]=\"elem.config.placeholder\"\r\n                                                  [disabled]=\"elem.config.disabled\"></textarea>\r\n                                    </mat-form-field>\r\n\r\n                                    <!--if element is BUTTON-->\r\n                                    <div *ngIf=\"elem.type==='button'\" class=\"example-button-row flex-grow\">\r\n                                        <button mat-raised-button\r\n                                                [color]=\"elem.config.color\"\r\n                                                [disabled]=\"elem.config.disabled\">{{elem.config.value}}</button>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                </fieldset>\r\n            </form>\r\n        </div>\r\n\r\n    </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\" fxLayout=\"row\">\r\n    <mat-sidenav fxFlex.sm=\"1 0 230px\"\r\n                 fxFlex.md=\"1 1 25%\"\r\n                 fxFlex.gt-md=\"1 1 20%\"\r\n                 #drawer class=\"sidenav\"\r\n                 fixedInViewport=\"true\"\r\n                 [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n                 [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n                 [opened]=\"!(isHandset$ | async)\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"center center\">\r\n            <mat-slide-toggle (click)=\"showEditPanel()\"\r\n                              fxHide.xs=\"true\"\r\n                              labelPosition=\"before\">\r\n                <span>Show edit panel</span>\r\n            </mat-slide-toggle>\r\n        </mat-toolbar>\r\n        <mat-nav-list>\r\n            <app-nav-list></app-nav-list>\r\n        </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content fxFlex.sm=\"1 1 70%\"\r\n                         fxFlex.md=\"1 1 75%\"\r\n                         fxFlex.gt-md=\"1 1 80%\">\r\n        <mat-toolbar fxLayout=\"row\"\r\n                     fxLayoutAlign=\"space-between center\"\r\n                     fxLayoutAlign.gt-xs=\"end center\"\r\n                     color=\"primary\">\r\n            <button type=\"button\"\r\n                    aria-label=\"Toggle sidenav\"\r\n                    mat-icon-button\r\n                    (click)=\"drawer.toggle()\"\r\n                    *ngIf=\"isHandset$ | async\"\r\n                    color=\"primary\">\r\n                <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n            </button>\r\n            <button fxFlex=\"1 1 260px\" mat-raised-button color=\"primary\" (click)=\"startInterview()\" [disabled]=\"!form\">\r\n                Start interview\r\n            </button>\r\n        </mat-toolbar>\r\n\r\n        <div class=\"form\" *ngIf=\"form\">\r\n            <div class=\"form-info-buttons\">\r\n                <button mat-raised-button color=\"primary\" (click)=\"showEditPanel()\">Edit form</button>\r\n                <button mat-raised-button color=\"warn\" (click)=\"delForm(form)\">Remove form</button>\r\n            </div>\r\n            <form class=\"example-container\">\r\n                <fieldset class=\"form\">\r\n                    <legend>\r\n                        <h2>{{form.title}}</h2>\r\n                    </legend>\r\n                    <!--container for row-->\r\n                    <div class=\"row-container\" *ngFor=\"let row of form.rows; let rowIndex = index\">\r\n                    <!--row-->\r\n                    <div class=\"row\">\r\n                        <!--container for cell-->\r\n                        <div class=\"cell-container\" *ngFor=\"let cell of row.cells; let cellIndex = index\">\r\n                            <!--cell-->\r\n                            <div class=\"cell\">\r\n                                <div class=\"element flex-grow\" *ngFor=\"let elem of cell.elements; let elemIndex = index\">\r\n\r\n                                    <!--component with elements-->\r\n                                    <app-element class=\"flex-grow\"[elem]=\"elem\"></app-element>\r\n\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                </fieldset>\r\n            </form>\r\n        </div>\r\n\r\n    </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
 
 /***/ }),
 
@@ -9865,7 +10005,7 @@ module.exports = "<mat-sidenav-container class=\"sidenav-container full-height\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".sidenav {\n  width: 50%; }\n\n.sidenav-container {\n  height: 100%; }\n\n.sidenav {\n  background: inherit; }\n\n.mat-toolbar {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n  background-color: #fff; }\n\n.mat-toolbar .mat-toolbar-single-row {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1; }\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n  padding-top: 0; }\n\n.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {\n  color: #fff !important;\n  font-size: 20px;\n  font-weight: normal; }\n\n.new-form-button, .save-form-button {\n  margin-right: 10px; }\n\nmat-sidenav-container {\n  text-align: center; }\n\nmat-sidenav {\n  min-width: 200px; }\n\nmat-card {\n  margin: 16px;\n  padding-bottom: 0; }\n\nmat-card mat-card-title {\n  font-size: 20px; }\n\nmat-card img {\n  max-width: 700px; }\n\n@media only screen and (min-width: 600px) {\n  mat-sidenav {\n    position: relative;\n    max-width: 25%; }\n  mat-sidenav-content {\n    margin-left: 0 !important; } }\n\n.full-height {\n  height: calc(100vh - 64px); }\n\n.flex-grow {\n  flex-grow: 1; }\n\n.flex-grow button {\n    width: 100%; }\n\n.form {\n  margin-top: 30px; }\n\n.form-info-buttons {\n    margin: 0 auto;\n    width: 90%;\n    text-align: right;\n    justify-content: flex-end; }\n\n.form-info-buttons button {\n      margin-left: 10px; }\n\n.form .example-container {\n    margin: 0 auto;\n    width: 90%;\n    min-height: 50px;\n    padding: 5px; }\n\n.form .example-container fieldset {\n      margin: 0;\n      border: 1px solid #c9c9c9;\n      border-radius: 5px; }\n\n.form .example-container fieldset legend {\n        padding: 0 10px;\n        color: #464646; }\n\n.form .example-container fieldset legend h2 {\n          margin: 5px 0; }\n\n.form .example-container .row-container {\n      display: flex;\n      align-items: center;\n      justify-content: center; }\n\n.form .example-container .row-container .row {\n        display: flex;\n        margin: 5px;\n        padding: 5px;\n        width: 100%;\n        min-height: 20px;\n        border-radius: 5px;\n        border: 1px solid #c9c9c9;\n        align-items: center; }\n\n.form .example-container .row-container .row .cell-container {\n          display: flex;\n          width: 100%;\n          margin-right: 5px;\n          align-items: center;\n          justify-content: center; }\n\n.form .example-container .row-container .row .cell-container .cell {\n            display: flex;\n            margin: 5px;\n            padding: 5px;\n            width: 100%;\n            min-height: 20px;\n            border-radius: 5px;\n            border: 1px solid #c9c9c9; }\n\n.form .example-container .row-container .row .cell-container .cell .element {\n              display: flex;\n              align-items: center; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field {\n                margin: 0 15px; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field ::ng-deep .mat-form-field-infix {\n                  width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slider {\n                width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slide-toggle {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-select {\n                width: 140px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-group {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-button {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical {\n                display: block !important;\n                text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .element .vertical .mat-checkbox {\n                  margin: 10px;\n                  display: block; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-section-checkbox {\n                display: flex;\n                align-content: center;\n                align-items: center;\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-margin-checkbox {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-button-row {\n                margin: 5px; }\n\n.form .example-container .row-container .mat-mini-fab {\n        width: 30px;\n        height: 30px; }\n\n.form .example-container .row-container .mat-mini-fab mat-icon {\n          width: 20px;\n          height: 30px;\n          font-size: 20px; }\n\n.form .example-container .mat-mini-fab {\n      width: 40px;\n      height: 40px;\n      padding: 3px; }\n\n.form .example-container .mat-mini-fab mat-icon {\n        margin-top: -8px;\n        padding: 0;\n        width: 30px;\n        height: 30px;\n        font-size: 30px; }\n\n/*my mixins*/\n"
+module.exports = ".sidenav {\n  width: 50%; }\n\n.sidenav-container {\n  height: 100%; }\n\n.sidenav {\n  background: inherit; }\n\n.mat-toolbar {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n  background-color: #fff; }\n\n.mat-toolbar .mat-toolbar-single-row {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1; }\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n  padding-top: 0; }\n\n.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {\n  color: #fff !important;\n  font-size: 20px;\n  font-weight: normal; }\n\n.new-form-button, .save-form-button {\n  margin-right: 10px; }\n\nmat-sidenav-container {\n  text-align: center; }\n\nmat-sidenav {\n  min-width: 200px; }\n\nmat-card {\n  margin: 16px;\n  padding-bottom: 0; }\n\nmat-card mat-card-title {\n  font-size: 20px; }\n\nmat-card img {\n  max-width: 700px; }\n\n@media only screen and (min-width: 600px) {\n  mat-sidenav {\n    position: relative;\n    max-width: 25%; }\n  mat-sidenav-content {\n    margin-left: 0 !important; } }\n\n.full-height {\n  height: calc(100vh - 64px); }\n\n.flex-grow {\n  display: flex;\n  flex-grow: 1; }\n\n.flex-grow button {\n    width: 100%; }\n\n.form {\n  margin-top: 30px; }\n\n.form-info-buttons {\n    margin: 0 auto;\n    width: 90%;\n    text-align: right;\n    justify-content: flex-end; }\n\n.form-info-buttons button {\n      margin-left: 10px; }\n\n.form .example-container {\n    margin: 0 auto;\n    width: 90%;\n    min-height: 50px;\n    padding: 5px; }\n\n.form .example-container fieldset {\n      margin: 0;\n      border: 1px solid #c9c9c9;\n      border-radius: 5px; }\n\n.form .example-container fieldset legend {\n        padding: 0 10px;\n        color: #464646; }\n\n.form .example-container fieldset legend h2 {\n          margin: 5px 0; }\n\n.form .example-container .row-container {\n      display: flex;\n      align-items: center;\n      justify-content: center; }\n\n.form .example-container .row-container .row {\n        display: flex;\n        margin: 5px;\n        padding: 5px;\n        width: 100%;\n        min-height: 20px;\n        border-radius: 5px;\n        border: 1px solid #c9c9c9;\n        align-items: center; }\n\n.form .example-container .row-container .row .cell-container {\n          display: flex;\n          width: 100%;\n          margin-right: 5px;\n          align-items: center;\n          justify-content: center; }\n\n.form .example-container .row-container .row .cell-container .cell {\n            display: flex;\n            margin: 5px;\n            padding: 5px;\n            width: 100%;\n            min-height: 20px;\n            border-radius: 5px;\n            border: 1px solid #c9c9c9; }\n\n.form .example-container .row-container .row .cell-container .cell .element {\n              display: flex;\n              align-items: center; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field {\n                margin: 0 15px; }\n\n.form .example-container .row-container .row .cell-container .cell .element mat-form-field ::ng-deep .mat-form-field-infix {\n                  width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slider {\n                width: 100%; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-slide-toggle {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .mat-select {\n                width: 140px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-group {\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-radio-button {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical {\n                display: block !important;\n                text-align: left; }\n\n.form .example-container .row-container .row .cell-container .cell .element .vertical .mat-radio-button, .form .example-container .row-container .row .cell-container .cell .element .vertical .mat-checkbox {\n                  margin: 10px;\n                  display: block; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-section-checkbox {\n                display: flex;\n                align-content: center;\n                align-items: center;\n                margin: 0 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-margin-checkbox {\n                margin-left: 10px; }\n\n.form .example-container .row-container .row .cell-container .cell .element .example-button-row {\n                margin: 5px; }\n\n.form .example-container .row-container .mat-mini-fab {\n        width: 30px;\n        height: 30px; }\n\n.form .example-container .row-container .mat-mini-fab mat-icon {\n          width: 20px;\n          height: 30px;\n          font-size: 20px; }\n\n.form .example-container .mat-mini-fab {\n      width: 40px;\n      height: 40px;\n      padding: 3px; }\n\n.form .example-container .mat-mini-fab mat-icon {\n        margin-top: -8px;\n        padding: 0;\n        width: 30px;\n        height: 30px;\n        font-size: 30px; }\n\n/*my mixins*/\n"
 
 /***/ }),
 
@@ -10132,7 +10272,7 @@ var HttpService = /** @class */ (function () {
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('delForm', [])));
     };
     HttpService.prototype.getAvailableInterviews = function () {
-        return this.http.get('/interviews')
+        return this.http.get('/interview/active-interviews')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (interviews) {
             console.log(interviews);
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getInterview', [])));
@@ -10180,7 +10320,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var src_app_options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/options/snackbar/snackbar.component */ "./src/app/options/snackbar/snackbar.component.ts");
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./http.service */ "./src/app/forms/services/http.service.ts");
-/* harmony import */ var _broadcast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./broadcast.service */ "./src/app/forms/services/broadcast.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10194,29 +10333,26 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
+// type screenshotFile = {imgFile: String, fileName: String};
 var ScreenshotService = /** @class */ (function () {
-    function ScreenshotService(http, snackbarComponent, broadcastService) {
+    function ScreenshotService(http, snackbarComponent) {
         this.http = http;
         this.snackbarComponent = snackbarComponent;
-        this.broadcastService = broadcastService;
-        this.fileSaveResult = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     ScreenshotService.prototype.saveScreenshot = function (form) {
         var _this = this;
+        var imgData;
         html2canvas__WEBPACK_IMPORTED_MODULE_1___default()(this.HTMLElement, {
             scale: 0.3
         })
             .then(function (canvas) {
             var imgFile = canvas.toDataURL();
-            _this.http.postScreenshotData({ 'imgFile': imgFile, 'fileName': form.preview })
+            imgData = { 'imgFile': imgFile, 'fileName': form.preview };
+            _this.http.postScreenshotData(imgData)
                 .subscribe(function (isFileSaved) {
                 _this.showSaveMessage(form.title, isFileSaved);
             });
         });
-    };
-    ScreenshotService.prototype.isScreenshotSaved = function (response) {
-        return this.fileSaveResult;
     };
     ScreenshotService.prototype.showSaveMessage = function (title, isAllSaved) {
         if (isAllSaved) {
@@ -10226,11 +10362,13 @@ var ScreenshotService = /** @class */ (function () {
             this.snackbarComponent.openSnackBar(title + " has not been saved", 'fail');
         }
     };
-    ScreenshotService.prototype.deleteScreenshot = function (form) {
+    ScreenshotService.prototype.deleteScreenshot = function (form, hideMessage) {
         var _this = this;
         this.http.deleteScreenshotData(form.preview)
             .subscribe(function (isFileDeleted) {
-            _this.showDeleteMessage(form.title, isFileDeleted);
+            if (!hideMessage) {
+                _this.showDeleteMessage(form.title, !!isFileDeleted);
+            }
         });
     };
     ScreenshotService.prototype.showDeleteMessage = function (title, isAllSaved) {
@@ -10246,8 +10384,7 @@ var ScreenshotService = /** @class */ (function () {
             providedIn: 'root'
         }),
         __metadata("design:paramtypes", [_http_service__WEBPACK_IMPORTED_MODULE_3__["HttpService"],
-            src_app_options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_2__["SnackbarComponent"],
-            _broadcast_service__WEBPACK_IMPORTED_MODULE_4__["BroadcastService"]])
+            src_app_options_snackbar_snackbar_component__WEBPACK_IMPORTED_MODULE_2__["SnackbarComponent"]])
     ], ScreenshotService);
     return ScreenshotService;
 }());
@@ -10271,6 +10408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _statistic_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./statistic.service */ "./src/app/forms/services/statistic.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10284,8 +10422,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var SocketService = /** @class */ (function () {
-    function SocketService() {
+    function SocketService(statistic) {
+        this.statistic = statistic;
         this.url = '/';
     }
     SocketService.prototype.connectToSockets = function () {
@@ -10296,40 +10436,88 @@ var SocketService = /** @class */ (function () {
     };
     SocketService.prototype.initiateInterview = function (interviewData) {
         this.interviewId = interviewData.interviewId;
+        interviewData.creationTime = this.statistic.getCurrentTime();
         this.socket.emit('initiateInterview', interviewData);
+        this.statistic.setInterviewReference(this.socket, this.interviewId);
     };
     SocketService.prototype.joinInterview = function (userInfo) {
-        var connectionInfo = this.emitConnectionMessage(userInfo, 'connect');
-        this.socket.emit('joinInterview', connectionInfo);
+        var eventInfo = {
+            interviewId: this.interviewId,
+            messageText: this.emitConnectionMessage(userInfo, 'connect')
+        };
+        this.socket.emit('joinInterview', eventInfo);
+        this.statistic.setInterviewReference(this.socket, this.interviewId);
+        this.statistic.logConnectDisconnect('connect');
     };
-    SocketService.prototype.endInterview = function (userInfo) {
+    SocketService.prototype.exitInterview = function (userInfo) {
         // if we weren't connected, there is no need to unsub
-        if (!this.socket) {
+        if (!this.socket || !this.interviewId) {
             return;
         }
-        var eventInfo = this.emitConnectionMessage(userInfo, 'end interview');
+        var eventInfo = {
+            interviewId: this.interviewId,
+            messageText: this.emitConnectionMessage(userInfo, 'disconnect'),
+            infoToLog: this.statistic.logConnectDisconnect('disconnect')
+        };
+        this.socket.emit('onLeave', eventInfo);
+        this.detachInterviewData();
+    };
+    // triggers ending of interview
+    SocketService.prototype.endInterview = function (userInfo) {
+        // if we weren't connected, there is no need to unsub
+        if (!this.socket || !this.interviewId) {
+            return;
+        }
+        var eventInfo = {
+            interviewId: this.interviewId,
+            messageText: this.emitConnectionMessage(userInfo, 'finish'),
+            infoToLog: this.statistic.logConnectDisconnect('finish')
+        };
         this.socket.emit('endInterview', eventInfo);
+        this.detachInterviewData();
+    };
+    SocketService.prototype.detachInterviewData = function () {
         this.interviewId = null;
+        this.statistic.setInterviewReference(null, this.interviewId);
+    };
+    // triggers closing of interview for participants if interviewer ended it
+    SocketService.prototype.finishNotificator = function () {
+        var _this = this;
+        var eventObservable = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
+            _this.socket.on('interviewFinished', function (triggerFinish) {
+                observer.next(triggerFinish);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return eventObservable;
     };
     SocketService.prototype.emitConnectionMessage = function (userInfo, eventType) {
         var role = userInfo.role[0].toUpperCase() + userInfo.role.slice(1);
         var messageText = role + " " + userInfo.fullname;
-        var connectionInfo = {
-            interviewId: this.interviewId,
-            messageText: messageText
-        };
         if (eventType === 'connect') {
-            connectionInfo.messageText += ' has joined the interview';
-            return connectionInfo;
+            messageText += ' has joined the interview';
         }
-        else if (eventType === 'end interview') {
-            connectionInfo.messageText += ' has finished the interview. Thank you for participating.';
-            return connectionInfo;
+        else if (eventType === 'disconnect') {
+            messageText += ' has left the interview';
         }
         else {
-            connectionInfo.messageText += ' has left the interview';
-            this.socket.emit('onLeave', connectionInfo);
+            messageText += ' has finished the interview. Thank you for participating.';
         }
+        return messageText;
+    };
+    SocketService.prototype.showMessage = function () {
+        var _this = this;
+        var messageObservable = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
+            _this.socket.on('showMessage', function (message) {
+                observer.next(message);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return messageObservable;
     };
     SocketService.prototype.updateInterviewList = function () {
         var _this = this;
@@ -10343,7 +10531,7 @@ var SocketService = /** @class */ (function () {
         });
         return interviewInfoProvider;
     };
-    // interview events
+    // interview event related methods
     SocketService.prototype.sendClick = function (eventInfo) {
         eventInfo.interviewId = this.interviewId;
         this.socket.emit('click', eventInfo);
@@ -10360,21 +10548,9 @@ var SocketService = /** @class */ (function () {
         eventInfo.interviewId = this.interviewId;
         this.socket.emit('keyPress', eventInfo);
     };
-    SocketService.prototype.sendOnChangetEvent = function (eventInfo) {
+    SocketService.prototype.sendOnChangeEvent = function (eventInfo) {
         eventInfo.interviewId = this.interviewId;
         this.socket.emit('onChange', eventInfo);
-    };
-    SocketService.prototype.showMessage = function () {
-        var _this = this;
-        var messageObservable = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            _this.socket.on('showMessage', function (message) {
-                observer.next(message);
-            });
-            return function () {
-                _this.socket.disconnect();
-            };
-        });
-        return messageObservable;
     };
     SocketService.prototype.getClickEvent = function () {
         var _this = this;
@@ -10382,9 +10558,6 @@ var SocketService = /** @class */ (function () {
             _this.socket.on('mouseClick', function (eventData) {
                 observer.next(eventData);
             });
-            return function () {
-                _this.socket.disconnect();
-            };
         });
         return eventObservable.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(100));
     };
@@ -10394,9 +10567,6 @@ var SocketService = /** @class */ (function () {
             _this.socket.on('newMouseMove', function (eventData) {
                 observer.next(eventData);
             });
-            return function () {
-                _this.socket.disconnect();
-            };
         });
         return eventObservable;
     };
@@ -10406,9 +10576,6 @@ var SocketService = /** @class */ (function () {
             _this.socket.on('newFocus', function (eventData) {
                 observer.next(eventData);
             });
-            return function () {
-                _this.socket.disconnect();
-            };
         });
         return eventObservable;
     };
@@ -10418,9 +10585,6 @@ var SocketService = /** @class */ (function () {
             _this.socket.on('newKeyPress', function (eventData) {
                 observer.next(eventData);
             });
-            return function () {
-                _this.socket.disconnect();
-            };
         });
         return eventObservable;
     };
@@ -10430,21 +10594,6 @@ var SocketService = /** @class */ (function () {
             _this.socket.on('newOnChange', function (eventData) {
                 observer.next(eventData);
             });
-            return function () {
-                _this.socket.disconnect();
-            };
-        });
-        return eventObservable;
-    };
-    SocketService.prototype.finishInterview = function () {
-        var _this = this;
-        var eventObservable = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            _this.socket.on('finishInterview', function (triggerFinish) {
-                observer.next(triggerFinish);
-            });
-            return function () {
-                _this.socket.disconnect();
-            };
         });
         return eventObservable;
     };
@@ -10452,9 +10601,171 @@ var SocketService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_statistic_service__WEBPACK_IMPORTED_MODULE_4__["StatisticService"]])
     ], SocketService);
     return SocketService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/forms/services/statistic.service.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/forms/services/statistic.service.ts ***!
+  \*****************************************************/
+/*! exports provided: StatisticService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatisticService", function() { return StatisticService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _models_logInfo_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/logInfo.model */ "./src/app/models/logInfo.model.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var StatisticService = /** @class */ (function () {
+    function StatisticService() {
+        this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
+    }
+    StatisticService.prototype.setInterviewReference = function (socket, interviewId) {
+        this.socket = socket;
+        this.interviewId = interviewId;
+        this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
+    };
+    StatisticService.prototype.logConnectDisconnect = function (action) {
+        var infoToLog = new _models_logInfo_model__WEBPACK_IMPORTED_MODULE_1__["InfoToLog"](this.currentUser.fullname, this.currentUser.role, action, this.getCurrentTime(), this.interviewId);
+        if (action === 'connect') {
+            this.socket.emit('logEvent', infoToLog);
+        }
+        else {
+            this.interviewId = null;
+        }
+        // return info instead of logging it right here because of
+        // a bug that appears when closing inactive tab with interview
+        return infoToLog;
+    };
+    StatisticService.prototype.logClick = function (event) {
+        var targetTag;
+        var targetLabel;
+        // handler for toggle
+        if (event.target.className.indexOf('toggle') !== -1) {
+            targetTag = 'toggle';
+            targetLabel = this.extractToggleLabel(event);
+        }
+        // handler for radio
+        if (event.target.className.indexOf('radio') !== -1) {
+            targetTag = 'radiobutton';
+            targetLabel = this.extractRadioLabel(event.target);
+        }
+        // handler for checkboxes
+        if (event.target.className.indexOf('checkbox') !== -1) {
+            targetTag = 'checkbox';
+            targetLabel = event.target.firstChild.value ? event.target.firstChild.value : event.target.innerText;
+        }
+        // handler for other elements
+        if (!targetTag && (event.target.innerText || event.target.labels)) {
+            targetTag = event.target.localName;
+            targetLabel = event.target.innerText ? event.target.innerText : event.target.labels[0].innerText;
+        }
+        if (targetTag) {
+            var infoToLog = new _models_logInfo_model__WEBPACK_IMPORTED_MODULE_1__["InfoToLog"](this.currentUser.fullname, this.currentUser.role, event.type, this.getCurrentTime(), this.interviewId, targetTag, targetLabel);
+            this.socket.emit('logEvent', infoToLog);
+            return infoToLog;
+        }
+    };
+    StatisticService.prototype.logValueChange = function (event) {
+        if (event.source) {
+            this.logSliderChange(event);
+            return;
+        }
+        var targetTag = event.target.localName;
+        var targetLabel = event.target.labels[0].innerText;
+        var infoToLog = new _models_logInfo_model__WEBPACK_IMPORTED_MODULE_1__["InfoToLog"](this.currentUser.fullname, this.currentUser.role, event.type, this.getCurrentTime(), this.interviewId, targetTag, targetLabel, event.target.value);
+        this.socket.emit('logEvent', infoToLog);
+        return infoToLog;
+    };
+    StatisticService.prototype.logSliderChange = function (event) {
+        if (!event.source._elementRef) {
+            return;
+        }
+        var eventType = 'change';
+        var targetTag = 'slider';
+        var targetLabel = event.source._elementRef.nativeElement.previousElementSibling.innerText;
+        var infoToLog = new _models_logInfo_model__WEBPACK_IMPORTED_MODULE_1__["InfoToLog"](this.currentUser.fullname, this.currentUser.role, eventType, this.getCurrentTime(), this.interviewId, targetTag, targetLabel, event.value);
+        this.socket.emit('logEvent', infoToLog);
+    };
+    StatisticService.prototype.extractToggleLabel = function (event) {
+        var targetLabel;
+        if (event.target.className.indexOf('thumb') !== -1) {
+            targetLabel = event.path[3].innerText;
+        }
+        else if (event.target.localName === 'label' || event.target.localName === 'span') {
+            targetLabel = event.target.innerText;
+        }
+        else {
+            targetLabel = event.target.parentNode.innerText;
+        }
+        return targetLabel;
+    };
+    StatisticService.prototype.extractRadioLabel = function (element) {
+        var targetLabel;
+        if (element.className.indexOf('label') !== -1) {
+            targetLabel = element.innerText;
+        }
+        else {
+            var infoPlacement = element.parentNode.innerText;
+            targetLabel = infoPlacement ? infoPlacement : element.parentNode.lastChild.labels[0].innerText;
+        }
+        return targetLabel;
+    };
+    StatisticService.prototype.getCurrentTime = function () {
+        return Date.now();
+    };
+    StatisticService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], StatisticService);
+    return StatisticService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/logInfo.model.ts":
+/*!*****************************************!*\
+  !*** ./src/app/models/logInfo.model.ts ***!
+  \*****************************************/
+/*! exports provided: InfoToLog */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InfoToLog", function() { return InfoToLog; });
+var InfoToLog = /** @class */ (function () {
+    function InfoToLog(author, role, action, time, interviewId, targetTag, targetLabel, newValue) {
+        this.author = author;
+        this.role = role;
+        this.action = action;
+        this.time = time;
+        this.interviewId = interviewId;
+        this.targetTag = targetTag;
+        this.targetLabel = targetLabel;
+        this.newValue = newValue;
+    }
+    return InfoToLog;
 }());
 
 
@@ -11465,7 +11776,7 @@ var ToggleComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section fxLayout=\"row\">\r\n  <interviewers-list [dataSource]=\"groupsSource\"\r\n                     [columns]=\"groupsColumns\" \r\n                     [headers]=\"groupsColumnsHeaders\"\r\n                     (onAdd)=\"addGroup()\"\r\n                     (selectGroup)=\"selectGroup($event)\"\r\n                     (contextMenu)=\"openContextMenu($event)\">\r\n      <h2>\r\n          <i class=\"material-icons\">\r\n              group\r\n          </i>\r\n          Group list\r\n      </h2>\r\n\r\n      <mat-paginator class=\"paginator groups__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #groupsPaginator >\r\n      </mat-paginator>\r\n\r\n      Add\r\n      <i class=\"material-icons\">\r\n              group_add\r\n      </i>\r\n  </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n  <button mat-menu-item (click)=\"edit($event)\">Edit</button>\r\n  <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>"
+module.exports = "<section fxLayout=\"row\">\r\n  <interviewers-list [dataSource]=\"groupsSource\"\r\n                     [columns]=\"groupsColumns\" \r\n                     [headers]=\"groupsColumnsHeaders\"\r\n                     (onAdd)=\"addGroup()\"\r\n                     (selectGroup)=\"selectGroup($event)\"\r\n                     (contextMenu)=\"openContextMenu($event)\">\r\n      <h2>\r\n          <i class=\"material-icons\">\r\n              group\r\n          </i>\r\n          Group list\r\n      </h2>\r\n\r\n      <mat-paginator class=\"paginator groups__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #groupsPaginator >\r\n      </mat-paginator>\r\n\r\n      Add\r\n      <i class=\"material-icons\">\r\n              group_add\r\n      </i>\r\n  </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n  <button mat-menu-item (click)=\"edit($event)\">Edit</button>\r\n  <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>\r\n\r\n<app-interviewers *ngIf=\"isGroupSelected\" [selectedGroup]=\"isGroupSelected\"></app-interviewers>"
 
 /***/ }),
 
@@ -11522,6 +11833,7 @@ var GroupsComponent = /** @class */ (function () {
         this.http = http;
         this.dialog = dialog;
         this.message = message;
+        this.isGroupSelected = false;
         this.groupsColumns = [{
                 title: "name",
                 value: "Title",
@@ -11535,8 +11847,20 @@ var GroupsComponent = /** @class */ (function () {
         ];
     }
     GroupsComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.getGroups();
         this.groupsColumnsHeaders = this.groupsColumns.map(function (field) { return field.title; });
+        this.selectedGroupSubscription = this.http.getSelectedGroup()
+            .subscribe(function (group) {
+            if (group) {
+                _this.isGroupSelected = true;
+            }
+            else
+                _this.isGroupSelected = false;
+        });
+    };
+    GroupsComponent.prototype.ngOnDestroy = function () {
+        this.selectedGroupSubscription.unsubscribe();
     };
     GroupsComponent.prototype.getGroups = function () {
         var _this = this;
@@ -11573,9 +11897,7 @@ var GroupsComponent = /** @class */ (function () {
         });
     };
     GroupsComponent.prototype.selectGroup = function (event) {
-        var name = event.target.parentNode.querySelector('.cdk-column-name').innerText ||
-            event.target.innerText;
-        this.http.setSelectedGroup(name);
+        this.http.setSelectedGroup(event.item.name);
     };
     GroupsComponent.prototype.openContextMenu = function (event) {
         this.dialog.openContextMenu(event, this.trigger);
@@ -11662,7 +11984,7 @@ var GroupsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section fxLayout=\"row\">\r\n    <interviewers-list [dataSource]=\"usersSource\"\r\n                       [columns]=\"usersColumns\"\r\n                       [headers]=\"usersColumnsHeaders\"\r\n                       (onAdd)=\"addUser()\"\r\n                       (contextMenu)=\"openContextMenu($event)\">\r\n        <h2>\r\n            <i class=\"material-icons\">\r\n                    person\r\n            </i>\r\n            Interviewers list <span *ngIf=\"selectedGroup\">: {{selectedGroup}}</span>\r\n        </h2> \r\n        \r\n        <mat-paginator class=\"paginator users__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #usersPaginator>\r\n        </mat-paginator>\r\n\r\n        Add\r\n        <i class=\"material-icons\">\r\n                person_add\r\n        </i>\r\n\r\n        <button *ngIf=\"selectedGroup\" (click)=\"showAll()\" class=\"showAll\" mat-raised-button color=\"accent\">\r\n            Show all\r\n        </button>\r\n    </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n    <button mat-menu-item (click)=\"edit($event)\">Edit</button>\r\n    <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>\r\n"
+module.exports = "<section fxLayout=\"row\">\r\n    <interviewers-list [dataSource]=\"usersSource\"\r\n                       [columns]=\"usersColumns\"\r\n                       [headers]=\"usersColumnsHeaders\"\r\n                       (onAdd)=\"addUser()\"\r\n                       (contextMenu)=\"openContextMenu($event)\">\r\n        <h2>\r\n            <i class=\"material-icons\">\r\n                    person\r\n            </i>\r\n            Interviewers list <span *ngIf=\"groupName\">: {{groupName}}</span>\r\n        </h2> \r\n        \r\n        <mat-paginator class=\"paginator users__paginator\" [pageSize]=\"10\" [pageSizeOptions]=\"[5,10,25]\" #usersPaginator>\r\n        </mat-paginator>\r\n\r\n        Add\r\n        <i class=\"material-icons\">\r\n                person_add\r\n        </i>\r\n\r\n        <button *ngIf=\"selectedGroup\" (click)=\"showAll()\" class=\"showAll\" mat-raised-button color=\"warn\">\r\n            Close\r\n        </button>\r\n    </interviewers-list>\r\n</section>\r\n\r\n<mat-menu #editMenu=\"matMenu\" class=\"editMenu\">\r\n    <button mat-menu-item (click)=\"edit($event)\">Edit</button>\r\n    <button mat-menu-item (click)=\"remove($event)\">Remove</button>\r\n</mat-menu>\r\n\r\n<div [matMenuTriggerFor]=\"editMenu\" class=\"menuButton\">\r\n</div>\r\n"
 
 /***/ }),
 
@@ -11754,9 +12076,12 @@ var InterviewersComponent = /** @class */ (function () {
             this.usersSource = this.initDataSource(this.usersData, this.usersPaginator);
         }
         else {
-            var selectedUsers = this.usersData.filter(function (user) { return user.group === _this.selectedGroup; });
-            this.usersSource = this.initDataSource(selectedUsers, this.usersPaginator);
-            this.http.setSelectedGroup(this.selectedGroup);
+            this.http.getSelectedGroup()
+                .subscribe(function (group) {
+                _this.groupName = group;
+                var selectedUsers = _this.usersData.filter(function (users) { return users.group === group; });
+                _this.usersSource = _this.initDataSource(selectedUsers, _this.usersPaginator);
+            });
         }
     };
     InterviewersComponent.prototype.initDataSource = function (data, paginator) {
@@ -11817,7 +12142,6 @@ var InterviewersComponent = /** @class */ (function () {
     InterviewersComponent.prototype.edit = function () {
         var _this = this;
         if (this.dialog.target) {
-            console.log(this.dialog.target);
             this.dialog.editUser()
                 .afterClosed()
                 .subscribe(function (changedUser) {
@@ -11833,7 +12157,6 @@ var InterviewersComponent = /** @class */ (function () {
                         _this.renderUsersList();
                         _this.http.updateUser(__assign({}, changedUser, { previousName: _this.dialog.target.username }))
                             .subscribe(function (_) {
-                            console.log(changedUser, 'was updated');
                             _this.dialog.target = null;
                         });
                     }
@@ -11846,10 +12169,13 @@ var InterviewersComponent = /** @class */ (function () {
         return array.some(function (user) { return user.username === name; });
     };
     InterviewersComponent.prototype.showAll = function () {
-        this.selectedGroup = '';
+        this.http.setSelectedGroup(null);
         this.renderUsersList();
-        this.http.setSelectedGroup(false);
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], InterviewersComponent.prototype, "selectedGroup", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('usersPaginator'),
         __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
@@ -11886,7 +12212,7 @@ var InterviewersComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"dataSource\">\r\n    <ng-content select=\"h2\"></ng-content>\r\n    <mat-table [(dataSource)]=\"dataSource\" matSort>\r\n        <ng-container matColumnDef=\"{{column.title}}\" *ngFor=\"let column of columns;\">\r\n            <!-- columns header -->\r\n            <mat-header-cell *matHeaderCellDef mat-sort-header>\r\n                {{ column.value }}\r\n            </mat-header-cell>\r\n            <mat-cell *matCellDef=\"let item\">\r\n                <!-- columns value -->\r\n                {{ item[column.title] }}\r\n            </mat-cell>\r\n        </ng-container>\r\n\r\n        <mat-header-row *matHeaderRowDef=\"headers\">\r\n        </mat-header-row>\r\n\r\n        <mat-row *matRowDef=\"let row; columns: headers; let item\" (contextmenu)=\"editContextMenu($event, item)\" (click)=\"select($event)\">\r\n        </mat-row>\r\n    </mat-table>\r\n\r\n    <mat-toolbar class=\"list--tolbar\">\r\n        <ng-content select=\".paginator\"></ng-content>\r\n        <list-controls (onAdd)=\"add()\">\r\n            <ng-content></ng-content>\r\n        </list-controls>\r\n        <ng-content select=\".showAll\"></ng-content>\r\n    </mat-toolbar>\r\n</section>\r\n"
+module.exports = "<section *ngIf=\"dataSource\">\r\n    <ng-content select=\"h2\"></ng-content>\r\n    <mat-table [(dataSource)]=\"dataSource\" matSort>\r\n        <ng-container matColumnDef=\"{{column.title}}\" *ngFor=\"let column of columns;\">\r\n            <!-- columns header -->\r\n            <mat-header-cell *matHeaderCellDef mat-sort-header>\r\n                {{ column.value }}\r\n            </mat-header-cell>\r\n            <mat-cell *matCellDef=\"let item\">\r\n                <!-- columns value -->\r\n                {{ item[column.title] }}\r\n            </mat-cell>\r\n        </ng-container>\r\n\r\n        <mat-header-row *matHeaderRowDef=\"headers\">\r\n        </mat-header-row>\r\n\r\n        <mat-row *matRowDef=\"let row; columns: headers; let item\" (contextmenu)=\"editContextMenu($event, item)\" (click)=\"select($event, item)\">\r\n        </mat-row>\r\n    </mat-table>\r\n\r\n    <mat-toolbar class=\"list--tolbar\">\r\n        <ng-content select=\".paginator\"></ng-content>\r\n        <list-controls (onAdd)=\"add()\">\r\n            <ng-content></ng-content>\r\n        </list-controls>\r\n        <ng-content select=\".showAll\"></ng-content>\r\n    </mat-toolbar>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -11939,8 +12265,9 @@ var ListComponent = /** @class */ (function () {
     ListComponent.prototype.add = function () {
         this.onAdd.emit(true);
     };
-    ListComponent.prototype.select = function (group) {
-        this.selectGroup.emit(group);
+    ListComponent.prototype.select = function (event, item) {
+        var eventObject = { event: event, item: item };
+        this.selectGroup.emit(eventObject);
     };
     ListComponent.prototype.editContextMenu = function (event, item) {
         var eventObject = { event: event, item: item };
@@ -12820,7 +13147,9 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginatorModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTooltipModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBarModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatGridListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTabsModule"]
             ],
             exports: [
                 _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__["LayoutModule"],
@@ -12845,7 +13174,9 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginatorModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTooltipModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBarModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatGridListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTabsModule"]
             ],
         })
     ], MaterialModule);
@@ -12968,43 +13299,6 @@ var NotfoundModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/modules/statistics/services/statistics.service.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/modules/statistics/services/statistics.service.ts ***!
-  \*******************************************************************/
-/*! exports provided: StatisticsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatisticsService", function() { return StatisticsService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var StatisticsService = /** @class */ (function () {
-    function StatisticsService() {
-    }
-    StatisticsService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], StatisticsService);
-    return StatisticsService;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/modules/statistics/statistics.module.ts":
 /*!*********************************************************!*\
   !*** ./src/app/modules/statistics/statistics.module.ts ***!
@@ -13018,14 +13312,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _statistics_statistics_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./statistics/statistics.component */ "./src/app/modules/statistics/statistics/statistics.component.ts");
-/* harmony import */ var _services_statistics_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/statistics.service */ "./src/app/modules/statistics/services/statistics.service.ts");
+/* harmony import */ var _statistics_statistics_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./statistics/statistics.service */ "./src/app/modules/statistics/statistics/statistics.service.ts");
 /* harmony import */ var _material_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../material/material */ "./src/app/modules/material/material.ts");
+/* harmony import */ var _statistics_components_list_interviews_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./statistics/components/list/interviews-list.component */ "./src/app/modules/statistics/statistics/components/list/interviews-list.component.ts");
+/* harmony import */ var _statistics_components_item_item_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./statistics/components/item/item.component */ "./src/app/modules/statistics/statistics/components/item/item.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -13041,15 +13339,246 @@ var StatisticsModule = /** @class */ (function () {
                 _material_material__WEBPACK_IMPORTED_MODULE_4__["MaterialModule"]
             ],
             providers: [
-                _services_statistics_service__WEBPACK_IMPORTED_MODULE_3__["StatisticsService"]
+                _statistics_statistics_service__WEBPACK_IMPORTED_MODULE_3__["StatisticsService"]
             ],
-            declarations: [_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_2__["StatisticsComponent"]],
+            declarations: [_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_2__["StatisticsComponent"], _statistics_components_list_interviews_list_component__WEBPACK_IMPORTED_MODULE_5__["IntreviewsListComponent"], _statistics_components_item_item_component__WEBPACK_IMPORTED_MODULE_6__["ItemComponent"]],
             exports: [
                 _statistics_statistics_component__WEBPACK_IMPORTED_MODULE_2__["StatisticsComponent"]
             ]
         })
     ], StatisticsModule);
     return StatisticsModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/components/item/item.component.html":
+/*!***********************************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/components/item/item.component.html ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section *ngIf=\"interview\">\r\n\r\n<ng-content>\r\n</ng-content>\r\n\r\n<mat-tab-group>\r\n    <mat-tab label=\"General info\">\r\n        <div>\r\n          <p>\r\n              <i class=\"material-icons\">timer</i><span>Start time: </span>{{interview.startTime | date:'medium'}}\r\n          </p>\r\n          <p>\r\n              <i class=\"material-icons\">timer_off</i><span>End time: </span>{{interview.endTime | date:'medium'}}\r\n          </p>\r\n        </div>\r\n        <div>\r\n            <p>\r\n                <i class=\"material-icons\">portrait</i><span>Candidate: </span>{{interview.candidate}}\r\n            </p>\r\n            <p>\r\n                <i class=\"material-icons\">verified_user</i><span>Interviewer: </span>{{interview.interviewer}}\r\n            </p>\r\n        </div>\r\n        <div>\r\n            <p>\r\n                <i class=\"material-icons\">filter_none</i><span>Form title: </span>{{interview.formTitle}}\r\n            </p>\r\n        </div>\r\n    </mat-tab>\r\n    <mat-tab label=\"Actions\"> \r\n\r\n        <mat-table [dataSource]=\"actions\" matSort>\r\n            <ng-container matColumnDef=\"{{column.title}}\" *ngFor=\"let column of columns;\">\r\n                <mat-header-cell *matHeaderCellDef mat-sort-header>\r\n                    {{ column.value }}\r\n                </mat-header-cell>\r\n        \r\n                <mat-cell *matCellDef=\"let item\">\r\n                    {{column.title === 'time' ? (item.time | date:'medium') : item[column.title] }}\r\n                </mat-cell>\r\n            </ng-container>\r\n            \r\n            <mat-header-row *matHeaderRowDef=\"headers\">\r\n            </mat-header-row>\r\n                                     \r\n            <mat-row *matRowDef=\"let row; columns: headers; let item\">\r\n            </mat-row>\r\n        </mat-table>\r\n\r\n        <mat-toolbar class=\"list--tolbar\">\r\n            <mat-paginator class=\"paginator\" \r\n                           [pageSize]=\"5\" \r\n                           [pageSizeOptions]=\"[5,10,25]\" \r\n                           #paginator>\r\n            </mat-paginator>\r\n        </mat-toolbar>\r\n    </mat-tab>\r\n\r\n    <mat-tab label=\"Comments and other info\">\r\n    <!-- <div class=\"logInOut\" *ngIf=\"interview?.logInOut\">\r\n        \r\n          {{interview.logInOut}}\r\n    </div> -->\r\n  \r\n    <div class=\"comments\" *ngIf=\"interview?.comments\">\r\n            <div>\r\n                <i class=\"material-icons\">comment</i><span>Comment: </span>{{interview.comments}}\r\n            </div>\r\n    </div>\r\n  </mat-tab>\r\n</mat-tab-group>\r\n\r\n\r\n\r\n</section>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/components/item/item.component.scss":
+/*!***********************************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/components/item/item.component.scss ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".list--tolbar {\n  background-color: #fff; }\n\ndiv {\n  font-size: 14px;\n  line-height: 24px;\n  padding-left: 24px;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n  min-height: 48px;\n  align-items: center;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: flex-start;\n  align-items: center; }\n\np {\n  margin-right: 5%;\n  display: inline-flex;\n  justify-content: flex-start;\n  align-items: center;\n  width: 300px; }\n\np span, div span {\n  padding: 0px 8px 0px 8px;\n  color: rgba(0, 0, 0, 0.5); }\n\n.mat-tab-label-container {\n  padding-left: 16px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/components/item/item.component.ts":
+/*!*********************************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/components/item/item.component.ts ***!
+  \*********************************************************************************/
+/*! exports provided: ItemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemComponent", function() { return ItemComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _statistics_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../statistics.service */ "./src/app/modules/statistics/statistics/statistics.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ItemComponent = /** @class */ (function () {
+    function ItemComponent(statisticService) {
+        this.statisticService = statisticService;
+        this.hide = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.columns = [{
+                title: 'action',
+                value: 'Action',
+                icon: 'timer'
+            },
+            {
+                title: 'time',
+                value: 'Time',
+                icon: 'timer_off'
+            },
+            {
+                title: 'author',
+                value: 'Author'
+            },
+            {
+                title: 'role',
+                value: 'Role'
+            },
+            {
+                title: 'targetTag',
+                value: 'Target Element'
+            },
+            {
+                title: 'targetLabel',
+                value: 'Target Label'
+            },
+            {
+                title: 'newValue',
+                value: 'New value'
+            }
+        ];
+    }
+    ItemComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.statisticService.getSelectedInterview()
+            .subscribe(function (interview) {
+            if (interview) {
+                _this.interview = interview;
+                _this.renderInterviewsList(_this.interview.actions);
+            }
+        });
+        this.headers = this.columns.map(function (field) { return field.title; });
+    };
+    ItemComponent.prototype.ngAfterViewInit = function () {
+        this.actions.paginator = this.paginator;
+    };
+    ItemComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
+    ItemComponent.prototype.renderInterviewsList = function (dataSource) {
+        this.actions = this.initDataSource(dataSource, this.paginator);
+    };
+    ItemComponent.prototype.initDataSource = function (data, paginator) {
+        var dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](data);
+        dataSource.paginator = paginator;
+        return dataSource;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
+    ], ItemComponent.prototype, "hide", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('paginator'),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
+    ], ItemComponent.prototype, "paginator", void 0);
+    ItemComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'selected-item',
+            template: __webpack_require__(/*! ./item.component.html */ "./src/app/modules/statistics/statistics/components/item/item.component.html"),
+            styles: [__webpack_require__(/*! ./item.component.scss */ "./src/app/modules/statistics/statistics/components/item/item.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_statistics_service__WEBPACK_IMPORTED_MODULE_2__["StatisticsService"]])
+    ], ItemComponent);
+    return ItemComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/components/list/interviews-list.component.html":
+/*!**********************************************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/components/list/interviews-list.component.html ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section *ngIf=\"interviewsSource\">\r\n  <ng-content></ng-content>\r\n  <mat-table [dataSource]=\"interviewsSource\" matSort>\r\n      <ng-container matColumnDef=\"{{column.title}}\" *ngFor=\"let column of columns;\">\r\n          <!-- columns header -->\r\n          <mat-header-cell *matHeaderCellDef mat-sort-header>\r\n                  <!-- <i class=\"material-icons\" *ngIf=\"column?.icon\">\r\n                          {{ column.icon }}\r\n                  </i> -->\r\n              {{ column.value }}\r\n          </mat-header-cell>\r\n\r\n          <mat-cell *matCellDef=\"let item;\">\r\n \r\n          <button mat-raised-button color=\"primary\" *ngIf=\"column?.icon && column.title==='info'\">\r\n              <i class=\"material-icons\">\r\n                      {{ column.icon }}\r\n              </i>\r\n          </button>\r\n\r\n              {{ column.title === 'startTime' ? (item.startTime | date:'medium') : \r\n                 column.title === 'endTime' ? (item.endTime | date:'medium') : item[column.title] }}\r\n          \r\n          </mat-cell>\r\n      </ng-container>\r\n      \r\n      <mat-header-row *matHeaderRowDef=\"headers\">\r\n      </mat-header-row>\r\n                               \r\n      <mat-row *matRowDef=\"let row; columns: headers; let item\" (click)=\"selectItem(item)\">\r\n      </mat-row>\r\n  </mat-table>\r\n\r\n  <mat-toolbar class=\"list--tolbar\">\r\n      <mat-paginator class=\"paginator users__paginator\" \r\n                     [pageSize]=\"5\" \r\n                     [pageSizeOptions]=\"[5,10,25]\" \r\n                     #interviewsPaginator>\r\n      </mat-paginator>\r\n  </mat-toolbar>\r\n</section>"
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/components/list/interviews-list.component.scss":
+/*!**********************************************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/components/list/interviews-list.component.scss ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".list--tolbar {\n  background-color: #fff; }\n\nmat-row:hover {\n  background-color: rgba(0, 0, 0, 0.03);\n  transition: background-color .3s ease; }\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/components/list/interviews-list.component.ts":
+/*!********************************************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/components/list/interviews-list.component.ts ***!
+  \********************************************************************************************/
+/*! exports provided: IntreviewsListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IntreviewsListComponent", function() { return IntreviewsListComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var IntreviewsListComponent = /** @class */ (function () {
+    function IntreviewsListComponent() {
+        this.selectInterview = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    IntreviewsListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.interviews$
+            .subscribe(function (interviews) { return _this.renderInterviewsList(interviews); });
+    };
+    IntreviewsListComponent.prototype.renderInterviewsList = function (dataSource) {
+        this.interviewsSource = this.initDataSource(dataSource, this.interviewsPaginator);
+    };
+    IntreviewsListComponent.prototype.initDataSource = function (data, paginator) {
+        var dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](data);
+        dataSource.paginator = paginator;
+        return dataSource;
+    };
+    IntreviewsListComponent.prototype.selectItem = function (item) {
+        this.selectInterview.emit(item);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], IntreviewsListComponent.prototype, "interviews$", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], IntreviewsListComponent.prototype, "columns", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], IntreviewsListComponent.prototype, "headers", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
+    ], IntreviewsListComponent.prototype, "selectInterview", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('interviewsPaginator'),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
+    ], IntreviewsListComponent.prototype, "interviewsPaginator", void 0);
+    IntreviewsListComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'interviews-list',
+            template: __webpack_require__(/*! ./interviews-list.component.html */ "./src/app/modules/statistics/statistics/components/list/interviews-list.component.html"),
+            styles: [__webpack_require__(/*! ./interviews-list.component.scss */ "./src/app/modules/statistics/statistics/components/list/interviews-list.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], IntreviewsListComponent);
+    return IntreviewsListComponent;
 }());
 
 
@@ -13063,7 +13592,7 @@ var StatisticsModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"dataSource\">\r\n    <div class=\"title\">\r\n            <i class=\"material-icons\">\r\n                    info\r\n            </i>\r\n\r\n            <h2>{{title}}</h2>\r\n    </div>\r\n    <mat-table [dataSource]=\"interviewsSource\" matSort>\r\n        <ng-container matColumnDef=\"{{column.title}}\" *ngFor=\"let column of interviewColumns;\">\r\n            <!-- columns header -->\r\n            <mat-header-cell *matHeaderCellDef mat-sort-header>\r\n                    <!-- <i class=\"material-icons\" *ngIf=\"column?.icon\">\r\n                            {{ column.icon }}\r\n                    </i> -->\r\n                {{ column.value }}\r\n            </mat-header-cell>\r\n\r\n            <mat-cell *matCellDef=\"let item;\">\r\n   \r\n            <button mat-raised-button color=\"primary\" *ngIf=\"column?.icon && column.title==='info'\">\r\n                <i class=\"material-icons\">\r\n                        {{ column.icon }}\r\n                </i>\r\n            </button>\r\n                {{ item[column.title] }}\r\n            </mat-cell>\r\n        </ng-container>\r\n        \r\n        <mat-header-row *matHeaderRowDef=\"interviewsColumnsHeaders\">\r\n        </mat-header-row>\r\n                                 \r\n        <mat-row *matRowDef=\"let row; columns: interviewsColumnsHeaders; let item\">\r\n        </mat-row>\r\n    </mat-table>\r\n\r\n    <mat-toolbar class=\"list--tolbar\">\r\n        <mat-paginator class=\"paginator users__paginator\" \r\n                       [pageSize]=\"10\" \r\n                       [pageSizeOptions]=\"[5,10,25]\" \r\n                       #interviewsPaginator>\r\n        </mat-paginator>\r\n    </mat-toolbar>\r\n</section>\r\n"
+module.exports = "<section class=\"statistics\">\r\n    <interviews-list\r\n      [interviews$]=\"interviews$\"\r\n      [columns]=\"interviewColumns\"\r\n      [headers]=\"interviewsColumnsHeaders\"\r\n      (selectInterview) = \"selectInterview($event)\"\r\n      >\r\n      <div class=\"title\">\r\n            <i class=\"material-icons\">\r\n                    info\r\n            </i>\r\n\r\n            <h2>{{title}}</h2>\r\n      </div>\r\n    </interviews-list>\r\n</section>\r\n\r\n<selected-item *ngIf=\"selectedInterview\">\r\n    <div class=\"title\">\r\n        <i class=\"material-icons\">\r\n                info\r\n        </i>\r\n\r\n        <h2>{{details}}</h2>\r\n\r\n        <button mat-raised-button color=\"primary\" (click)=\"unselectItem()\">\r\n            Hide details\r\n        </button>\r\n  </div>\r\n</selected-item>"
 
 /***/ }),
 
@@ -13074,7 +13603,7 @@ module.exports = "<section *ngIf=\"dataSource\">\r\n    <div class=\"title\">\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".list--tolbar {\n  background-color: #fff; }\n\n.title {\n  display: flex;\n  justify-content: flex-start;\n  vertical-align: middle;\n  align-items: center;\n  margin-left: 16px; }\n\n.title i {\n    opacity: 0.6;\n    margin-right: 8px; }\n\nmat-row:hover {\n  background-color: rgba(0, 0, 0, 0.03);\n  transition: background-color .3s ease; }\n"
+module.exports = ".title {\n  display: flex;\n  justify-content: flex-start;\n  vertical-align: middle;\n  align-items: center;\n  margin-left: 16px; }\n  .title i {\n    opacity: 0.6;\n    margin-right: 8px; }\n  button {\n  margin: 24px; }\n"
 
 /***/ }),
 
@@ -13090,6 +13619,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatisticsComponent", function() { return StatisticsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../store */ "./src/app/store.ts");
+/* harmony import */ var _statistics_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./statistics.service */ "./src/app/modules/statistics/statistics/statistics.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13101,52 +13632,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var StatisticsComponent = /** @class */ (function () {
-    function StatisticsComponent() {
-        this.title = "Interviews statistic";
-        this.panelOpenState = false;
-        this.dataSource = [{
-                id: 1,
-                startTime: '11:32',
-                endTime: '11:45',
-                candidate: 'Alexey',
-                interviewer: 'Happy Man',
-                formTitle: 'Registration Form',
-                logInOut: 'Expand to view',
-                actions: 'Expand',
-                comments: 'Expand'
-            },
-            {
-                id: 2,
-                startTime: '11:57',
-                endTime: '12:03',
-                candidate: 'Ehor',
-                interviewer: 'Валера',
-                formTitle: 'Registration Form',
-                logInOut: 'Expand to view',
-                actions: 'Expand',
-                comments: 'Expand'
-            },
-            {
-                id: 3,
-                startTime: '12:54',
-                endTime: '13:20',
-                candidate: 'Donald',
-                interviewer: 'epicmaster',
-                formTitle: 'Registration Form',
-                logInOut: 'Expand to view',
-                actions: 'Expand',
-                comments: 'Expand'
-            }
-        ];
-        this.interviewColumns = [{
-                title: 'id',
-                value: 'Interview id',
-            },
+    function StatisticsComponent(store, statisticService) {
+        this.store = store;
+        this.statisticService = statisticService;
+        this.title = 'Interviews statistic';
+        this.details = 'Interview details';
+        this.interviewColumns = [
             {
                 title: 'startTime',
                 value: 'Start Time',
-                icon: 'timer'
+                icon: 'timer',
+                pipe: ''
             },
             {
                 title: 'endTime',
@@ -13173,19 +13672,23 @@ var StatisticsComponent = /** @class */ (function () {
         ];
     }
     StatisticsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.interviews$ = this.store.select('interviews');
+        this.subscription = this.statisticService.getInterviews$.subscribe();
         this.interviewsColumnsHeaders = this.interviewColumns.map(function (field) { return field.title; });
-        this.renderInterviewsList();
+        this.selectedSubscription = this.statisticService.getSelectedInterview()
+            .subscribe(function (interview) { return _this.selectedInterview = interview; });
     };
-    StatisticsComponent.prototype.ngAfterViewInit = function () {
-        this.interviewsSource.paginator = this.interviewsPaginator;
+    StatisticsComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+        this.selectedSubscription.unsubscribe();
+        this.unselectItem();
     };
-    StatisticsComponent.prototype.renderInterviewsList = function () {
-        this.interviewsSource = this.initDataSource(this.dataSource, this.interviewsPaginator);
+    StatisticsComponent.prototype.selectInterview = function (item) {
+        this.statisticService.setSelectedInterview(item);
     };
-    StatisticsComponent.prototype.initDataSource = function (data, paginator) {
-        var dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](data);
-        dataSource.paginator = paginator;
-        return dataSource;
+    StatisticsComponent.prototype.unselectItem = function () {
+        this.statisticService.setSelectedInterview(null);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('interviewsPaginator'),
@@ -13197,9 +13700,70 @@ var StatisticsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./statistics.component.html */ "./src/app/modules/statistics/statistics/statistics.component.html"),
             styles: [__webpack_require__(/*! ./statistics.component.scss */ "./src/app/modules/statistics/statistics/statistics.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_store__WEBPACK_IMPORTED_MODULE_2__["Store"],
+            _statistics_service__WEBPACK_IMPORTED_MODULE_3__["StatisticsService"]])
     ], StatisticsComponent);
     return StatisticsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/statistics/statistics/statistics.service.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/modules/statistics/statistics/statistics.service.ts ***!
+  \*********************************************************************/
+/*! exports provided: StatisticsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatisticsService", function() { return StatisticsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../store */ "./src/app/store.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var StatisticsService = /** @class */ (function () {
+    function StatisticsService(http, store) {
+        var _this = this;
+        this.http = http;
+        this.store = store;
+        this.getInterviews$ = this.http
+            .get('/stats/interviews')
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (res) {
+            return res.json();
+        }))
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (next) { return _this.store.set('interviews', next); }));
+        this.selectedInterview = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](null);
+    }
+    StatisticsService.prototype.getSelectedInterview = function () {
+        return this.selectedInterview.asObservable();
+    };
+    StatisticsService.prototype.setSelectedInterview = function (interview) {
+        this.selectedInterview.next(interview);
+    };
+    StatisticsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"],
+            _store__WEBPACK_IMPORTED_MODULE_2__["Store"]])
+    ], StatisticsService);
+    return StatisticsService;
 }());
 
 
@@ -13341,6 +13905,57 @@ var SnackbarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"]])
     ], SnackbarComponent);
     return SnackbarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/store.ts":
+/*!**************************!*\
+  !*** ./src/app/store.ts ***!
+  \**************************/
+/*! exports provided: Store */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+var state = {
+    interviews: undefined
+};
+var Store = /** @class */ (function () {
+    function Store() {
+        this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_0__["BehaviorSubject"](state);
+        this.store = this.subject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["distinctUntilChanged"])());
+    }
+    Object.defineProperty(Store.prototype, "value", {
+        get: function () {
+            return this.subject.value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Store.prototype.select = function (name) {
+        return this.store.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["pluck"])(name));
+    };
+    Store.prototype.set = function (name, state) {
+        var _a;
+        this.subject.next(__assign({}, this.value, (_a = {}, _a[name] = state, _a)));
+    };
+    return Store;
 }());
 
 
@@ -13498,7 +14113,7 @@ window.global = window;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\heroku\sync-forms\app-client\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Dp-142\29.11.18\syncforms\app-client\src\main.ts */"./src/main.ts");
 
 
 /***/ }),

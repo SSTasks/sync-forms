@@ -1,0 +1,75 @@
+<section *ngIf="interview">
+
+<ng-content>
+</ng-content>
+
+<mat-tab-group>
+    <mat-tab label="General info">
+        <div>
+          <p>
+              <i class="material-icons">timer</i><span>Start time: </span>{{interview.startTime | date:'medium'}}
+          </p>
+          <p>
+              <i class="material-icons">timer_off</i><span>End time: </span>{{interview.endTime | date:'medium'}}
+          </p>
+        </div>
+        <div>
+            <p>
+                <i class="material-icons">portrait</i><span>Candidate: </span>{{interview.candidate}}
+            </p>
+            <p>
+                <i class="material-icons">verified_user</i><span>Interviewer: </span>{{interview.interviewer}}
+            </p>
+        </div>
+        <div>
+            <p>
+                <i class="material-icons">filter_none</i><span>Form title: </span>{{interview.formTitle}}
+            </p>
+        </div>
+    </mat-tab>
+    <mat-tab label="Actions"> 
+
+        <mat-table [dataSource]="actions" matSort>
+            <ng-container matColumnDef="{{column.title}}" *ngFor="let column of columns;">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{ column.value }}
+                </mat-header-cell>
+        
+                <mat-cell *matCellDef="let item">
+                    {{column.title === 'time' ? (item.time | date:'medium') : item[column.title] }}
+                </mat-cell>
+            </ng-container>
+            
+            <mat-header-row *matHeaderRowDef="headers">
+            </mat-header-row>
+                                     
+            <mat-row *matRowDef="let row; columns: headers; let item">
+            </mat-row>
+        </mat-table>
+
+        <mat-toolbar class="list--tolbar">
+            <mat-paginator class="paginator" 
+                           [pageSize]="5" 
+                           [pageSizeOptions]="[5,10,25]" 
+                           #paginator>
+            </mat-paginator>
+        </mat-toolbar>
+    </mat-tab>
+
+    <mat-tab label="Comments and other info">
+    <!-- <div class="logInOut" *ngIf="interview?.logInOut">
+        
+          {{interview.logInOut}}
+    </div> -->
+  
+    <div class="comments" *ngIf="interview?.comments">
+            <div>
+                <i class="material-icons">comment</i><span>Comment: </span>{{interview.comments}}
+            </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+</section>

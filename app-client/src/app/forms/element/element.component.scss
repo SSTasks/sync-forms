@@ -1,0 +1,72 @@
+$firstColor:#3f51b5;
+$secondColor:#53aeea;
+$thirdColor: #c9c9c9;
+
+.flex-grow {
+  flex-grow: 1;
+  & button {
+    width: 100%;
+  }
+}
+
+.hovered {
+  outline: 4px solid deeppink;
+}
+
+mat-form-field{
+  //width:70% !important;
+  margin: 0 15px;
+
+  ::ng-deep .mat-form-field-infix{
+    width:100%;
+  }
+}
+
+.mat-slider-horizontal{
+  //min-width: 100%;
+}
+
+.mat-slider{
+  width:100%;
+}
+
+.mat-slide-toggle{
+  margin:0 10px;
+}
+
+select {
+  width:140px;
+}
+
+.example-radio-group {
+  margin:0 10px;
+}
+
+.example-radio-button {
+  margin-left:10px;
+}
+
+.vertical{
+  display: block !important;
+  text-align: left;
+
+  .mat-radio-button, .mat-checkbox{
+    margin:10px;
+    display: block;
+  }
+}
+
+.example-section-checkbox {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin:0 10px;
+}
+
+.example-margin-checkbox {
+  margin-left:10px;
+}
+
+.example-button-row{
+  margin:5px;
+}

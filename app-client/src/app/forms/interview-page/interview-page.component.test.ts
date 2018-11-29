@@ -9,15 +9,15 @@ import {
   MatToolbarModule,
 } from '@angular/material';
 
-import { MainNavComponent } from './interview-page.component';
+import { InterviewPageComponent } from './interview-page.component';
 
-describe('MainNavComponent', () => {
-  let component: MainNavComponent;
-  let fixture: ComponentFixture<MainNavComponent>;
+describe('InterviewPageComponent', () => {
+  let component: InterviewPageComponent;
+  let fixture: ComponentFixture<InterviewPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainNavComponent],
+      declarations: [InterviewPageComponent],
       imports: [
         NoopAnimationsModule,
         LayoutModule,
@@ -31,7 +31,7 @@ describe('MainNavComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainNavComponent);
+    fixture = TestBed.createComponent(InterviewPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

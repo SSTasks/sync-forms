@@ -18,6 +18,4 @@ export class FormScreenshotComponent implements OnInit {
    ngAfterViewInit() {
       this.screenshotService.HTMLElement = this.screenshot.nativeElement;
    }
-
-
 }

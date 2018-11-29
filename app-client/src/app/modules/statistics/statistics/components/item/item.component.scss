@@ -1,0 +1,33 @@
+.list--tolbar {
+    background-color: #fff;
+}
+
+div {
+    font-size: 14px;
+    line-height: 24px;
+    padding-left: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    min-height: 48px;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+p {
+    margin-right: 5%;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 300px;
+}
+
+p span, div span {
+    padding: 0px 8px 0px 8px;
+    color: rgba(0, 0, 0, .5);
+}
+
+.mat-tab-label-container {
+    padding-left: 16px;
+}

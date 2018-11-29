@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import io from 'socket.io-client';
 
+import { StatisticService } from './statistic.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +13,7 @@ export class SocketService {
   private socket;
   public interviewId: Number;
 
-  constructor() { }
+  constructor(private statistic: StatisticService) { }
 
   public connectToSockets() {
     this.socket = io.connect(this.url);
@@ -23,48 +25,105 @@ export class SocketService {
 
   public initiateInterview(interviewData) {
     this.interviewId = interviewData.interviewId;
+    interviewData.creationTime = this.statistic.getCurrentTime();
+    
     this.socket.emit('initiateInterview', interviewData);
+    this.statistic.setInterviewReference(this.socket, this.interviewId);
   }
 
   public joinInterview(userInfo) {
-    const connectionInfo = this.emitConnectionMessage(userInfo, 'connect');
+    const eventInfo = {
+      interviewId: this.interviewId,
+      messageText: this.emitConnectionMessage(userInfo, 'connect')
+    };
 
-    this.socket.emit('joinInterview', connectionInfo);
+    this.socket.emit('joinInterview', eventInfo);
+    this.statistic.setInterviewReference(this.socket, this.interviewId);
+    this.statistic.logConnectDisconnect('connect');
   }
 
-  public endInterview(userInfo) {
+  public exitInterview(userInfo) {
     // if we weren't connected, there is no need to unsub
-    if (!this.socket) {
+    if (!this.socket || !this.interviewId) {
       return;
     }
-    const eventInfo = this.emitConnectionMessage(userInfo, 'end interview');
 
-    this.socket.emit('endInterview', eventInfo);
-    this.interviewId = null;
+    const eventInfo = {
+      interviewId: this.interviewId,
+      messageText: this.emitConnectionMessage(userInfo, 'disconnect'),
+      infoToLog: this.statistic.logConnectDisconnect('disconnect')
+    };
+
+    this.socket.emit('onLeave', eventInfo);
+    this.detachInterviewData();
   }
 
-  public emitConnectionMessage(userInfo, eventType) {
+  // triggers ending of interview
+  public endInterview(userInfo) {
+    // if we weren't connected, there is no need to unsub
+    if (!this.socket || !this.interviewId) {
+      return;
+    }
+
+    const eventInfo = {
+      interviewId: this.interviewId,
+      messageText: this.emitConnectionMessage(userInfo, 'finish'),
+      infoToLog: this.statistic.logConnectDisconnect('finish')
+    };
+
+    this.socket.emit('endInterview', eventInfo);
+    this.detachInterviewData();
+  }
+
+  public detachInterviewData() {
+    this.interviewId = null;
+    this.statistic.setInterviewReference(null, this.interviewId);
+  }
+
+  // triggers closing of interview for participants if interviewer ended it
+  public finishNotificator() {
+    const eventObservable = new Observable(observer => {
+      this.socket.on('interviewFinished', (triggerFinish) => {
+        observer.next(triggerFinish);
+      });
+
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+
+    return eventObservable;
+  }
+
+  private emitConnectionMessage(userInfo, eventType) {
     const role = userInfo.role[0].toUpperCase() + userInfo.role.slice(1);
     let messageText = `${role} ${userInfo.fullname}`;
 
-    const connectionInfo = {
-      interviewId: this.interviewId,
-      messageText
-    };
-
     if (eventType === 'connect') {
-      connectionInfo.messageText += ' has joined the interview';
-      return connectionInfo;
+      messageText += ' has joined the interview';
 
-    } else if (eventType === 'end interview') {
-      connectionInfo.messageText += ' has finished the interview. Thank you for participating.';
-      return connectionInfo;
+    } else if (eventType === 'disconnect') {
+      messageText += ' has left the interview';
 
     } else {
-      connectionInfo.messageText += ' has left the interview';
-
-      this.socket.emit('onLeave', connectionInfo);
+      messageText += ' has finished the interview. Thank you for participating.';
     }
+
+    return messageText;
+  }
+
+  public showMessage() {
+    const messageObservable = new Observable(observer => {
+      this.socket.on('showMessage', (message) => {
+        observer.next(message);
+      });
+
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+
+    return messageObservable; 
   }
 
   public updateInterviewList() {
@@ -81,7 +140,7 @@ export class SocketService {
     return interviewInfoProvider; 
   }
 
-  // interview events
+  // interview event related methods
 
   public sendClick(eventInfo) {
     eventInfo.interviewId = this.interviewId;
@@ -103,23 +162,9 @@ export class SocketService {
     this.socket.emit('keyPress', eventInfo);
   }
 
-  public sendOnChangetEvent(eventInfo) {
+  public sendOnChangeEvent(eventInfo) {
     eventInfo.interviewId = this.interviewId;
     this.socket.emit('onChange', eventInfo);
-  }
-
-  public showMessage() {
-    const messageObservable = new Observable(observer => {
-      this.socket.on('showMessage', (message) => {
-        observer.next(message);
-      });
-
-      return () => {
-        this.socket.disconnect();
-      };
-    });
-
-    return messageObservable; 
   }
 
   public getClickEvent() {
@@ -127,10 +172,6 @@ export class SocketService {
       this.socket.on('mouseClick', (eventData) => {
         observer.next(eventData);
       });
-
-      return () => {
-        this.socket.disconnect();
-      };
     });
 
     return eventObservable.pipe(debounceTime(100)); 
@@ -141,10 +182,6 @@ export class SocketService {
       this.socket.on('newMouseMove', (eventData) => {
         observer.next(eventData);
       });
-
-      return () => {
-        this.socket.disconnect();
-      };
     });
 
     return eventObservable;
@@ -155,10 +192,6 @@ export class SocketService {
       this.socket.on('newFocus', (eventData) => {
         observer.next(eventData);
       });
-
-      return () => {
-        this.socket.disconnect();
-      };
     });
 
     return eventObservable;
@@ -169,10 +202,6 @@ export class SocketService {
       this.socket.on('newKeyPress', (eventData) => {
         observer.next(eventData);
       });
-
-      return () => {
-        this.socket.disconnect();
-      };
     });
 
     return eventObservable;
@@ -183,24 +212,6 @@ export class SocketService {
       this.socket.on('newOnChange', (eventData) => {
         observer.next(eventData);
       });
-
-      return () => {
-        this.socket.disconnect();
-      };
-    });
-
-    return eventObservable;
-  }
-
-  public finishInterview() {
-    const eventObservable = new Observable(observer => {
-      this.socket.on('finishInterview', (triggerFinish) => {
-        observer.next(triggerFinish);
-      });
-
-      return () => {
-        this.socket.disconnect();
-      };
     });
 
     return eventObservable;

@@ -5,6 +5,7 @@ import { HttpAdminService } from '../../services/http.service';
 import { DialogService } from '../../services/dialog.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { Group } from 'src/app/models/group.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-groups',
@@ -21,6 +22,8 @@ export class GroupsComponent implements OnInit {
     groupsSource: MatTableDataSource < object > ;
     groupsColumnsHeaders: String[];
     private groupsData: Group[];
+    public isGroupSelected: boolean = false;
+    selectedGroupSubscription: Subscription;
 
     @ViewChild('groupsPaginator') groupsPaginator: MatPaginator;
     @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
@@ -29,6 +32,18 @@ export class GroupsComponent implements OnInit {
         this.getGroups();
 
         this.groupsColumnsHeaders = this.groupsColumns.map(field => field.title);
+
+        this.selectedGroupSubscription = this.http.getSelectedGroup()
+            .subscribe( group => {
+                if(group){
+                    this.isGroupSelected = true;
+                } else 
+                this.isGroupSelected = false;
+            })
+    }
+
+    ngOnDestroy() {
+        this.selectedGroupSubscription.unsubscribe();
     }
 
     private getGroups(): void {
@@ -70,10 +85,7 @@ export class GroupsComponent implements OnInit {
     }
 
     selectGroup(event): void {
-        let name = event.target.parentNode.querySelector('.cdk-column-name').innerText ||
-            event.target.innerText;
-
-        this.http.setSelectedGroup(name);
+        this.http.setSelectedGroup(event.item.name);
     }
 
     openContextMenu(event): void {

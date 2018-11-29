@@ -63,9 +63,9 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
     this.http.getAvailableInterviews()
       .subscribe(data => {
-          this.forms = data;
+        this.forms = data;
+        console.log(this.forms);
           this.renderUsersList();
-          console.log(this.formsSource);
       });
 
     this.unsubUpdateTable = this.updateTable();

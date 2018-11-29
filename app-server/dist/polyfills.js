@@ -8129,7 +8129,7 @@ window.global = window;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\heroku\sync-forms\app-client\src\polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! D:\Dp-142\29.11.18\syncforms\app-client\src\polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

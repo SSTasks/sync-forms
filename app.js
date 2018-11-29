@@ -16,11 +16,11 @@ var errorHandler = require('./app-server/middlewares/errorHandler');
 require("./app-server/schemas/db");
 
 var forms = require('./app-server/routes/forms');
-
 var screenshot = require('./app-server/routes/screenshot');
-
 var usersRouter = require('./app-server/routes/usersRouter');
+var interviewRouter = require('./app-server/routes/interviewRouter');
 var adminRouter = require('./app-server/routes/adminRouter');
+var statisticsRouter = require('./app-server/routes/statisticsRouter');
 
 // var formsRouter = require('./app-server/routes/formsRouter');
 
@@ -29,6 +29,9 @@ var authorizeUser = require('./app-server/middlewares/authorizeUser');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
+
+// make sockets available
+require("./app-server/interviewManager/interviewSockets").interviewHandler(io);
 
 var checkAuth = require('./app-server/middlewares/checkAuthorization');
 
@@ -60,67 +63,19 @@ passport.use(new LocalStrategy(authorizeUser));
 app.use('/users', usersRouter);
 app.use('/form', forms);
 app.use('/screenshot', screenshot);
+app.use('/interview', interviewRouter);
 app.use('/adm', adminRouter);
+app.use('/stats', statisticsRouter);
 
-let activeInterviews = [];
-
-app.get('/interviews', (req, res) => {
-    res.send(activeInterviews);
-});
 
 // unauthorized users don't have access to these routes
 app.use('/preview', checkAuth);
 app.use('/admin', checkAuth);
 app.use('/constructor', checkAuth);
-app.use('/interview-page', checkAuth);
+app.use('/statistics', checkAuth);
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname + '/app-server/dist/index.html'));
-});
-
-io.on('connection', function(socket) {
-    socket.on('initiateInterview', function(interviewData) {
-        socket.join(interviewData.interviewId);
-        activeInterviews.push(interviewData);
-        socket.broadcast.emit('updateInterviewList', activeInterviews);
-    });
-
-    socket.on('joinInterview', function(connectionInfo) {
-        socket.join(connectionInfo.interviewId);
-        socket.broadcast.emit('showMessage', connectionInfo.messageText);
-    });
-
-    socket.on('endInterview', function(eventData) {
-        activeInterviews = activeInterviews.filter(interview => interview.interviewId !== eventData.interviewId);
-        socket.broadcast.to(eventData.interviewId).emit('showMessage', eventData.messageText);
-        socket.broadcast.to(eventData.interviewId).emit('finishInterview', true);
-        socket.broadcast.emit('updateInterviewList', activeInterviews);
-        socket.leave(eventData.interviewId);
-    });
-
-    socket.on('click', function(eventData) {
-        socket.broadcast.to(eventData.interviewId).emit('mouseClick', eventData);
-    });
-
-    socket.on('mouseMove', function(eventData) {
-        socket.broadcast.to(eventData.interviewId).emit('newMouseMove', eventData);
-    });
-
-    socket.on('focusEvent', function(eventData) {
-        socket.broadcast.to(eventData.interviewId).emit('newFocus', eventData);
-    });
-
-    socket.on('keyPress', function(eventData) {
-        socket.broadcast.to(eventData.interviewId).emit('newKeyPress', eventData);
-    });
-
-    socket.on('onChange', function(eventData) {
-        socket.broadcast.to(eventData.interviewId).emit('newOnChange', eventData);
-    });
-
-    socket.on('onLeave', function(eventData) {
-        socket.broadcast.to(eventData.interviewId).emit('showMessage', eventData.messageText);
-    });
 });
 
 // catch 404 and forward to error handler
@@ -132,4 +87,7 @@ app.use(function (req, res, next) {
 
 app.use(errorHandler);
 
-module.exports = { app: app, server: server };
+module.exports = {
+    app: app,
+    server: server
+};

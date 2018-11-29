@@ -18,7 +18,7 @@ import { ScreenshotService } from '../services/screenshot.service';
 const emptyForm = {
     title: 'New form',
     author: 'Ya',
-    preview: '',
+    preview: 'https://ps.w.org/simple-registration-form/trunk/screenshot-1.png?rev=1790752',
     groups: ['Dnipro-142'],
     rows: [],
     description: ''
@@ -36,7 +36,7 @@ export class ConstructorPageComponent implements OnInit {
     public groups: String[];
     public form: Form; // new form
     private elemParams: any; // row and cell of new element
-    private formSavingProcess: boolean;
+    private disableSaveFormButton: boolean;
    
    isHandset$: Observable<boolean> = this.breakpoint.observe(Breakpoints.Handset)
    .pipe(
@@ -56,6 +56,7 @@ export class ConstructorPageComponent implements OnInit {
         this.broadcast.subscriberSendElem()
             .subscribe(
                 elem => {
+                    console.log('got element');
                     this.pushElem(elem);
                 });
 
@@ -99,38 +100,40 @@ export class ConstructorPageComponent implements OnInit {
         this.router.navigate(['/preview']);
     }
 
+
     saveForm() {
-      this.formSavingProcess = true;
-      let currentDate = new Date().valueOf();
+      this.disableSaveFormButton = true;
+
+      if (this.form.preview !== '') {
+          let hideMessage = true;
+          this.screenshotService.deleteScreenshot(this.form, hideMessage);
+      }
+      
+      let currentDate = Date.now();
       let imgName = currentDate + '.png';
 
       this.form.title = this.formInfo.value.title;
       this.form.author = JSON.parse(window.localStorage.getItem('currentUser')).username;
       this.form.groups = this.formInfo.value.groups;
-
-      if (this.form.preview === '') {
-          this.form.preview = imgName;
-      }
+         this.form.preview = imgName;
 
       this.http.saveForm(this.form)
-          .subscribe(data => {
-              const isFormSaved = Array.isArray(data);
+         .subscribe(data => {
+            const isFormSaved = Array.isArray(data);
 
-              if (isFormSaved) {
-                 if (this.form._id) {
-                    let forms = data.filter(form => form._id === this.form._id);
-                    this.form = forms[0]; // show updated form
-                  } else {
-                    let forms = data.filter(form => form.preview === this.form.preview);; // show created form
-                    this.form = forms[0];
-                  }
+            if (isFormSaved) {
+               if (this.form._id) {
+                  let forms = data.filter(form => form._id === this.form._id);
+                  this.form = forms[0]; // show updated form
+               } else {
+                  this.form = data[data.length - 1]; // show created form
+               }
                   this.screenshotService.saveScreenshot(this.form);
-
-              } else {
-                  this.screenshotService.showSaveMessage(this.form.title, isFormSaved);
-              }
-              this.formSavingProcess = false;
-          });
+            } else {
+               this.screenshotService.showSaveMessage(this.form.title, isFormSaved);
+            }
+            this.disableSaveFormButton = false;
+            });
     }
 
   
@@ -151,13 +154,10 @@ export class ConstructorPageComponent implements OnInit {
                   }
                });
             }
-         });
-
-
-      }
+        });
+    }
 
     
-
     addRow() {
         this.hideConfig();
         this.form.rows.push({cells: []});
@@ -181,19 +181,24 @@ export class ConstructorPageComponent implements OnInit {
     addElem(rowIndex, cellIndex) {
         this.hideConfig();
         this.elemParams = {row: rowIndex, cell: cellIndex}; // saves row and cell for new element
+        console.log(this.elemParams);
         setTimeout( () => {
             this.broadcast.activationConstructor();
         }, 100);
     }
 
     pushElem(elem) {
-        console.log(this.elemParams);
-        let copyElem = JSON.parse(JSON.stringify(elem));
-        let elements = this.form.rows[this.elemParams.row].cells[this.elemParams.cell].elements;
-        this.hideConfig();
+        // debugger;
+        console.log(123)
+        if (this.elemParams) {
+            console.log(456)
+            let copyElem = JSON.parse(JSON.stringify(elem));
+            let elements = this.form.rows[this.elemParams.row].cells[this.elemParams.cell].elements;
+            this.hideConfig();
 
-        if (!elements.length) {
-            elements.push(copyElem);
+            if (!elements.length) {
+                elements.push(copyElem);
+            }
         }
     }
 

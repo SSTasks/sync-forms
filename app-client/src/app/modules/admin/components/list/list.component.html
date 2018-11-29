@@ -15,7 +15,7 @@
         <mat-header-row *matHeaderRowDef="headers">
         </mat-header-row>
 
-        <mat-row *matRowDef="let row; columns: headers; let item" (contextmenu)="editContextMenu($event, item)" (click)="select($event)">
+        <mat-row *matRowDef="let row; columns: headers; let item" (contextmenu)="editContextMenu($event, item)" (click)="select($event, item)">
         </mat-row>
     </mat-table>
 

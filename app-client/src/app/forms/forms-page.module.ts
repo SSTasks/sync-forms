@@ -7,10 +7,9 @@ import {HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {GestureConfig} from '@angular/material';
 import {MaterialModule} from '../modules/material/material';
 
-import {ElementTypePipe} from './pipes/element-type.pipe';
-
 import {BroadcastService} from './services/broadcast.service';
-import {SocketService} from './services/socket-service.service';
+import { SocketService } from './services/socket-service.service';
+import { StatisticService } from './services/statistic.service';
 import {HttpService} from './services/http.service';
 
 // import {MainNavComponent} from './main-nav/main-nav.component';
@@ -25,19 +24,20 @@ import { ScreenshotService } from './services/screenshot.service';
 import { ConfirmRemovingFormComponent } from '../options/confirm-removing-form/confirm-removing-form.component';
 import { FormScreenshotComponent } from './constructor-page/form-screenshot/form-screenshot.component';
 import { SnackbarComponent } from '../options/snackbar/snackbar.component';
+import { ElementComponent } from './element/element.component';
 
 @NgModule({
     declarations: [
         NavConstructorComponent,
         NavListComponent,
         NavConfigComponent,
-        ElementTypePipe,
         InterviewPageComponent,
         PreviewPageComponent,
         ConstructorPageComponent,
         ConfirmRemovingFormComponent,
         FormScreenshotComponent,
         SnackbarComponent,
+        ElementComponent
     ],
     imports: [
         CommonModule,
@@ -50,6 +50,7 @@ import { SnackbarComponent } from '../options/snackbar/snackbar.component';
         BroadcastService,
         HttpService, {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig},
         SocketService,
+        StatisticService,
         ScreenshotService,
         FormScreenshotComponent,
         SnackbarComponent

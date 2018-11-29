@@ -1,7 +1,3 @@
-.list--tolbar {
-    background-color: #fff;
-}
-
 .title {
     display: flex;
     justify-content: flex-start;
@@ -14,7 +10,6 @@
     }
 }
 
-mat-row:hover {
-    background-color: rgba(#000, .03);
-    transition: background-color .3s ease;
+button {
+    margin: 24px;
 }

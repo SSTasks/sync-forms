@@ -26,7 +26,6 @@
   height: 30px;
 }
 #scroll::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   background-color: #F5F5F5;
 }
 #scroll::-webkit-scrollbar {
@@ -43,9 +42,101 @@
   background-color: rgba(0,0,0,0.1);
 }
 table {
-  width: 70%;
-  margin-bottom: 5%;
+  width: 80%;
 }
 .highlight { 
   background: rgba(0,0,0,0.1);
+}
+
+
+//olez 
+
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+
+.join--button {
+  margin-top: 16px;
+}
+
+.main {
+  & .text {
+    font-size: 16px;
+    font-weight: 400 !important;
+  }
+  box-sizing: border-box;
+}
+
+h1.main {
+  font-weight: 300;
+  font-size: 30px;
+  color: rgba(0,0,0,.54);
+}
+
+h2.main {
+  font-size: 20px;
+  font-weight: 400;
+  &.no-avail {
+    color: rgba(0,0,0,.54);
+  }
+}
+
+.intro {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.features {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.text--block {
+  flex-basis: 1;
+}
+
+.img--block {
+  margin-right: 50px;
+}
+
+.logo--title {
+  font-family: 'Russo One', sans-serif;
+  margin-bottom: 8px;
+}
+
+.section--fullwidth {
+  box-sizing: border-box;
+  width: 100vw;
+  &.intro {
+    color: rgba(0,0,0,.54);
+    background-color: rgba(250,250,250,1);
+  }
+  &.features {
+    background-color: #3f51b5;
+    color: white;
+    margin-top: 0;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul li {
+  box-sizing: border-box;
+  margin: 8px;
+}
+
+li:before {
+  content: '⚡️'
 }

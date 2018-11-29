@@ -8,7 +8,7 @@
             <i class="material-icons">
                     person
             </i>
-            Interviewers list <span *ngIf="selectedGroup">: {{selectedGroup}}</span>
+            Interviewers list <span *ngIf="groupName">: {{groupName}}</span>
         </h2> 
         
         <mat-paginator class="paginator users__paginator" [pageSize]="10" [pageSizeOptions]="[5,10,25]" #usersPaginator>
@@ -19,8 +19,8 @@
                 person_add
         </i>
 
-        <button *ngIf="selectedGroup" (click)="showAll()" class="showAll" mat-raised-button color="accent">
-            Show all
+        <button *ngIf="selectedGroup" (click)="showAll()" class="showAll" mat-raised-button color="warn">
+            Close
         </button>
     </interviewers-list>
 </section>

@@ -1,0 +1,41 @@
+<section *ngIf="interviewsSource">
+  <ng-content></ng-content>
+  <mat-table [dataSource]="interviewsSource" matSort>
+      <ng-container matColumnDef="{{column.title}}" *ngFor="let column of columns;">
+          <!-- columns header -->
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <!-- <i class="material-icons" *ngIf="column?.icon">
+                          {{ column.icon }}
+                  </i> -->
+              {{ column.value }}
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let item;">
+ 
+          <button mat-raised-button color="primary" *ngIf="column?.icon && column.title==='info'">
+              <i class="material-icons">
+                      {{ column.icon }}
+              </i>
+          </button>
+
+              {{ column.title === 'startTime' ? (item.startTime | date:'medium') : 
+                 column.title === 'endTime' ? (item.endTime | date:'medium') : item[column.title] }}
+          
+          </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="headers">
+      </mat-header-row>
+                               
+      <mat-row *matRowDef="let row; columns: headers; let item" (click)="selectItem(item)">
+      </mat-row>
+  </mat-table>
+
+  <mat-toolbar class="list--tolbar">
+      <mat-paginator class="paginator users__paginator" 
+                     [pageSize]="5" 
+                     [pageSizeOptions]="[5,10,25]" 
+                     #interviewsPaginator>
+      </mat-paginator>
+  </mat-toolbar>
+</section>

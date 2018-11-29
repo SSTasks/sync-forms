@@ -159,6 +159,7 @@ export class NavConstructorComponent implements OnInit {
         if (this.stateConstructor) {
             this.stateConstructor = false;
             constructorActivation(this.stateConstructor);
+            console.log('initiate element');
             this.broadcast.sendElem(elem);
         }
     }

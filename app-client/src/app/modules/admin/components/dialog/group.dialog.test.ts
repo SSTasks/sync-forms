@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupDialogComponent } from './group.component';
+// import { GroupDialogComponent } from './group.component';
+import { GroupDialogComponent } from './group.dialog';
 
 describe('GroupDialogComponent', () => {
   let component: GroupDialogComponent;

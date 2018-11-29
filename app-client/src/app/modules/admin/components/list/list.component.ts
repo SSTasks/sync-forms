@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
   }
 
   @Output() onAdd: EventEmitter < boolean > = new EventEmitter();
-  @Output() selectGroup: EventEmitter < boolean > = new EventEmitter();
+  @Output() selectGroup: EventEmitter < Object > = new EventEmitter();
   @Output() contextMenu: EventEmitter < Object > = new EventEmitter();
 
 
@@ -28,8 +28,9 @@ export class ListComponent implements OnInit {
       this.onAdd.emit(true);
   }
 
-  select(group) {
-      this.selectGroup.emit(group);
+  select(event, item) {
+    let eventObject = {event, item};
+    this.selectGroup.emit(eventObject);
   }
 
   editContextMenu(event, item) {

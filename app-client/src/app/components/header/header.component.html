@@ -4,7 +4,7 @@
         <h1 class="header-logo" [routerLink]="['/main']">{{Title}}</h1>
         <span class="header-spacer"></span>
         <ul class="header-list headernav">
-            <button *ngIf="isInterviewer || isMaster" class="header-button-spacer disabled" mat-menu-item routerLinkActive disabled [routerLink]="[ '/interviews' ]" >Interviews</button>
+            <button *ngIf="isInterviewer || isMaster" class="header-button-spacer" mat-menu-item routerLinkActive [routerLink]="[ '/main' ]" >Interviews</button>
             <button *ngIf="isInterviewer || isMaster" class="header-button-spacer" mat-menu-item [routerLink]="[ '/preview' ]" >Preview</button>
             <button *ngIf="isInterviewer || isMaster" class="header-button-spacer" mat-menu-item routerLinkActive [routerLink]="[ '/statistics' ]" >Statistics</button>
             <button *ngIf="isMaster" class="header-button-spacer" color="white" mat-menu-item routerLinkActive [routerLink]="[ '/admin' ]">Admin</button>

@@ -70,7 +70,7 @@ export class HttpService {
     }
 
     public getAvailableInterviews() {
-        return this.http.get('/interviews')
+        return this.http.get('/interview/active-interviews')
             .pipe(
                 tap(interviews => {
                     console.log(interviews);
